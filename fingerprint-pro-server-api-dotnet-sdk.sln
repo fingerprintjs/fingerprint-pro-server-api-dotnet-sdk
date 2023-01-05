@@ -1,10 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk", "src\sdk\sdk.csproj", "{DEE4B355-41FC-4B06-92D3-FE21753D84EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk.Test", "src\sdk.Test\sdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
