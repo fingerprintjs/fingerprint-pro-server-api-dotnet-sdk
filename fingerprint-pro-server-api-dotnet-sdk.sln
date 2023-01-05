@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk", "src\sdk\sdk.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk.Test", "src\sdk.Test\sdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "examples-net7", "src\examples-net7\examples-net7.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
