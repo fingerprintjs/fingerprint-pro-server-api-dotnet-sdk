@@ -12,7 +12,7 @@ var api = new FingerprintApi(
 
 var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
 
-var visits = api.GetVisits(Environment.GetEnvironmentVariable("VISITOR_ID")!, requestId);
+var visits = api.GetVisits(Environment.GetEnvironmentVariable("VISITOR_ID")!);
 var events = api.GetEvent(requestId);
 
 Console.WriteLine(visits);
