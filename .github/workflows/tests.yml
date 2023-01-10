@@ -5,10 +5,12 @@ on:
     branches:
       - '*'
   workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * *'
 
 jobs:
   tests:
-    name: Tests (dotnet ${{ matrix.dotnet-version }})
+    name: Unit and functional tests (dotnet ${{ matrix.dotnet-version }})
     runs-on: "ubuntu-latest"
 
     strategy:
@@ -29,3 +31,7 @@ jobs:
         
       - name: Run tests
         run: dotnet test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          VISITOR_ID: ${{ secrets.VISITOR_ID }}
+          REQUEST_ID: ${{ secrets.REQUEST_ID }}
