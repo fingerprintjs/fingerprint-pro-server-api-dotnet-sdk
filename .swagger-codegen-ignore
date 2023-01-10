@@ -26,3 +26,4 @@
 git_push.sh
 
 **/packages.config
+src/sdk.Test/**

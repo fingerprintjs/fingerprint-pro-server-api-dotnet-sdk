@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Tests (dotnet ${{ matrix.dotnet-version }})
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        dotnet-version: [ 7.x ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - run: dotnet --version && dotnet restore && dotnet list package
+
+      - name: Build
+        run: dotnet build
+        
+      - name: Run tests
+        run: dotnet test
