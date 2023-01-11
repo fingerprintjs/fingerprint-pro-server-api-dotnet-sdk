@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk", "src\sdk\sdk.csproj", "{DEE4B355-41FC-4B06-92D3-FE21753D84EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.Sdk", "src\Fingerprint.Sdk\Fingerprint.Sdk.csproj", "{DEE4B355-41FC-4B06-92D3-FE21753D84EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk.Test", "src\sdk.Test\sdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.Sdk.Test", "src\Fingerprint.Sdk.Test\Fingerprint.Sdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "examples-net7", "src\examples-net7\examples-net7.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.Sdk.ExamplesNet7", "src\Fingerprint.Sdk.ExamplesNet7\Fingerprint.Sdk.ExamplesNet7.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk.FunctionalTest", "src\sdk.FunctionalTest\sdk.FunctionalTest.csproj", "{60A3F0A3-764A-43CA-9BDD-E2A727F86347}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.Sdk.FunctionalTest", "src\Fingerprint.Sdk.FunctionalTest\Fingerprint.Sdk.FunctionalTest.csproj", "{60A3F0A3-764A-43CA-9BDD-E2A727F86347}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

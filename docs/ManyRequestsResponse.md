@@ -1,4 +1,4 @@
-# sdk.Model.ManyRequestsResponse
+# Fingerprint.Sdk.Model.ManyRequestsResponse
 ## Properties
 
 Name | Type | Description | Notes
