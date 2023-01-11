@@ -26,4 +26,4 @@
 git_push.sh
 
 **/packages.config
-src/sdk.Test/**
+src/Fingerprint.Sdk.Test/**

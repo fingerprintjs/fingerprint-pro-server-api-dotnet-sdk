@@ -1,4 +1,4 @@
-# sdk.Model.StSeenAt
+# Fingerprint.Sdk.Model.StSeenAt
 ## Properties
 
 Name | Type | Description | Notes

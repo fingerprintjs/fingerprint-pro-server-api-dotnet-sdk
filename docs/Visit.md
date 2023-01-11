@@ -1,4 +1,4 @@
-# sdk.Model.Visit
+# Fingerprint.Sdk.Model.Visit
 ## Properties
 
 Name | Type | Description | Notes

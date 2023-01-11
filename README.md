@@ -1,4 +1,4 @@
-# sdk - the C# library for the Fingerprint Pro Server API
+# Fingerprint.Sdk - the C# library for the Fingerprint Pro Server API
 
 Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
 
@@ -36,9 +36,9 @@ Run the following command to generate the DLL
 
 Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
 ```csharp
-using sdk.Api;
-using sdk.Client;
-using sdk.Model;
+using Fingerprint.Sdk.Api;
+using Fingerprint.Sdk.Client;
+using Fingerprint.Sdk.Model;
 ```
 <a name="packaging"></a>
 ## Packaging
@@ -48,7 +48,7 @@ A `.nuspec` is included with the project. You can follow the Nuget quickstart to
 This `.nuspec` uses placeholders from the `.csproj`, so build the `.csproj` directly:
 
 ```
-nuget pack -Build -OutputDirectory out sdk.csproj
+nuget pack -Build -OutputDirectory out Fingerprint.Sdk.csproj
 ```
 
 Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-packages/local-feeds) or [other host](https://docs.microsoft.com/en-us/nuget/hosting-packages/overview) and consume the new package via Nuget as usual.
@@ -59,9 +59,9 @@ Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-p
 ```csharp
 using System;
 using System.Diagnostics;
-using sdk.Api;
-using sdk.Client;
-using sdk.Model;
+using Fingerprint.Sdk.Api;
+using Fingerprint.Sdk.Client;
+using Fingerprint.Sdk.Model;
 
 namespace Example
 {
