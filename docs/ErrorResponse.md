@@ -1,4 +1,4 @@
-# sdk.Model.ErrorResponse
+# Fingerprint.Sdk.Model.ErrorResponse
 ## Properties
 
 Name | Type | Description | Notes

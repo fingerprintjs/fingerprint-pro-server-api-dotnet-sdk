@@ -1,4 +1,4 @@
-# sdk.Model.Subdivision
+# Fingerprint.Sdk.Model.Subdivision
 ## Properties
 
 Name | Type | Description | Notes
