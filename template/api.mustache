@@ -81,6 +81,8 @@ namespace {{packageName}}.{{apiPackage}}
         /// </summary>
     {{>visibility}} partial class {{classname}} : {{interfacePrefix}}{{classname}}
         {
+        public const string Version = "{{packageVersion}}";
+    
         private {{packageName}}.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
@@ -221,6 +223,8 @@ namespace {{packageName}}.{{apiPackage}}
                 var localVarFormParams = new Dictionary<String, String>();
                 var localVarFileParams = new Dictionary<String, FileParameter>();
                 Object localVarPostBody = null;
+
+                localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "{{gitRepoId}}/{{packageVersion}}"));
 
                 // to determine the Content-Type header
                 String[] localVarHttpContentTypes = new String[] {
@@ -367,6 +371,8 @@ namespace {{packageName}}.{{apiPackage}}
                     var localVarFormParams = new Dictionary<String, String>();
                     var localVarFileParams = new Dictionary<String, FileParameter>();
                     Object localVarPostBody = null;
+
+                    localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "{{gitRepoId}}/{{packageVersion}}"));
 
                     // to determine the Content-Type header
                     String[] localVarHttpContentTypes = new String[] {

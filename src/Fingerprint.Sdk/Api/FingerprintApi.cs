@@ -130,6 +130,8 @@ namespace Fingerprint.Sdk.Api
     /// </summary>
     public partial class FingerprintApi : IFingerprintApi
     {
+        public const string Version = "0.0.1";
+
         private Fingerprint.Sdk.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
@@ -265,6 +267,8 @@ namespace Fingerprint.Sdk.Api
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
 
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/0.0.1"));
+
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
                 };
@@ -340,6 +344,8 @@ namespace Fingerprint.Sdk.Api
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
+
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/0.0.1"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
@@ -423,6 +429,8 @@ namespace Fingerprint.Sdk.Api
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
+
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/0.0.1"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
@@ -511,6 +519,8 @@ namespace Fingerprint.Sdk.Api
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
+
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/0.0.1"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {

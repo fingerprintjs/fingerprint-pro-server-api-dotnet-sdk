@@ -94,7 +94,6 @@ namespace Fingerprint.Sdk.Test.Api
 
                 requests.Add(req);
 
-
                 // Print out some info about the request
                 Console.WriteLine(req.Url?.ToString());
                 Console.WriteLine(req.HttpMethod);
@@ -142,7 +141,7 @@ namespace Fingerprint.Sdk.Test.Api
 
                 var request = requests[0];
 
-                Assert.That(request.Url?.ToString(), Is.EqualTo($"http://127.0.0.1:8080/events/{requestId}"));
+                Assert.That(request.Url?.ToString(), Is.EqualTo($"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
             });
@@ -175,7 +174,7 @@ namespace Fingerprint.Sdk.Test.Api
 
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?request_id={requestId}&limit={limit}"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&request_id={requestId}&limit={limit}"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }

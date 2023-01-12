@@ -22,7 +22,7 @@ namespace Fingerprint.Sdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "";
+        public const string Version = "0.0.1";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -107,7 +107,7 @@ namespace Fingerprint.Sdk.Client
         /// </summary>
         public Configuration()
         {
-            UserAgent = "Swagger-Codegen//csharp";
+            UserAgent = "Swagger-Codegen/0.0.1/csharp";
             BasePath = "https://api.fpjs.io";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -179,7 +179,7 @@ namespace Fingerprint.Sdk.Client
         string? tempFolderPath = null,
         string? dateTimeFormat = null,
         int timeout = 100000,
-        string userAgent = "Swagger-Codegen//csharp"
+        string userAgent = "Swagger-Codegen/0.0.1/csharp"
         // ReSharper restore UnusedParameter.Local
         )
         {
@@ -435,7 +435,7 @@ namespace Fingerprint.Sdk.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version + "\n";
             report += "    Version of the API: 3\n";
-            report += "    SDK Package Version: \n";
+            report += "    SDK Package Version: 0.0.1\n";
 
             return report;
         }
