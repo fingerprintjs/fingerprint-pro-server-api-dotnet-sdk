@@ -37,6 +37,14 @@ public class ApiTests
     }
 
     [Test]
+    public void GetEvents404Test()
+    {
+        var getEvents = () => api.GetEventAsync("1662542583652.pLBzes");
+        
+        Assert.That(getEvents, Throws.TypeOf<ApiException>().With.Message.Contains("request id is not found").And.Property(nameof(ApiException.ErrorCode)).EqualTo(404));
+    }
+
+    [Test]
     public void GetVisitsWithoutRequestIdTest()
     {
         var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
