@@ -10,12 +10,13 @@ on:
 
 jobs:
   tests:
-    name: Unit and functional tests (dotnet ${{ matrix.dotnet-version }})
+    name: Unit and functional tests on ${{ matrix.os }} (dotnet ${{ matrix.dotnet-version }})
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
-        dotnet-version: [ 4.x, 5.x, 6.x, 7.x ]
+        dotnet-version: [ 5.x, 6.x, 7.x ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
