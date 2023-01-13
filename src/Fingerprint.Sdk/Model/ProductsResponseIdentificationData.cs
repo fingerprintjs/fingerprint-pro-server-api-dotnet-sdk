@@ -39,7 +39,7 @@ namespace Fingerprint.Sdk.Model
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
         /// <param name="visitorId">visitorId (required).</param>
-        public ProductsResponseIdentificationData(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), StSeenAt firstSeenAt = default(StSeenAt), StSeenAt lastSeenAt = default(StSeenAt), string visitorId = default(string))
+        public ProductsResponseIdentificationData(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt), string visitorId = default(string))
         {
             // to ensure "requestId" is required (not null)
 
@@ -259,13 +259,13 @@ namespace Fingerprint.Sdk.Model
         /// Gets or Sets FirstSeenAt
         /// </summary>
         [DataMember(Name = "firstSeenAt", EmitDefaultValue = false)]
-        public StSeenAt FirstSeenAt { get; set; }
+        public SeenAt FirstSeenAt { get; set; }
 
         /// <summary>
         /// Gets or Sets LastSeenAt
         /// </summary>
         [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
-        public StSeenAt LastSeenAt { get; set; }
+        public SeenAt LastSeenAt { get; set; }
 
         /// <summary>
         /// Gets or Sets VisitorId
