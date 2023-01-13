@@ -6,6 +6,7 @@
         <Version>0.0.1</Version>
         <Authors>Przemysław Żydek</Authors>
         <Company>Fingerprint</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <PropertyGroup>
