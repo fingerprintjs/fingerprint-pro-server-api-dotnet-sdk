@@ -1,3 +1,27 @@
+<p align="center">
+    <a href="https://fingerprint.com">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/main/res/logo_light.svg" />
+            <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/main/res/logo_dark.svg" />
+            <img src="https://raw.githubusercontent.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/main/res/logo_dark.svg" alt="Fingerprint logo" width="312px" />
+        </picture>
+    </a>
+</p>
+<p align="center">
+    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/release.yml">
+        <img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" />
+    </a>
+    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/tests.yml">
+        <img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/tests.yml/badge.svg" alt="CI badge" />
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/:license-mit-blue.svg?style=flat"/>
+    </a>
+    <a href="https://discord.gg/39EpE2neBg">
+        <img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
+    </a>
+</p>
+
 # Fingerprint.Sdk - the C# library for the Fingerprint Pro Server API
 
 Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
