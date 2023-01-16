@@ -29,16 +29,7 @@ namespace Example
     {
         public void main()
         {
-            var configuration = new Configuration();
-            // Configure API key authorization: ApiKeyHeader
-            configuration.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // configuration.AddApiKeyPrefix("Auth-API-Key", "Bearer");
-            // Configure API key authorization: ApiKeyQuery
-            configuration.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // configuration.AddApiKeyPrefix("api_key", "Bearer");
-
+            var configuration = new Configuration("YOUR_API_KEY");
             var apiInstance = new FingerprintApi(configuration);
             var requestId = requestId_example;  // string | requestId is the unique identifier of each request
 
@@ -99,16 +90,7 @@ namespace Example
     {
         public void main()
         {
-            var configuration = new Configuration();
-            // Configure API key authorization: ApiKeyHeader
-            configuration.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // configuration.AddApiKeyPrefix("Auth-API-Key", "Bearer");
-            // Configure API key authorization: ApiKeyQuery
-            configuration.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // configuration.AddApiKeyPrefix("api_key", "Bearer");
-
+            var configuration = new Configuration("YOUR_API_KEY");
             var apiInstance = new FingerprintApi(configuration);
             var visitorId = visitorId_example;  // string | 
             var requestId = requestId_example;  // string | Filter visits by requestId (optional) 

@@ -34,27 +34,7 @@ namespace Example
     {
         public void main()
         {
-            var configuration = new Configuration();
-            {{#hasAuthMethods}}
-            {{#authMethods}}
-            {{#isBasic}}
-            // Configure HTTP basic authorization: {{{name}}}
-            configuration.Username = "YOUR_USERNAME";
-            configuration.Password = "YOUR_PASSWORD";
-            {{/isBasic}}
-            {{#isApiKey}}
-            // Configure API key authorization: {{{name}}}
-            configuration.AddApiKey("{{{keyParamName}}}", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // configuration.AddApiKeyPrefix("{{{keyParamName}}}", "Bearer");
-            {{/isApiKey}}
-            {{#isOAuth}}
-            // Configure OAuth2 access token for authorization: {{{name}}}
-            configuration.AccessToken = "YOUR_ACCESS_TOKEN";
-            {{/isOAuth}}
-            {{/authMethods}}
-
-            {{/hasAuthMethods}}
+            var configuration = new Configuration("YOUR_API_KEY");
             var apiInstance = new {{classname}}(configuration);
             {{#parameters}}
             {{#isPrimitiveType}}

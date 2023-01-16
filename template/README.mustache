@@ -89,8 +89,7 @@ using Fingerprint.Sdk.Api;
 using Fingerprint.Sdk.Client;
 
 // Initialize configuration and add your api key
-var configuration = new Configuration();
-configuration.AddApiKey("api_key", Environment.GetEnvironmentVariable("API_KEY")!);
+var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
 
 var api = new FingerprintApi(
 configuration
@@ -113,7 +112,7 @@ If your subscription is in region other than US, you need to change the region i
 ```csharp
 using Fingerprint.Sdk.Client;
 
-var configuration = new Configuration
+var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!)
 {
     Region = Region.Eu // or Region.Asia
 };
