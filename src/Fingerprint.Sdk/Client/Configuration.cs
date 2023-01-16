@@ -47,7 +47,6 @@ namespace Fingerprint.Sdk.Client
         #region Static Members
 
         private static readonly object GlobalConfigSync = new { };
-        private static Configuration _globalConfiguration;
 
         /// <summary>
         /// Default creation of exceptions for a given method name and response object
@@ -68,22 +67,6 @@ namespace Fingerprint.Sdk.Client
             }
             return null;
         };
-
-        /// <summary>
-        /// Gets or sets the default Configuration.
-        /// </summary>
-        /// <value>Configuration.</value>
-        public static Configuration Default
-        {
-            get { return _globalConfiguration; }
-            set
-            {
-                lock (GlobalConfigSync)
-                {
-                    _globalConfiguration = value;
-                }
-            }
-        }
 
         #endregion Static Members
 
@@ -108,15 +91,12 @@ namespace Fingerprint.Sdk.Client
 
         #region Constructors
 
-        static Configuration()
-        {
-            _globalConfiguration = new GlobalConfiguration();
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Configuration" /> class
         /// </summary>
-        public Configuration()
+        ///
+        /// <param name="apiKey">User provided API Key</param>
+        public Configuration(string apiKey)
         {
             UserAgent = "Swagger-Codegen/0.0.1/csharp";
             BasePath = "https://api.fpjs.io";
@@ -124,88 +104,9 @@ namespace Fingerprint.Sdk.Client
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
 
+            AddApiKey("api_key", apiKey);
+
             Timeout = 100000;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Configuration" /> class
-        /// </summary>
-        public Configuration(
-        IDictionary<string, string> defaultHeader,
-        IDictionary<string, string> apiKey,
-        IDictionary<string, string> apiKeyPrefix,
-        string basePath = "https://api.fpjs.io") : this()
-        {
-            if (string.IsNullOrWhiteSpace(basePath))
-                throw new ArgumentException("The provided basePath is invalid.", "basePath");
-            if (defaultHeader == null)
-                throw new ArgumentNullException("defaultHeader");
-            if (apiKey == null)
-                throw new ArgumentNullException("apiKey");
-            if (apiKeyPrefix == null)
-                throw new ArgumentNullException("apiKeyPrefix");
-
-            BasePath = basePath;
-
-            foreach (var keyValuePair in defaultHeader)
-            {
-                DefaultHeader.Add(keyValuePair);
-            }
-
-            foreach (var keyValuePair in apiKey)
-            {
-                ApiKey.Add(keyValuePair);
-            }
-
-            foreach (var keyValuePair in apiKeyPrefix)
-            {
-                ApiKeyPrefix.Add(keyValuePair);
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Configuration" /> class with different settings
-        /// </summary>
-        /// <param name="apiClient">Api client</param>
-        /// <param name="defaultHeader">Dictionary of default HTTP header</param>
-        /// <param name="username">Username</param>
-        /// <param name="password">Password</param>
-        /// <param name="accessToken">accessToken</param>
-        /// <param name="apiKey">Dictionary of API key</param>
-        /// <param name="apiKeyPrefix">Dictionary of API key prefix</param>
-        /// <param name="tempFolderPath">Temp folder path</param>
-        /// <param name="dateTimeFormat">DateTime format string</param>
-        /// <param name="timeout">HTTP connection timeout (in milliseconds)</param>
-        /// <param name="userAgent">HTTP user agent</param>
-        [Obsolete("Use explicit object construction and setting of properties.", true)]
-        public Configuration(
-        // ReSharper disable UnusedParameter.Local
-        ApiClient? apiClient = null,
-        IDictionary<string, string>? defaultHeader = null,
-        string? username = null,
-        string? password = null,
-        string? accessToken = null,
-        IDictionary<string, string>? apiKey = null,
-        IDictionary<string, string>? apiKeyPrefix = null,
-        string? tempFolderPath = null,
-        string? dateTimeFormat = null,
-        int timeout = 100000,
-        string userAgent = "Swagger-Codegen/0.0.1/csharp"
-        // ReSharper restore UnusedParameter.Local
-        )
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the Configuration class.
-        /// </summary>
-        /// <param name="apiClient">Api client.</param>
-        [Obsolete("This constructor caused unexpected sharing of static data. It is no longer supported.", true)]
-        // ReSharper disable once UnusedParameter.Local
-        public Configuration(ApiClient apiClient)
-        {
-
         }
 
         #endregion Constructors
@@ -213,71 +114,23 @@ namespace Fingerprint.Sdk.Client
 
         #region Properties
 
-        private ApiClient _apiClient = null;
-        /// <summary>
-        /// Gets an instance of an ApiClient for this configuration
-        /// </summary>
-        public ApiClient ApiClient
-        {
-            get
-            {
-                if (_apiClient == null) _apiClient = CreateApiClient();
-                return _apiClient;
-            }
-        }
-
         private string _basePath = null;
 
         private Region _region = Region.Us;
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
-        public string BasePath
-        {
-            get { return _basePath; }
-            set
-            {
-                _basePath = value;
-                // pass-through to ApiClient if it's set.
-                if (_apiClient != null)
-                {
-                    _apiClient.RestClient.BaseUrl = new Uri(_basePath);
-                }
-            }
-        }
+        public string BasePath { get; set; }
 
         /// <summary>
         /// Gets or sets the default header.
         /// </summary>
         public IDictionary<string, string> DefaultHeader { get; set; }
 
-        private int _timeout = 100000;
         /// <summary>
         /// Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
         /// </summary>
-        public int Timeout
-        {
-
-            get
-            {
-                if (_apiClient == null)
-                {
-                    return _timeout;
-                }
-                else
-                {
-                    return ApiClient.RestClient.Timeout;
-                }
-            }
-            set
-            {
-                _timeout = value;
-                if (_apiClient != null)
-                {
-                    ApiClient.RestClient.Timeout = _timeout;
-                }
-            }
-        }
+        public int Timeout { get; set; }
 
         /// <summary>
         /// Gets or sets the API Region
@@ -458,16 +311,6 @@ namespace Fingerprint.Sdk.Client
         {
             DefaultHeader[key] = value;
         }
-
-        /// <summary>
-        /// Creates a new <see cref="ApiClient" /> based on this <see cref="Configuration" /> instance.
-        /// </summary>
-        /// <returns></returns>
-        public ApiClient CreateApiClient()
-        {
-            return new ApiClient(BasePath) { Configuration = this };
-        }
-
 
         /// <summary>
         /// Returns a string with essential information for debugging.

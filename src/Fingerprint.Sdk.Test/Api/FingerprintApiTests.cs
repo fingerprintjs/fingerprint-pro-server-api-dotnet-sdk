@@ -44,7 +44,7 @@ namespace Fingerprint.Sdk.Test.Api
 
             Console.WriteLine("Started server");
 
-            var config = new Configuration
+            var config = new Configuration("123")
             {
                 BasePath = _serverUrl
             };

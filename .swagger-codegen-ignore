@@ -27,3 +27,5 @@ git_push.sh
 
 **/packages.config
 src/Fingerprint.Sdk.Test/**
+
+**/GlobalConfiguration.cs

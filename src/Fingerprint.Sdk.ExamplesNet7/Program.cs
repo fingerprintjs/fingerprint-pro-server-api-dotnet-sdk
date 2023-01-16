@@ -3,9 +3,8 @@
 using Fingerprint.Sdk.Api;
 using Fingerprint.Sdk.Client;
 
-var configuration = new Configuration();
+var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
 //configuration.Region = Region.Eu;
-configuration.AddApiKey("api_key", Environment.GetEnvironmentVariable("API_KEY")!);
 
 var api = new FingerprintApi(
     configuration

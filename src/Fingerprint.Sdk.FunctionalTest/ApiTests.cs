@@ -6,15 +6,14 @@ namespace Fingerprint.Sdk.FunctionalTest;
 
 public class ApiTests
 {
-    private FingerprintApi api;
+    private FingerprintApi _api;
 
     [SetUp]
     public void Setup()
     {
-        var configuration = new Configuration();
-        configuration.AddApiKey("api_key", Environment.GetEnvironmentVariable("API_KEY")!);
+        var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
 
-        api = new FingerprintApi(
+        _api = new FingerprintApi(
             configuration
         );
     }
@@ -24,7 +23,7 @@ public class ApiTests
     {
         var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
 
-        var events = api.GetEvent(requestId);
+        var events = _api.GetEvent(requestId);
 
         Assert.Multiple(() =>
         {
@@ -39,7 +38,7 @@ public class ApiTests
     [Test]
     public void GetEvents404Test()
     {
-        var getEvents = () => api.GetEventAsync("1662542583652.pLBzes");
+        var getEvents = () => _api.GetEventAsync("1662542583652.pLBzes");
 
         Assert.That(getEvents, Throws.TypeOf<ApiException>().With.Message.Contains("request id is not found").And.Property(nameof(ApiException.ErrorCode)).EqualTo(404));
     }
@@ -49,7 +48,7 @@ public class ApiTests
     {
         var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
 
-        var response = api.GetVisits(visitorId);
+        var response = _api.GetVisits(visitorId);
 
         Assert.Multiple(() =>
         {
@@ -64,11 +63,11 @@ public class ApiTests
     public void GetVisitsWithRequestIdTest()
     {
         var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
-        var allVisits = api.GetVisits(visitorId);
+        var allVisits = _api.GetVisits(visitorId);
 
         var requestId = allVisits.Visits[0].RequestId;
 
-        var response = api.GetVisits(visitorId, requestId);
+        var response = _api.GetVisits(visitorId, requestId);
 
         Assert.Multiple(() =>
         {
@@ -83,11 +82,11 @@ public class ApiTests
     public void GetVisitsWithLinkedId()
     {
         var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
-        var allVisits = api.GetVisits(visitorId);
+        var allVisits = _api.GetVisits(visitorId);
 
         var linkedId = allVisits.Visits[0].LinkedId;
 
-        var response = api.GetVisits(visitorId, null, linkedId);
+        var response = _api.GetVisits(visitorId, null, linkedId);
 
         Assert.Multiple(() =>
         {

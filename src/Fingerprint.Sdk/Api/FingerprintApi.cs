@@ -132,29 +132,9 @@ namespace Fingerprint.Sdk.Api
     {
         public const string Version = "0.0.1";
 
+        private readonly ApiClient _apiClient;
+
         private Fingerprint.Sdk.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FingerprintApi"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public FingerprintApi(String basePath)
-        {
-            this.Configuration = new Fingerprint.Sdk.Client.Configuration { BasePath = basePath };
-
-            ExceptionFactory = Fingerprint.Sdk.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FingerprintApi"/> class
-        /// </summary>
-        /// <returns></returns>
-        public FingerprintApi()
-        {
-            this.Configuration = Fingerprint.Sdk.Client.Configuration.Default;
-
-            ExceptionFactory = Fingerprint.Sdk.Client.Configuration.DefaultExceptionFactory;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FingerprintApi"/> class
@@ -162,12 +142,10 @@ namespace Fingerprint.Sdk.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public FingerprintApi(Fingerprint.Sdk.Client.Configuration configuration = null)
+        public FingerprintApi(Fingerprint.Sdk.Client.Configuration configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                this.Configuration = Fingerprint.Sdk.Client.Configuration.Default;
-            else
-                this.Configuration = configuration;
+            Configuration = configuration;
+            _apiClient = new ApiClient(configuration);
 
             ExceptionFactory = Fingerprint.Sdk.Client.Configuration.DefaultExceptionFactory;
         }
@@ -178,14 +156,14 @@ namespace Fingerprint.Sdk.Api
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return this._apiClient.RestClient.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        [Obsolete("SetBasePath is deprecated, please do '_apiClient = new ApiClient(\"http://new-path\")' instead.")]
         public void SetBasePath(String basePath)
         {
             // do nothing
@@ -272,18 +250,18 @@ namespace Fingerprint.Sdk.Api
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
                 };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
                     "application/json"
                 };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (requestId != null) localVarPathParams.Add("request_id", this.Configuration.ApiClient.ParameterToString(requestId)); // path parameter
-                                                                                                                                    // authentication (ApiKeyHeader) required
+            if (requestId != null) localVarPathParams.Add("request_id", this._apiClient.ParameterToString(requestId)); // path parameter
+                                                                                                                       // authentication (ApiKeyHeader) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Auth-API-Key")))
             {
                 localVarHeaderParams["Auth-API-Key"] = this.Configuration.GetApiKeyWithPrefix("Auth-API-Key");
@@ -291,11 +269,11 @@ namespace Fingerprint.Sdk.Api
             // authentication (ApiKeyQuery) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
             {
-                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
+                localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)this._apiClient.CallApi(localVarPath,
             Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -309,7 +287,7 @@ namespace Fingerprint.Sdk.Api
 
             return new ApiResponse<EventResponse>(localVarStatusCode,
             localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-            (EventResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EventResponse)));
+            (EventResponse)this._apiClient.Deserialize(localVarResponse, typeof(EventResponse)));
         }
 
         /// <summary>
@@ -350,18 +328,18 @@ namespace Fingerprint.Sdk.Api
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
                     };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
                         "application/json"
                     };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (requestId != null) localVarPathParams.Add("request_id", this.Configuration.ApiClient.ParameterToString(requestId)); // path parameter
-                                                                                                                                    // authentication (ApiKeyHeader) required
+            if (requestId != null) localVarPathParams.Add("request_id", this._apiClient.ParameterToString(requestId)); // path parameter
+                                                                                                                       // authentication (ApiKeyHeader) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Auth-API-Key")))
             {
                 localVarHeaderParams["Auth-API-Key"] = this.Configuration.GetApiKeyWithPrefix("Auth-API-Key");
@@ -369,11 +347,11 @@ namespace Fingerprint.Sdk.Api
             // authentication (ApiKeyQuery) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
             {
-                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
+                localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)await this._apiClient.CallApiAsync(localVarPath,
             Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -387,7 +365,7 @@ namespace Fingerprint.Sdk.Api
 
             return new ApiResponse<EventResponse>(localVarStatusCode,
             localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-            (EventResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EventResponse)));
+            (EventResponse)this._apiClient.Deserialize(localVarResponse, typeof(EventResponse)));
         }
 
         /// <summary>
@@ -435,23 +413,23 @@ namespace Fingerprint.Sdk.Api
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
                 };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
                     "application/json",
                     "text/html"
                 };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (visitorId != null) localVarPathParams.Add("visitor_id", this.Configuration.ApiClient.ParameterToString(visitorId)); // path parameter
-            if (requestId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "request_id", requestId)); // query parameter
-            if (linkedId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "linked_id", linkedId)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (before != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "before", before)); // query parameter
-                                                                                                                                           // authentication (ApiKeyHeader) required
+            if (visitorId != null) localVarPathParams.Add("visitor_id", this._apiClient.ParameterToString(visitorId)); // path parameter
+            if (requestId != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "request_id", requestId)); // query parameter
+            if (linkedId != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "linked_id", linkedId)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (before != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "before", before)); // query parameter
+                                                                                                                              // authentication (ApiKeyHeader) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Auth-API-Key")))
             {
                 localVarHeaderParams["Auth-API-Key"] = this.Configuration.GetApiKeyWithPrefix("Auth-API-Key");
@@ -459,11 +437,11 @@ namespace Fingerprint.Sdk.Api
             // authentication (ApiKeyQuery) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
             {
-                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
+                localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)this._apiClient.CallApi(localVarPath,
             Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -477,7 +455,7 @@ namespace Fingerprint.Sdk.Api
 
             return new ApiResponse<Response>(localVarStatusCode,
             localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-            (Response)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Response)));
+            (Response)this._apiClient.Deserialize(localVarResponse, typeof(Response)));
         }
 
         /// <summary>
@@ -526,23 +504,23 @@ namespace Fingerprint.Sdk.Api
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
                     };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
                         "application/json",
                         "text/html"
                     };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (visitorId != null) localVarPathParams.Add("visitor_id", this.Configuration.ApiClient.ParameterToString(visitorId)); // path parameter
-            if (requestId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "request_id", requestId)); // query parameter
-            if (linkedId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "linked_id", linkedId)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (before != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "before", before)); // query parameter
-                                                                                                                                           // authentication (ApiKeyHeader) required
+            if (visitorId != null) localVarPathParams.Add("visitor_id", this._apiClient.ParameterToString(visitorId)); // path parameter
+            if (requestId != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "request_id", requestId)); // query parameter
+            if (linkedId != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "linked_id", linkedId)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (before != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "before", before)); // query parameter
+                                                                                                                              // authentication (ApiKeyHeader) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Auth-API-Key")))
             {
                 localVarHeaderParams["Auth-API-Key"] = this.Configuration.GetApiKeyWithPrefix("Auth-API-Key");
@@ -550,11 +528,11 @@ namespace Fingerprint.Sdk.Api
             // authentication (ApiKeyQuery) required
             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
             {
-                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
+                localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "api_key", this.Configuration.GetApiKeyWithPrefix("api_key")));
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)await this._apiClient.CallApiAsync(localVarPath,
             Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -568,7 +546,7 @@ namespace Fingerprint.Sdk.Api
 
             return new ApiResponse<Response>(localVarStatusCode,
             localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-            (Response)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Response)));
+            (Response)this._apiClient.Deserialize(localVarResponse, typeof(Response)));
         }
 
     }

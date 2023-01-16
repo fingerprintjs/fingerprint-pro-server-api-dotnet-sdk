@@ -8,7 +8,7 @@ public class ConfigurationTests
     [Test]
     public void EuRegionTest()
     {
-        var config = new Configuration
+        var config = new Configuration("123")
         {
             Region = Region.Eu
         };
@@ -23,7 +23,7 @@ public class ConfigurationTests
     [Test]
     public void AsiaRegionTest()
     {
-        var config = new Configuration
+        var config = new Configuration("123")
         {
             Region = Region.Asia
         };
@@ -38,7 +38,7 @@ public class ConfigurationTests
     [Test]
     public void UsRegionTest()
     {
-        var config = new Configuration();
+        var config = new Configuration("123");
 
         Assert.Multiple(() =>
         {

@@ -83,29 +83,9 @@ namespace {{packageName}}.{{apiPackage}}
         {
         public const string Version = "{{packageVersion}}";
     
+        private readonly ApiClient _apiClient;
+    
         private {{packageName}}.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="{{classname}}"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public {{classname}}(String basePath)
-        {
-        this.Configuration = new {{packageName}}.Client.Configuration { BasePath = basePath };
-
-        ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="{{classname}}"/> class
-        /// </summary>
-        /// <returns></returns>
-        public {{classname}}()
-        {
-        this.Configuration = {{packageName}}.Client.Configuration.Default;
-
-        ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="{{classname}}"/> class
@@ -113,12 +93,10 @@ namespace {{packageName}}.{{apiPackage}}
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public {{classname}}({{packageName}}.Client.Configuration configuration = null)
+        public {{classname}}({{packageName}}.Client.Configuration configuration)
         {
-        if (configuration == null) // use the default one in Configuration
-        this.Configuration = {{packageName}}.Client.Configuration.Default;
-        else
-        this.Configuration = configuration;
+        Configuration = configuration;
+        _apiClient = new ApiClient(configuration);
 
         ExceptionFactory = {{packageName}}.Client.Configuration.DefaultExceptionFactory;
         }
@@ -129,14 +107,14 @@ namespace {{packageName}}.{{apiPackage}}
         /// <value>The base path</value>
         public String GetBasePath()
         {
-        return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        return this._apiClient.RestClient.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        [Obsolete("SetBasePath is deprecated, please do '_apiClient = new ApiClient(\"http://new-path\")' instead.")]
         public void SetBasePath(String basePath)
         {
         // do nothing
@@ -232,7 +210,7 @@ namespace {{packageName}}.{{apiPackage}}
                     "{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}
             {{/consumes}}
                 };
-                String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+                String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
                 // to determine the Accept header
                 String[] localVarHttpHeaderAccepts = new String[] {
@@ -240,29 +218,29 @@ namespace {{packageName}}.{{apiPackage}}
                     "{{{mediaType}}}"{{#hasMore}},{{/hasMore}}
             {{/produces}}
                 };
-                String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+                String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
                 if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             {{#pathParams}}
-                    if ({{paramName}} != null) localVarPathParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // path parameter
+                    if ({{paramName}} != null) localVarPathParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // path parameter
             {{/pathParams}}
             {{#queryParams}}
-                    if ({{paramName}} != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}", "{{baseName}}", {{paramName}})); // query parameter
+                    if ({{paramName}} != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}", "{{baseName}}", {{paramName}})); // query parameter
             {{/queryParams}}
             {{#headerParams}}
-                    if ({{paramName}} != null) localVarHeaderParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // header parameter
+                    if ({{paramName}} != null) localVarHeaderParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // header parameter
             {{/headerParams}}
             {{#isForm}}
                 {{#formParams}}
-                        if ({{paramName}} != null) {{#isBinary}}localVarFileParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToFile("{{baseName}}", {{paramName}}));{{/isBinary}}{{^isBinary}}localVarFormParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // form parameter{{/isBinary}}
+                        if ({{paramName}} != null) {{#isBinary}}localVarFileParams.Add("{{baseName}}", this._apiClient.ParameterToFile("{{baseName}}", {{paramName}}));{{/isBinary}}{{^isBinary}}localVarFormParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // form parameter{{/isBinary}}
                 {{/formParams}}
             {{/isForm}}
             {{^isForm}}
                 {{#bodyParam}}
                         if ({{paramName}} != null && {{paramName}}.GetType() != typeof(byte[]))
                         {
-                        localVarPostBody = this.Configuration.ApiClient.Serialize({{paramName}}); // http body (model) parameter
+                        localVarPostBody = this._apiClient.Serialize({{paramName}}); // http body (model) parameter
                         }
                         else
                         {
@@ -282,7 +260,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {{#isKeyInQuery}}
                             if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")))
                             {
-                            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "{{keyParamName}}", this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")));
+                            localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "{{keyParamName}}", this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")));
                             }
                     {{/isKeyInQuery}}
                 {{/isApiKey}}
@@ -310,7 +288,7 @@ namespace {{packageName}}.{{apiPackage}}
             {{/authMethods}}
 
                 // make the HTTP request
-                IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                IRestResponse localVarResponse = (IRestResponse) this._apiClient.CallApi(localVarPath,
                 Method.{{httpMethod}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -325,7 +303,7 @@ namespace {{packageName}}.{{apiPackage}}
             {{#returnType}}
                     return new ApiResponse<{{{returnType}}}>(localVarStatusCode,
                     localVarResponse.Headers.ToDictionary(x => x.{{^netStandard}}Name{{/netStandard}}{{#netStandard}}Key{{/netStandard}}, x => string.Join(",", x.Value)),
-                    ({{{returnType}}}) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof({{#returnContainer}}{{{returnContainer}}}{{/returnContainer}}{{^returnContainer}}{{{returnType}}}{{/returnContainer}})));
+                    ({{{returnType}}}) this._apiClient.Deserialize(localVarResponse, typeof({{#returnContainer}}{{{returnContainer}}}{{/returnContainer}}{{^returnContainer}}{{{returnType}}}{{/returnContainer}})));
             {{/returnType}}
             {{^returnType}}
                     return new ApiResponse<Object>(localVarStatusCode,
@@ -380,7 +358,7 @@ namespace {{packageName}}.{{apiPackage}}
                         "{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}
                 {{/consumes}}
                     };
-                    String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+                    String localVarHttpContentType = this._apiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
                     // to determine the Accept header
                     String[] localVarHttpHeaderAccepts = new String[] {
@@ -388,29 +366,29 @@ namespace {{packageName}}.{{apiPackage}}
                         "{{{mediaType}}}"{{#hasMore}},{{/hasMore}}
                 {{/produces}}
                     };
-                    String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+                    String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
                     if (localVarHttpHeaderAccept != null)
                     localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
                 {{#pathParams}}
-                        if ({{paramName}} != null) localVarPathParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // path parameter
+                        if ({{paramName}} != null) localVarPathParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // path parameter
                 {{/pathParams}}
                 {{#queryParams}}
-                        if ({{paramName}} != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}", "{{baseName}}", {{paramName}})); // query parameter
+                        if ({{paramName}} != null) localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}", "{{baseName}}", {{paramName}})); // query parameter
                 {{/queryParams}}
                 {{#headerParams}}
-                        if ({{paramName}} != null) localVarHeaderParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // header parameter
+                        if ({{paramName}} != null) localVarHeaderParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // header parameter
                 {{/headerParams}}
                 {{#isForm}}
                     {{#formParams}}
-                            if ({{paramName}} != null) {{#isBinary}}localVarFileParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToFile("{{baseName}}", {{paramName}}));{{/isBinary}}{{^isBinary}}localVarFormParams.Add("{{baseName}}", this.Configuration.ApiClient.ParameterToString({{paramName}})); // form parameter{{/isBinary}}
+                            if ({{paramName}} != null) {{#isBinary}}localVarFileParams.Add("{{baseName}}", this._apiClient.ParameterToFile("{{baseName}}", {{paramName}}));{{/isBinary}}{{^isBinary}}localVarFormParams.Add("{{baseName}}", this._apiClient.ParameterToString({{paramName}})); // form parameter{{/isBinary}}
                     {{/formParams}}
                 {{/isForm}}
                 {{^isForm}}
                     {{#bodyParam}}
                             if ({{paramName}} != null && {{paramName}}.GetType() != typeof(byte[]))
                             {
-                            localVarPostBody = this.Configuration.ApiClient.Serialize({{paramName}}); // http body (model) parameter
+                            localVarPostBody = this._apiClient.Serialize({{paramName}}); // http body (model) parameter
                             }
                             else
                             {
@@ -430,7 +408,7 @@ namespace {{packageName}}.{{apiPackage}}
                         {{#isKeyInQuery}}
                                 if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")))
                                 {
-                                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "{{keyParamName}}", this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")));
+                                localVarQueryParams.AddRange(this._apiClient.ParameterToKeyValuePairs("", "{{keyParamName}}", this.Configuration.GetApiKeyWithPrefix("{{keyParamName}}")));
                                 }
                         {{/isKeyInQuery}}
                     {{/isApiKey}}
@@ -458,7 +436,7 @@ namespace {{packageName}}.{{apiPackage}}
                 {{/authMethods}}
 
                     // make the HTTP request
-                    IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                    IRestResponse localVarResponse = (IRestResponse) await this._apiClient.CallApiAsync(localVarPath,
                     Method.{{httpMethod}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                     localVarPathParams, localVarHttpContentType);
 
@@ -473,7 +451,7 @@ namespace {{packageName}}.{{apiPackage}}
                 {{#returnType}}
                         return new ApiResponse<{{{returnType}}}>(localVarStatusCode,
                         localVarResponse.Headers.ToDictionary(x => x.{{^netStandard}}Name{{/netStandard}}{{#netStandard}}Key{{/netStandard}}, x => string.Join(",", x.Value)),
-                        ({{{returnType}}}) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof({{#returnContainer}}{{{returnContainer}}}{{/returnContainer}}{{^returnContainer}}{{{returnType}}}{{/returnContainer}})));
+                        ({{{returnType}}}) this._apiClient.Deserialize(localVarResponse, typeof({{#returnContainer}}{{{returnContainer}}}{{/returnContainer}}{{^returnContainer}}{{{returnType}}}{{/returnContainer}})));
                 {{/returnType}}
                 {{^returnType}}
                         return new ApiResponse<Object>(localVarStatusCode,
