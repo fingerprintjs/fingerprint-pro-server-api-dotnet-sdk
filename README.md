@@ -93,6 +93,19 @@ Console.WriteLine(visits);
 Console.WriteLine(events);
 ```
 
+### Region
+
+If your subscription is in region other than US, you need to change the region in the configuration:
+
+```csharp
+using Fingerprint.Sdk.Client;
+
+var configuration = new Configuration
+{
+    Region = Region.Eu // or Region.Asia
+};
+```
+
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 

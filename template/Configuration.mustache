@@ -2,9 +2,20 @@
 {{^net35}}
     using System.Collections.Concurrent;
 {{/net35}}
+using System.Runtime.Serialization;
 
 namespace {{packageName}}.Client
 {
+public enum Region
+{
+    [EnumMember(Value = "eu")]
+    Eu,
+    [EnumMember(Value = "us")]
+    Us,
+    [EnumMember(Value = "asia")]
+    Asia
+}
+
 /// <summary>
     /// Represents a set of configuration settings
     /// </summary>
@@ -209,7 +220,9 @@ return _apiClient;
 }
 }
 
-private String _basePath = null;
+private string _basePath = null;
+
+private Region _region = Region.Us;
 /// <summary>
     /// Gets or sets the base path for API access.
     /// </summary>
@@ -272,6 +285,21 @@ ApiClient.RestClient.Timeout = TimeSpan.FromMilliseconds(_timeout);
     ApiClient.RestClient.Timeout = _timeout;
     }
     }{{/netStandard}}
+}
+
+/// <summary>
+/// Gets or sets the API Region
+/// </summary>
+/// <value>API Region</value>
+public Region Region
+{
+    get { return _region; }
+    set
+    {
+        _region = value;
+
+        BasePath = ResolveBasePathForRegion();
+    }
 }
 
 /// <summary>
@@ -412,6 +440,21 @@ _apiKey = value;
 #endregion Properties
 
 #region Methods
+
+private string ResolveBasePathForRegion()
+{
+    switch (_region)
+{
+case Region.Eu:
+    return "https://eu.api.fpjs.io";
+
+case Region.Asia:
+    return "https://ap.api.fpjs.io";
+
+default:
+    return "{{{basePath}}}";
+}
+}
 
 /// <summary>
     /// Add default header.
