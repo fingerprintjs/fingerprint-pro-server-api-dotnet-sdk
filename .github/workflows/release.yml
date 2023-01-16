@@ -38,4 +38,5 @@ jobs:
         run: ./semantic-release/node_modules/.bin/semantic-release --extends ./semantic-release/.releaserc.js
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
           HUSKY: 0
