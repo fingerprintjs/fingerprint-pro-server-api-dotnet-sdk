@@ -14,7 +14,7 @@ public class WebhookVisitTests
         var bytes = MockLoader.Load("webhook.json");
         var json = Encoding.UTF8.GetString(bytes);
         var webhook = JsonConvert.DeserializeObject<WebhookVisit>(json);
-        
+
         Assert.That(webhook, Is.InstanceOf<WebhookVisit>());
     }
 }
