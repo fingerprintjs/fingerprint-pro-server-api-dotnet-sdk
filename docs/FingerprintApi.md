@@ -29,16 +29,17 @@ namespace Example
     {
         public void main()
         {
+            var configuration = new Configuration();
             // Configure API key authorization: ApiKeyHeader
-            Configuration.Default.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
+            configuration.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Auth-API-Key", "Bearer");
+            // configuration.AddApiKeyPrefix("Auth-API-Key", "Bearer");
             // Configure API key authorization: ApiKeyQuery
-            Configuration.Default.AddApiKey("api_key", "YOUR_API_KEY");
+            configuration.AddApiKey("api_key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("api_key", "Bearer");
+            // configuration.AddApiKeyPrefix("api_key", "Bearer");
 
-            var apiInstance = new FingerprintApi();
+            var apiInstance = new FingerprintApi(configuration);
             var requestId = requestId_example;  // string | requestId is the unique identifier of each request
 
             try
@@ -98,16 +99,17 @@ namespace Example
     {
         public void main()
         {
+            var configuration = new Configuration();
             // Configure API key authorization: ApiKeyHeader
-            Configuration.Default.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
+            configuration.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Auth-API-Key", "Bearer");
+            // configuration.AddApiKeyPrefix("Auth-API-Key", "Bearer");
             // Configure API key authorization: ApiKeyQuery
-            Configuration.Default.AddApiKey("api_key", "YOUR_API_KEY");
+            configuration.AddApiKey("api_key", "YOUR_API_KEY");
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("api_key", "Bearer");
+            // configuration.AddApiKeyPrefix("api_key", "Bearer");
 
-            var apiInstance = new FingerprintApi();
+            var apiInstance = new FingerprintApi(configuration);
             var visitorId = visitorId_example;  // string | 
             var requestId = requestId_example;  // string | Filter visits by requestId (optional) 
             var linkedId = linkedId_example;  // string | Filter visits by custom identifier (optional) 
