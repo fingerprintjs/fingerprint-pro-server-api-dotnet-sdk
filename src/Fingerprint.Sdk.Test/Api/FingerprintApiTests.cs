@@ -140,7 +140,7 @@ namespace Fingerprint.Sdk.Test.Api
 
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}"));
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
             });
@@ -173,7 +173,7 @@ namespace Fingerprint.Sdk.Test.Api
 
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&request_id={requestId}&limit={limit}"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }
