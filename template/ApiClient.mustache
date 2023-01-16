@@ -38,55 +38,18 @@ partial void InterceptResponse(IRestRequest request, IRestResponse response);
 
 /// <summary>
     /// Initializes a new instance of the <see cref="ApiClient" /> class
-    /// with default configuration.
-    /// </summary>
-public ApiClient()
-{
-Configuration = {{packageName}}.Client.Configuration.Default;
-RestClient = new RestClient("{{{basePath}}}");
-{{#netStandard}}
-    RestClient.IgnoreResponseStatusCode = true;
-{{/netStandard}}
-}
-
-/// <summary>
-    /// Initializes a new instance of the <see cref="ApiClient" /> class
     /// with default base path ({{{basePath}}}).
     /// </summary>
 /// <param name="config">An instance of Configuration.</param>
 public ApiClient(Configuration config)
 {
-Configuration = config ?? {{packageName}}.Client.Configuration.Default;
+Configuration = config;
 
 RestClient = new RestClient(Configuration.BasePath);
 {{#netStandard}}
     RestClient.IgnoreResponseStatusCode = true;
 {{/netStandard}}
 }
-
-/// <summary>
-    /// Initializes a new instance of the <see cref="ApiClient" /> class
-    /// with default configuration.
-    /// </summary>
-/// <param name="basePath">The base path.</param>
-public ApiClient(String basePath = "{{{basePath}}}")
-{
-if (String.IsNullOrEmpty(basePath))
-throw new ArgumentException("basePath cannot be empty");
-
-RestClient = new RestClient(basePath);
-{{#netStandard}}
-    RestClient.IgnoreResponseStatusCode = true;
-{{/netStandard}}
-Configuration = Client.Configuration.Default;
-}
-
-/// <summary>
-    /// Gets or sets the default API client for making HTTP calls.
-    /// </summary>
-/// <value>The default API client.</value>
-[Obsolete("ApiClient.Default is deprecated, please use 'Configuration.Default.ApiClient' instead.")]
-public static ApiClient Default;
 
 /// <summary>
     /// Gets or sets an instance of the IReadableConfiguration.

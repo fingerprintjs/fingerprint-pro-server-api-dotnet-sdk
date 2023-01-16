@@ -3,16 +3,17 @@
 using Fingerprint.Sdk.Api;
 using Fingerprint.Sdk.Client;
 
-var configuration = new Configuration();
-configuration.AddApiKey("api_key", Environment.GetEnvironmentVariable("API_KEY")!);
+var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
+//configuration.Region = Region.Eu;
 
 var api = new FingerprintApi(
     configuration
 );
 
 var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
+var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
 
-var visits = api.GetVisits(Environment.GetEnvironmentVariable("VISITOR_ID")!);
+var visits = api.GetVisits(visitorId);
 var events = api.GetEvent(requestId);
 
 Console.WriteLine(visits);

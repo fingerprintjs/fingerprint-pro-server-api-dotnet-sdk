@@ -16,33 +16,25 @@ using System.ComponentModel.DataAnnotations;
 namespace Fingerprint.Sdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// ErrorEvent404Response
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class ErrorEvent404Response : IEquatable<ErrorEvent404Response>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="ErrorEvent404Response" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), BotdError error = default(BotdError))
+        public ErrorEvent404Response(ErrorEvent404ResponseError error = default(ErrorEvent404ResponseError))
         {
-            this.Data = data;
             this.Error = error;
         }
-
-        /// <summary>
-        /// Gets or Sets Data
-        /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public BotdError Error { get; set; }
+        public ErrorEvent404ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -51,8 +43,7 @@ namespace Fingerprint.Sdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("class ErrorEvent404Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -68,21 +59,16 @@ namespace Fingerprint.Sdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if ErrorEvent404Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of ErrorEvent404Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(ErrorEvent404Response input)
         {
             if (input == null)
                 return false;
 
             return
-                (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
-                ) &&
                 (
                 this.Error == input.Error ||
                 (this.Error != null &&
@@ -99,8 +85,6 @@ namespace Fingerprint.Sdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
                 if (this.Error != null)
                     hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;

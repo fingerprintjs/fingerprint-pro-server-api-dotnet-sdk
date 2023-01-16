@@ -16,33 +16,31 @@ using System.ComponentModel.DataAnnotations;
 namespace Fingerprint.Sdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// SeenAt
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class SeenAt : IEquatable<SeenAt>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="SeenAt" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), BotdError error = default(BotdError))
+        /// <param name="global">global (required).</param>
+        /// <param name="subscription">subscription (required).</param>
+        public SeenAt(DateTime? global = default(DateTime?), DateTime? subscription = default(DateTime?))
         {
-            this.Data = data;
-            this.Error = error;
         }
 
         /// <summary>
-        /// Gets or Sets Data
+        /// Gets or Sets Global
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
+        [DataMember(Name = "global", EmitDefaultValue = false)]
+        public DateTime? Global { get; set; }
 
         /// <summary>
-        /// Gets or Sets Error
+        /// Gets or Sets Subscription
         /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        public BotdError Error { get; set; }
+        [DataMember(Name = "subscription", EmitDefaultValue = false)]
+        public DateTime? Subscription { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -51,9 +49,9 @@ namespace Fingerprint.Sdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("class SeenAt {\n");
+            sb.Append("  Global: ").Append(Global).Append("\n");
+            sb.Append("  Subscription: ").Append(Subscription).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -68,25 +66,25 @@ namespace Fingerprint.Sdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if SeenAt instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of SeenAt to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(SeenAt input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
+                this.Global == input.Global ||
+                (this.Global != null &&
+                this.Global.Equals(input.Global))
                 ) &&
                 (
-                this.Error == input.Error ||
-                (this.Error != null &&
-                this.Error.Equals(input.Error))
+                this.Subscription == input.Subscription ||
+                (this.Subscription != null &&
+                this.Subscription.Equals(input.Subscription))
                 );
         }
 
@@ -99,10 +97,10 @@ namespace Fingerprint.Sdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
-                if (this.Error != null)
-                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                if (this.Global != null)
+                    hashCode = hashCode * 59 + this.Global.GetHashCode();
+                if (this.Subscription != null)
+                    hashCode = hashCode * 59 + this.Subscription.GetHashCode();
                 return hashCode;
             }
         }

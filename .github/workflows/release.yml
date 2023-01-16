@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - test
+      - main
+
+jobs:
+  release:
+    # Don't forget to configure production environment after repository is made public to require approval before triggering!
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '11'
+
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x
+
+      - run: dotnet --version && dotnet restore && dotnet list package
+          
+      - name: Install dependencies
+        run: yarn install --cwd=release
+
+      - name: Build library
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Release
+        run: ./semantic-release/node_modules/.bin/semantic-release --extends ./semantic-release/.releaserc.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          HUSKY: 0

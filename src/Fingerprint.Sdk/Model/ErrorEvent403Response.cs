@@ -16,31 +16,25 @@ using System.ComponentModel.DataAnnotations;
 namespace Fingerprint.Sdk.Model
 {
     /// <summary>
-    /// StSeenAt
+    /// ErrorEvent403Response
     /// </summary>
     [DataContract]
-    public partial class StSeenAt : IEquatable<StSeenAt>
+    public partial class ErrorEvent403Response : IEquatable<ErrorEvent403Response>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StSeenAt" /> class.
+        /// Initializes a new instance of the <see cref="ErrorEvent403Response" /> class.
         /// </summary>
-        /// <param name="global">global (required).</param>
-        /// <param name="subscription">subscription (required).</param>
-        public StSeenAt(DateTime? global = default(DateTime?), DateTime? subscription = default(DateTime?))
+        /// <param name="error">error.</param>
+        public ErrorEvent403Response(ErrorEvent403ResponseError error = default(ErrorEvent403ResponseError))
         {
+            this.Error = error;
         }
 
         /// <summary>
-        /// Gets or Sets Global
+        /// Gets or Sets Error
         /// </summary>
-        [DataMember(Name = "global", EmitDefaultValue = false)]
-        public DateTime? Global { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Subscription
-        /// </summary>
-        [DataMember(Name = "subscription", EmitDefaultValue = false)]
-        public DateTime? Subscription { get; set; }
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        public ErrorEvent403ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -49,9 +43,8 @@ namespace Fingerprint.Sdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class StSeenAt {\n");
-            sb.Append("  Global: ").Append(Global).Append("\n");
-            sb.Append("  Subscription: ").Append(Subscription).Append("\n");
+            sb.Append("class ErrorEvent403Response {\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -66,25 +59,20 @@ namespace Fingerprint.Sdk.Model
         }
 
         /// <summary>
-        /// Returns true if StSeenAt instances are equal
+        /// Returns true if ErrorEvent403Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of StSeenAt to be compared</param>
+        /// <param name="input">Instance of ErrorEvent403Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(StSeenAt input)
+        public bool Equals(ErrorEvent403Response input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Global == input.Global ||
-                (this.Global != null &&
-                this.Global.Equals(input.Global))
-                ) &&
-                (
-                this.Subscription == input.Subscription ||
-                (this.Subscription != null &&
-                this.Subscription.Equals(input.Subscription))
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
                 );
         }
 
@@ -97,10 +85,8 @@ namespace Fingerprint.Sdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Global != null)
-                    hashCode = hashCode * 59 + this.Global.GetHashCode();
-                if (this.Subscription != null)
-                    hashCode = hashCode * 59 + this.Subscription.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
             }
         }

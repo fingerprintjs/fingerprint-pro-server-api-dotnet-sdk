@@ -1,10 +1,9 @@
-# Fingerprint.Sdk.Model.ProductsResponseBotd
+# Fingerprint.Sdk.Model.ErrorEvent403Response
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**BotdResult**](BotdResult.md) |  | [optional] 
-**Error** | [**BotdError**](BotdError.md) |  | [optional] 
+**Error** | [**ErrorEvent403ResponseError**](ErrorEvent403ResponseError.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

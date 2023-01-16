@@ -51,7 +51,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EventResponse'
               examples:
-                example:
+                fullResponse:
                   summary: Example response
                   value:
                     products:
@@ -106,25 +106,64 @@ paths:
                           url: https://www.example.com/login
                           ip: 61.127.217.15
                           time: '2019-05-21T16:40:13Z'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example:
-                  summary: Example response
+                withBotdError:
+                  summary: Example response with BotD error
                   value:
-                    error:
-                      code: RequestIdCannotBeParsed
-                      message: invalid format of request id
+                    products:
+                      identification:
+                        data:
+                          visitorId: Ibk1527CUFmcnjLwIs4A9
+                          requestId: 0KSh65EnVoB85JBmloQK
+                          incognito: true
+                          linkedId: somelinkedId
+                          time: '2019-05-21T16:40:13Z'
+                          timestamp: 1582299576512
+                          url: https://www.example.com/login
+                          ip: 61.127.217.15
+                          ipLocation:
+                            accuracyRadius: 10
+                            latitude: 49.982
+                            longitude: 36.2566
+                            postalCode: '61202'
+                            timezone: Europe/Dusseldorf
+                            city:
+                              name: Dusseldorf
+                            continent:
+                              code: EU
+                              name: Europe
+                            country:
+                              code: DE
+                              name: Germany
+                            subdivisions:
+                              - isoCode: '63'
+                                name: North Rhine-Westphalia
+                          browserDetails:
+                            browserName: Chrome
+                            browserMajorVersion: '74'
+                            browserFullVersion: 74.0.3729
+                            os: Windows
+                            osVersion: '7'
+                            device: Other
+                            userAgent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....
+                          confidence:
+                            score: 0.97
+                          visitorFound: true
+                          firstSeenAt:
+                            global: '2022-03-16T11:26:45.362Z'
+                            subscription: '2022-03-16T11:31:01.101Z'
+                          lastSeenAt:
+                            global: '2022-03-16T11:28:34.023Z'
+                            subscription: null
+                      botd:
+                        error:
+                          code: Failed
+                          message: internal server error
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/ErrorEvent403Response'
               examples:
                 example:
                   summary: Example response
@@ -132,6 +171,19 @@ paths:
                     error:
                       code: TokenRequired
                       message: secret key is required
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEvent404Response'
+              examples:
+                example:
+                  summary: Example response
+                  value:
+                    error:
+                      code: RequestNotFound
+                      message: request id is not found
         '429':
           description: Too Many Requests
           headers:
@@ -2874,6 +2926,15 @@ paths:
                         lastSeenAt:
                           global: '2022-03-08T12:33:05.677Z'
                           subscription: '2022-03-08T12:33:05.677Z'
+        '403':
+          description: Forbidden. Probably ApiKey is missed or provided the wrong one.
+          content:
+            text/html:
+              schema:
+                type: string
+                example: >
+                  <html> <head><title>403 Forbidden</title></head> <body>
+                  <center><h1>403 Forbidden</h1></center> </body> </html>
         '429':
           description: Too Many Requests
           headers:
@@ -3035,12 +3096,12 @@ components:
                 description: Attribute represents if a visitor had been identified before.
                 type: boolean
               firstSeenAt:
-                $ref: '#/components/schemas/StSeenAt'
+                $ref: '#/components/schemas/SeenAt'
                 example:
                   global: '2022-05-05T18:28:54.535Z'
                   subscription: '2022-06-09T22:58:05.576Z'
               lastSeenAt:
-                $ref: '#/components/schemas/StSeenAt'
+                $ref: '#/components/schemas/SeenAt'
                 example:
                   global: '2022-06-09T22:58:35.795Z'
                   subscription: null
@@ -3080,21 +3141,58 @@ components:
       description: >-
         Fields `lastTimestamp` and `paginationKey` added when `limit` or
         `before` parameter provided and there is more data to show
-    ErrorResponse:
+    ErrorEvent403Response:
       type: object
       additionalProperties: false
       properties:
         error:
           type: object
           additionalProperties: false
-          title: ErrorResponseError
+          title: ErrorEvent403ResponseError
           properties:
             code:
               type: string
+              description: |
+                Error code:
+                 * `TokenRequired` - `Auth-API-Key` header is missing or empty
+                 * `TokenNotFound` - subscription not found for specified secret key
+                 * `SubscriptionNotActive` - subscription is not active
+                 * `WrongRegion` - server and subscription region differ
+              enum:
+                - TokenRequired
+                - TokenNotFound
+                - SubscriptionNotActive
+                - WrongRegion
               example: TokenRequired
             message:
               type: string
               example: secret key is required
+          required:
+            - code
+            - message
+    ErrorEvent404Response:
+      type: object
+      additionalProperties: false
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          title: ErrorEvent404ResponseError
+          properties:
+            code:
+              type: string
+              description: |
+                Error code:
+                 * `RequestNotFound` - request not found for specified id
+              enum:
+                - RequestNotFound
+              example: RequestNotFound
+            message:
+              type: string
+              example: request id is not found
+          required:
+            - code
+            - message
     ManyRequestsResponse:
       type: object
       additionalProperties: false
@@ -3159,12 +3257,12 @@ components:
           description: Attribute represents if a visitor had been identified before.
           type: boolean
         firstSeenAt:
-          $ref: '#/components/schemas/StSeenAt'
+          $ref: '#/components/schemas/SeenAt'
           example:
             global: '2022-05-05T18:28:54.535Z'
             subscription: '2022-06-09T22:58:05.576Z'
         lastSeenAt:
-          $ref: '#/components/schemas/StSeenAt'
+          $ref: '#/components/schemas/SeenAt'
           example:
             global: '2022-06-09T22:58:35.795Z'
             subscription: null
@@ -3233,12 +3331,12 @@ components:
           description: Attribute represents if a visitor had been identified before.
           type: boolean
         firstSeenAt:
-          $ref: '#/components/schemas/StSeenAt'
+          $ref: '#/components/schemas/SeenAt'
           example:
             global: '2022-05-05T18:28:54.535Z'
             subscription: '2022-06-09T22:58:05.576Z'
         lastSeenAt:
-          $ref: '#/components/schemas/StSeenAt'
+          $ref: '#/components/schemas/SeenAt'
           example:
             global: '2022-06-09T22:58:35.795Z'
             subscription: null
@@ -3309,7 +3407,7 @@ components:
       required:
         - score
       title: Confidence
-    StSeenAt:
+    SeenAt:
       type: object
       additionalProperties: false
       properties:
@@ -3324,7 +3422,7 @@ components:
       required:
         - global
         - subscription
-      title: StSeenAt
+      title: SeenAt
     IPLocation:
       type: object
       additionalProperties: false
@@ -3477,12 +3575,12 @@ components:
                     before.
                   type: boolean
                 firstSeenAt:
-                  $ref: '#/components/schemas/StSeenAt'
+                  $ref: '#/components/schemas/SeenAt'
                   example:
                     global: '2022-05-05T18:28:54.535Z'
                     subscription: '2022-06-09T22:58:05.576Z'
                 lastSeenAt:
-                  $ref: '#/components/schemas/StSeenAt'
+                  $ref: '#/components/schemas/SeenAt'
                   example:
                     global: '2022-06-09T22:58:35.795Z'
                     subscription: null
@@ -3510,6 +3608,8 @@ components:
           properties:
             data:
               $ref: '#/components/schemas/BotdResult'
+            error:
+              $ref: '#/components/schemas/BotdError'
     EventResponse:
       description: >-
         Contains event from activated products - Fingerprint Pro or Bot
@@ -3569,3 +3669,23 @@ components:
             - bad
       required:
         - result
+    BotdError:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: |
+            Error code:
+             * `TooManyRequests` - the limit on secret API key requests per second has been exceeded
+             * `Failed` - internal server error
+          enum:
+            - TooManyRequests
+            - Failed
+          example: TooManyRequests
+        message:
+          type: string
+          example: too many requests
+      required:
+        - code
+        - message

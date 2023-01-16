@@ -1,10 +1,10 @@
-# Fingerprint.Sdk.Model.ProductsResponseBotd
+# Fingerprint.Sdk.Model.SeenAt
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**BotdResult**](BotdResult.md) |  | [optional] 
-**Error** | [**BotdError**](BotdError.md) |  | [optional] 
+**Global** | **DateTime?** |  | 
+**Subscription** | **DateTime?** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

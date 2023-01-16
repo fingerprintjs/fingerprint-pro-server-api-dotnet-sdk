@@ -13,6 +13,7 @@ using System.Text;
 using Fingerprint.Sdk.Api;
 using Fingerprint.Sdk.Client;
 using Fingerprint.Sdk.Model;
+using Fingerprint.Sdk.Test.Utils;
 
 namespace Fingerprint.Sdk.Test.Api
 {
@@ -35,20 +36,20 @@ namespace Fingerprint.Sdk.Test.Api
             Console.WriteLine("Starting server...");
 
             // Start simple HTTP server
-            mockServer = new HttpListener();
-            mockServer.Prefixes.Add(serverUrl);
-            mockServer.Start();
+            _mockServer = new HttpListener();
+            _mockServer.Prefixes.Add(_serverUrl);
+            _mockServer.Start();
 
             HandleConnection().GetAwaiter();
 
             Console.WriteLine("Started server");
 
-            var config = new Configuration
+            var config = new Configuration("123")
             {
-                BasePath = serverUrl
+                BasePath = _serverUrl
             };
 
-            instance = new FingerprintApi(config);
+            _instance = new FingerprintApi(config);
         }
 
         /// <summary>
@@ -59,41 +60,36 @@ namespace Fingerprint.Sdk.Test.Api
         {
             Console.WriteLine("Closing server.");
 
-            requests.Clear();
-            mockServer!.Close();
+            _requests.Clear();
+            _mockServer!.Close();
         }
 
-        private const string serverUrl = "http://127.0.0.1:8080/";
+        private const string _serverUrl = "http://127.0.0.1:8080/";
 
-        private FingerprintApi? instance;
+        private FingerprintApi? _instance;
 
-        private HttpListener? mockServer;
+        private HttpListener? _mockServer;
 
-        private readonly List<HttpListenerRequest> requests = new List<HttpListenerRequest>();
+        private readonly List<HttpListenerRequest> _requests = new List<HttpListenerRequest>();
 
-        private byte[]? mockResponseBytes;
+        private byte[]? _mockResponseBytes;
 
         private void SetupMockResponse(string fileName)
         {
-            // Load selected json file store in /mocks directory, and save it to a "mockResponse" property
-
-            var mockResponse = File.ReadAllText($"../../../mocks/{fileName}");
-
-            mockResponseBytes = Encoding.UTF8.GetBytes(mockResponse);
+            _mockResponseBytes = MockLoader.Load(fileName);
         }
 
         private async Task HandleConnection()
         {
-            while (mockServer != null)
+            while (_mockServer != null)
             {
-                var ctx = await mockServer.GetContextAsync();
+                var ctx = await _mockServer.GetContextAsync();
 
                 // Peel out the requests and response objects
                 var req = ctx.Request;
                 var resp = ctx.Response;
 
-                requests.Add(req);
-
+                _requests.Add(req);
 
                 // Print out some info about the request
                 Console.WriteLine(req.Url?.ToString());
@@ -102,13 +98,13 @@ namespace Fingerprint.Sdk.Test.Api
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine();
 
-                if (mockResponseBytes != null)
+                if (_mockResponseBytes != null)
                 {
                     resp.ContentType = "application/json";
                     resp.ContentEncoding = Encoding.UTF8;
-                    resp.ContentLength64 = mockResponseBytes.LongLength;
+                    resp.ContentLength64 = _mockResponseBytes.LongLength;
 
-                    await resp.OutputStream.WriteAsync(mockResponseBytes);
+                    await resp.OutputStream.WriteAsync(_mockResponseBytes);
                 }
 
                 resp.Close();
@@ -121,7 +117,7 @@ namespace Fingerprint.Sdk.Test.Api
         [Test]
         public void InstanceTest()
         {
-            Assert.That(instance, Is.InstanceOf(typeof(FingerprintApi)), "instance is a FingerprintApi");
+            Assert.That(_instance, Is.InstanceOf(typeof(FingerprintApi)), "instance is a FingerprintApi");
         }
 
         /// <summary>
@@ -133,16 +129,18 @@ namespace Fingerprint.Sdk.Test.Api
             SetupMockResponse("get_event.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
-            var response = instance!.GetEvent(requestId);
+            var response = _instance!.GetEvent(requestId);
 
             Assert.Multiple(() =>
             {
-                Assert.That(requests, Has.Count.EqualTo(1));
+                Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
 
-                var request = requests[0];
+                var request = _requests[0];
 
-                Assert.That(request.Url?.ToString(), Is.EqualTo($"http://127.0.0.1:8080/events/{requestId}"));
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
             });
@@ -162,20 +160,20 @@ namespace Fingerprint.Sdk.Test.Api
             int? limit = 1;
             int? before = null;
 
-            var response = instance.GetVisits(visitorId, requestId, linkedId, limit, before);
+            var response = _instance!.GetVisits(visitorId, requestId, linkedId, limit, before);
 
             Assert.Multiple(() =>
             {
-                Assert.That(requests, Has.Count.EqualTo(1));
+                Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<Response>(), "response is Response");
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(1));
 
-                var request = requests[0];
+                var request = _requests[0];
 
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?request_id={requestId}&limit={limit}"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }

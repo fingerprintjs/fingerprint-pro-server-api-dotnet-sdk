@@ -29,16 +29,8 @@ namespace Example
     {
         public void main()
         {
-            // Configure API key authorization: ApiKeyHeader
-            Configuration.Default.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Auth-API-Key", "Bearer");
-            // Configure API key authorization: ApiKeyQuery
-            Configuration.Default.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("api_key", "Bearer");
-
-            var apiInstance = new FingerprintApi();
+            var configuration = new Configuration("YOUR_API_KEY");
+            var apiInstance = new FingerprintApi(configuration);
             var requestId = requestId_example;  // string | requestId is the unique identifier of each request
 
             try
@@ -98,16 +90,8 @@ namespace Example
     {
         public void main()
         {
-            // Configure API key authorization: ApiKeyHeader
-            Configuration.Default.AddApiKey("Auth-API-Key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("Auth-API-Key", "Bearer");
-            // Configure API key authorization: ApiKeyQuery
-            Configuration.Default.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // Configuration.Default.AddApiKeyPrefix("api_key", "Bearer");
-
-            var apiInstance = new FingerprintApi();
+            var configuration = new Configuration("YOUR_API_KEY");
+            var apiInstance = new FingerprintApi(configuration);
             var visitorId = visitorId_example;  // string | 
             var requestId = requestId_example;  // string | Filter visits by requestId (optional) 
             var linkedId = linkedId_example;  // string | Filter visits by custom identifier (optional) 
@@ -150,6 +134,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

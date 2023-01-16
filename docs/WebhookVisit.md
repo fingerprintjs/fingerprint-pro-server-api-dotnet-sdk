@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **LinkedId** | **string** | A customer-provided id that was sent with identification request. | [optional] 
 **Confidence** | [**Confidence**](Confidence.md) |  | 
 **VisitorFound** | **bool?** | Attribute represents if a visitor had been identified before. | 
-**FirstSeenAt** | [**StSeenAt**](StSeenAt.md) |  | 
-**LastSeenAt** | [**StSeenAt**](StSeenAt.md) |  | 
+**FirstSeenAt** | [**SeenAt**](SeenAt.md) |  | 
+**LastSeenAt** | [**SeenAt**](SeenAt.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

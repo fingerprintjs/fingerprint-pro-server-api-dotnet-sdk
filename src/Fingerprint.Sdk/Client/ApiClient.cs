@@ -40,46 +40,15 @@ namespace Fingerprint.Sdk.Client
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default configuration.
-        /// </summary>
-        public ApiClient()
-        {
-            Configuration = Fingerprint.Sdk.Client.Configuration.Default;
-            RestClient = new RestClient("https://api.fpjs.io");
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient" /> class
         /// with default base path (https://api.fpjs.io).
         /// </summary>
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config)
         {
-            Configuration = config ?? Fingerprint.Sdk.Client.Configuration.Default;
+            Configuration = config;
 
             RestClient = new RestClient(Configuration.BasePath);
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default configuration.
-        /// </summary>
-        /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "https://api.fpjs.io")
-        {
-            if (String.IsNullOrEmpty(basePath))
-                throw new ArgumentException("basePath cannot be empty");
-
-            RestClient = new RestClient(basePath);
-            Configuration = Client.Configuration.Default;
-        }
-
-        /// <summary>
-        /// Gets or sets the default API client for making HTTP calls.
-        /// </summary>
-        /// <value>The default API client.</value>
-        [Obsolete("ApiClient.Default is deprecated, please use 'Configuration.Default.ApiClient' instead.")]
-        public static ApiClient Default;
 
         /// <summary>
         /// Gets or sets an instance of the IReadableConfiguration.
