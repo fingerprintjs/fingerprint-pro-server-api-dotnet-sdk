@@ -29,3 +29,4 @@ git_push.sh
 src/Fingerprint.Sdk.Test/**
 
 **/GlobalConfiguration.cs
+.gitignore
