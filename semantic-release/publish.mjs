@@ -45,7 +45,7 @@ cp.execSync('dotnet pack --configuration Release --no-restore', {
     cwd: paths.sdk
 })
 
-const fileName = `FingerprintPro.ServerApi.${version}.nupkg`;
+const fileName = `FingerprintPro.ServerSdk.${version}.nupkg`;
 
 console.info(`Publishing ${fileName}...`);
 
