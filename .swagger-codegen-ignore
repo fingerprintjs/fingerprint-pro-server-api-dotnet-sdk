@@ -30,3 +30,6 @@ src/FingerprintPro.ServerSdk.Test/**
 
 **/GlobalConfiguration.cs
 .gitignore
+
+build.bat
+build.sh
