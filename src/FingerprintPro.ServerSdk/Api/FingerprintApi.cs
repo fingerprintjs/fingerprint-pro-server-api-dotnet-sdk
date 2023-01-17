@@ -130,7 +130,7 @@ namespace FingerprintPro.ServerSdk.Api
     /// </summary>
     public partial class FingerprintApi : IFingerprintApi
     {
-        public const string Version = "1.0.0-test.3";
+        public const string Version = "1.0.0-test.4";
 
         private readonly ApiClient _apiClient;
 
@@ -213,7 +213,7 @@ namespace FingerprintPro.ServerSdk.Api
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
 
-            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.3"));
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.4"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
@@ -291,7 +291,7 @@ namespace FingerprintPro.ServerSdk.Api
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
 
-            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.3"));
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.4"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
@@ -376,7 +376,7 @@ namespace FingerprintPro.ServerSdk.Api
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
 
-            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.3"));
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.4"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
@@ -467,7 +467,7 @@ namespace FingerprintPro.ServerSdk.Api
             var localVarFileParams = new Dictionary<String, FileParameter>();
             Object localVarPostBody = null;
 
-            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.3"));
+            localVarQueryParams.Add(new KeyValuePair<string, string>("ii", "fingerprint-pro-server-api-dotnet-sdk/1.0.0-test.4"));
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {

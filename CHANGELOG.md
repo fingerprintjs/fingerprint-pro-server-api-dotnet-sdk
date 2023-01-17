@@ -1,3 +1,10 @@
+## [1.0.0-test.4](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.3...v1.0.0-test.4) (2023-01-17)
+
+
+### Documentation
+
+* **README:** include readme and license ([6102d58](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/6102d589823e0bcefd25e08a6cd0d16304e6321a))
+
 ## [1.0.0-test.3](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.2...v1.0.0-test.3) (2023-01-17)
 
 
