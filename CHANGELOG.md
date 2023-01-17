@@ -1,3 +1,11 @@
+## [1.0.0-test.5](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.4...v1.0.0-test.5) (2023-01-17)
+
+
+### Documentation
+
+* **README:** add install command and fix style problems ([4798730](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/47987309a0dcb8d63a42bb6863fb0328e7f3b705))
+* **README:** add separate readme to package ([6572a05](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/6572a05a311954342a7e46cc30fc4d2442c5d252))
+
 ## [1.0.0-test.4](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.3...v1.0.0-test.4) (2023-01-17)
 
 
