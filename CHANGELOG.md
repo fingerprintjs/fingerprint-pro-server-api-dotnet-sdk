@@ -1,3 +1,10 @@
+## [1.0.0-test.3](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.2...v1.0.0-test.3) (2023-01-17)
+
+
+### Features
+
+* rename package to match new root namespace ([e457a69](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/e457a6932d871e9371ea72c9faa2e411604e3439))
+
 ## [1.0.0-test.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.1...v1.0.0-test.2) (2023-01-17)
 
 
