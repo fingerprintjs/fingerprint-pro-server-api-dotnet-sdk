@@ -1,3 +1,10 @@
+## [1.0.0-test.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.1...v1.0.0-test.2) (2023-01-17)
+
+
+### Features
+
+* change namespace from Fingerprint.Sdk to Fingerprint.ServerSdk ([250b756](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/250b756ec21162bf90dc2f5ca010f012804544e8))
+
 ## 1.0.0-test.1 (2023-01-17)
 
 
