@@ -1,6 +1,6 @@
 using FingerprintPro.ServerSdk.Client;
 
-namespace Fingerprint.ServerSdk.Test.Client;
+namespace FingerprintPro.ServerSdk.Test.Client;
 
 [TestFixture]
 public class ConfigurationTests

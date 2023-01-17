@@ -15,7 +15,7 @@ using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
 using FingerprintPro.ServerSdk.Test.Utils;
 
-namespace Fingerprint.ServerSdk.Test.Api
+namespace FingerprintPro.ServerSdk.Test.Api
 {
     /// <summary>
     ///  Class for testing FingerprintApi

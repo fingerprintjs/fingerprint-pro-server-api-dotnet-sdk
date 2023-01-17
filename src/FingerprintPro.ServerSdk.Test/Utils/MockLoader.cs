@@ -1,8 +1,8 @@
 using System.Text;
 
-namespace Fingerprint.ServerSdk.Test.Utils;
+namespace FingerprintPro.ServerSdk.Test.Utils;
 
-public class MockLoader
+public static class MockLoader
 {
     public static byte[] Load(string fileName)
     {

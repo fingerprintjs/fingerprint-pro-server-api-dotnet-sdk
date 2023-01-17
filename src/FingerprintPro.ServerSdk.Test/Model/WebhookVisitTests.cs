@@ -3,7 +3,7 @@ using FingerprintPro.ServerSdk.Model;
 using FingerprintPro.ServerSdk.Test.Utils;
 using Newtonsoft.Json;
 
-namespace Fingerprint.ServerSdk.Test.Model;
+namespace FingerprintPro.ServerSdk.Test.Model;
 
 [TestFixture]
 public class WebhookVisitTests
