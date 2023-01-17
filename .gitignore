@@ -14,7 +14,7 @@
 [Rr]elease/
 x64/
 build/
-[Bb]in/
+src/**/[Bb]in/
 [Oo]bj/
 
 # NuGet Packages
