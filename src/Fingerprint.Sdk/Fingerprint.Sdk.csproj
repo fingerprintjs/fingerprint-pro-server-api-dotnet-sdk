@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageId>Fingerprint.Sdk</PackageId>
+        <PackageId>FingerprintPro.ServerApi</PackageId>
         <PackageTags>browser,detection,fingerprint,identification,fingerprinting,browser-fingerprinting,fraud-detection,fraud,audio-fingerprinting,fingerprintjs,fingerprintjs-pro,visitor-identification</PackageTags>
         <Version>0.0.1</Version>
         <Authors>Przemysław Żydek</Authors>
