@@ -120,7 +120,7 @@ module.exports = {
           "README.md",
           "config.json",
           "docs/**/*",
-          "src/Fingerprint.ServerSdk/Fingerprint.ServerSdk.csproj",
+          "src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj",
           "src/**/Api/*.cs",
           "src/**/Model/*.cs",
           "src/**/Client/*.cs",

@@ -26,7 +26,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>EventResponse</returns>
         EventResponse GetEvent(string requestId);
@@ -37,7 +37,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>ApiResponse of EventResponse</returns>
         ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId);
@@ -47,7 +47,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -62,7 +62,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -78,7 +78,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>Task of EventResponse</returns>
         System.Threading.Tasks.Task<EventResponse> GetEventAsync(string requestId);
@@ -89,7 +89,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>Task of ApiResponse (EventResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId);
@@ -99,7 +99,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -114,7 +114,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <remarks>
         /// This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -134,7 +134,7 @@ namespace FingerprintPro.ServerSdk.Api
 
         private readonly ApiClient _apiClient;
 
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private FingerprintPro.ServerSdk.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FingerprintApi"/> class
@@ -142,12 +142,12 @@ namespace FingerprintPro.ServerSdk.Api
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public FingerprintApi(Configuration configuration)
+        public FingerprintApi(FingerprintPro.ServerSdk.Client.Configuration configuration)
         {
             Configuration = configuration;
             _apiClient = new ApiClient(configuration);
 
-            ExceptionFactory = Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = FingerprintPro.ServerSdk.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -163,12 +163,12 @@ namespace FingerprintPro.ServerSdk.Api
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
+        public FingerprintPro.ServerSdk.Client.Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public ExceptionFactory ExceptionFactory
+        public FingerprintPro.ServerSdk.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -184,7 +184,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get event by requestId This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>EventResponse</returns>
         public EventResponse GetEvent(string requestId)
@@ -196,7 +196,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get event by requestId This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>ApiResponse of EventResponse</returns>
         public ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId)
@@ -249,7 +249,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = this.ExceptionFactory("GetEvent", localVarResponse);
+                Exception exception = ExceptionFactory("GetEvent", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -261,7 +261,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get event by requestId This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>Task of EventResponse</returns>
         public async System.Threading.Tasks.Task<EventResponse> GetEventAsync(string requestId)
@@ -274,7 +274,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get event by requestId This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId">requestId is the unique identifier of each request</param>
         /// <returns>Task of ApiResponse (EventResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
@@ -327,7 +327,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = this.ExceptionFactory("GetEvent", localVarResponse);
+                Exception exception = ExceptionFactory("GetEvent", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -339,7 +339,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get visits by visitorId This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -355,7 +355,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get visits by visitorId This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -417,7 +417,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = this.ExceptionFactory("GetVisits", localVarResponse);
+                Exception exception = ExceptionFactory("GetVisits", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -429,7 +429,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get visits by visitorId This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -446,7 +446,7 @@ namespace FingerprintPro.ServerSdk.Api
         /// <summary>
         /// Get visits by visitorId This endpoint allows you to get a history of visits with all available information. Use the visitorId as a URL path parameter. This API method is scoped to a visitor, i.e. all returned information is by visitorId.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="visitorId"></param>
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
@@ -508,7 +508,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = this.ExceptionFactory("GetVisits", localVarResponse);
+                Exception exception = ExceptionFactory("GetVisits", localVarResponse);
                 if (exception != null) throw exception;
             }
 

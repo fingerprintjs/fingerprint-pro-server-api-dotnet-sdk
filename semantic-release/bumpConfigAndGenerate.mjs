@@ -28,7 +28,7 @@ function bumpConfigVersion(version) {
 }
 
 function bumpCsprojVersion(version) {
-    const csprojPath = path.resolve(dirname, '../../src/Fingerprint.ServerSdk/Fingerprint.ServerSdk.csproj');
+    const csprojPath = path.resolve(dirname, '../../src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj');
 
     console.info('Csproj path:', csprojPath);
 

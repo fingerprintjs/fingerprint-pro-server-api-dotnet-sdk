@@ -1,4 +1,4 @@
-# Fingerprint.ServerSdk.Model.Subdivision
+# FingerprintPro.ServerSdk.Model.Subdivision
 ## Properties
 
 Name | Type | Description | Notes

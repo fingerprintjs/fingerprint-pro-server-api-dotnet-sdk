@@ -85,8 +85,8 @@ using {{packageName}}.{{modelPackage}};
 // See https://aka.ms/new-console-template for more information
 // Example usage of our SDK
 
-using Fingerprint.ServerSdk.Api;
-using Fingerprint.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
 
 // Initialize configuration and add your api key
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
@@ -110,7 +110,7 @@ Console.WriteLine(events);
 If your subscription is in region other than US, you need to change the region in the configuration:
 
 ```csharp
-using Fingerprint.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Client;
 
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!)
 {
