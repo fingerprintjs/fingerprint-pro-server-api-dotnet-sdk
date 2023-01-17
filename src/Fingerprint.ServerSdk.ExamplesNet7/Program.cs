@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System;
 using Fingerprint.ServerSdk.Api;
 using Fingerprint.ServerSdk.Client;
 
