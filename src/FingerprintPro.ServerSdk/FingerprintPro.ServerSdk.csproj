@@ -7,6 +7,8 @@
         <Authors>Przemysław Żydek</Authors>
         <Company>Fingerprint</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -20,6 +22,11 @@
         <PackageReference Include="JsonSubTypes" Version="2.0.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="RestSharp" Version="105.1.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="/" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="/" />
     </ItemGroup>
 
 </Project>
