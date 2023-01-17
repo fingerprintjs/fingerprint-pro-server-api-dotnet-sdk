@@ -3,12 +3,18 @@ import * as path from "path";
 import * as fs from "fs";
 
 const dirname = import.meta.url.replace(/^file:\/\//, '');
-const sdkPath = path.resolve(dirname, '../src/Fingerprint.Sdk');
+const sdkPath = path.resolve(dirname, '../../src/Fingerprint.Sdk');
 
 const paths = {
     sdk: sdkPath,
     release: path.join(sdkPath, 'bin/Release')
 }
+
+Object.entries(paths).forEach(([key, value]) => {
+    if (!fs.existsSync(value)) {
+        throw new Error(`Path ${key} does not exist: ${value}`);
+    }
+})
 
 console.info('Publishing SDK to NuGet',);
 console.info('Paths:', paths);
@@ -45,5 +51,5 @@ console.info(`Publishing ${fileName}...`);
 
 cp.execSync(`dotnet nuget push ${fileName} --api-key ${apiKey} --source https://api.nuget.org/v3/index.json`, {
     stdio: 'inherit',
-    cwd: paths.release 
+    cwd: paths.release
 })
