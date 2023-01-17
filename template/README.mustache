@@ -61,7 +61,6 @@ NOTE: RestSharp versions greater than 105.1.0 have a bug which causes file uploa
 
 <a name="installation"></a>
 ## Installation
-// TODO Update this section once package is published to nuget
 
 {{#netStandard}}
 Generate the DLL using your preferred tool
@@ -72,12 +71,11 @@ Run the following command to generate the DLL
 - [Windows] `build.bat`
 {{/netStandard}}
 
-Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
-```csharp
-using {{packageName}}.{{apiPackage}};
-using {{packageName}}.Client;
-using {{packageName}}.{{modelPackage}};
+We recommend installing the package from [NuGet](https://docs.nuget.org/consume/installing-nuget):
+```shell
+dotnet add package FingerprintPro.ServerSdk
 ```
+
 <a name="getting-started"></a>
 ## Getting Started
 
@@ -85,6 +83,7 @@ using {{packageName}}.{{modelPackage}};
 // See https://aka.ms/new-console-template for more information
 // Example usage of our SDK
 
+// Import namespaces
 using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
@@ -92,7 +91,7 @@ using FingerprintPro.ServerSdk.Client;
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
 
 var api = new FingerprintApi(
-configuration
+    configuration
 );
 
 var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
@@ -132,8 +131,8 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
 {{#modelPackage}}
-    {{#models}}{{#model}} - [{{{modelPackage}}}.{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
-    {{/model}}{{/models}}
+{{#models}}{{#model}} - [{{{modelPackage}}}.{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
+{{/model}}{{/models}}
 {{/modelPackage}}
 {{^modelPackage}}
     No model defined in this package

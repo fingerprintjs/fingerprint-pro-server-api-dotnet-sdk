@@ -53,18 +53,16 @@ NOTE: RestSharp versions greater than 105.1.0 have a bug which causes file uploa
 
 <a name="installation"></a>
 ## Installation
-// TODO Update this section once package is published to nuget
 
 Run the following command to generate the DLL
 - [Mac/Linux] `/bin/sh build.sh`
 - [Windows] `build.bat`
 
-Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
-```csharp
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+We recommend installing the package from [NuGet](https://docs.nuget.org/consume/installing-nuget):
+```shell
+dotnet add package FingerprintPro.ServerSdk
 ```
+
 <a name="getting-started"></a>
 ## Getting Started
 
@@ -72,6 +70,7 @@ using FingerprintPro.ServerSdk.Model;
 // See https://aka.ms/new-console-template for more information
 // Example usage of our SDK
 
+// Import namespaces
 using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
@@ -79,7 +78,7 @@ using FingerprintPro.ServerSdk.Client;
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
 
 var api = new FingerprintApi(
-configuration
+    configuration
 );
 
 var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
@@ -118,7 +117,7 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
-     - [Model.BotdDetectionResult](docs/BotdDetectionResult.md)
+ - [Model.BotdDetectionResult](docs/BotdDetectionResult.md)
  - [Model.BotdError](docs/BotdError.md)
  - [Model.BotdResult](docs/BotdResult.md)
  - [Model.BrowserDetails](docs/BrowserDetails.md)
