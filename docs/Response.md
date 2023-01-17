@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.Response
+# Fingerprint.ServerSdk.Model.Response
 ## Properties
 
 Name | Type | Description | Notes

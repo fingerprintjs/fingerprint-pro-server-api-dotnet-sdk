@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.BotdError
+# Fingerprint.ServerSdk.Model.BotdError
 ## Properties
 
 Name | Type | Description | Notes

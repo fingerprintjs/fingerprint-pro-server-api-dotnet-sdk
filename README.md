@@ -22,7 +22,7 @@
     </a>
 </p>
 
-# Fingerprint.Sdk - the C# library for the Fingerprint Pro Server API
+# Fingerprint.ServerSdk - the C# library for the Fingerprint Pro Server API
 
 Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
 
@@ -61,9 +61,9 @@ Run the following command to generate the DLL
 
 Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
 ```csharp
-using Fingerprint.Sdk.Api;
-using Fingerprint.Sdk.Client;
-using Fingerprint.Sdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 ```
 <a name="getting-started"></a>
 ## Getting Started
@@ -72,8 +72,8 @@ using Fingerprint.Sdk.Model;
 // See https://aka.ms/new-console-template for more information
 // Example usage of our SDK
 
-using Fingerprint.Sdk.Api;
-using Fingerprint.Sdk.Client;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
 
 // Initialize configuration and add your api key
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
@@ -97,7 +97,7 @@ Console.WriteLine(events);
 If your subscription is in region other than US, you need to change the region in the configuration:
 
 ```csharp
-using Fingerprint.Sdk.Client;
+using Fingerprint.ServerSdk.Client;
 
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!)
 {

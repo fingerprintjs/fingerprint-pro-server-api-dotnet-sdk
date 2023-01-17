@@ -40,7 +40,7 @@ if ! type nuget &>/dev/null; then
 fi
 
 mozroots --import --sync
-${nuget_cmd} install src/Fingerprint.Sdk/packages.config -o packages;
+${nuget_cmd} install src/Fingerprint.ServerSdk/packages.config -o packages;
 
 echo "[INFO] Copy DLLs to the 'bin' folder"
 mkdir -p bin;
@@ -48,15 +48,15 @@ cp packages/Newtonsoft.Json.10.0.3/lib/net45/Newtonsoft.Json.dll bin/Newtonsoft.
 cp packages/RestSharp.105.1.0/lib/net45/RestSharp.dll bin/RestSharp.dll;
 cp packages/JsonSubTypes.1.2.0/lib/net45/JsonSubTypes.dll bin/JsonSubTypes.dll
 
-echo "[INFO] Run 'mcs' to build bin/Fingerprint.Sdk.dll"
+echo "[INFO] Run 'mcs' to build bin/Fingerprint.ServerSdk.dll"
 mcs -langversion:${langversion} -sdk:${sdk} -r:bin/Newtonsoft.Json.dll,bin/JsonSubTypes.dll,\
 bin/RestSharp.dll,\
 System.ComponentModel.DataAnnotations.dll,\
 System.Runtime.Serialization.dll \
 -target:library \
--out:bin/Fingerprint.Sdk.dll \
--recurse:'src/Fingerprint.Sdk/*.cs' \
--doc:bin/Fingerprint.Sdk.xml \
+-out:bin/Fingerprint.ServerSdk.dll \
+-recurse:'src/Fingerprint.ServerSdk/*.cs' \
+-doc:bin/Fingerprint.ServerSdk.xml \
 -platform:anycpu
 
 if [ $? -ne 0 ]
@@ -64,5 +64,5 @@ then
   echo "[ERROR] Compilation failed with exit code $?"
   exit 1
 else
-  echo "[INFO] bin/Fingerprint.Sdk.dll was created successfully"
+  echo "[INFO] bin/Fingerprint.ServerSdk.dll was created successfully"
 fi

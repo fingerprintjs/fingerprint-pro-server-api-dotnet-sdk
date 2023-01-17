@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.WebhookVisit
+# Fingerprint.ServerSdk.Model.WebhookVisit
 ## Properties
 
 Name | Type | Description | Notes

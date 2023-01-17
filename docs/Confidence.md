@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.Confidence
+# Fingerprint.ServerSdk.Model.Confidence
 ## Properties
 
 Name | Type | Description | Notes

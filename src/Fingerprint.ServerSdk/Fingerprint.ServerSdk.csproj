@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>FingerprintPro.ServerApi</PackageId>
+        <PackageTags>browser,detection,fingerprint,identification,fingerprinting,browser-fingerprinting,fraud-detection,fraud,audio-fingerprinting,fingerprintjs,fingerprintjs-pro,visitor-identification</PackageTags>
+        <Version>1.0.0-test.1</Version>
+        <Authors>Przemysław Żydek</Authors>
+        <Company>Fingerprint</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>Fingerprint.ServerSdk</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TargetFrameworks>net5;net6;net7</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="RestSharp" Version="105.1.0" />
+    </ItemGroup>
+
+</Project>

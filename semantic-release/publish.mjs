@@ -3,7 +3,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 const dirname = import.meta.url.replace(/^file:\/\//, '');
-const sdkPath = path.resolve(dirname, '../../src/Fingerprint.Sdk');
+const sdkPath = path.resolve(dirname, '../../src/Fingerprint.ServerSdk');
 
 const paths = {
     sdk: sdkPath,
