@@ -1,3 +1,10 @@
+## [1.0.0-test.6](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.5...v1.0.0-test.6) (2023-01-18)
+
+
+### Features
+
+* bump RestSharp to 108.0.3 ([a36615f](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a36615f17a6fdefde279aef93e8e1d89b27cad75))
+
 ## [1.0.0-test.5](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.4...v1.0.0-test.5) (2023-01-17)
 
 
