@@ -12,8 +12,6 @@ using System.Text.RegularExpressions;
 using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Net.Http;
-
 
 namespace FingerprintPro.ServerSdk.Client
 {

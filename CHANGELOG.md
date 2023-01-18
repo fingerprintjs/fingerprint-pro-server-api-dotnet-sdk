@@ -1,3 +1,10 @@
+## [1.0.0-test.7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.6...v1.0.0-test.7) (2023-01-18)
+
+
+### Features
+
+* support other dotenv frameworks as well ([692f1bc](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/692f1bc7c4be0e164a39b53777f164cf3b0ff45a))
+
 ## [1.0.0-test.6](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.5...v1.0.0-test.6) (2023-01-18)
 
 
