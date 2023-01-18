@@ -138,9 +138,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
                 var request = _requests[0];
 
+                Assert.That(request.Headers.Get("User-Agent"), Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&api_key=123"));
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
             });
@@ -171,9 +172,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
                 var request = _requests[0];
 
+                Assert.That(request.Headers.Get("User-Agent"), Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2F{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }
