@@ -92,7 +92,7 @@ private string _tempFolderPath = Path.GetTempPath();
 /// <param name="apiKey">User provided API Key</param>
 public Configuration(string apiKey)
 {
-    UserAgent = "Swagger-Codegen/0.0.1/csharp";
+    UserAgent = "Swagger-Codegen/{{packageVersion}}/csharp";
     BasePath = "https://api.fpjs.io";
     DefaultHeader = new ConcurrentDictionary<string, string>();
     ApiKey = new ConcurrentDictionary<string, string>();

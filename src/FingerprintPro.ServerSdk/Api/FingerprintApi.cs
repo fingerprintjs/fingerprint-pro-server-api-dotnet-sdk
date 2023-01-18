@@ -154,9 +154,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this._apiClient.RestClient.BaseUrl.ToString();
+            return this._apiClient.RestClient.Options.BaseUrl!.ToString();
         }
 
         /// <summary>
@@ -241,8 +241,8 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this._apiClient.CallApi(localVarPath,
-            Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)this._apiClient.CallApi(localVarPath,
+            Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -319,8 +319,8 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await this._apiClient.CallApiAsync(localVarPath,
-            Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await this._apiClient.CallApiAsync(localVarPath,
+            Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -409,8 +409,8 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)this._apiClient.CallApi(localVarPath,
-            Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)this._apiClient.CallApi(localVarPath,
+            Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -500,8 +500,8 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await this._apiClient.CallApiAsync(localVarPath,
-            Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await this._apiClient.CallApiAsync(localVarPath,
+            Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
