@@ -98,7 +98,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="apiKey">User provided API Key</param>
         public Configuration(string apiKey)
         {
-            UserAgent = "Swagger-Codegen/1.0.0-test.4/csharp";
+            UserAgent = "Swagger-Codegen/1.0.0-test.5/csharp";
             BasePath = "https://api.fpjs.io";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
