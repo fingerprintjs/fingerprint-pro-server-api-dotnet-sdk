@@ -12,6 +12,8 @@ using System.Text.RegularExpressions;
 using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Net.Http;
+
 
 namespace FingerprintPro.ServerSdk.Client
 {
@@ -267,9 +269,9 @@ namespace FingerprintPro.ServerSdk.Client
                 return DateTime.Parse(response.Content, null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
 
-            if (type == typeof(String) || type.Name.StartsWith("System.Nullable")) // return primitive type
+            if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
             {
-                return ConvertType(response.Content, type);
+                return (string)response.Content;
             }
 
             // at this point, it must be a model (json)
@@ -363,17 +365,6 @@ namespace FingerprintPro.ServerSdk.Client
         public static string Base64Encode(string text)
         {
             return System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(text));
-        }
-
-        /// <summary>
-        /// Dynamically cast the object into target type.
-        /// </summary>
-        /// <param name="fromObject">Object to be casted</param>
-        /// <param name="toObject">Target type</param>
-        /// <returns>Casted object</returns>
-        public static dynamic ConvertType(dynamic fromObject, Type toObject)
-        {
-            return Convert.ChangeType(fromObject, toObject);
         }
 
         /// <summary>

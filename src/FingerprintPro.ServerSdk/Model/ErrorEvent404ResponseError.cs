@@ -11,7 +11,6 @@ using System.Text;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 
 namespace FingerprintPro.ServerSdk.Model
 {
