@@ -1,3 +1,10 @@
+## [1.0.0-test.8](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.7...v1.0.0-test.8) (2023-01-19)
+
+
+### Documentation
+
+* **README:** add logo ([55f72fb](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/55f72fbfee8e4e206a93f1419c370c0fdaefbb03))
+
 ## [1.0.0-test.7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.6...v1.0.0-test.7) (2023-01-18)
 
 
