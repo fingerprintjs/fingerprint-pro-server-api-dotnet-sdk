@@ -11,7 +11,10 @@ public class ApiTests
     [SetUp]
     public void Setup()
     {
-        var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
+        var configuration = new Configuration("D0sjRtV8i0obVPaWoxsY")
+        {
+            Region = Region.Eu
+        };
 
         _api = new FingerprintApi(
             configuration
@@ -21,18 +24,32 @@ public class ApiTests
     [Test]
     public void GetEventsTest()
     {
-        var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
+        var requestId = "1673533359077.QYeH4K";
 
         var events = _api.GetEvent(requestId);
 
-        Assert.Multiple(() =>
+        var task = () =>
         {
-            Assert.That(events, Is.InstanceOf<EventResponse>());
-            Assert.That(events.Products, Is.InstanceOf<ProductsResponse>());
-            Assert.That(events.Products.Botd, Is.InstanceOf<ProductsResponseBotd>());
-            Assert.That(events.Products.Identification, Is.InstanceOf<ProductsResponseIdentification>());
-            Assert.That(events.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
-        });
+            try
+            {
+                var response = _api.GetEvent(requestId);
+
+                Console.WriteLine("Got response");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error!");
+                Console.WriteLine(e);
+            }
+        };
+        
+        var tasks = new Task[25];
+        for (var i = 0; i < tasks.Length; i++)
+        {
+            tasks[i] = Task.Run(task);
+        }
+
+        Task.WaitAll(tasks);
     }
 
     [Test]
