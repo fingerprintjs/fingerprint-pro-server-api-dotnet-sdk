@@ -113,7 +113,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content Type of the request</param>
         /// <returns>Object</returns>
-        public Object CallApi(
+        public RestResponse CallApi(
         String path, RestSharp.Method method, List<KeyValuePair<String, String>> queryParams, Object postBody,
         Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
         Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
@@ -130,7 +130,7 @@ namespace FingerprintPro.ServerSdk.Client
             var response = RestClient.Execute(request);
             InterceptResponse(request, response);
 
-            return (Object)response;
+            return response;
         }
         /// <summary>
         /// Makes the asynchronous HTTP request.
@@ -145,7 +145,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content type.</param>
         /// <returns>The Task instance.</returns>
-        public async System.Threading.Tasks.Task<Object> CallApiAsync(
+        public async System.Threading.Tasks.Task<RestResponse> CallApiAsync(
             String path, RestSharp.Method method, List<KeyValuePair<String, String>> queryParams, Object postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
@@ -157,7 +157,7 @@ namespace FingerprintPro.ServerSdk.Client
             InterceptRequest(request);
             var response = await RestClient.ExecuteAsync(request);
             InterceptResponse(request, response);
-            return (Object)response;
+            return response;
         }
 
         /// <summary>

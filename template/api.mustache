@@ -256,7 +256,7 @@ namespace {{packageName}}.{{apiPackage}}
             {{/authMethods}}
 
                 // make the HTTP request
-                RestResponse localVarResponse = (RestResponse) this._apiClient.CallApi(localVarPath,
+                RestResponse localVarResponse = this._apiClient.CallApi(localVarPath,
                 Method.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -404,7 +404,7 @@ namespace {{packageName}}.{{apiPackage}}
                 {{/authMethods}}
 
                     // make the HTTP request
-                    RestResponse localVarResponse = (RestResponse) await this._apiClient.CallApiAsync(localVarPath,
+                    RestResponse localVarResponse = await this._apiClient.CallApiAsync(localVarPath,
                     Method.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                     localVarPathParams, localVarHttpContentType);
 

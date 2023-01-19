@@ -1,0 +1,10 @@
+{
+  "products": {
+    "identification": {
+      "error": {
+        "code": "429 Too Many Requests",
+        "message": "too many requests"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "products": {
+    "botd": {
+      "error": {
+        "code": "TooManyRequests",
+        "message": "too many requests"
+      }
+    }
+  }
+}
