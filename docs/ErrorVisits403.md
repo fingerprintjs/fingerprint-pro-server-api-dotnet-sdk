@@ -1,10 +1,9 @@
-# FingerprintPro.ServerSdk.Model.ProductsResponseIdentification
+# FingerprintPro.ServerSdk.Model.ErrorVisits403
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**ProductsResponseIdentificationData**](ProductsResponseIdentificationData.md) |  | [optional] 
-**Error** | [**IdentificationError**](IdentificationError.md) |  | [optional] 
+**Error** | **string** | Error text. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

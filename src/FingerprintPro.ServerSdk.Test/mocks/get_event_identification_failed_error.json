@@ -1,0 +1,10 @@
+{
+  "products": {
+    "identification": {
+      "error": {
+        "code": "Failed",
+        "message": "failed"
+      }
+    }
+  }
+}

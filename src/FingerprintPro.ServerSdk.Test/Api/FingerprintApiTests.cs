@@ -176,7 +176,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.TooManyRequests));
             });
         }
-
+        
         [Test]
         public void GetEventBotdFailedErorTest()
         {
@@ -190,6 +190,38 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.Failed));
+            });
+        }
+        
+        [Test]
+        public void GetEventIdentificationTooManyRequestsErrorTest()
+        {
+            SetupMockResponse("get_event_identification_too_many_requests_error.json");
+
+            const string requestId = "0KSh65EnVoB85JBmloQK";
+            var response = _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response.Products.Identification.Error.Code, Is.EqualTo(IdentificationError.CodeEnum._429TooManyRequests));
+            });
+        }
+        
+        [Test]
+        public void GetEventIdentificationFailedErrorTest()
+        {
+            SetupMockResponse("get_event_identification_failed_error.json");
+
+            const string requestId = "0KSh65EnVoB85JBmloQK";
+            var response = _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response.Products.Identification.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
             });
         }
 

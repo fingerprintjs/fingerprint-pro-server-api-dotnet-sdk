@@ -184,21 +184,6 @@ paths:
                     error:
                       code: RequestNotFound
                       message: request id is not found
-        '429':
-          description: Too Many Requests
-          headers:
-            Retry-After:
-              description: >-
-                Indicates how long the user should wait in seconds before
-                attempting the next request.
-              schema:
-                type: integer
-                format: int32
-                minimum: 0
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManyRequestsResponse'
   /visitors/{visitor_id}:
     get:
       tags:
@@ -2929,12 +2914,12 @@ paths:
         '403':
           description: Forbidden. Probably ApiKey is missed or provided the wrong one.
           content:
-            text/html:
+            application/json:
               schema:
-                type: string
-                example: >
-                  <html> <head><title>403 Forbidden</title></head> <body>
-                  <center><h1>403 Forbidden</h1></center> </body> </html>
+                $ref: '#/components/schemas/ErrorVisits403'
+              examples:
+                forbidden:
+                  value: '{"error": "Forbidden (HTTP 403)"}'
         '429':
           description: Too Many Requests
           headers:
@@ -3193,6 +3178,16 @@ components:
           required:
             - code
             - message
+    ErrorVisits403:
+      type: object
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+          description: Error text.
+          example: Forbidden (HTTP 403)
+      required:
+        - error
     ManyRequestsResponse:
       type: object
       additionalProperties: false
@@ -3601,6 +3596,8 @@ components:
                 - url
                 - visitorFound
                 - visitorId
+            error:
+              $ref: '#/components/schemas/IdentificationError'
         botd:
           title: ProductsResponseBotd
           type: object
@@ -3619,6 +3616,26 @@ components:
       properties:
         products:
           $ref: '#/components/schemas/ProductsResponse'
+    IdentificationError:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: |
+            Error code:
+             * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded
+             * `Failed` - internal server error
+          enum:
+            - 429 Too Many Requests
+            - Failed
+          example: 429 Too Many Requests
+        message:
+          type: string
+          example: too many requests
+      required:
+        - code
+        - message
     BotdResult:
       type: object
       description: Contains all the information from Bot Detection product

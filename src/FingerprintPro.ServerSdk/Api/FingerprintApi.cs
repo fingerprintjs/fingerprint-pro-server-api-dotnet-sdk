@@ -385,8 +385,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                    "application/json",
-                    "text/html"
+                    "application/json"
                 };
             String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -476,8 +475,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                        "application/json",
-                        "text/html"
+                        "application/json"
                     };
             String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
