@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.ErrorEvent403Response
+# FingerprintPro.ServerSdk.Model.ErrorEvent403Response
 ## Properties
 
 Name | Type | Description | Notes

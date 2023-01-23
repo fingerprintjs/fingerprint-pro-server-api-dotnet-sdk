@@ -1,10 +1,10 @@
 {
-  "packageName": "Fingerprint.Sdk",
-  "packageVersion": "0.0.1",
-  "packageUrl": "https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk",
-  "gitUserId": "fingerprintjs",
-  "gitRepoId": "fingerprint-pro-server-api-dotnet-sdk",
-  "projectGuid": "DEE4B355-41FC-4B06-92D3-FE21753D84EE",
-  "optionalAssemblyInfo": false,
-  "optionalProjectFile": false
+    "packageName": "FingerprintPro.ServerSdk",
+    "packageVersion": "1.0.0-test.9",
+    "packageUrl": "https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk",
+    "gitUserId": "fingerprintjs",
+    "gitRepoId": "fingerprint-pro-server-api-dotnet-sdk",
+    "projectGuid": "DEE4B355-41FC-4B06-92D3-FE21753D84EE",
+    "optionalAssemblyInfo": false,
+    "optionalProjectFile": false
 }

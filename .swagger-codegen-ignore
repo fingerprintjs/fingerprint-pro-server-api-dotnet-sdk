@@ -26,6 +26,10 @@
 git_push.sh
 
 **/packages.config
-src/Fingerprint.Sdk.Test/**
+src/FingerprintPro.ServerSdk.Test/**
 
 **/GlobalConfiguration.cs
+.gitignore
+
+build.bat
+build.sh

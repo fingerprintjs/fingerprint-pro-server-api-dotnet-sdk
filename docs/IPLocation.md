@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.IPLocation
+# FingerprintPro.ServerSdk.Model.IPLocation
 ## Properties
 
 Name | Type | Description | Notes

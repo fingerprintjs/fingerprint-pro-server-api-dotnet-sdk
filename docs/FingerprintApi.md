@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Api.FingerprintApi
+# FingerprintPro.ServerSdk.Api.FingerprintApi
 
 All URIs are relative to *https://api.fpjs.io*
 
@@ -19,9 +19,9 @@ This endpoint allows you to get events with all the information from each activa
 ```csharp
 using System;
 using System.Diagnostics;
-using Fingerprint.Sdk.Api;
-using Fingerprint.Sdk.Client;
-using Fingerprint.Sdk.Model;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
 
 namespace Example
 {
@@ -80,9 +80,9 @@ This endpoint allows you to get a history of visits with all available informati
 ```csharp
 using System;
 using System.Diagnostics;
-using Fingerprint.Sdk.Api;
-using Fingerprint.Sdk.Client;
-using Fingerprint.Sdk.Model;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
 
 namespace Example
 {
@@ -134,6 +134,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, text/html
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

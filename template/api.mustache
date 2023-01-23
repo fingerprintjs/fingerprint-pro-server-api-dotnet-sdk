@@ -105,9 +105,9 @@ namespace {{packageName}}.{{apiPackage}}
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-        return this._apiClient.RestClient.BaseUrl.ToString();
+        return this._apiClient.RestClient.Options.BaseUrl!.ToString();
         }
 
         /// <summary>
@@ -256,8 +256,8 @@ namespace {{packageName}}.{{apiPackage}}
             {{/authMethods}}
 
                 // make the HTTP request
-                IRestResponse localVarResponse = (IRestResponse) this._apiClient.CallApi(localVarPath,
-                Method.{{httpMethod}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                RestResponse localVarResponse = this._apiClient.CallApi(localVarPath,
+                Method.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
                 int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -404,8 +404,8 @@ namespace {{packageName}}.{{apiPackage}}
                 {{/authMethods}}
 
                     // make the HTTP request
-                    IRestResponse localVarResponse = (IRestResponse) await this._apiClient.CallApiAsync(localVarPath,
-                    Method.{{httpMethod}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                    RestResponse localVarResponse = await this._apiClient.CallApiAsync(localVarPath,
+                    Method.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                     localVarPathParams, localVarHttpContentType);
 
                     int localVarStatusCode = (int) localVarResponse.StatusCode;

@@ -1,5 +1,5 @@
 {
-  "name": "@fingerprintjs/fingerprint-pro-server-api-go-sdk",
+  "name": "dotnet-sdk-semantic-release",
   "scripts": {
     "release": "semantic-release"
   },

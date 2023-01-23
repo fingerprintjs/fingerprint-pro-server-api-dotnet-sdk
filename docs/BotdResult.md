@@ -1,4 +1,4 @@
-# Fingerprint.Sdk.Model.BotdResult
+# FingerprintPro.ServerSdk.Model.BotdResult
 ## Properties
 
 Name | Type | Description | Notes
