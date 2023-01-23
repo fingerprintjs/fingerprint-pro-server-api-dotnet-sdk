@@ -15,33 +15,35 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseIdentification
+    /// ErrorVisits403
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseIdentification : IEquatable<ProductsResponseIdentification>
+    public partial class ErrorVisits403 : IEquatable<ErrorVisits403>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseIdentification" /> class.
+        /// Initializes a new instance of the <see cref="ErrorVisits403" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
-        public ProductsResponseIdentification(ProductsResponseIdentificationData data = default(ProductsResponseIdentificationData), IdentificationError error = default(IdentificationError))
+        /// <param name="error">Error text. (required).</param>
+        public ErrorVisits403(string error = default(string))
         {
-            this.Data = data;
-            this.Error = error;
+            // to ensure "error" is required (not null)
+
+            if (error == null)
+            {
+                throw new InvalidDataException("error is a required property for ErrorVisits403 and cannot be null");
+            }
+            else
+            {
+                this.Error = error;
+            }
         }
 
         /// <summary>
-        /// Gets or Sets Data
+        /// Error text.
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public ProductsResponseIdentificationData Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Error
-        /// </summary>
+        /// <value>Error text.</value>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public IdentificationError Error { get; set; }
+        public string Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -50,8 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseIdentification {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("class ErrorVisits403 {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -67,21 +68,16 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseIdentification instances are equal
+        /// Returns true if ErrorVisits403 instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseIdentification to be compared</param>
+        /// <param name="input">Instance of ErrorVisits403 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseIdentification input)
+        public bool Equals(ErrorVisits403 input)
         {
             if (input == null)
                 return false;
 
             return
-                (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
-                ) &&
                 (
                 this.Error == input.Error ||
                 (this.Error != null &&
@@ -98,8 +94,6 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
                 if (this.Error != null)
                     hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;

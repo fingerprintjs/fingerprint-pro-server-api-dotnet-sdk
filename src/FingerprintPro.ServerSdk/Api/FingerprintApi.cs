@@ -241,7 +241,7 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)this._apiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = this._apiClient.CallApi(localVarPath,
             Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -319,7 +319,7 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await this._apiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = await this._apiClient.CallApiAsync(localVarPath,
             Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -385,8 +385,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                    "application/json",
-                    "text/html"
+                    "application/json"
                 };
             String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -409,7 +408,7 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)this._apiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = this._apiClient.CallApi(localVarPath,
             Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 
@@ -476,8 +475,7 @@ namespace FingerprintPro.ServerSdk.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                        "application/json",
-                        "text/html"
+                        "application/json"
                     };
             String localVarHttpHeaderAccept = this._apiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -500,7 +498,7 @@ namespace FingerprintPro.ServerSdk.Api
             }
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await this._apiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = await this._apiClient.CallApiAsync(localVarPath,
             Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
             localVarPathParams, localVarHttpContentType);
 

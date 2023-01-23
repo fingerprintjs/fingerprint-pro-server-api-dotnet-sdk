@@ -54,17 +54,29 @@ namespace FingerprintPro.ServerSdk.Client
         public static readonly ExceptionFactory? DefaultExceptionFactory = (methodName, response) =>
         {
             var status = (int)response.StatusCode;
+
             if (status >= 400)
             {
-                return new ApiException(status,
-            $"Error calling {methodName}: {response.Content}",
-        response.Content);
+                var message = $"Error calling {methodName}: {response.Content}";
+
+                if (status == TooManyRequestsException.TooManyRequestsCode)
+                {
+                    var retryAfterHeader = response.Headers.FirstOrDefault(h => h.Name == "Retry-After");
+                    var retryAfterValue = retryAfterHeader != null ? (string)retryAfterHeader.Value : null;
+                    int? retryAfterInt = retryAfterValue != null ? int.Parse(retryAfterValue) : null;
+
+                    return new TooManyRequestsException(message, retryAfterInt);
+                }
+
+                return new ApiException(status, message, response.Content);
             }
+
             if (status == 0)
             {
                 return new ApiException(status,
-            $"Error calling {methodName}: {response.ErrorMessage}", response.ErrorMessage);
+        $"Error calling {methodName}: {response.ErrorMessage}", response.ErrorMessage);
             }
+
             return null;
         };
 
