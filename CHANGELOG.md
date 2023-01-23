@@ -1,3 +1,11 @@
+## [1.0.0-test.9](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.8...v1.0.0-test.9) (2023-01-23)
+
+
+### Features
+
+* add identification error to events response ([a0afe34](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a0afe34a3e4d2dea7d3e56573d71ba72748cae8b))
+* introduce TooManyRequestsException ([bd94cf8](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/bd94cf8f31c50019b5dcba68b4b3a1c9d1389aeb))
+
 ## [1.0.0-test.8](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0-test.7...v1.0.0-test.8) (2023-01-19)
 
 

@@ -176,7 +176,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.TooManyRequests));
             });
         }
-        
+
         [Test]
         public void GetEventBotdFailedErorTest()
         {
@@ -192,7 +192,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.Failed));
             });
         }
-        
+
         [Test]
         public void GetEventIdentificationTooManyRequestsErrorTest()
         {
@@ -208,7 +208,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Identification.Error.Code, Is.EqualTo(IdentificationError.CodeEnum._429TooManyRequests));
             });
         }
-        
+
         [Test]
         public void GetEventIdentificationFailedErrorTest()
         {
