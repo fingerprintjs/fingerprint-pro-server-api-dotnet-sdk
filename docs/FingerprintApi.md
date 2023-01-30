@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 <a name="getvisits"></a>
 # **GetVisits**
-> Response GetVisits (string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null)
+> Response GetVisits (string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null)
 
 Get visits by visitorId
 
@@ -96,7 +96,7 @@ namespace Example
             var requestId = requestId_example;  // string | Filter visits by requestId (optional) 
             var linkedId = linkedId_example;  // string | Filter visits by custom identifier (optional) 
             var limit = 56;  // int? | Limit scanned results (optional) 
-            var before = 56;  // int? | Used to paginate results (optional) 
+            var before = 789;  // long? | Timestamp (in milliseconds since epoch) used to paginate results (optional) 
 
             try
             {
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
  **requestId** | **string**| Filter visits by requestId | [optional] 
  **linkedId** | **string**| Filter visits by custom identifier | [optional] 
  **limit** | **int?**| Limit scanned results | [optional] 
- **before** | **int?**| Used to paginate results | [optional] 
+ **before** | **long?**| Timestamp (in milliseconds since epoch) used to paginate results | [optional] 
 
 ### Return type
 

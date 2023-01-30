@@ -237,7 +237,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string requestId = "1655373953086.DDlfmP";
             const string? linkedId = null;
             int? limit = 1;
-            int? before = null;
+            long? before = null;
 
             var response = _instance!.GetVisits(visitorId, requestId, linkedId, limit, before);
 

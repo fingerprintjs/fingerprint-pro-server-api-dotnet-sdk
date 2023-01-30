@@ -52,9 +52,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Response</returns>
-        Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null);
+        Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null);
 
         /// <summary>
         /// Get visits by visitorId
@@ -67,9 +67,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>ApiResponse of Response</returns>
-        ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null);
+        ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -104,9 +104,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Task of Response</returns>
-        System.Threading.Tasks.Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null);
+        System.Threading.Tasks.Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null);
 
         /// <summary>
         /// Get visits by visitorId
@@ -119,9 +119,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Task of ApiResponse (Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null);
+        System.Threading.Tasks.Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null);
         #endregion Asynchronous Operations
     }
 
@@ -344,9 +344,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Response</returns>
-        public Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null)
+        public Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null)
         {
             ApiResponse<Response> localVarResponse = GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, before);
             return localVarResponse.Data;
@@ -360,9 +360,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>ApiResponse of Response</returns>
-        public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null)
+        public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null)
         {
             // verify the required parameter 'visitorId' is set
             if (visitorId == null)
@@ -433,9 +433,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Task of Response</returns>
-        public async System.Threading.Tasks.Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null)
+        public async System.Threading.Tasks.Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null)
         {
             ApiResponse<Response> localVarResponse = await GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, before);
             return localVarResponse.Data;
@@ -450,9 +450,9 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">Filter visits by requestId (optional)</param>
         /// <param name="linkedId">Filter visits by custom identifier (optional)</param>
         /// <param name="limit">Limit scanned results (optional)</param>
-        /// <param name="before">Used to paginate results (optional)</param>
+        /// <param name="before">Timestamp (in milliseconds since epoch) used to paginate results (optional)</param>
         /// <returns>Task of ApiResponse (Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, int? before = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null, long? before = null)
         {
             // verify the required parameter 'visitorId' is set
             if (visitorId == null)
