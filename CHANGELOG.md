@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0...v2.0.0) (2023-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* changed `before` parameter type from `int` to `long`
+
+### Features
+
+* change `before` parameter type in /visits endpoint ([c9234aa](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/c9234aa30971f69d0965da66b70de211b6602d0d))
+
 ## 1.0.0 (2023-01-23)
 
 
