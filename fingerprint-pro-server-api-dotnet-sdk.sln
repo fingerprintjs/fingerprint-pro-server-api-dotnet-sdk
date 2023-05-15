@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk", "src\FingerprintPro.ServerSdk\FingerprintPro.ServerSdk.csproj", "{DEE4B355-41FC-4B06-92D3-FE21753D84EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.Test", "src\FingerprintPro.ServerSdk.Test\FingerprintPro.ServerSdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
@@ -30,5 +31,10 @@ Global
 		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 	EndGlobalSection
 EndGlobal

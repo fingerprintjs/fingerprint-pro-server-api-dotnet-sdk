@@ -15,33 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class IpInfoResult : IEquatable<IpInfoResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="IpInfoResult" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
+        /// <param name="v4">v4.</param>
+        /// <param name="v6">v6.</param>
+        public IpInfoResult(IpInfoResultV4 v4 = default(IpInfoResultV4), IpInfoResultV6 v6 = default(IpInfoResultV6))
         {
-            this.Data = data;
-            this.Error = error;
+            this.V4 = v4;
+            this.V6 = v6;
         }
 
         /// <summary>
-        /// Gets or Sets Data
+        /// Gets or Sets V4
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
+        [DataMember(Name = "v4", EmitDefaultValue = false)]
+        public IpInfoResultV4 V4 { get; set; }
 
         /// <summary>
-        /// Gets or Sets Error
+        /// Gets or Sets V6
         /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ProductError Error { get; set; }
+        [DataMember(Name = "v6", EmitDefaultValue = false)]
+        public IpInfoResultV6 V6 { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -50,9 +50,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("class IpInfoResult {\n");
+            sb.Append("  V4: ").Append(V4).Append("\n");
+            sb.Append("  V6: ").Append(V6).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -67,25 +67,25 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if IpInfoResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of IpInfoResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(IpInfoResult input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
+                this.V4 == input.V4 ||
+                (this.V4 != null &&
+                this.V4.Equals(input.V4))
                 ) &&
                 (
-                this.Error == input.Error ||
-                (this.Error != null &&
-                this.Error.Equals(input.Error))
+                this.V6 == input.V6 ||
+                (this.V6 != null &&
+                this.V6.Equals(input.V6))
                 );
         }
 
@@ -98,10 +98,10 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
-                if (this.Error != null)
-                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                if (this.V4 != null)
+                    hashCode = hashCode * 59 + this.V4.GetHashCode();
+                if (this.V6 != null)
+                    hashCode = hashCode * 59 + this.V6.GetHashCode();
                 return hashCode;
             }
         }

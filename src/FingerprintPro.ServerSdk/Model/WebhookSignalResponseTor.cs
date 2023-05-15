@@ -15,33 +15,26 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// WebhookSignalResponseTor
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class WebhookSignalResponseTor : IEquatable<WebhookSignalResponseTor>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="WebhookSignalResponseTor" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
+        /// <param name="result">&#x60;true&#x60; if the request IP address is a known tor exit node, &#x60;false&#x60; otherwise. .</param>
+        public WebhookSignalResponseTor(bool? result = default(bool?))
         {
-            this.Data = data;
-            this.Error = error;
+            this.Result = result;
         }
 
         /// <summary>
-        /// Gets or Sets Data
+        /// &#x60;true&#x60; if the request IP address is a known tor exit node, &#x60;false&#x60; otherwise. 
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Error
-        /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ProductError Error { get; set; }
+        /// <value>&#x60;true&#x60; if the request IP address is a known tor exit node, &#x60;false&#x60; otherwise. </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        public bool? Result { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -50,9 +43,8 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("class WebhookSignalResponseTor {\n");
+            sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -67,25 +59,20 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if WebhookSignalResponseTor instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of WebhookSignalResponseTor to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(WebhookSignalResponseTor input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
-                ) &&
-                (
-                this.Error == input.Error ||
-                (this.Error != null &&
-                this.Error.Equals(input.Error))
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
                 );
         }
 
@@ -98,10 +85,8 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
-                if (this.Error != null)
-                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
                 return hashCode;
             }
         }

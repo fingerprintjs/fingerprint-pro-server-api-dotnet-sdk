@@ -25,9 +25,19 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="visitorId">visitorId (required).</param>
         /// <param name="clientReferrer">clientReferrer.</param>
+        /// <param name="userAgent">userAgent.</param>
+        /// <param name="bot">bot.</param>
+        /// <param name="ipInfo">ipInfo.</param>
+        /// <param name="incognito">Flag if user used incognito session. (required).</param>
+        /// <param name="rootApps">rootApps.</param>
+        /// <param name="emulator">emulator.</param>
+        /// <param name="ipBlocklist">ipBlocklist.</param>
+        /// <param name="tor">tor.</param>
+        /// <param name="vpn">vpn.</param>
+        /// <param name="proxy">proxy.</param>
+        /// <param name="tampering">tampering.</param>
         /// <param name="requestId">Unique identifier of the user&#x27;s identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
-        /// <param name="incognito">Flag if user used incognito session. (required).</param>
         /// <param name="ip">ip (required).</param>
         /// <param name="ipLocation">ipLocation (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
@@ -39,7 +49,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
-        public WebhookVisit(string visitorId = default(string), string clientReferrer = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
+        public WebhookVisit(string visitorId = default(string), string clientReferrer = default(string), string userAgent = default(string), BotdDetectionResult bot = default(BotdDetectionResult), IpInfoResult ipInfo = default(IpInfoResult), bool? incognito = default(bool?), WebhookSignalResponseRootApps rootApps = default(WebhookSignalResponseRootApps), WebhookSignalResponseEmulator emulator = default(WebhookSignalResponseEmulator), IpBlockListResult ipBlocklist = default(IpBlockListResult), WebhookSignalResponseTor tor = default(WebhookSignalResponseTor), VpnResult vpn = default(VpnResult), WebhookSignalResponseProxy proxy = default(WebhookSignalResponseProxy), TamperingResult tampering = default(TamperingResult), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
         {
             // to ensure "visitorId" is required (not null)
 
@@ -50,6 +60,16 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.VisitorId = visitorId;
+            }
+            // to ensure "incognito" is required (not null)
+
+            if (incognito == null)
+            {
+                throw new InvalidDataException("incognito is a required property for WebhookVisit and cannot be null");
+            }
+            else
+            {
+                this.Incognito = incognito;
             }
             // to ensure "requestId" is required (not null)
 
@@ -70,16 +90,6 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.BrowserDetails = browserDetails;
-            }
-            // to ensure "incognito" is required (not null)
-
-            if (incognito == null)
-            {
-                throw new InvalidDataException("incognito is a required property for WebhookVisit and cannot be null");
-            }
-            else
-            {
-                this.Incognito = incognito;
             }
             // to ensure "ip" is required (not null)
 
@@ -172,6 +182,16 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LastSeenAt = lastSeenAt;
             }
             this.ClientReferrer = clientReferrer;
+            this.UserAgent = userAgent;
+            this.Bot = bot;
+            this.IpInfo = ipInfo;
+            this.RootApps = rootApps;
+            this.Emulator = emulator;
+            this.IpBlocklist = ipBlocklist;
+            this.Tor = tor;
+            this.Vpn = vpn;
+            this.Proxy = proxy;
+            this.Tampering = tampering;
             this.Tag = tag;
             this.LinkedId = linkedId;
         }
@@ -189,6 +209,73 @@ namespace FingerprintPro.ServerSdk.Model
         public string ClientReferrer { get; set; }
 
         /// <summary>
+        /// Gets or Sets UserAgent
+        /// </summary>
+        [DataMember(Name = "userAgent", EmitDefaultValue = false)]
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Bot
+        /// </summary>
+        [DataMember(Name = "bot", EmitDefaultValue = false)]
+        public BotdDetectionResult Bot { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpInfo
+        /// </summary>
+        [DataMember(Name = "ipInfo", EmitDefaultValue = false)]
+        public IpInfoResult IpInfo { get; set; }
+
+        /// <summary>
+        /// Flag if user used incognito session.
+        /// </summary>
+        /// <value>Flag if user used incognito session.</value>
+        [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        public bool? Incognito { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RootApps
+        /// </summary>
+        [DataMember(Name = "rootApps", EmitDefaultValue = false)]
+        public WebhookSignalResponseRootApps RootApps { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Emulator
+        /// </summary>
+        [DataMember(Name = "emulator", EmitDefaultValue = false)]
+        public WebhookSignalResponseEmulator Emulator { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpBlocklist
+        /// </summary>
+        [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
+        public IpBlockListResult IpBlocklist { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tor
+        /// </summary>
+        [DataMember(Name = "tor", EmitDefaultValue = false)]
+        public WebhookSignalResponseTor Tor { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Vpn
+        /// </summary>
+        [DataMember(Name = "vpn", EmitDefaultValue = false)]
+        public VpnResult Vpn { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Proxy
+        /// </summary>
+        [DataMember(Name = "proxy", EmitDefaultValue = false)]
+        public WebhookSignalResponseProxy Proxy { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tampering
+        /// </summary>
+        [DataMember(Name = "tampering", EmitDefaultValue = false)]
+        public TamperingResult Tampering { get; set; }
+
+        /// <summary>
         /// Unique identifier of the user&#x27;s identification request.
         /// </summary>
         /// <value>Unique identifier of the user&#x27;s identification request.</value>
@@ -200,13 +287,6 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "browserDetails", EmitDefaultValue = false)]
         public BrowserDetails BrowserDetails { get; set; }
-
-        /// <summary>
-        /// Flag if user used incognito session.
-        /// </summary>
-        /// <value>Flag if user used incognito session.</value>
-        [DataMember(Name = "incognito", EmitDefaultValue = false)]
-        public bool? Incognito { get; set; }
 
         /// <summary>
         /// Gets or Sets Ip
@@ -290,9 +370,19 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class WebhookVisit {\n");
             sb.Append("  VisitorId: ").Append(VisitorId).Append("\n");
             sb.Append("  ClientReferrer: ").Append(ClientReferrer).Append("\n");
+            sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
+            sb.Append("  Bot: ").Append(Bot).Append("\n");
+            sb.Append("  IpInfo: ").Append(IpInfo).Append("\n");
+            sb.Append("  Incognito: ").Append(Incognito).Append("\n");
+            sb.Append("  RootApps: ").Append(RootApps).Append("\n");
+            sb.Append("  Emulator: ").Append(Emulator).Append("\n");
+            sb.Append("  IpBlocklist: ").Append(IpBlocklist).Append("\n");
+            sb.Append("  Tor: ").Append(Tor).Append("\n");
+            sb.Append("  Vpn: ").Append(Vpn).Append("\n");
+            sb.Append("  Proxy: ").Append(Proxy).Append("\n");
+            sb.Append("  Tampering: ").Append(Tampering).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
-            sb.Append("  Incognito: ").Append(Incognito).Append("\n");
             sb.Append("  Ip: ").Append(Ip).Append("\n");
             sb.Append("  IpLocation: ").Append(IpLocation).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
@@ -339,6 +429,61 @@ namespace FingerprintPro.ServerSdk.Model
                 this.ClientReferrer.Equals(input.ClientReferrer))
                 ) &&
                 (
+                this.UserAgent == input.UserAgent ||
+                (this.UserAgent != null &&
+                this.UserAgent.Equals(input.UserAgent))
+                ) &&
+                (
+                this.Bot == input.Bot ||
+                (this.Bot != null &&
+                this.Bot.Equals(input.Bot))
+                ) &&
+                (
+                this.IpInfo == input.IpInfo ||
+                (this.IpInfo != null &&
+                this.IpInfo.Equals(input.IpInfo))
+                ) &&
+                (
+                this.Incognito == input.Incognito ||
+                (this.Incognito != null &&
+                this.Incognito.Equals(input.Incognito))
+                ) &&
+                (
+                this.RootApps == input.RootApps ||
+                (this.RootApps != null &&
+                this.RootApps.Equals(input.RootApps))
+                ) &&
+                (
+                this.Emulator == input.Emulator ||
+                (this.Emulator != null &&
+                this.Emulator.Equals(input.Emulator))
+                ) &&
+                (
+                this.IpBlocklist == input.IpBlocklist ||
+                (this.IpBlocklist != null &&
+                this.IpBlocklist.Equals(input.IpBlocklist))
+                ) &&
+                (
+                this.Tor == input.Tor ||
+                (this.Tor != null &&
+                this.Tor.Equals(input.Tor))
+                ) &&
+                (
+                this.Vpn == input.Vpn ||
+                (this.Vpn != null &&
+                this.Vpn.Equals(input.Vpn))
+                ) &&
+                (
+                this.Proxy == input.Proxy ||
+                (this.Proxy != null &&
+                this.Proxy.Equals(input.Proxy))
+                ) &&
+                (
+                this.Tampering == input.Tampering ||
+                (this.Tampering != null &&
+                this.Tampering.Equals(input.Tampering))
+                ) &&
+                (
                 this.RequestId == input.RequestId ||
                 (this.RequestId != null &&
                 this.RequestId.Equals(input.RequestId))
@@ -347,11 +492,6 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserDetails == input.BrowserDetails ||
                 (this.BrowserDetails != null &&
                 this.BrowserDetails.Equals(input.BrowserDetails))
-                ) &&
-                (
-                this.Incognito == input.Incognito ||
-                (this.Incognito != null &&
-                this.Incognito.Equals(input.Incognito))
                 ) &&
                 (
                 this.Ip == input.Ip ||
@@ -424,12 +564,32 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.VisitorId.GetHashCode();
                 if (this.ClientReferrer != null)
                     hashCode = hashCode * 59 + this.ClientReferrer.GetHashCode();
+                if (this.UserAgent != null)
+                    hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
+                if (this.Bot != null)
+                    hashCode = hashCode * 59 + this.Bot.GetHashCode();
+                if (this.IpInfo != null)
+                    hashCode = hashCode * 59 + this.IpInfo.GetHashCode();
+                if (this.Incognito != null)
+                    hashCode = hashCode * 59 + this.Incognito.GetHashCode();
+                if (this.RootApps != null)
+                    hashCode = hashCode * 59 + this.RootApps.GetHashCode();
+                if (this.Emulator != null)
+                    hashCode = hashCode * 59 + this.Emulator.GetHashCode();
+                if (this.IpBlocklist != null)
+                    hashCode = hashCode * 59 + this.IpBlocklist.GetHashCode();
+                if (this.Tor != null)
+                    hashCode = hashCode * 59 + this.Tor.GetHashCode();
+                if (this.Vpn != null)
+                    hashCode = hashCode * 59 + this.Vpn.GetHashCode();
+                if (this.Proxy != null)
+                    hashCode = hashCode * 59 + this.Proxy.GetHashCode();
+                if (this.Tampering != null)
+                    hashCode = hashCode * 59 + this.Tampering.GetHashCode();
                 if (this.RequestId != null)
                     hashCode = hashCode * 59 + this.RequestId.GetHashCode();
                 if (this.BrowserDetails != null)
                     hashCode = hashCode * 59 + this.BrowserDetails.GetHashCode();
-                if (this.Incognito != null)
-                    hashCode = hashCode * 59 + this.Incognito.GetHashCode();
                 if (this.Ip != null)
                     hashCode = hashCode * 59 + this.Ip.GetHashCode();
                 if (this.IpLocation != null)

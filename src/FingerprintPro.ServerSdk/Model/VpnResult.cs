@@ -15,33 +15,34 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// VpnResult
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class VpnResult : IEquatable<VpnResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="VpnResult" /> class.
         /// </summary>
-        /// <param name="data">data.</param>
-        /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
+        /// <param name="result">VPN or other anonymising service has been used when sending the request..</param>
+        /// <param name="methods">methods.</param>
+        public VpnResult(bool? result = default(bool?), VpnResultMethods methods = default(VpnResultMethods))
         {
-            this.Data = data;
-            this.Error = error;
+            this.Result = result;
+            this.Methods = methods;
         }
 
         /// <summary>
-        /// Gets or Sets Data
+        /// VPN or other anonymising service has been used when sending the request.
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
+        /// <value>VPN or other anonymising service has been used when sending the request.</value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
+        public bool? Result { get; set; }
 
         /// <summary>
-        /// Gets or Sets Error
+        /// Gets or Sets Methods
         /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ProductError Error { get; set; }
+        [DataMember(Name = "methods", EmitDefaultValue = false)]
+        public VpnResultMethods Methods { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -50,9 +51,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("class VpnResult {\n");
+            sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("  Methods: ").Append(Methods).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -67,25 +68,25 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if VpnResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of VpnResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(VpnResult input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Data == input.Data ||
-                (this.Data != null &&
-                this.Data.Equals(input.Data))
+                this.Result == input.Result ||
+                (this.Result != null &&
+                this.Result.Equals(input.Result))
                 ) &&
                 (
-                this.Error == input.Error ||
-                (this.Error != null &&
-                this.Error.Equals(input.Error))
+                this.Methods == input.Methods ||
+                (this.Methods != null &&
+                this.Methods.Equals(input.Methods))
                 );
         }
 
@@ -98,10 +99,10 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Data != null)
-                    hashCode = hashCode * 59 + this.Data.GetHashCode();
-                if (this.Error != null)
-                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                if (this.Result != null)
+                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Methods != null)
+                    hashCode = hashCode * 59 + this.Methods.GetHashCode();
                 return hashCode;
             }
         }

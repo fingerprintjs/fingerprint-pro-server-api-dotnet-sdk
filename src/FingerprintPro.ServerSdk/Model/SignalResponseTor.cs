@@ -15,17 +15,17 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// SignalResponseTor
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class SignalResponseTor : IEquatable<SignalResponseTor>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="SignalResponseTor" /> class.
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
+        public SignalResponseTor(SignalResponseTorData data = default(SignalResponseTorData), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
+        public SignalResponseTorData Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
@@ -50,7 +50,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
+            sb.Append("class SignalResponseTor {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
@@ -67,11 +67,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if SignalResponseTor instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of SignalResponseTor to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(SignalResponseTor input)
         {
             if (input == null)
                 return false;

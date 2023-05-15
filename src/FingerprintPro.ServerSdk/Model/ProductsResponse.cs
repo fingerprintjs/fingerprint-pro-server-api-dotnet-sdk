@@ -25,10 +25,28 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="identification">identification.</param>
         /// <param name="botd">botd.</param>
-        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd))
+        /// <param name="ipInfo">ipInfo.</param>
+        /// <param name="incognito">incognito.</param>
+        /// <param name="rootApps">rootApps.</param>
+        /// <param name="emulator">emulator.</param>
+        /// <param name="ipBlocklist">ipBlocklist.</param>
+        /// <param name="tor">tor.</param>
+        /// <param name="vpn">vpn.</param>
+        /// <param name="proxy">proxy.</param>
+        /// <param name="tampering">tampering.</param>
+        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering))
         {
             this.Identification = identification;
             this.Botd = botd;
+            this.IpInfo = ipInfo;
+            this.Incognito = incognito;
+            this.RootApps = rootApps;
+            this.Emulator = emulator;
+            this.IpBlocklist = ipBlocklist;
+            this.Tor = tor;
+            this.Vpn = vpn;
+            this.Proxy = proxy;
+            this.Tampering = tampering;
         }
 
         /// <summary>
@@ -44,6 +62,60 @@ namespace FingerprintPro.ServerSdk.Model
         public ProductsResponseBotd Botd { get; set; }
 
         /// <summary>
+        /// Gets or Sets IpInfo
+        /// </summary>
+        [DataMember(Name = "ipInfo", EmitDefaultValue = false)]
+        public SignalResponseIpInfo IpInfo { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Incognito
+        /// </summary>
+        [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        public SignalResponseIncognito Incognito { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RootApps
+        /// </summary>
+        [DataMember(Name = "rootApps", EmitDefaultValue = false)]
+        public SignalResponseRootApps RootApps { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Emulator
+        /// </summary>
+        [DataMember(Name = "emulator", EmitDefaultValue = false)]
+        public SignalResponseEmulator Emulator { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IpBlocklist
+        /// </summary>
+        [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
+        public SignalResponseIpBlocklist IpBlocklist { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tor
+        /// </summary>
+        [DataMember(Name = "tor", EmitDefaultValue = false)]
+        public SignalResponseTor Tor { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Vpn
+        /// </summary>
+        [DataMember(Name = "vpn", EmitDefaultValue = false)]
+        public SignalResponseVpn Vpn { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Proxy
+        /// </summary>
+        [DataMember(Name = "proxy", EmitDefaultValue = false)]
+        public SignalResponseProxy Proxy { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tampering
+        /// </summary>
+        [DataMember(Name = "tampering", EmitDefaultValue = false)]
+        public SignalResponseTampering Tampering { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -53,6 +125,15 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class ProductsResponse {\n");
             sb.Append("  Identification: ").Append(Identification).Append("\n");
             sb.Append("  Botd: ").Append(Botd).Append("\n");
+            sb.Append("  IpInfo: ").Append(IpInfo).Append("\n");
+            sb.Append("  Incognito: ").Append(Incognito).Append("\n");
+            sb.Append("  RootApps: ").Append(RootApps).Append("\n");
+            sb.Append("  Emulator: ").Append(Emulator).Append("\n");
+            sb.Append("  IpBlocklist: ").Append(IpBlocklist).Append("\n");
+            sb.Append("  Tor: ").Append(Tor).Append("\n");
+            sb.Append("  Vpn: ").Append(Vpn).Append("\n");
+            sb.Append("  Proxy: ").Append(Proxy).Append("\n");
+            sb.Append("  Tampering: ").Append(Tampering).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -86,6 +167,51 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Botd == input.Botd ||
                 (this.Botd != null &&
                 this.Botd.Equals(input.Botd))
+                ) &&
+                (
+                this.IpInfo == input.IpInfo ||
+                (this.IpInfo != null &&
+                this.IpInfo.Equals(input.IpInfo))
+                ) &&
+                (
+                this.Incognito == input.Incognito ||
+                (this.Incognito != null &&
+                this.Incognito.Equals(input.Incognito))
+                ) &&
+                (
+                this.RootApps == input.RootApps ||
+                (this.RootApps != null &&
+                this.RootApps.Equals(input.RootApps))
+                ) &&
+                (
+                this.Emulator == input.Emulator ||
+                (this.Emulator != null &&
+                this.Emulator.Equals(input.Emulator))
+                ) &&
+                (
+                this.IpBlocklist == input.IpBlocklist ||
+                (this.IpBlocklist != null &&
+                this.IpBlocklist.Equals(input.IpBlocklist))
+                ) &&
+                (
+                this.Tor == input.Tor ||
+                (this.Tor != null &&
+                this.Tor.Equals(input.Tor))
+                ) &&
+                (
+                this.Vpn == input.Vpn ||
+                (this.Vpn != null &&
+                this.Vpn.Equals(input.Vpn))
+                ) &&
+                (
+                this.Proxy == input.Proxy ||
+                (this.Proxy != null &&
+                this.Proxy.Equals(input.Proxy))
+                ) &&
+                (
+                this.Tampering == input.Tampering ||
+                (this.Tampering != null &&
+                this.Tampering.Equals(input.Tampering))
                 );
         }
 
@@ -102,6 +228,24 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Identification.GetHashCode();
                 if (this.Botd != null)
                     hashCode = hashCode * 59 + this.Botd.GetHashCode();
+                if (this.IpInfo != null)
+                    hashCode = hashCode * 59 + this.IpInfo.GetHashCode();
+                if (this.Incognito != null)
+                    hashCode = hashCode * 59 + this.Incognito.GetHashCode();
+                if (this.RootApps != null)
+                    hashCode = hashCode * 59 + this.RootApps.GetHashCode();
+                if (this.Emulator != null)
+                    hashCode = hashCode * 59 + this.Emulator.GetHashCode();
+                if (this.IpBlocklist != null)
+                    hashCode = hashCode * 59 + this.IpBlocklist.GetHashCode();
+                if (this.Tor != null)
+                    hashCode = hashCode * 59 + this.Tor.GetHashCode();
+                if (this.Vpn != null)
+                    hashCode = hashCode * 59 + this.Vpn.GetHashCode();
+                if (this.Proxy != null)
+                    hashCode = hashCode * 59 + this.Proxy.GetHashCode();
+                if (this.Tampering != null)
+                    hashCode = hashCode * 59 + this.Tampering.GetHashCode();
                 return hashCode;
             }
         }

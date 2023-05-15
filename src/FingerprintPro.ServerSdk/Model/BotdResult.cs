@@ -26,8 +26,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
         /// <param name="time">Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible (required).</param>
         /// <param name="url">Page URL from which identification request was sent. (required).</param>
+        /// <param name="userAgent">userAgent.</param>
+        /// <param name="requestId">requestId.</param>
         /// <param name="bot">bot (required).</param>
-        public BotdResult(string ip = default(string), DateTime? time = default(DateTime?), string url = default(string), BotdDetectionResult bot = default(BotdDetectionResult))
+        public BotdResult(string ip = default(string), DateTime? time = default(DateTime?), string url = default(string), string userAgent = default(string), string requestId = default(string), BotdDetectionResult bot = default(BotdDetectionResult))
         {
             // to ensure "ip" is required (not null)
 
@@ -69,6 +71,8 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Bot = bot;
             }
+            this.UserAgent = userAgent;
+            this.RequestId = requestId;
         }
 
         /// <summary>
@@ -93,6 +97,18 @@ namespace FingerprintPro.ServerSdk.Model
         public string Url { get; set; }
 
         /// <summary>
+        /// Gets or Sets UserAgent
+        /// </summary>
+        [DataMember(Name = "userAgent", EmitDefaultValue = false)]
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RequestId
+        /// </summary>
+        [DataMember(Name = "requestId", EmitDefaultValue = false)]
+        public string RequestId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Bot
         /// </summary>
         [DataMember(Name = "bot", EmitDefaultValue = false)]
@@ -109,6 +125,8 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Ip: ").Append(Ip).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
+            sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -150,6 +168,16 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Url.Equals(input.Url))
                 ) &&
                 (
+                this.UserAgent == input.UserAgent ||
+                (this.UserAgent != null &&
+                this.UserAgent.Equals(input.UserAgent))
+                ) &&
+                (
+                this.RequestId == input.RequestId ||
+                (this.RequestId != null &&
+                this.RequestId.Equals(input.RequestId))
+                ) &&
+                (
                 this.Bot == input.Bot ||
                 (this.Bot != null &&
                 this.Bot.Equals(input.Bot))
@@ -171,6 +199,10 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Time.GetHashCode();
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
+                if (this.UserAgent != null)
+                    hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
+                if (this.RequestId != null)
+                    hashCode = hashCode * 59 + this.RequestId.GetHashCode();
                 if (this.Bot != null)
                     hashCode = hashCode * 59 + this.Bot.GetHashCode();
                 return hashCode;

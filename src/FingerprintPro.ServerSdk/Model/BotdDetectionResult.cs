@@ -53,7 +53,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="BotdDetectionResult" /> class.
         /// </summary>
         /// <param name="result">Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  (required).</param>
-        public BotdDetectionResult(ResultEnum result = default(ResultEnum))
+        /// <param name="type">type.</param>
+        public BotdDetectionResult(ResultEnum result = default(ResultEnum), string type = default(string))
         {
             // to ensure "result" is required (not null)
 
@@ -65,8 +66,15 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Result = result;
             }
+            this.Type = type;
         }
 
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -77,6 +85,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class BotdDetectionResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,6 +114,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result == input.Result ||
                 (this.Result != null &&
                 this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.Type == input.Type ||
+                (this.Type != null &&
+                this.Type.Equals(input.Type))
                 );
         }
 
@@ -119,6 +133,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

@@ -15,17 +15,17 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductsResponseBotd
+    /// SignalResponseEmulator
     /// </summary>
     [DataContract]
-    public partial class ProductsResponseBotd : IEquatable<ProductsResponseBotd>
+    public partial class SignalResponseEmulator : IEquatable<SignalResponseEmulator>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductsResponseBotd" /> class.
+        /// Initializes a new instance of the <see cref="SignalResponseEmulator" /> class.
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
+        public SignalResponseEmulator(SignalResponseEmulatorData data = default(SignalResponseEmulatorData), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public BotdResult Data { get; set; }
+        public SignalResponseEmulatorData Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
@@ -50,7 +50,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ProductsResponseBotd {\n");
+            sb.Append("class SignalResponseEmulator {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
@@ -67,11 +67,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ProductsResponseBotd instances are equal
+        /// Returns true if SignalResponseEmulator instances are equal
         /// </summary>
-        /// <param name="input">Instance of ProductsResponseBotd to be compared</param>
+        /// <param name="input">Instance of SignalResponseEmulator to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductsResponseBotd input)
+        public bool Equals(SignalResponseEmulator input)
         {
             if (input == null)
                 return false;
