@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public ProductsResponseBotd(BotdResult data = default(BotdResult), BotdError error = default(BotdError))
+        public ProductsResponseBotd(BotdResult data = default(BotdResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -41,7 +41,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public BotdError Error { get; set; }
+        public ProductError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

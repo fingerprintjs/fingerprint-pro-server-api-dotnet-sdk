@@ -15,10 +15,10 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// BotdError
+    /// ProductError
     /// </summary>
     [DataContract]
-    public partial class BotdError : IEquatable<BotdError>
+    public partial class ProductError : IEquatable<ProductError>
     {
         /// <summary>
         /// Error code:  * &#x60;TooManyRequests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error 
@@ -45,17 +45,17 @@ namespace FingerprintPro.ServerSdk.Model
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="BotdError" /> class.
+        /// Initializes a new instance of the <see cref="ProductError" /> class.
         /// </summary>
         /// <param name="code">Error code:  * &#x60;TooManyRequests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error  (required).</param>
         /// <param name="message">message (required).</param>
-        public BotdError(CodeEnum code = default(CodeEnum), string message = default(string))
+        public ProductError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for BotdError and cannot be null");
+                throw new InvalidDataException("code is a required property for ProductError and cannot be null");
             }
             else
             {
@@ -65,7 +65,7 @@ namespace FingerprintPro.ServerSdk.Model
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for BotdError and cannot be null");
+                throw new InvalidDataException("message is a required property for ProductError and cannot be null");
             }
             else
             {
@@ -87,7 +87,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class BotdError {\n");
+            sb.Append("class ProductError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -104,11 +104,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if BotdError instances are equal
+        /// Returns true if ProductError instances are equal
         /// </summary>
-        /// <param name="input">Instance of BotdError to be compared</param>
+        /// <param name="input">Instance of ProductError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(BotdError input)
+        public bool Equals(ProductError input)
         {
             if (input == null)
                 return false;

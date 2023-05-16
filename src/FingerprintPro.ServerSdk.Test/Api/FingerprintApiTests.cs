@@ -158,6 +158,67 @@ namespace FingerprintPro.ServerSdk.Test.Api
                         $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
+                Assert.That(response.Products.IpInfo.Data.V4.Address, Is.EqualTo("94.142.239.124"));
+            });
+        }
+
+        [Test]
+        public void GetEventWithExtraFieldsTest()
+        {
+            SetupMockResponse("get_event_extra_fields.json");
+
+            const string requestId = "0KSh65EnVoB85JBmloQK";
+            var response = _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+                Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
+            });
+        }
+
+        [Test]
+        public void GetEvenAllErrorsTest()
+        {
+            SetupMockResponse("get_event_all_errors.json");
+
+            const string requestId = "0KSh65EnVoB85JBmloQK";
+            var response = _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+                Assert.That(response.Products.Identification.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.IpInfo.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Incognito.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.RootApps.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Emulator.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.IpBlocklist.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Tor.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Vpn.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Proxy.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
             });
         }
 
@@ -173,7 +234,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
-                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.TooManyRequests));
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.TooManyRequests));
             });
         }
 
@@ -189,7 +250,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
-                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(BotdError.CodeEnum.Failed));
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
             });
         }
 
