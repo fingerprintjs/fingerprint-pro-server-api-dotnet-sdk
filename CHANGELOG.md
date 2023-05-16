@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.0.0...v2.1.0) (2023-05-16)
+
+
+### Features
+
+* introduce new signals ([c38a0da](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/c38a0dacdebae155f97a942e6f16184f925f5413))
+
 ## [2.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v1.0.0...v2.0.0) (2023-01-30)
 
 
