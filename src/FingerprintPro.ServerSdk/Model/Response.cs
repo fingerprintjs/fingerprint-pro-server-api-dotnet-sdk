@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -25,8 +25,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="visitorId">visitorId (required).</param>
         /// <param name="visits">visits (required).</param>
-        /// <param name="lastTimestamp">When more results are available (e.g., you scanned 200 results using &#x60;limit&#x60; parameter, but a total of 600 results are available), a special &#x60;lastTimestamp&#x60; top-level attribute is added to the response. If you want to paginate the results further in the past, you should use the value of this attribute..</param>
-        /// <param name="paginationKey">Visit&#x27;s &#x60;requestId&#x60; of the last visit in the current page..</param>
+        /// <param name="lastTimestamp">⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. .</param>
+        /// <param name="paginationKey">Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results..</param>
         public Response(string visitorId = default(string), List<ResponseVisits> visits = default(List<ResponseVisits>), long? lastTimestamp = default(long?), string paginationKey = default(string))
         {
             // to ensure "visitorId" is required (not null)
@@ -66,16 +66,16 @@ namespace FingerprintPro.ServerSdk.Model
         public List<ResponseVisits> Visits { get; set; }
 
         /// <summary>
-        /// When more results are available (e.g., you scanned 200 results using &#x60;limit&#x60; parameter, but a total of 600 results are available), a special &#x60;lastTimestamp&#x60; top-level attribute is added to the response. If you want to paginate the results further in the past, you should use the value of this attribute.
+        /// ⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. 
         /// </summary>
-        /// <value>When more results are available (e.g., you scanned 200 results using &#x60;limit&#x60; parameter, but a total of 600 results are available), a special &#x60;lastTimestamp&#x60; top-level attribute is added to the response. If you want to paginate the results further in the past, you should use the value of this attribute.</value>
+        /// <value>⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. </value>
         [DataMember(Name = "lastTimestamp", EmitDefaultValue = false)]
         public long? LastTimestamp { get; set; }
 
         /// <summary>
-        /// Visit&#x27;s &#x60;requestId&#x60; of the last visit in the current page.
+        /// Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results.
         /// </summary>
-        /// <value>Visit&#x27;s &#x60;requestId&#x60; of the last visit in the current page.</value>
+        /// <value>Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results.</value>
         [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
         public string PaginationKey { get; set; }
 

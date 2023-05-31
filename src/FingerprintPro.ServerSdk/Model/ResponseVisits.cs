@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="incognito">Flag if user used incognito session. (required).</param>
         /// <param name="ip">ip (required).</param>
-        /// <param name="ipLocation">ipLocation (required).</param>
+        /// <param name="ipLocation">ipLocation.</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format. (required).</param>
         /// <param name="url">Page URL from which identification request was sent. (required).</param>
@@ -78,16 +78,6 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.Ip = ip;
-            }
-            // to ensure "ipLocation" is required (not null)
-
-            if (ipLocation == null)
-            {
-                throw new InvalidDataException("ipLocation is a required property for ResponseVisits and cannot be null");
-            }
-            else
-            {
-                this.IpLocation = ipLocation;
             }
             // to ensure "timestamp" is required (not null)
 
@@ -169,6 +159,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.LastSeenAt = lastSeenAt;
             }
+            this.IpLocation = ipLocation;
             this.LinkedId = linkedId;
         }
 
