@@ -23,7 +23,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsResponseIdentificationData" /> class.
         /// </summary>
-        /// <param name="requestId">Unique identifier of the user&#x27;s identification request. (required).</param>
+        /// <param name="requestId">Unique identifier of the user's identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="incognito">Flag if user used incognito session. (required).</param>
         /// <param name="ip">ip (required).</param>
@@ -166,9 +166,9 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Unique identifier of the user&#x27;s identification request.
+        /// Unique identifier of the user's identification request.
         /// </summary>
-        /// <value>Unique identifier of the user&#x27;s identification request.</value>
+        /// <value>Unique identifier of the user's identification request.</value>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
         public string RequestId { get; set; }
 

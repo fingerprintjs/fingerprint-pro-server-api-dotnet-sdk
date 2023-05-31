@@ -21,9 +21,9 @@ namespace FingerprintPro.ServerSdk.Model
     public partial class ErrorEvent404ResponseError : IEquatable<ErrorEvent404ResponseError>
     {
         /// <summary>
-        /// Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - request not found for specified id 
         /// </summary>
-        /// <value>Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id </value>
+        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -34,15 +34,15 @@ namespace FingerprintPro.ServerSdk.Model
             RequestNotFound = 1
         }
         /// <summary>
-        /// Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - request not found for specified id 
         /// </summary>
-        /// <value>Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id </value>
+        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorEvent404ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id  (required).</param>
+        /// <param name="code">Error code:  * `RequestNotFound` - request not found for specified id  (required).</param>
         /// <param name="message">message (required).</param>
         public ErrorEvent404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {

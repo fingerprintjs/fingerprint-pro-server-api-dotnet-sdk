@@ -21,9 +21,9 @@ namespace FingerprintPro.ServerSdk.Model
     public partial class IdentificationError : IEquatable<IdentificationError>
     {
         /// <summary>
-        /// Error code:  * &#x60;429 Too Many Requests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error 
+        /// Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error 
         /// </summary>
-        /// <value>Error code:  * &#x60;429 Too Many Requests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error </value>
+        /// <value>Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -39,15 +39,15 @@ namespace FingerprintPro.ServerSdk.Model
             Failed = 2
         }
         /// <summary>
-        /// Error code:  * &#x60;429 Too Many Requests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error 
+        /// Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error 
         /// </summary>
-        /// <value>Error code:  * &#x60;429 Too Many Requests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error </value>
+        /// <value>Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentificationError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * &#x60;429 Too Many Requests&#x60; - the limit on secret API key requests per second has been exceeded  * &#x60;Failed&#x60; - internal server error  (required).</param>
+        /// <param name="code">Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error  (required).</param>
         /// <param name="message">message (required).</param>
         public IdentificationError(CodeEnum code = default(CodeEnum), string message = default(string))
         {

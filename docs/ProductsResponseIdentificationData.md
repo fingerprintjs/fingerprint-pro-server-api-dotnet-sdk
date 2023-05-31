@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RequestId** | **string** | Unique identifier of the user&#x27;s identification request. | 
+**RequestId** | **string** | Unique identifier of the user's identification request. | 
 **BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | 
 **Incognito** | **bool?** | Flag if user used incognito session. | 
 **Ip** | **string** |  | 

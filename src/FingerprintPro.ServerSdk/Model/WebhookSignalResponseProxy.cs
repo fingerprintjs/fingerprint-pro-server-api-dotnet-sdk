@@ -23,16 +23,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookSignalResponseProxy" /> class.
         /// </summary>
-        /// <param name="result">&#x60;true&#x60; if the request IP address is used by a public proxy provider, &#x60;false&#x60; otherwise. .</param>
+        /// <param name="result">`true` if the request IP address is used by a public proxy provider, `false` otherwise. .</param>
         public WebhookSignalResponseProxy(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// &#x60;true&#x60; if the request IP address is used by a public proxy provider, &#x60;false&#x60; otherwise. 
+        /// `true` if the request IP address is used by a public proxy provider, `false` otherwise. 
         /// </summary>
-        /// <value>&#x60;true&#x60; if the request IP address is used by a public proxy provider, &#x60;false&#x60; otherwise. </value>
+        /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 

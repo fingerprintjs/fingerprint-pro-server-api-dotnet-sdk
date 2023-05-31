@@ -23,16 +23,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookSignalResponseEmulator" /> class.
         /// </summary>
-        /// <param name="result">Android specific emulator detection. There are 2 values: • &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD) • &#x60;false&#x60; - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. .</param>
+        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. .</param>
         public WebhookSignalResponseEmulator(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// Android specific emulator detection. There are 2 values: • &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD) • &#x60;false&#x60; - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. 
+        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. 
         /// </summary>
-        /// <value>Android specific emulator detection. There are 2 values: • &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD) • &#x60;false&#x60; - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. </value>
+        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected Available only for events from Android client. The field will not be present for a browser or iOS event. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 

@@ -15,7 +15,7 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// Fields &#x60;lastTimestamp&#x60; and &#x60;paginationKey&#x60; added when &#x60;limit&#x60; or &#x60;before&#x60; parameter provided and there is more data to show
+    /// Fields `lastTimestamp` and `paginationKey` added when `limit` or `before` parameter provided and there is more data to show
     /// </summary>
     [DataContract]
     public partial class Response : IEquatable<Response>
@@ -25,8 +25,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="visitorId">visitorId (required).</param>
         /// <param name="visits">visits (required).</param>
-        /// <param name="lastTimestamp">⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. .</param>
-        /// <param name="paginationKey">Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results..</param>
+        /// <param name="lastTimestamp">⚠️ Deprecated paging attribute, please use `paginationKey` instead. Timestamp of the last visit in the current page of results. .</param>
+        /// <param name="paginationKey">Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results..</param>
         public Response(string visitorId = default(string), List<ResponseVisits> visits = default(List<ResponseVisits>), long? lastTimestamp = default(long?), string paginationKey = default(string))
         {
             // to ensure "visitorId" is required (not null)
@@ -66,16 +66,16 @@ namespace FingerprintPro.ServerSdk.Model
         public List<ResponseVisits> Visits { get; set; }
 
         /// <summary>
-        /// ⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. 
+        /// ⚠️ Deprecated paging attribute, please use `paginationKey` instead. Timestamp of the last visit in the current page of results. 
         /// </summary>
-        /// <value>⚠️ Deprecated paging attribute, please use &#x60;paginationKey&#x60; instead. Timestamp of the last visit in the current page of results. </value>
+        /// <value>⚠️ Deprecated paging attribute, please use `paginationKey` instead. Timestamp of the last visit in the current page of results. </value>
         [DataMember(Name = "lastTimestamp", EmitDefaultValue = false)]
         public long? LastTimestamp { get; set; }
 
         /// <summary>
-        /// Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results.
+        /// Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results.
         /// </summary>
-        /// <value>Request ID of the last visit in the current page of results. Use this value in the following request as the &#x60;paginationKey&#x60; parameter to get the next page of results.</value>
+        /// <value>Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results.</value>
         [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
         public string PaginationKey { get; set; }
 

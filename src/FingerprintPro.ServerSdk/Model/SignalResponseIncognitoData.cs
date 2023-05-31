@@ -23,16 +23,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseIncognitoData" /> class.
         /// </summary>
-        /// <param name="result">&#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. .</param>
+        /// <param name="result">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
         public SignalResponseIncognitoData(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// &#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. 
+        /// `true` if we detected incognito mode used in the browser, `false` otherwise. 
         /// </summary>
-        /// <value>&#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. </value>
+        /// <value>`true` if we detected incognito mode used in the browser, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 

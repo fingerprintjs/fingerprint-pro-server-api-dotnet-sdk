@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Vpn** | [**VpnResult**](VpnResult.md) |  | [optional] 
 **Proxy** | [**WebhookSignalResponseProxy**](WebhookSignalResponseProxy.md) |  | [optional] 
 **Tampering** | [**TamperingResult**](TamperingResult.md) |  | [optional] 
-**RequestId** | **string** | Unique identifier of the user&#x27;s identification request. | 
+**RequestId** | **string** | Unique identifier of the user's identification request. | 
 **BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | 
 **Ip** | **string** |  | 
 **IpLocation** | [**IPLocation**](IPLocation.md) |  | [optional] 

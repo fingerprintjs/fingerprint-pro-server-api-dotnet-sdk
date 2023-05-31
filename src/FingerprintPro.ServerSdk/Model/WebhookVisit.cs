@@ -36,7 +36,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="vpn">vpn.</param>
         /// <param name="proxy">proxy.</param>
         /// <param name="tampering">tampering.</param>
-        /// <param name="requestId">Unique identifier of the user&#x27;s identification request. (required).</param>
+        /// <param name="requestId">Unique identifier of the user's identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="ip">ip (required).</param>
         /// <param name="ipLocation">ipLocation.</param>
@@ -267,9 +267,9 @@ namespace FingerprintPro.ServerSdk.Model
         public TamperingResult Tampering { get; set; }
 
         /// <summary>
-        /// Unique identifier of the user&#x27;s identification request.
+        /// Unique identifier of the user's identification request.
         /// </summary>
-        /// <value>Unique identifier of the user&#x27;s identification request.</value>
+        /// <value>Unique identifier of the user's identification request.</value>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
         public string RequestId { get; set; }
 

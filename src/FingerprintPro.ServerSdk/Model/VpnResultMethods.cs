@@ -23,7 +23,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResultMethods" /> class.
         /// </summary>
-        /// <param name="timezoneMismatch">User&#x27;s browser timezone doesn&#x27;t match the timezone from which the request was originally made..</param>
+        /// <param name="timezoneMismatch">User's browser timezone doesn't match the timezone from which the request was originally made..</param>
         /// <param name="publicVPN">Request IP address is owned and used by a public VPN service provider..</param>
         public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?))
         {
@@ -32,9 +32,9 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// User&#x27;s browser timezone doesn&#x27;t match the timezone from which the request was originally made.
+        /// User's browser timezone doesn't match the timezone from which the request was originally made.
         /// </summary>
-        /// <value>User&#x27;s browser timezone doesn&#x27;t match the timezone from which the request was originally made.</value>
+        /// <value>User's browser timezone doesn't match the timezone from which the request was originally made.</value>
         [DataMember(Name = "timezoneMismatch", EmitDefaultValue = false)]
         public bool? TimezoneMismatch { get; set; }
 

@@ -23,7 +23,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResult" /> class.
         /// </summary>
-        /// <param name="result">&#x60;true&#x60; if request IP address is part of any database that we use to search for known malicious actors, &#x60;false&#x60; otherwise. .</param>
+        /// <param name="result">`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. .</param>
         /// <param name="details">details.</param>
         public IpBlockListResult(bool? result = default(bool?), IpBlockListResultDetails details = default(IpBlockListResultDetails))
         {
@@ -32,9 +32,9 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// &#x60;true&#x60; if request IP address is part of any database that we use to search for known malicious actors, &#x60;false&#x60; otherwise. 
+        /// `true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. 
         /// </summary>
-        /// <value>&#x60;true&#x60; if request IP address is part of any database that we use to search for known malicious actors, &#x60;false&#x60; otherwise. </value>
+        /// <value>`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
