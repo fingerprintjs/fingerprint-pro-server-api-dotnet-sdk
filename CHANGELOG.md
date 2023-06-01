@@ -1,3 +1,15 @@
+## [2.2.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.1.0...v2.2.0) (2023-06-01)
+
+
+### Features
+
+* update schema with correct `IpLocation` format and doc updates ([4ddae4d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/4ddae4dc2b279b8f15d1f5829b152b095bba31d3))
+
+
+### Bug Fixes
+
+* fix backtick problem in comments and documentation ([a12e9a3](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a12e9a3e2e14f357ca0ecdd96b53eae0d5cb3c3a))
+
 ## [2.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.0.0...v2.1.0) (2023-05-16)
 
 
