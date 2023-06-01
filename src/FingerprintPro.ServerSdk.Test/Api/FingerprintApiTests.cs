@@ -1,4 +1,4 @@
-/* 
+/*
  * Fingerprint Pro Server API
  *
  * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
@@ -298,9 +298,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string requestId = "1655373953086.DDlfmP";
             const string? linkedId = null;
             int? limit = 1;
-            long? before = null;
 
-            var response = _instance!.GetVisits(visitorId, requestId, linkedId, limit, before);
+            var response = _instance!.GetVisits(visitorId, requestId, linkedId, limit);
 
             Assert.Multiple(() =>
             {
@@ -308,6 +307,39 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response, Is.InstanceOf<Response>(), "response is Response");
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(1));
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+            });
+        }
+
+        /// <summary>
+        /// Test GetVisits
+        /// </summary>
+        [Test]
+        public void GetVisitsLimit500Test()
+        {
+            SetupMockResponse("visits_limit_500.json");
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+            const string requestId = "1655373953086.DDlfmP";
+            const string? linkedId = null;
+            int? limit = 500;
+
+            var response = _instance!.GetVisits(visitorId, requestId, linkedId, limit);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<Response>(), "response is Response");
+                Assert.That(response.VisitorId, Is.EqualTo(visitorId));
+                Assert.That(response.Visits, Has.Count.EqualTo(62));
 
                 var request = _requests[0];
 

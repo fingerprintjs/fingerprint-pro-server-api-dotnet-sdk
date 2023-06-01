@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -23,16 +23,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseIncognitoData" /> class.
         /// </summary>
-        /// <param name="result">&#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. .</param>
+        /// <param name="result">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
         public SignalResponseIncognitoData(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// &#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. 
+        /// `true` if we detected incognito mode used in the browser, `false` otherwise. 
         /// </summary>
-        /// <value>&#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. </value>
+        /// <value>`true` if we detected incognito mode used in the browser, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 

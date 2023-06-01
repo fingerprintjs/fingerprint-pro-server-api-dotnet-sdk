@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -21,9 +21,9 @@ namespace FingerprintPro.ServerSdk.Model
     public partial class BotdDetectionResult : IEquatable<BotdDetectionResult>
     {
         /// <summary>
-        /// Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
+        /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
         /// </summary>
-        /// <value>Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
+        /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ResultEnum
         {
@@ -44,15 +44,15 @@ namespace FingerprintPro.ServerSdk.Model
             Bad = 3
         }
         /// <summary>
-        /// Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
+        /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
         /// </summary>
-        /// <value>Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
+        /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public ResultEnum Result { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="BotdDetectionResult" /> class.
         /// </summary>
-        /// <param name="result">Bot detection result:  * &#x60;notDetected&#x60; - the visitor is not a bot  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  (required).</param>
+        /// <param name="result">Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  (required).</param>
         /// <param name="type">type.</param>
         public BotdDetectionResult(ResultEnum result = default(ResultEnum), string type = default(string))
         {

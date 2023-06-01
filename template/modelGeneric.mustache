@@ -1,5 +1,5 @@
 /// <summary>
-    /// {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
+    /// {{#description}}{{{.}}}{{/description}}{{^description}}{{classname}}{{/description}}
     /// </summary>
 [DataContract]
 {{#discriminator}}
@@ -26,10 +26,10 @@
     {{/isEnum}}
     {{#isEnum}}
         /// <summary>
-            /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+            /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}
             /// </summary>
         {{#description}}
-            /// <value>{{description}}</value>
+            /// <value>{{{description}}}</value>
         {{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
         public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }
@@ -49,7 +49,7 @@
     /// </summary>
 {{#vars}}
     {{^isReadOnly}}
-        /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{description}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
+        /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{{description}}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
     {{/isReadOnly}}
 {{/vars}}
 {{#hasOnlyReadOnly}}
@@ -63,7 +63,7 @@ public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isCon
             {{#required}}
                 {{^nullable}}
                     // to ensure "{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}" is required (not null)
-                    
+
                     if ({{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} == null)
                     {
                     throw new InvalidDataException("{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} is a required property for {{classname}} and cannot be null");
@@ -104,9 +104,9 @@ public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isCon
     {{^isInherited}}
         {{^isEnum}}
             /// <summary>
-                /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+                /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}
                 /// </summary>{{#description}}
-                /// <value>{{description}}</value>{{/description}}
+                /// <value>{{{description}}}</value>{{/description}}
             [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]{{#isDate}}
                 [JsonConverter(typeof(SwaggerDateConverter))]{{/isDate}}
             public {{{datatype}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }

@@ -3,14 +3,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccuracyRadius** | **int?** |  | 
-**Latitude** | **double?** |  | 
-**Longitude** | **double?** |  | 
+**AccuracyRadius** | **int?** |  | [optional] 
+**Latitude** | **double?** |  | [optional] 
+**Longitude** | **double?** |  | [optional] 
 **PostalCode** | **string** |  | [optional] 
-**Timezone** | **string** |  | 
+**Timezone** | **string** |  | [optional] 
 **City** | [**IPLocationCity**](IPLocationCity.md) |  | [optional] 
-**Country** | [**Location**](Location.md) |  | 
-**Continent** | [**Location**](Location.md) |  | 
+**Country** | [**Location**](Location.md) |  | [optional] 
+**Continent** | [**Location**](Location.md) |  | [optional] 
 **Subdivisions** | [**List&lt;Subdivision&gt;**](Subdivision.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

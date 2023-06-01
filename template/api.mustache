@@ -25,10 +25,10 @@ namespace {{packageName}}.{{apiPackage}}
                 /// {{summary}}
                 /// </summary>
             /// <remarks>
-                /// {{notes}}
+                /// {{{notes}}}
                 /// </remarks>
             /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-            {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+            {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
             {{/parameters}}/// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
             {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}} ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
 
@@ -36,10 +36,10 @@ namespace {{packageName}}.{{apiPackage}}
                 /// {{summary}}
                 /// </summary>
             /// <remarks>
-                /// {{notes}}
+                /// {{{notes}}}
                 /// </remarks>
             /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-            {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+            {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
             {{/parameters}}/// <returns>ApiResponse of {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Object(void){{/returnType}}</returns>
             ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Object{{/returnType}}> {{operationId}}WithHttpInfo ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
         {{/contents}}
@@ -53,10 +53,10 @@ namespace {{packageName}}.{{apiPackage}}
                     /// {{summary}}
                     /// </summary>
                     /// <remarks>
-                    /// {{notes}}
+                    /// {{{notes}}}
                     /// </remarks>
                     /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-                {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+                {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
                 {{/parameters}}/// <returns>Task of {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}void{{/returnType}}</returns>
                 {{#returnType}}System.Threading.Tasks.Task<{{{returnType}}}>{{/returnType}}{{^returnType}}System.Threading.Tasks.Task{{/returnType}} {{operationId}}Async ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
 
@@ -64,10 +64,10 @@ namespace {{packageName}}.{{apiPackage}}
                     /// {{summary}}
                     /// </summary>
                     /// <remarks>
-                    /// {{notes}}
+                    /// {{{notes}}}
                     /// </remarks>
                     /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-                {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+                {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
                 {{/parameters}}/// <returns>Task of ApiResponse{{#returnType}} ({{returnType}}){{/returnType}}</returns>
                     System.Threading.Tasks.Task<ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Object{{/returnType}}>> {{operationId}}AsyncWithHttpInfo ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
             {{/contents}}
@@ -82,9 +82,9 @@ namespace {{packageName}}.{{apiPackage}}
     {{>visibility}} partial class {{classname}} : {{interfacePrefix}}{{classname}}
         {
         public const string Version = "{{packageVersion}}";
-    
+
         private readonly ApiClient _apiClient;
-    
+
         private {{packageName}}.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
@@ -135,10 +135,10 @@ namespace {{packageName}}.{{apiPackage}}
     {{#operation}}
         {{#contents}}
                 /// <summary>
-                /// {{summary}} {{notes}}
+                /// {{summary}} {{{notes}}}
                 /// </summary>
                 /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-            {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+            {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
             {{/parameters}}/// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
                 public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}} ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}})
                 {
@@ -147,10 +147,10 @@ namespace {{packageName}}.{{apiPackage}}
                 }
 
                 /// <summary>
-                /// {{summary}} {{notes}}
+                /// {{summary}} {{{notes}}}
                 /// </summary>
                 /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-            {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+            {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
             {{/parameters}}/// <returns>ApiResponse of {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Object(void){{/returnType}}</returns>
                 public ApiResponse<{{#returnType}} {{{returnType}}} {{/returnType}}{{^returnType}}Object{{/returnType}}> {{operationId}}WithHttpInfo ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}})
                 {
@@ -282,10 +282,10 @@ namespace {{packageName}}.{{apiPackage}}
 
             {{#supportsAsync}}
                     /// <summary>
-                    /// {{summary}} {{notes}}
+                    /// {{summary}} {{{notes}}}
                     /// </summary>
                     /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-                {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+                {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
                 {{/parameters}}/// <returns>Task of {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}void{{/returnType}}</returns>
                 {{#returnType}}public async System.Threading.Tasks.Task<{{{returnType}}}>{{/returnType}}{{^returnType}}public async System.Threading.Tasks.Task{{/returnType}} {{operationId}}Async ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}})
                     {
@@ -295,10 +295,10 @@ namespace {{packageName}}.{{apiPackage}}
                     }
 
                     /// <summary>
-                    /// {{summary}} {{notes}}
+                    /// {{summary}} {{{notes}}}
                     /// </summary>
                     /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
-                {{#parameters}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+                {{#parameters}}/// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
                 {{/parameters}}/// <returns>Task of ApiResponse{{#returnType}} ({{returnType}}){{/returnType}}</returns>
                     public async System.Threading.Tasks.Task<ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Object{{/returnType}}>> {{operationId}}AsyncWithHttpInfo ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}})
                     {

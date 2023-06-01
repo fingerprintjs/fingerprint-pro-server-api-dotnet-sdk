@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -21,9 +21,9 @@ namespace FingerprintPro.ServerSdk.Model
     public partial class ErrorEvent404ResponseError : IEquatable<ErrorEvent404ResponseError>
     {
         /// <summary>
-        /// Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - request not found for specified id 
         /// </summary>
-        /// <value>Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id </value>
+        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -34,15 +34,15 @@ namespace FingerprintPro.ServerSdk.Model
             RequestNotFound = 1
         }
         /// <summary>
-        /// Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - request not found for specified id 
         /// </summary>
-        /// <value>Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id </value>
+        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorEvent404ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * &#x60;RequestNotFound&#x60; - request not found for specified id  (required).</param>
+        /// <param name="code">Error code:  * `RequestNotFound` - request not found for specified id  (required).</param>
         /// <param name="message">message (required).</param>
         public ErrorEvent404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {

@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -36,10 +36,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="vpn">vpn.</param>
         /// <param name="proxy">proxy.</param>
         /// <param name="tampering">tampering.</param>
-        /// <param name="requestId">Unique identifier of the user&#x27;s identification request. (required).</param>
+        /// <param name="requestId">Unique identifier of the user's identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="ip">ip (required).</param>
-        /// <param name="ipLocation">ipLocation (required).</param>
+        /// <param name="ipLocation">ipLocation.</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format. (required).</param>
         /// <param name="url">Page URL from which identification request was sent. (required).</param>
@@ -100,16 +100,6 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.Ip = ip;
-            }
-            // to ensure "ipLocation" is required (not null)
-
-            if (ipLocation == null)
-            {
-                throw new InvalidDataException("ipLocation is a required property for WebhookVisit and cannot be null");
-            }
-            else
-            {
-                this.IpLocation = ipLocation;
             }
             // to ensure "timestamp" is required (not null)
 
@@ -192,6 +182,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.Vpn = vpn;
             this.Proxy = proxy;
             this.Tampering = tampering;
+            this.IpLocation = ipLocation;
             this.Tag = tag;
             this.LinkedId = linkedId;
         }
@@ -276,9 +267,9 @@ namespace FingerprintPro.ServerSdk.Model
         public TamperingResult Tampering { get; set; }
 
         /// <summary>
-        /// Unique identifier of the user&#x27;s identification request.
+        /// Unique identifier of the user's identification request.
         /// </summary>
-        /// <value>Unique identifier of the user&#x27;s identification request.</value>
+        /// <value>Unique identifier of the user's identification request.</value>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
         public string RequestId { get; set; }
 

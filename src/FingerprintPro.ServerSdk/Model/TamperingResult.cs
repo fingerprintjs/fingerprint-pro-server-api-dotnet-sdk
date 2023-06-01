@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -24,7 +24,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="TamperingResult" /> class.
         /// </summary>
         /// <param name="result">Flag indicating whether browser tampering was detected according to our internal thresholds..</param>
-        /// <param name="anomalyScore">Confidence score (&#x60;0.0 - 1.0&#x60;) for the tampering detection. Values above &#x60;0.5&#x60; suggest that we&#x27;re reasonably sure there was a tampering attempt. Values below &#x60;0.5&#x60; are genuine browsers..</param>
+        /// <param name="anomalyScore">Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers..</param>
         public TamperingResult(bool? result = default(bool?), decimal? anomalyScore = default(decimal?))
         {
             this.Result = result;
@@ -39,9 +39,9 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Result { get; set; }
 
         /// <summary>
-        /// Confidence score (&#x60;0.0 - 1.0&#x60;) for the tampering detection. Values above &#x60;0.5&#x60; suggest that we&#x27;re reasonably sure there was a tampering attempt. Values below &#x60;0.5&#x60; are genuine browsers.
+        /// Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers.
         /// </summary>
-        /// <value>Confidence score (&#x60;0.0 - 1.0&#x60;) for the tampering detection. Values above &#x60;0.5&#x60; suggest that we&#x27;re reasonably sure there was a tampering attempt. Values below &#x60;0.5&#x60; are genuine browsers.</value>
+        /// <value>Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers.</value>
         [DataMember(Name = "anomalyScore", EmitDefaultValue = false)]
         public decimal? AnomalyScore { get; set; }
 

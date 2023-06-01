@@ -1,7 +1,7 @@
 /* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -23,79 +23,25 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IPLocation" /> class.
         /// </summary>
-        /// <param name="accuracyRadius">accuracyRadius (required).</param>
-        /// <param name="latitude">latitude (required).</param>
-        /// <param name="longitude">longitude (required).</param>
+        /// <param name="accuracyRadius">accuracyRadius.</param>
+        /// <param name="latitude">latitude.</param>
+        /// <param name="longitude">longitude.</param>
         /// <param name="postalCode">postalCode.</param>
-        /// <param name="timezone">timezone (required).</param>
+        /// <param name="timezone">timezone.</param>
         /// <param name="city">city.</param>
-        /// <param name="country">country (required).</param>
-        /// <param name="continent">continent (required).</param>
+        /// <param name="country">country.</param>
+        /// <param name="continent">continent.</param>
         /// <param name="subdivisions">subdivisions.</param>
         public IPLocation(int? accuracyRadius = default(int?), double? latitude = default(double?), double? longitude = default(double?), string postalCode = default(string), string timezone = default(string), IPLocationCity city = default(IPLocationCity), Location country = default(Location), Location continent = default(Location), List<Subdivision> subdivisions = default(List<Subdivision>))
         {
-            // to ensure "accuracyRadius" is required (not null)
-
-            if (accuracyRadius == null)
-            {
-                throw new InvalidDataException("accuracyRadius is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.AccuracyRadius = accuracyRadius;
-            }
-            // to ensure "latitude" is required (not null)
-
-            if (latitude == null)
-            {
-                throw new InvalidDataException("latitude is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.Latitude = latitude;
-            }
-            // to ensure "longitude" is required (not null)
-
-            if (longitude == null)
-            {
-                throw new InvalidDataException("longitude is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.Longitude = longitude;
-            }
-            // to ensure "timezone" is required (not null)
-
-            if (timezone == null)
-            {
-                throw new InvalidDataException("timezone is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.Timezone = timezone;
-            }
-            // to ensure "country" is required (not null)
-
-            if (country == null)
-            {
-                throw new InvalidDataException("country is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.Country = country;
-            }
-            // to ensure "continent" is required (not null)
-
-            if (continent == null)
-            {
-                throw new InvalidDataException("continent is a required property for IPLocation and cannot be null");
-            }
-            else
-            {
-                this.Continent = continent;
-            }
+            this.AccuracyRadius = accuracyRadius;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
             this.PostalCode = postalCode;
+            this.Timezone = timezone;
             this.City = city;
+            this.Country = country;
+            this.Continent = continent;
             this.Subdivisions = subdivisions;
         }
 
