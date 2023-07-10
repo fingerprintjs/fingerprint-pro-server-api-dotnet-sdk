@@ -73,6 +73,9 @@ public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isCon
                     this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
                     }
                 {{/nullable}}
+                {{#nullable}}
+                    this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
+                {{/nullable}}
             {{/required}}
         {{/isReadOnly}}
     {{/isInherited}}
