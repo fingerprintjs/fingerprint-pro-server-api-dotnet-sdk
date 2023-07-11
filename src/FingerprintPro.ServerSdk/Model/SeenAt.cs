@@ -27,6 +27,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="subscription">subscription (required).</param>
         public SeenAt(DateTime? global = default(DateTime?), DateTime? subscription = default(DateTime?))
         {
+            this.Global = global;
+            this.Subscription = subscription;
         }
 
         /// <summary>
