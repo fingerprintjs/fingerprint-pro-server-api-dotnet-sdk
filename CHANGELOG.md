@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.2.0...v2.2.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* ensure that SeenAt properties are correctly set in constructor ([9bd9e14](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/9bd9e14764dad8a8472f54619972867d871f5661))
+
 ## [2.2.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.1.0...v2.2.0) (2023-06-01)
 
 
