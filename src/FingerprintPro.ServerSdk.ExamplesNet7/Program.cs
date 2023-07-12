@@ -5,7 +5,7 @@ using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
-//configuration.Region = Region.Eu;
+configuration.Region = Region.Eu;
 
 var api = new FingerprintApi(
     configuration

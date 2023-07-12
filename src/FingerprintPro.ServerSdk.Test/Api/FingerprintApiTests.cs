@@ -159,6 +159,22 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
                 Assert.That(response.Products.IpInfo.Data.V4.Address, Is.EqualTo("94.142.239.124"));
+                Assert.That(response.Products.ClonedApp.Data.Result, Is.False);
+                Assert.That(response.Products.Emulator.Data.Result, Is.False);
+                Assert.That(response.Products.FactoryReset.Data.Timestamp, Is.EqualTo(0));
+                Assert.That(response.Products.Frida.Data.Result, Is.False);
+                Assert.That(response.Products.Incognito.Data.Result, Is.False);
+                Assert.That(response.Products.IpBlocklist.Data.Result, Is.False);
+                Assert.That(response.Products.IpBlocklist.Data.Details.AttackSource, Is.False);
+                Assert.That(response.Products.IpBlocklist.Data.Details.EmailSpam, Is.False);
+                Assert.That(response.Products.Jailbroken.Data.Result, Is.False);
+                Assert.That(response.Products.PrivacySettings.Data.Result, Is.False);
+                Assert.That(response.Products.Proxy.Data.Result, Is.False);
+                Assert.That(response.Products.RootApps.Data.Result, Is.False);
+                Assert.That(response.Products.Tampering.Data.Result, Is.False);
+                Assert.That(response.Products.Tor.Data.Result, Is.False);
+                Assert.That(response.Products.VirtualMachine.Data.Result, Is.False);
+                Assert.That(response.Products.Vpn.Data.Result, Is.False);
             });
         }
 

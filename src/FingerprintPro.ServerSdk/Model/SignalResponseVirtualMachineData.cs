@@ -15,24 +15,24 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseEmulator
+    /// SignalResponseVirtualMachineData
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseEmulator : IEquatable<WebhookSignalResponseEmulator>
+    public partial class SignalResponseVirtualMachineData : IEquatable<SignalResponseVirtualMachineData>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseEmulator" /> class.
+        /// Initializes a new instance of the <see cref="SignalResponseVirtualMachineData" /> class.
         /// </summary>
-        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. .</param>
-        public WebhookSignalResponseEmulator(bool? result = default(bool?))
+        /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. .</param>
+        public SignalResponseVirtualMachineData(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. 
+        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
         /// </summary>
-        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. </value>
+        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseEmulator {\n");
+            sb.Append("class SignalResponseVirtualMachineData {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +59,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseEmulator instances are equal
+        /// Returns true if SignalResponseVirtualMachineData instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseEmulator to be compared</param>
+        /// <param name="input">Instance of SignalResponseVirtualMachineData to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseEmulator input)
+        public bool Equals(SignalResponseVirtualMachineData input)
         {
             if (input == null)
                 return false;

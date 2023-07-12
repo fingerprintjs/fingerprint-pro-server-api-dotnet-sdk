@@ -15,24 +15,24 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseEmulator
+    /// WebhookSignalResponsePrivacySettings
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseEmulator : IEquatable<WebhookSignalResponseEmulator>
+    public partial class WebhookSignalResponsePrivacySettings : IEquatable<WebhookSignalResponsePrivacySettings>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseEmulator" /> class.
+        /// Initializes a new instance of the <see cref="WebhookSignalResponsePrivacySettings" /> class.
         /// </summary>
-        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. .</param>
-        public WebhookSignalResponseEmulator(bool? result = default(bool?))
+        /// <param name="result">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
+        public WebhookSignalResponsePrivacySettings(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. 
+        /// `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
         /// </summary>
-        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. </value>
+        /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseEmulator {\n");
+            sb.Append("class WebhookSignalResponsePrivacySettings {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +59,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseEmulator instances are equal
+        /// Returns true if WebhookSignalResponsePrivacySettings instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseEmulator to be compared</param>
+        /// <param name="input">Instance of WebhookSignalResponsePrivacySettings to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseEmulator input)
+        public bool Equals(WebhookSignalResponsePrivacySettings input)
         {
             if (input == null)
                 return false;

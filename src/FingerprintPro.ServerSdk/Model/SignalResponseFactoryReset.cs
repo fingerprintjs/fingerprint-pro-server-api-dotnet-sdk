@@ -15,26 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseEmulator
+    /// SignalResponseFactoryReset
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseEmulator : IEquatable<WebhookSignalResponseEmulator>
+    public partial class SignalResponseFactoryReset : IEquatable<SignalResponseFactoryReset>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseEmulator" /> class.
+        /// Initializes a new instance of the <see cref="SignalResponseFactoryReset" /> class.
         /// </summary>
-        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. .</param>
-        public WebhookSignalResponseEmulator(bool? result = default(bool?))
+        /// <param name="data">data.</param>
+        /// <param name="error">error.</param>
+        public SignalResponseFactoryReset(SignalResponseFactoryResetData data = default(SignalResponseFactoryResetData), ProductError error = default(ProductError))
         {
-            this.Result = result;
+            this.Data = data;
+            this.Error = error;
         }
 
         /// <summary>
-        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. 
+        /// Gets or Sets Data
         /// </summary>
-        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
-        public bool? Result { get; set; }
+        [DataMember(Name = "data", EmitDefaultValue = false)]
+        public SignalResponseFactoryResetData Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        public ProductError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -43,8 +50,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseEmulator {\n");
-            sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("class SignalResponseFactoryReset {\n");
+            sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -59,20 +67,25 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseEmulator instances are equal
+        /// Returns true if SignalResponseFactoryReset instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseEmulator to be compared</param>
+        /// <param name="input">Instance of SignalResponseFactoryReset to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseEmulator input)
+        public bool Equals(SignalResponseFactoryReset input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Result == input.Result ||
-                (this.Result != null &&
-                this.Result.Equals(input.Result))
+                this.Data == input.Data ||
+                (this.Data != null &&
+                this.Data.Equals(input.Data))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
                 );
         }
 
@@ -85,8 +98,10 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Result != null)
-                    hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Data != null)
+                    hashCode = hashCode * 59 + this.Data.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
             }
         }

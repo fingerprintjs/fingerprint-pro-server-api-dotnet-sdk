@@ -15,24 +15,24 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseEmulator
+    /// WebhookSignalResponseClonedApp
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseEmulator : IEquatable<WebhookSignalResponseEmulator>
+    public partial class WebhookSignalResponseClonedApp : IEquatable<WebhookSignalResponseClonedApp>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseEmulator" /> class.
+        /// Initializes a new instance of the <see cref="WebhookSignalResponseClonedApp" /> class.
         /// </summary>
-        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. .</param>
-        public WebhookSignalResponseEmulator(bool? result = default(bool?))
+        /// <param name="result">Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. .</param>
+        public WebhookSignalResponseClonedApp(bool? result = default(bool?))
         {
             this.Result = result;
         }
 
         /// <summary>
-        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. 
+        /// Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. 
         /// </summary>
-        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client isn't Android. </value>
+        /// <value>Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseEmulator {\n");
+            sb.Append("class WebhookSignalResponseClonedApp {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +59,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseEmulator instances are equal
+        /// Returns true if WebhookSignalResponseClonedApp instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseEmulator to be compared</param>
+        /// <param name="input">Instance of WebhookSignalResponseClonedApp to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseEmulator input)
+        public bool Equals(WebhookSignalResponseClonedApp input)
         {
             if (input == null)
                 return false;
