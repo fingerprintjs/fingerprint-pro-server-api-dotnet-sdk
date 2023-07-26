@@ -249,6 +249,23 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.Vpn.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Proxy.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.ClonedApp.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.FactoryReset.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Jailbroken.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Frida.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.PrivacySettings.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.VirtualMachine.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
+                Assert.IsTrue(rawDeviceAttributes.ContainsKey("audio"));
+                Assert.IsNotNull(rawDeviceAttributes["audio"]);
+                var audio = (JObject)rawDeviceAttributes["audio"];
+                var audioError = (JObject)audio["error"];
+                Assert.That(audioError["name"].ToString(), Is.EqualTo("Error"));
+                Assert.IsTrue(rawDeviceAttributes.ContainsKey("canvas"));
+                Assert.IsNotNull(rawDeviceAttributes["canvas"]);
+                var canvas = (JObject)rawDeviceAttributes["canvas"];
+                var canvasError = (JObject)canvas["error"];
+                Assert.That(canvasError["name"].ToString(), Is.EqualTo("Error"));
             });
         }
 
