@@ -4,8 +4,19 @@ using System;
 using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
+
 var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
-configuration.Region = Region.Eu;
+
+// Change region if needed
+var region = Environment.GetEnvironmentVariable("REGION")!;
+if (region == "eu")
+{
+    configuration.Region = Region.Eu;
+}
+else if (region == "ap")
+{
+    configuration.Region = Region.Asia;
+}
 
 var api = new FingerprintApi(
     configuration
@@ -17,5 +28,5 @@ var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
 var visits = api.GetVisits(visitorId);
 var events = api.GetEvent(requestId);
 
-Console.WriteLine(visits);
-Console.WriteLine(events);
+Console.WriteLine(visits.ToJson());
+Console.WriteLine(events.ToJson());

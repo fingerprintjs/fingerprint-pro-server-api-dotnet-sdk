@@ -25,22 +25,67 @@ Project configuration is described in `config.json` file. To read about availabl
 java -jar ./bin/swagger-codegen-cli.jar config-help -l csharp
 ```
 
-### How to test
+### Running tests
+
 Tests are located in tests.
 
 To run tests you can use IDE instruments or just run:
+
 ```shell
 dotnet test
 ```
 
+### Testing the local source code of the SDK
+
+To make requests using the local version of the SDK you can use the debugger inside VS Code.
+
+1. Add this `launch.json` file to the project's `.vscode` folder:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/src/FingerprintPro.ServerSdk.ExamplesNet7/bin/Debug/net7.0/FingerprintPro.ServerSdk.ExamplesNet7.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/FingerprintPro.ServerSdk.ExamplesNet7",
+      // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "env": {
+        "VISITOR_ID": "<VISITOR_ID>",
+        "REQUEST_ID": "<REQUEST_ID>",
+        "API_KEY": "<API_KEY>",
+        "REGION": "<REGION>" // e.g. "eu" or "ap", "us" is the default
+      }
+    }
+  ]
+}
+```
+
+2. Replace environment variable placeholders with your API Key, Visitor ID, Request ID. Define `REGION` if you want to use a region other than the default one (`us`).
+3. Run `dotnet build` in the terminal.
+4. Run the debugger (F5).
+
+The debugger will run the code inside `src/FingerprintPro.ServerSdk.ExamplesNet7/Program.cs` using the local source code of the SDK. If you change `Program.cs` you will need run `dotnet build` again for the changes to take effect.
+
 ### How to publish
 
 The library is automatically released on every push to the main branch if there are relevant changes using [semantic-release](https://github.com/semantic-release/semantic-release) with following plugins:
-* [@semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer)
-* [@semantic-release/release-notes-generator](https://github.com/semantic-release/release-notes-generator)
-* [@semantic-release/changelog](https://github.com/semantic-release/changelog)
-* [@semantic-release/npm](https://github.com/semantic-release/npm)
-* [@semantic-release/github](https://github.com/semantic-release/github)
+
+- [@semantic-release/commit-analyzer](https://github.com/semantic-release/commit-analyzer)
+- [@semantic-release/release-notes-generator](https://github.com/semantic-release/release-notes-generator)
+- [@semantic-release/changelog](https://github.com/semantic-release/changelog)
+- [@semantic-release/npm](https://github.com/semantic-release/npm)
+- [@semantic-release/github](https://github.com/semantic-release/github)
 
 The workflow must be approved by one of the maintainers, first.
 The release configuration can be found in [./release](./release) directory.
