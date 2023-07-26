@@ -6,14 +6,26 @@ java -jar ./bin/swagger-codegen-cli.jar generate -t ./template -l csharp -i ./re
 dotnet format
 
 # Ugly fix for codegen problem that I couldn't fix editing template.
+# Platform check
+platform=$(uname)
 (
-  # Platform check
-  platform=$(uname)
-
-  # Modification with sed
+  # Model file fix
   if [ "$platform" = "Darwin" ]; then
     sed -i '' 's/public override string ToJson()/public string ToJson()/' ./src/FingerprintPro.ServerSdk/Model/RawDeviceAttributesResult.cs
   else
     sed -i 's/public override string ToJson()/public string ToJson()/' ./src/FingerprintPro.ServerSdk/Model/RawDeviceAttributesResult.cs
+  fi
+)
+
+(
+  # Readme file fix
+  replacement=$(printf 'The rawAttributes object follows this general shape: `{ value: any } | { error: { name: string; message: string; } }`\n')
+  readme_filename="./docs/RawDeviceAttributesResult.md"
+  if [ "$platform" = "Darwin" ]; then
+    sed -i '' "s/^Name |.*/${replacement}/" "$readme_filename"
+    sed -i '' "/^------------ |/c\\" "$readme_filename"
+  else
+    sed -i "s/^Name |.*/${replacement}/" "$readme_filename"
+    sed -i "/^------------ |/c\\" "$readme_filename"
   fi
 )
