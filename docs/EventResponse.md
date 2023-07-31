@@ -1,4 +1,6 @@
 # FingerprintPro.ServerSdk.Model.EventResponse
+Contains results from all activated products - Fingerprint Pro, Bot Detection, and others.
+
 ## Properties
 
 Name | Type | Description | Notes

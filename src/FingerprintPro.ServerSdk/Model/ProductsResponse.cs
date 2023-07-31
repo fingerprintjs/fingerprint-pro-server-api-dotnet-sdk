@@ -29,12 +29,19 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="incognito">incognito.</param>
         /// <param name="rootApps">rootApps.</param>
         /// <param name="emulator">emulator.</param>
+        /// <param name="clonedApp">clonedApp.</param>
+        /// <param name="factoryReset">factoryReset.</param>
+        /// <param name="jailbroken">jailbroken.</param>
+        /// <param name="frida">frida.</param>
         /// <param name="ipBlocklist">ipBlocklist.</param>
         /// <param name="tor">tor.</param>
+        /// <param name="privacySettings">privacySettings.</param>
+        /// <param name="virtualMachine">virtualMachine.</param>
         /// <param name="vpn">vpn.</param>
         /// <param name="proxy">proxy.</param>
         /// <param name="tampering">tampering.</param>
-        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering))
+        /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
+        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseClonedApp clonedApp = default(SignalResponseClonedApp), SignalResponseFactoryReset factoryReset = default(SignalResponseFactoryReset), SignalResponseJailbroken jailbroken = default(SignalResponseJailbroken), SignalResponseFrida frida = default(SignalResponseFrida), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponsePrivacySettings privacySettings = default(SignalResponsePrivacySettings), SignalResponseVirtualMachine virtualMachine = default(SignalResponseVirtualMachine), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering), SignalResponseRawDeviceAttributes rawDeviceAttributes = default(SignalResponseRawDeviceAttributes))
         {
             this.Identification = identification;
             this.Botd = botd;
@@ -42,11 +49,18 @@ namespace FingerprintPro.ServerSdk.Model
             this.Incognito = incognito;
             this.RootApps = rootApps;
             this.Emulator = emulator;
+            this.ClonedApp = clonedApp;
+            this.FactoryReset = factoryReset;
+            this.Jailbroken = jailbroken;
+            this.Frida = frida;
             this.IpBlocklist = ipBlocklist;
             this.Tor = tor;
+            this.PrivacySettings = privacySettings;
+            this.VirtualMachine = virtualMachine;
             this.Vpn = vpn;
             this.Proxy = proxy;
             this.Tampering = tampering;
+            this.RawDeviceAttributes = rawDeviceAttributes;
         }
 
         /// <summary>
@@ -86,6 +100,30 @@ namespace FingerprintPro.ServerSdk.Model
         public SignalResponseEmulator Emulator { get; set; }
 
         /// <summary>
+        /// Gets or Sets ClonedApp
+        /// </summary>
+        [DataMember(Name = "clonedApp", EmitDefaultValue = false)]
+        public SignalResponseClonedApp ClonedApp { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FactoryReset
+        /// </summary>
+        [DataMember(Name = "factoryReset", EmitDefaultValue = false)]
+        public SignalResponseFactoryReset FactoryReset { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Jailbroken
+        /// </summary>
+        [DataMember(Name = "jailbroken", EmitDefaultValue = false)]
+        public SignalResponseJailbroken Jailbroken { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Frida
+        /// </summary>
+        [DataMember(Name = "frida", EmitDefaultValue = false)]
+        public SignalResponseFrida Frida { get; set; }
+
+        /// <summary>
         /// Gets or Sets IpBlocklist
         /// </summary>
         [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
@@ -96,6 +134,18 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "tor", EmitDefaultValue = false)]
         public SignalResponseTor Tor { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PrivacySettings
+        /// </summary>
+        [DataMember(Name = "privacySettings", EmitDefaultValue = false)]
+        public SignalResponsePrivacySettings PrivacySettings { get; set; }
+
+        /// <summary>
+        /// Gets or Sets VirtualMachine
+        /// </summary>
+        [DataMember(Name = "virtualMachine", EmitDefaultValue = false)]
+        public SignalResponseVirtualMachine VirtualMachine { get; set; }
 
         /// <summary>
         /// Gets or Sets Vpn
@@ -116,6 +166,12 @@ namespace FingerprintPro.ServerSdk.Model
         public SignalResponseTampering Tampering { get; set; }
 
         /// <summary>
+        /// Gets or Sets RawDeviceAttributes
+        /// </summary>
+        [DataMember(Name = "rawDeviceAttributes", EmitDefaultValue = false)]
+        public SignalResponseRawDeviceAttributes RawDeviceAttributes { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -129,11 +185,18 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Incognito: ").Append(Incognito).Append("\n");
             sb.Append("  RootApps: ").Append(RootApps).Append("\n");
             sb.Append("  Emulator: ").Append(Emulator).Append("\n");
+            sb.Append("  ClonedApp: ").Append(ClonedApp).Append("\n");
+            sb.Append("  FactoryReset: ").Append(FactoryReset).Append("\n");
+            sb.Append("  Jailbroken: ").Append(Jailbroken).Append("\n");
+            sb.Append("  Frida: ").Append(Frida).Append("\n");
             sb.Append("  IpBlocklist: ").Append(IpBlocklist).Append("\n");
             sb.Append("  Tor: ").Append(Tor).Append("\n");
+            sb.Append("  PrivacySettings: ").Append(PrivacySettings).Append("\n");
+            sb.Append("  VirtualMachine: ").Append(VirtualMachine).Append("\n");
             sb.Append("  Vpn: ").Append(Vpn).Append("\n");
             sb.Append("  Proxy: ").Append(Proxy).Append("\n");
             sb.Append("  Tampering: ").Append(Tampering).Append("\n");
+            sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -189,6 +252,26 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Emulator.Equals(input.Emulator))
                 ) &&
                 (
+                this.ClonedApp == input.ClonedApp ||
+                (this.ClonedApp != null &&
+                this.ClonedApp.Equals(input.ClonedApp))
+                ) &&
+                (
+                this.FactoryReset == input.FactoryReset ||
+                (this.FactoryReset != null &&
+                this.FactoryReset.Equals(input.FactoryReset))
+                ) &&
+                (
+                this.Jailbroken == input.Jailbroken ||
+                (this.Jailbroken != null &&
+                this.Jailbroken.Equals(input.Jailbroken))
+                ) &&
+                (
+                this.Frida == input.Frida ||
+                (this.Frida != null &&
+                this.Frida.Equals(input.Frida))
+                ) &&
+                (
                 this.IpBlocklist == input.IpBlocklist ||
                 (this.IpBlocklist != null &&
                 this.IpBlocklist.Equals(input.IpBlocklist))
@@ -197,6 +280,16 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Tor == input.Tor ||
                 (this.Tor != null &&
                 this.Tor.Equals(input.Tor))
+                ) &&
+                (
+                this.PrivacySettings == input.PrivacySettings ||
+                (this.PrivacySettings != null &&
+                this.PrivacySettings.Equals(input.PrivacySettings))
+                ) &&
+                (
+                this.VirtualMachine == input.VirtualMachine ||
+                (this.VirtualMachine != null &&
+                this.VirtualMachine.Equals(input.VirtualMachine))
                 ) &&
                 (
                 this.Vpn == input.Vpn ||
@@ -212,6 +305,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Tampering == input.Tampering ||
                 (this.Tampering != null &&
                 this.Tampering.Equals(input.Tampering))
+                ) &&
+                (
+                this.RawDeviceAttributes == input.RawDeviceAttributes ||
+                (this.RawDeviceAttributes != null &&
+                this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
                 );
         }
 
@@ -236,16 +334,30 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.RootApps.GetHashCode();
                 if (this.Emulator != null)
                     hashCode = hashCode * 59 + this.Emulator.GetHashCode();
+                if (this.ClonedApp != null)
+                    hashCode = hashCode * 59 + this.ClonedApp.GetHashCode();
+                if (this.FactoryReset != null)
+                    hashCode = hashCode * 59 + this.FactoryReset.GetHashCode();
+                if (this.Jailbroken != null)
+                    hashCode = hashCode * 59 + this.Jailbroken.GetHashCode();
+                if (this.Frida != null)
+                    hashCode = hashCode * 59 + this.Frida.GetHashCode();
                 if (this.IpBlocklist != null)
                     hashCode = hashCode * 59 + this.IpBlocklist.GetHashCode();
                 if (this.Tor != null)
                     hashCode = hashCode * 59 + this.Tor.GetHashCode();
+                if (this.PrivacySettings != null)
+                    hashCode = hashCode * 59 + this.PrivacySettings.GetHashCode();
+                if (this.VirtualMachine != null)
+                    hashCode = hashCode * 59 + this.VirtualMachine.GetHashCode();
                 if (this.Vpn != null)
                     hashCode = hashCode * 59 + this.Vpn.GetHashCode();
                 if (this.Proxy != null)
                     hashCode = hashCode * 59 + this.Proxy.GetHashCode();
                 if (this.Tampering != null)
                     hashCode = hashCode * 59 + this.Tampering.GetHashCode();
+                if (this.RawDeviceAttributes != null)
+                    hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
                 return hashCode;
             }
         }
