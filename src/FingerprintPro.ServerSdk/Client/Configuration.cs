@@ -33,7 +33,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "2.2.1";
+        public const string Version = "2.3.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -110,7 +110,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="apiKey">User provided API Key</param>
         public Configuration(string apiKey)
         {
-            UserAgent = "Swagger-Codegen/2.2.1/csharp";
+            UserAgent = "Swagger-Codegen/2.3.0/csharp";
             BasePath = "https://api.fpjs.io";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -333,7 +333,7 @@ namespace FingerprintPro.ServerSdk.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version + "\n";
             report += "    Version of the API: 3\n";
-            report += "    SDK Package Version: 2.2.1\n";
+            report += "    SDK Package Version: 2.3.0\n";
 
             return report;
         }

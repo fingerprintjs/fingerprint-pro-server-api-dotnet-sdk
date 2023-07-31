@@ -1,3 +1,11 @@
+## [2.3.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.2.1...v2.3.0) (2023-07-31)
+
+
+### Features
+
+* add `rawDeviceAttributes` signal as generic JObject ([40f5022](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/40f5022e2e960f2b99e98789275ddc0e8d80ff12))
+* add smart signals support ([053779d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/053779d0d26544482c0461b00ecb7b4b5003c5cf))
+
 ## [2.2.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.2.0...v2.2.1) (2023-07-11)
 
 
