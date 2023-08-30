@@ -45,6 +45,6 @@ jobs:
     uses: fingerprintjs/dx-team-toolkit/.github/workflows/report-workflow-status.yml@v1
     with:
       notification_title: 'dotnet SDK Tests has {status_message}'
-      job_status: ${{ needs.tests.status }}
+      job_status: ${{ needs.tests.result }}
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
