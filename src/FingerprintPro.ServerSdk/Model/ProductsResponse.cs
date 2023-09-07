@@ -15,7 +15,7 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// Contains all the information from each activated product - Fingerprint Pro or Bot Detection
+    /// Contains all information about the request identified by `requestId`, depending on the pricing plan (Pro, Pro Plus, Enterprise)
     /// </summary>
     [DataContract]
     public partial class ProductsResponse : IEquatable<ProductsResponse>
