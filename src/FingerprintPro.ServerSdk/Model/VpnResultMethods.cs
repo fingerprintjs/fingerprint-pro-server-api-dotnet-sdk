@@ -25,10 +25,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="timezoneMismatch">User's browser timezone doesn't match the timezone from which the request was originally made..</param>
         /// <param name="publicVPN">Request IP address is owned and used by a public VPN service provider..</param>
-        public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?))
+        /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices..</param>
+        public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?))
         {
             this.TimezoneMismatch = timezoneMismatch;
             this.PublicVPN = publicVPN;
+            this.AuxiliaryMobile = auxiliaryMobile;
         }
 
         /// <summary>
@@ -46,6 +48,13 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? PublicVPN { get; set; }
 
         /// <summary>
+        /// This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices.
+        /// </summary>
+        /// <value>This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices.</value>
+        [DataMember(Name = "auxiliaryMobile", EmitDefaultValue = false)]
+        public bool? AuxiliaryMobile { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -55,6 +64,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class VpnResultMethods {\n");
             sb.Append("  TimezoneMismatch: ").Append(TimezoneMismatch).Append("\n");
             sb.Append("  PublicVPN: ").Append(PublicVPN).Append("\n");
+            sb.Append("  AuxiliaryMobile: ").Append(AuxiliaryMobile).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -88,6 +98,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.PublicVPN == input.PublicVPN ||
                 (this.PublicVPN != null &&
                 this.PublicVPN.Equals(input.PublicVPN))
+                ) &&
+                (
+                this.AuxiliaryMobile == input.AuxiliaryMobile ||
+                (this.AuxiliaryMobile != null &&
+                this.AuxiliaryMobile.Equals(input.AuxiliaryMobile))
                 );
         }
 
@@ -104,6 +119,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.TimezoneMismatch.GetHashCode();
                 if (this.PublicVPN != null)
                     hashCode = hashCode * 59 + this.PublicVPN.GetHashCode();
+                if (this.AuxiliaryMobile != null)
+                    hashCode = hashCode * 59 + this.AuxiliaryMobile.GetHashCode();
                 return hashCode;
             }
         }

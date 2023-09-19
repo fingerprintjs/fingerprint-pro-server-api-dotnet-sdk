@@ -23,7 +23,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResult" /> class.
         /// </summary>
-        /// <param name="result">VPN or other anonymising service has been used when sending the request..</param>
+        /// <param name="result">VPN or other anonymizing service has been used when sending the request..</param>
         /// <param name="methods">methods.</param>
         public VpnResult(bool? result = default(bool?), VpnResultMethods methods = default(VpnResultMethods))
         {
@@ -32,9 +32,9 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// VPN or other anonymising service has been used when sending the request.
+        /// VPN or other anonymizing service has been used when sending the request.
         /// </summary>
-        /// <value>VPN or other anonymising service has been used when sending the request.</value>
+        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
