@@ -15,34 +15,42 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// VpnResult
+    /// DataCenter
     /// </summary>
     [DataContract]
-    public partial class VpnResult : IEquatable<VpnResult>
+    public partial class DataCenter : IEquatable<DataCenter>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VpnResult" /> class.
+        /// Initializes a new instance of the <see cref="DataCenter" /> class.
         /// </summary>
-        /// <param name="result">VPN or other anonymizing service has been used when sending the request..</param>
-        /// <param name="methods">methods.</param>
-        public VpnResult(bool? result = default(bool?), VpnResultMethods methods = default(VpnResultMethods))
+        /// <param name="result">result (required).</param>
+        /// <param name="name">name.</param>
+        public DataCenter(bool? result = default(bool?), string name = default(string))
         {
-            this.Result = result;
-            this.Methods = methods;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for DataCenter and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
+            this.Name = name;
         }
 
         /// <summary>
-        /// VPN or other anonymizing service has been used when sending the request.
+        /// Gets or Sets Result
         /// </summary>
-        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
         /// <summary>
-        /// Gets or Sets Methods
+        /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name = "methods", EmitDefaultValue = false)]
-        public VpnResultMethods Methods { get; set; }
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        public string Name { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -51,9 +59,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VpnResult {\n");
+            sb.Append("class DataCenter {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-            sb.Append("  Methods: ").Append(Methods).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -68,11 +76,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if VpnResult instances are equal
+        /// Returns true if DataCenter instances are equal
         /// </summary>
-        /// <param name="input">Instance of VpnResult to be compared</param>
+        /// <param name="input">Instance of DataCenter to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VpnResult input)
+        public bool Equals(DataCenter input)
         {
             if (input == null)
                 return false;
@@ -84,9 +92,9 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result.Equals(input.Result))
                 ) &&
                 (
-                this.Methods == input.Methods ||
-                (this.Methods != null &&
-                this.Methods.Equals(input.Methods))
+                this.Name == input.Name ||
+                (this.Name != null &&
+                this.Name.Equals(input.Name))
                 );
         }
 
@@ -101,8 +109,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.Methods != null)
-                    hashCode = hashCode * 59 + this.Methods.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;
             }
         }

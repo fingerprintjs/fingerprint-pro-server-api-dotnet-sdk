@@ -37,7 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
-        /// <param name="visitorId">visitorId (required).</param>
+        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser.  **Pro Plus:** If a bot is detected (`products.botd.bot.result != \"notDetected\"`), the `visitorId` value contains a placeholder string `BotDetected000000000`.  (required).</param>
         public ProductsResponseIdentificationData(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt), string visitorId = default(string))
         {
             // to ensure "requestId" is required (not null)
@@ -258,8 +258,9 @@ namespace FingerprintPro.ServerSdk.Model
         public SeenAt LastSeenAt { get; set; }
 
         /// <summary>
-        /// Gets or Sets VisitorId
+        /// String of 20 characters that uniquely identifies the visitor's browser.  **Pro Plus:** If a bot is detected (`products.botd.bot.result != \"notDetected\"`), the `visitorId` value contains a placeholder string `BotDetected000000000`. 
         /// </summary>
+        /// <value>String of 20 characters that uniquely identifies the visitor's browser.  **Pro Plus:** If a bot is detected (`products.botd.bot.result != \"notDetected\"`), the `visitorId` value contains a placeholder string `BotDetected000000000`. </value>
         [DataMember(Name = "visitorId", EmitDefaultValue = false)]
         public string VisitorId { get; set; }
 

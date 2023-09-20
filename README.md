@@ -103,10 +103,12 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [Model.ASN](docs/ASN.md)
  - [Model.BotdDetectionResult](docs/BotdDetectionResult.md)
  - [Model.BotdResult](docs/BotdResult.md)
  - [Model.BrowserDetails](docs/BrowserDetails.md)
  - [Model.Confidence](docs/Confidence.md)
+ - [Model.DataCenter](docs/DataCenter.md)
  - [Model.ErrorEvent403Response](docs/ErrorEvent403Response.md)
  - [Model.ErrorEvent403ResponseError](docs/ErrorEvent403ResponseError.md)
  - [Model.ErrorEvent404Response](docs/ErrorEvent404Response.md)

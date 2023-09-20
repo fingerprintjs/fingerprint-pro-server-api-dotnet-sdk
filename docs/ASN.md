@@ -1,12 +1,11 @@
-# FingerprintPro.ServerSdk.Model.IpInfoResultV4
+# FingerprintPro.ServerSdk.Model.ASN
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **string** |  | [optional] 
-**Geolocation** | [**IPLocation**](IPLocation.md) |  | [optional] 
-**Asn** | [**ASN**](ASN.md) |  | [optional] 
-**DataCenter** | [**DataCenter**](DataCenter.md) |  | [optional] 
+**_Asn** | **string** |  | 
+**Network** | **string** |  | 
+**Name** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
