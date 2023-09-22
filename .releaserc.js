@@ -108,7 +108,7 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "NEW_VERSION=\"${nextRelease.version}\" node semantic-release/bumpConfigAndGenerate.mjs && NEW_VERSION=\"${nextRelease.version}\" node semantic-release/publish.mjs"
+        "prepareCmd": "NEW_VERSION=\"${nextRelease.version}\" node bumpConfigAndGenerate.mjs && NEW_VERSION=\"${nextRelease.version}\" node publish.mjs"
       }
     ],
     [
