@@ -1,9 +1,18 @@
-import config from '../config.json' assert {type: 'json'};
+import config from './config.json' assert {type: 'json'};
 import path from 'path';
 import fs from 'fs'
 import cp from 'child_process'
 
 const dirname = import.meta.url.replace(/^file:\/\//, '');
+
+console.info('dirname', dirname);
+
+const paths = {
+    config: path.resolve(dirname, './config.json'),
+    csproj: path.resolve(dirname, './src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj'),
+}
+
+console.info('paths', paths);
 
 function getVersion() {
     const version = process.env.NEW_VERSION;
@@ -18,26 +27,20 @@ function getVersion() {
 }
 
 function bumpConfigVersion(version) {
-    const configPath = path.resolve(dirname, 'config.json');
-
-    console.info('Config path:', configPath);
-
     config.packageVersion = version;
 
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
+    fs.writeFileSync(paths.config, JSON.stringify(config, null, 4));
 }
 
 function bumpCsprojVersion(version) {
-    const csprojPath = path.resolve(dirname, 'src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj');
-
-    console.info('Csproj path:', csprojPath);
-
-    const csproj = fs.readFileSync(csprojPath, 'utf8');
+    const csproj = fs.readFileSync(paths.csproj, 'utf8');
 
     // Replace <Version> tag with given version
     const newCsproj = csproj.replace(/<Version>.*<\/Version>/, `<Version>${version}</Version>`);
+    
+    console.info('newCsproj', newCsproj);
 
-    fs.writeFileSync(csprojPath, newCsproj);
+    fs.writeFileSync(paths.csproj, newCsproj);
 }
 
 function generateSwaggerCode() {
