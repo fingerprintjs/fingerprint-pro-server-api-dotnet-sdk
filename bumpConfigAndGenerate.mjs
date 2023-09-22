@@ -18,7 +18,7 @@ function getVersion() {
 }
 
 function bumpConfigVersion(version) {
-    const configPath = path.resolve(dirname, '../../config.json');
+    const configPath = path.resolve(dirname, 'config.json');
 
     console.info('Config path:', configPath);
 
@@ -28,7 +28,7 @@ function bumpConfigVersion(version) {
 }
 
 function bumpCsprojVersion(version) {
-    const csprojPath = path.resolve(dirname, '../../src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj');
+    const csprojPath = path.resolve(dirname, 'src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj');
 
     console.info('Csproj path:', csprojPath);
 
@@ -41,7 +41,7 @@ function bumpCsprojVersion(version) {
 }
 
 function generateSwaggerCode() {
-    cp.execSync(`sh ${path.resolve(dirname, '../../generate.sh')}`, {
+    cp.execSync(`sh ${path.resolve(dirname, 'generate.sh')}`, {
         stdio: 'inherit'
     });
 }
