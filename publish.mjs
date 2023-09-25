@@ -1,8 +1,10 @@
 import cp from 'child_process';
 import * as path from "path";
 import * as fs from "fs";
+import { fileURLToPath } from "url";
 
-const dirname = import.meta.url.replace(/^file:\/\//, '');
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 const sdkPath = path.resolve(dirname, './src/FingerprintPro.ServerSdk');
 
 const paths = {
