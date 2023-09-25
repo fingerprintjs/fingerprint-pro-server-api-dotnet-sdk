@@ -1,3 +1,11 @@
+## [2.3.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.0...v2.3.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* update OpenAPI Schema with `asn` and `dataCenter` signals ([210b79a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/210b79a86cd558c209342e10c24d17d4652a0bf9))
+* update OpenAPI Schema with `auxiliaryMobile` method for VPN signal ([fcf0cf5](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/fcf0cf58eebbf17a99f1f601d00a323a379c4ab0))
+
 ## [2.3.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.2.1...v2.3.0) (2023-07-31)
 
 
