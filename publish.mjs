@@ -47,7 +47,7 @@ cp.execSync('dotnet pack --configuration Release --no-restore', {
     cwd: paths.sdk
 })
 
-/*
+
 const fileName = `FingerprintPro.ServerSdk.${version}.nupkg`;
 
 console.info(`Publishing ${fileName}...`);
@@ -55,4 +55,4 @@ console.info(`Publishing ${fileName}...`);
 cp.execSync(`dotnet nuget push ${fileName} --api-key ${apiKey} --source https://api.nuget.org/v3/index.json`, {
     stdio: 'inherit',
     cwd: paths.release
-})*/
+})
