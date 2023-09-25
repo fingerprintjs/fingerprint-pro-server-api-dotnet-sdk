@@ -1,9 +1,11 @@
 import config from './config.json' assert {type: 'json'};
-import path from 'path';
 import fs from 'fs'
 import cp from 'child_process'
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const dirname = import.meta.url.replace(/^file:\/\//, '');
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 console.info('dirname', dirname);
 
