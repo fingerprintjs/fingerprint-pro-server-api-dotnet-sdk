@@ -1,3 +1,15 @@
+## [2.3.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.1...v2.3.2) (2023-10-20)
+
+
+### Bug Fixes
+
+* change package author to Fingerprint ([721e91c](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/721e91ccf3494aa146bfc4aeabe870a86c7df0bc))
+
+
+### Documentation
+
+* **README:** add requirements and license mention INTER-283 ([0caaccc](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0caaccc7e7d588bd11ececd52b9cf79cd85c63ce))
+
 ## [2.3.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.0...v2.3.1) (2023-09-25)
 
 
