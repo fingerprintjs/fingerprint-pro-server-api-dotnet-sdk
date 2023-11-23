@@ -23,7 +23,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IPLocation" /> class.
         /// </summary>
-        /// <param name="accuracyRadius">accuracyRadius.</param>
+        /// <param name="accuracyRadius">The IP address is likely to be within this radius (in km) of the specified location..</param>
         /// <param name="latitude">latitude.</param>
         /// <param name="longitude">longitude.</param>
         /// <param name="postalCode">postalCode.</param>
@@ -46,8 +46,9 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Gets or Sets AccuracyRadius
+        /// The IP address is likely to be within this radius (in km) of the specified location.
         /// </summary>
+        /// <value>The IP address is likely to be within this radius (in km) of the specified location.</value>
         [DataMember(Name = "accuracyRadius", EmitDefaultValue = false)]
         public int? AccuracyRadius { get; set; }
 
