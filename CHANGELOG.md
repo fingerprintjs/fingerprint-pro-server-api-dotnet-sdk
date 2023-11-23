@@ -1,3 +1,10 @@
+## [2.4.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.2...v2.4.0) (2023-11-23)
+
+
+### Features
+
+* add `highActivity` and `locationSpoofing` signals, support `originTimezone` for `vpn` signal ([8f80f28](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/8f80f2807337dc961982da5a26009bd6b772ca10))
+
 ## [2.3.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.1...v2.3.2) (2023-10-20)
 
 
