@@ -43,6 +43,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="proxy">proxy.</param>
         /// <param name="tampering">tampering.</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
+        /// <param name="highActivity">highActivity.</param>
+        /// <param name="locationSpoofing">locationSpoofing.</param>
         /// <param name="requestId">Unique identifier of the user's identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="ip">ip (required).</param>
@@ -56,7 +58,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
-        public WebhookVisit(string visitorId = default(string), string clientReferrer = default(string), string userAgent = default(string), BotdDetectionResult bot = default(BotdDetectionResult), IpInfoResult ipInfo = default(IpInfoResult), bool? incognito = default(bool?), WebhookSignalResponseRootApps rootApps = default(WebhookSignalResponseRootApps), WebhookSignalResponseEmulator emulator = default(WebhookSignalResponseEmulator), WebhookSignalResponseClonedApp clonedApp = default(WebhookSignalResponseClonedApp), WebhookSignalResponseFactoryReset factoryReset = default(WebhookSignalResponseFactoryReset), WebhookSignalResponseJailbroken jailbroken = default(WebhookSignalResponseJailbroken), WebhookSignalResponseFrida frida = default(WebhookSignalResponseFrida), IpBlockListResult ipBlocklist = default(IpBlockListResult), WebhookSignalResponseTor tor = default(WebhookSignalResponseTor), WebhookSignalResponsePrivacySettings privacySettings = default(WebhookSignalResponsePrivacySettings), WebhookSignalResponseVirtualMachine virtualMachine = default(WebhookSignalResponseVirtualMachine), VpnResult vpn = default(VpnResult), WebhookSignalResponseProxy proxy = default(WebhookSignalResponseProxy), TamperingResult tampering = default(TamperingResult), RawDeviceAttributesResult rawDeviceAttributes = default(RawDeviceAttributesResult), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
+        public WebhookVisit(string visitorId = default(string), string clientReferrer = default(string), string userAgent = default(string), BotdDetectionResult bot = default(BotdDetectionResult), IpInfoResult ipInfo = default(IpInfoResult), bool? incognito = default(bool?), WebhookSignalResponseRootApps rootApps = default(WebhookSignalResponseRootApps), WebhookSignalResponseEmulator emulator = default(WebhookSignalResponseEmulator), WebhookSignalResponseClonedApp clonedApp = default(WebhookSignalResponseClonedApp), WebhookSignalResponseFactoryReset factoryReset = default(WebhookSignalResponseFactoryReset), WebhookSignalResponseJailbroken jailbroken = default(WebhookSignalResponseJailbroken), WebhookSignalResponseFrida frida = default(WebhookSignalResponseFrida), IpBlockListResult ipBlocklist = default(IpBlockListResult), WebhookSignalResponseTor tor = default(WebhookSignalResponseTor), WebhookSignalResponsePrivacySettings privacySettings = default(WebhookSignalResponsePrivacySettings), WebhookSignalResponseVirtualMachine virtualMachine = default(WebhookSignalResponseVirtualMachine), VpnResult vpn = default(VpnResult), WebhookSignalResponseProxy proxy = default(WebhookSignalResponseProxy), TamperingResult tampering = default(TamperingResult), RawDeviceAttributesResult rawDeviceAttributes = default(RawDeviceAttributesResult), HighActivityResult highActivity = default(HighActivityResult), LocationSpoofingResult locationSpoofing = default(LocationSpoofingResult), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
         {
             // to ensure "visitorId" is required (not null)
 
@@ -196,6 +198,8 @@ namespace FingerprintPro.ServerSdk.Model
             this.Proxy = proxy;
             this.Tampering = tampering;
             this.RawDeviceAttributes = rawDeviceAttributes;
+            this.HighActivity = highActivity;
+            this.LocationSpoofing = locationSpoofing;
             this.IpLocation = ipLocation;
             this.Tag = tag;
             this.LinkedId = linkedId;
@@ -323,6 +327,18 @@ namespace FingerprintPro.ServerSdk.Model
         public RawDeviceAttributesResult RawDeviceAttributes { get; set; }
 
         /// <summary>
+        /// Gets or Sets HighActivity
+        /// </summary>
+        [DataMember(Name = "highActivity", EmitDefaultValue = false)]
+        public HighActivityResult HighActivity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets LocationSpoofing
+        /// </summary>
+        [DataMember(Name = "locationSpoofing", EmitDefaultValue = false)]
+        public LocationSpoofingResult LocationSpoofing { get; set; }
+
+        /// <summary>
         /// Unique identifier of the user's identification request.
         /// </summary>
         /// <value>Unique identifier of the user's identification request.</value>
@@ -435,6 +451,8 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Proxy: ").Append(Proxy).Append("\n");
             sb.Append("  Tampering: ").Append(Tampering).Append("\n");
             sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
+            sb.Append("  HighActivity: ").Append(HighActivity).Append("\n");
+            sb.Append("  LocationSpoofing: ").Append(LocationSpoofing).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
             sb.Append("  Ip: ").Append(Ip).Append("\n");
@@ -573,6 +591,16 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
                 ) &&
                 (
+                this.HighActivity == input.HighActivity ||
+                (this.HighActivity != null &&
+                this.HighActivity.Equals(input.HighActivity))
+                ) &&
+                (
+                this.LocationSpoofing == input.LocationSpoofing ||
+                (this.LocationSpoofing != null &&
+                this.LocationSpoofing.Equals(input.LocationSpoofing))
+                ) &&
+                (
                 this.RequestId == input.RequestId ||
                 (this.RequestId != null &&
                 this.RequestId.Equals(input.RequestId))
@@ -689,6 +717,10 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Tampering.GetHashCode();
                 if (this.RawDeviceAttributes != null)
                     hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
+                if (this.HighActivity != null)
+                    hashCode = hashCode * 59 + this.HighActivity.GetHashCode();
+                if (this.LocationSpoofing != null)
+                    hashCode = hashCode * 59 + this.LocationSpoofing.GetHashCode();
                 if (this.RequestId != null)
                     hashCode = hashCode * 59 + this.RequestId.GetHashCode();
                 if (this.BrowserDetails != null)

@@ -15,43 +15,35 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// VpnResult
+    /// HighActivityResult
     /// </summary>
     [DataContract]
-    public partial class VpnResult : IEquatable<VpnResult>
+    public partial class HighActivityResult : IEquatable<HighActivityResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VpnResult" /> class.
+        /// Initializes a new instance of the <see cref="HighActivityResult" /> class.
         /// </summary>
-        /// <param name="result">VPN or other anonymizing service has been used when sending the request..</param>
-        /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method..</param>
-        /// <param name="methods">methods.</param>
-        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), VpnResultMethods methods = default(VpnResultMethods))
+        /// <param name="result">Flag indicating whether the request came from a high activity visitor..</param>
+        /// <param name="dailyRequests">Number of requests from the same visitor in the previous day..</param>
+        public HighActivityResult(bool? result = default(bool?), decimal? dailyRequests = default(decimal?))
         {
             this.Result = result;
-            this.OriginTimezone = originTimezone;
-            this.Methods = methods;
+            this.DailyRequests = dailyRequests;
         }
 
         /// <summary>
-        /// VPN or other anonymizing service has been used when sending the request.
+        /// Flag indicating whether the request came from a high activity visitor.
         /// </summary>
-        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
+        /// <value>Flag indicating whether the request came from a high activity visitor.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
         /// <summary>
-        /// Local timezone which is used in timezoneMismatch method.
+        /// Number of requests from the same visitor in the previous day.
         /// </summary>
-        /// <value>Local timezone which is used in timezoneMismatch method.</value>
-        [DataMember(Name = "originTimezone", EmitDefaultValue = false)]
-        public string OriginTimezone { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Methods
-        /// </summary>
-        [DataMember(Name = "methods", EmitDefaultValue = false)]
-        public VpnResultMethods Methods { get; set; }
+        /// <value>Number of requests from the same visitor in the previous day.</value>
+        [DataMember(Name = "dailyRequests", EmitDefaultValue = false)]
+        public decimal? DailyRequests { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,10 +52,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VpnResult {\n");
+            sb.Append("class HighActivityResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-            sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
-            sb.Append("  Methods: ").Append(Methods).Append("\n");
+            sb.Append("  DailyRequests: ").Append(DailyRequests).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -78,11 +69,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if VpnResult instances are equal
+        /// Returns true if HighActivityResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of VpnResult to be compared</param>
+        /// <param name="input">Instance of HighActivityResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VpnResult input)
+        public bool Equals(HighActivityResult input)
         {
             if (input == null)
                 return false;
@@ -94,14 +85,9 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result.Equals(input.Result))
                 ) &&
                 (
-                this.OriginTimezone == input.OriginTimezone ||
-                (this.OriginTimezone != null &&
-                this.OriginTimezone.Equals(input.OriginTimezone))
-                ) &&
-                (
-                this.Methods == input.Methods ||
-                (this.Methods != null &&
-                this.Methods.Equals(input.Methods))
+                this.DailyRequests == input.DailyRequests ||
+                (this.DailyRequests != null &&
+                this.DailyRequests.Equals(input.DailyRequests))
                 );
         }
 
@@ -116,10 +102,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.OriginTimezone != null)
-                    hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
-                if (this.Methods != null)
-                    hashCode = hashCode * 59 + this.Methods.GetHashCode();
+                if (this.DailyRequests != null)
+                    hashCode = hashCode * 59 + this.DailyRequests.GetHashCode();
                 return hashCode;
             }
         }

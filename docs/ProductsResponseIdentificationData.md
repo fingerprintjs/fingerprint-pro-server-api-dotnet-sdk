@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **VisitorFound** | **bool?** | Attribute represents if a visitor had been identified before. | 
 **FirstSeenAt** | [**SeenAt**](SeenAt.md) |  | 
 **LastSeenAt** | [**SeenAt**](SeenAt.md) |  | 
-**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser.  **Pro Plus:** If a bot is detected (`products.botd.bot.result != \"notDetected\"`), the `visitorId` value contains a placeholder string `BotDetected000000000`.  | 
+**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser.  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

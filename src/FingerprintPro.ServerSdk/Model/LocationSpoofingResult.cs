@@ -15,43 +15,26 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// VpnResult
+    /// LocationSpoofingResult
     /// </summary>
     [DataContract]
-    public partial class VpnResult : IEquatable<VpnResult>
+    public partial class LocationSpoofingResult : IEquatable<LocationSpoofingResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VpnResult" /> class.
+        /// Initializes a new instance of the <see cref="LocationSpoofingResult" /> class.
         /// </summary>
-        /// <param name="result">VPN or other anonymizing service has been used when sending the request..</param>
-        /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method..</param>
-        /// <param name="methods">methods.</param>
-        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), VpnResultMethods methods = default(VpnResultMethods))
+        /// <param name="result">Flag indicating whether the request came from a device with location spoofing enabled..</param>
+        public LocationSpoofingResult(bool? result = default(bool?))
         {
             this.Result = result;
-            this.OriginTimezone = originTimezone;
-            this.Methods = methods;
         }
 
         /// <summary>
-        /// VPN or other anonymizing service has been used when sending the request.
+        /// Flag indicating whether the request came from a device with location spoofing enabled.
         /// </summary>
-        /// <value>VPN or other anonymizing service has been used when sending the request.</value>
+        /// <value>Flag indicating whether the request came from a device with location spoofing enabled.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
-
-        /// <summary>
-        /// Local timezone which is used in timezoneMismatch method.
-        /// </summary>
-        /// <value>Local timezone which is used in timezoneMismatch method.</value>
-        [DataMember(Name = "originTimezone", EmitDefaultValue = false)]
-        public string OriginTimezone { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Methods
-        /// </summary>
-        [DataMember(Name = "methods", EmitDefaultValue = false)]
-        public VpnResultMethods Methods { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,10 +43,8 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VpnResult {\n");
+            sb.Append("class LocationSpoofingResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
-            sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
-            sb.Append("  Methods: ").Append(Methods).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -78,11 +59,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if VpnResult instances are equal
+        /// Returns true if LocationSpoofingResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of VpnResult to be compared</param>
+        /// <param name="input">Instance of LocationSpoofingResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VpnResult input)
+        public bool Equals(LocationSpoofingResult input)
         {
             if (input == null)
                 return false;
@@ -92,16 +73,6 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result == input.Result ||
                 (this.Result != null &&
                 this.Result.Equals(input.Result))
-                ) &&
-                (
-                this.OriginTimezone == input.OriginTimezone ||
-                (this.OriginTimezone != null &&
-                this.OriginTimezone.Equals(input.OriginTimezone))
-                ) &&
-                (
-                this.Methods == input.Methods ||
-                (this.Methods != null &&
-                this.Methods.Equals(input.Methods))
                 );
         }
 
@@ -116,10 +87,6 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
-                if (this.OriginTimezone != null)
-                    hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
-                if (this.Methods != null)
-                    hashCode = hashCode * 59 + this.Methods.GetHashCode();
                 return hashCode;
             }
         }
