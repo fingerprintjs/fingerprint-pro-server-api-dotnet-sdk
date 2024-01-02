@@ -15,23 +15,23 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// `dataCenter` is deprecated in favor of `datacenter`
+    /// DataCenterInfo
     /// </summary>
     [DataContract]
-    public partial class DataCenter : IEquatable<DataCenter>
+    public partial class DataCenterInfo : IEquatable<DataCenterInfo>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataCenter" /> class.
+        /// Initializes a new instance of the <see cref="DataCenterInfo" /> class.
         /// </summary>
         /// <param name="result">result (required).</param>
         /// <param name="name">name.</param>
-        public DataCenter(bool? result = default(bool?), string name = default(string))
+        public DataCenterInfo(bool? result = default(bool?), string name = default(string))
         {
             // to ensure "result" is required (not null)
 
             if (result == null)
             {
-                throw new InvalidDataException("result is a required property for DataCenter and cannot be null");
+                throw new InvalidDataException("result is a required property for DataCenterInfo and cannot be null");
             }
             else
             {
@@ -59,7 +59,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DataCenter {\n");
+            sb.Append("class DataCenterInfo {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -76,11 +76,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if DataCenter instances are equal
+        /// Returns true if DataCenterInfo instances are equal
         /// </summary>
-        /// <param name="input">Instance of DataCenter to be compared</param>
+        /// <param name="input">Instance of DataCenterInfo to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DataCenter input)
+        public bool Equals(DataCenterInfo input)
         {
             if (input == null)
                 return false;
