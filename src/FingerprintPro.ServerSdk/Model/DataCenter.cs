@@ -15,7 +15,7 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// `dataCenter` is deprecated in favor of `datacenter`
+    /// DataCenter
     /// </summary>
     [DataContract]
     public partial class DataCenter : IEquatable<DataCenter>

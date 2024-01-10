@@ -1,6 +1,4 @@
 # FingerprintPro.ServerSdk.Model.DataCenter
-`dataCenter` is deprecated in favor of `datacenter`
-
 ## Properties
 
 Name | Type | Description | Notes

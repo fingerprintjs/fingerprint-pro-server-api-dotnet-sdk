@@ -27,14 +27,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="geolocation">geolocation.</param>
         /// <param name="asn">asn.</param>
         /// <param name="datacenter">datacenter.</param>
-        /// <param name="dataCenter">dataCenter.</param>
-        public IpInfoResultV6(string address = default(string), IPLocation geolocation = default(IPLocation), ASN asn = default(ASN), DataCenterInfo datacenter = default(DataCenterInfo), DataCenter dataCenter = default(DataCenter))
+        public IpInfoResultV6(string address = default(string), IPLocation geolocation = default(IPLocation), ASN asn = default(ASN), DataCenter datacenter = default(DataCenter))
         {
             this.Address = address;
             this.Geolocation = geolocation;
             this.Asn = asn;
             this.Datacenter = datacenter;
-            this.DataCenter = dataCenter;
         }
 
         /// <summary>
@@ -59,13 +57,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Datacenter
         /// </summary>
         [DataMember(Name = "datacenter", EmitDefaultValue = false)]
-        public DataCenterInfo Datacenter { get; set; }
-
-        /// <summary>
-        /// Gets or Sets DataCenter
-        /// </summary>
-        [DataMember(Name = "dataCenter", EmitDefaultValue = false)]
-        public DataCenter DataCenter { get; set; }
+        public DataCenter Datacenter { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,7 +71,6 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Geolocation: ").Append(Geolocation).Append("\n");
             sb.Append("  Asn: ").Append(Asn).Append("\n");
             sb.Append("  Datacenter: ").Append(Datacenter).Append("\n");
-            sb.Append("  DataCenter: ").Append(DataCenter).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,11 +114,6 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Datacenter == input.Datacenter ||
                 (this.Datacenter != null &&
                 this.Datacenter.Equals(input.Datacenter))
-                ) &&
-                (
-                this.DataCenter == input.DataCenter ||
-                (this.DataCenter != null &&
-                this.DataCenter.Equals(input.DataCenter))
                 );
         }
 
@@ -148,8 +134,6 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Asn.GetHashCode();
                 if (this.Datacenter != null)
                     hashCode = hashCode * 59 + this.Datacenter.GetHashCode();
-                if (this.DataCenter != null)
-                    hashCode = hashCode * 59 + this.DataCenter.GetHashCode();
                 return hashCode;
             }
         }
