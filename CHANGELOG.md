@@ -1,3 +1,15 @@
+## [3.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.4.0...v3.0.0) (2024-01-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* `IpInfo` field `DataCenter` renamed to `Datacenter`
+
+### Features
+
+* deprecate `IPLocation` ([0ffeeb9](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0ffeeb9b6f35dd43ca88e8580b40cc6e795a06f9))
+* use datacenter instead of the wrong dataCenter ([308b5e2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/308b5e263028c0e366e0f616d83a2e9e0e1f953a))
+
 ## [2.4.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.3.2...v2.4.0) (2023-11-23)
 
 
