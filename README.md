@@ -91,6 +91,24 @@ var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KE
 };
 ```
 
+## Sealed results
+
+This SDK provides utility methods for decoding [sealed results](https://dev.fingerprint.com/docs/sealed-client-results).
+```csharp
+using FingerprintPro.ServerSdk;
+
+var sealedResult = Environment.GetEnvironmentVariable("BASE64_SEALED_RESULT")!;
+var sealedKey = Environment.GetEnvironmentVariable("BASE64_KEY")!;
+
+var events = Sealed.UnsealEventResponse(Convert.FromBase64String(sealedResult), new[]
+{
+new Sealed.DecryptionKey(Convert.FromBase64String(sealedKey), Sealed.DecryptionAlgorithm.Aes256Gcm)
+});
+
+Console.WriteLine(events.ToJson());
+```
+To learn more, refer to example located in [src/FingerprintPro.ServerSdk.SealedResultExampleNet7/Program.cs](src/FingerprintPro.ServerSdk.SealedResultExampleNet7/Program.cs).
+
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
@@ -200,6 +218,11 @@ Class | Method | HTTP request | Description
 - **API key parameter name**: api_key
 - **Location**: URL query string
         
+
+## Documentation for sealed results
+
+- [Sealed](docs/Sealed.md)
+- [DecryptionKey](docs/DecryptionKey.md)
 
 ## Support and feedback
 
