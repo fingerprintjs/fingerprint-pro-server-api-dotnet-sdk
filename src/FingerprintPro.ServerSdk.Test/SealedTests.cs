@@ -102,6 +102,22 @@ public class SealedTest
                     new(key, Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
     }
+    
+    [Test]
+    public void UnsealEventResponseWithEmptyData()
+    {
+        var sealedResult = Array.Empty<byte>();
+        var key = Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq53=");
+
+        Assert.Throws<Sealed.InvalidSealedDataHeaderException>(() =>
+            Sealed.UnsealEventResponse(
+                sealedResult,
+                new Sealed.DecryptionKey[]
+                {
+                    new(Convert.FromBase64String("aW52YWxpZA=="), Sealed.DecryptionAlgorithm.Aes256Gcm),
+                    new(key, Sealed.DecryptionAlgorithm.Aes256Gcm)
+                }));
+    }
 
     [Test]
     public void UnsealEventResponseWithInvalidKeys()
