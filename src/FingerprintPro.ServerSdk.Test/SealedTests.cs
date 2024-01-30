@@ -1,5 +1,6 @@
 using FingerprintPro.ServerSdk.Model;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto;
 
 namespace FingerprintPro.ServerSdk.Test;
 
@@ -102,7 +103,7 @@ public class SealedTest
                     new(key, Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
     }
-    
+
     [Test]
     public void UnsealEventResponseWithEmptyData()
     {
@@ -134,5 +135,24 @@ public class SealedTest
                     new(Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq54="),
                         Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
+    }
+
+    [Test]
+    public void UnsealEventResponseWithInvalidNonce()
+    {
+        byte[] sealedResult = { 0x9E, 0x85, 0xDC, 0xED, 0xAA, 0xBB, 0xCC };
+
+        var ex = Assert.Throws<Sealed.UnsealAggregateException>(() =>
+            Sealed.UnsealEventResponse(
+                sealedResult,
+                new Sealed.DecryptionKey[]
+                {
+                    new(Convert.FromBase64String("aW52YWxpZA=="), Sealed.DecryptionAlgorithm.Aes256Gcm),
+                    new(Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq54="),
+                        Sealed.DecryptionAlgorithm.Aes256Gcm)
+                }));
+        
+        var lastError = ex!.UnsealExceptions.Last();
+        Assert.That(lastError.InnerException, Is.InstanceOf(typeof(InvalidCipherTextException)));
     }
 }
