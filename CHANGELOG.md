@@ -1,3 +1,10 @@
+## [3.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v3.0.0...v3.1.0) (2024-02-13)
+
+
+### Features
+
+* add method for decoding sealed results ([763b940](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/763b940c1ee6bc35ac45b1a9384736d8d6312431))
+
 ## [3.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v2.4.0...v3.0.0) (2024-01-12)
 
 
