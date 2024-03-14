@@ -23,16 +23,25 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationSpoofingResult" /> class.
         /// </summary>
-        /// <param name="result">Flag indicating whether the request came from a device with location spoofing enabled..</param>
+        /// <param name="result">Flag indicating whether the request came from a mobile device with location spoofing enabled. (required).</param>
         public LocationSpoofingResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for LocationSpoofingResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// Flag indicating whether the request came from a device with location spoofing enabled.
+        /// Flag indicating whether the request came from a mobile device with location spoofing enabled.
         /// </summary>
-        /// <value>Flag indicating whether the request came from a device with location spoofing enabled.</value>
+        /// <value>Flag indicating whether the request came from a mobile device with location spoofing enabled.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 

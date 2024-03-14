@@ -23,12 +23,30 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TamperingResult" /> class.
         /// </summary>
-        /// <param name="result">Flag indicating whether browser tampering was detected according to our internal thresholds..</param>
-        /// <param name="anomalyScore">Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers..</param>
+        /// <param name="result">Flag indicating whether browser tampering was detected according to our internal thresholds. (required).</param>
+        /// <param name="anomalyScore">Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers. (required).</param>
         public TamperingResult(bool? result = default(bool?), decimal? anomalyScore = default(decimal?))
         {
-            this.Result = result;
-            this.AnomalyScore = anomalyScore;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for TamperingResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
+            // to ensure "anomalyScore" is required (not null)
+
+            if (anomalyScore == null)
+            {
+                throw new InvalidDataException("anomalyScore is a required property for TamperingResult and cannot be null");
+            }
+            else
+            {
+                this.AnomalyScore = anomalyScore;
+            }
         }
 
         /// <summary>

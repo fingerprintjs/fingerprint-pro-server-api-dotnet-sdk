@@ -23,14 +23,32 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResultV4" /> class.
         /// </summary>
-        /// <param name="address">address.</param>
-        /// <param name="geolocation">geolocation.</param>
+        /// <param name="address">address (required).</param>
+        /// <param name="geolocation">geolocation (required).</param>
         /// <param name="asn">asn.</param>
         /// <param name="datacenter">datacenter.</param>
         public IpInfoResultV4(string address = default(string), IPLocation geolocation = default(IPLocation), ASN asn = default(ASN), DataCenter datacenter = default(DataCenter))
         {
-            this.Address = address;
-            this.Geolocation = geolocation;
+            // to ensure "address" is required (not null)
+
+            if (address == null)
+            {
+                throw new InvalidDataException("address is a required property for IpInfoResultV4 and cannot be null");
+            }
+            else
+            {
+                this.Address = address;
+            }
+            // to ensure "geolocation" is required (not null)
+
+            if (geolocation == null)
+            {
+                throw new InvalidDataException("geolocation is a required property for IpInfoResultV4 and cannot be null");
+            }
+            else
+            {
+                this.Geolocation = geolocation;
+            }
             this.Asn = asn;
             this.Datacenter = datacenter;
         }

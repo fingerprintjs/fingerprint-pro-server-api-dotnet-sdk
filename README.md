@@ -186,6 +186,7 @@ Class | Method | HTTP request | Description
  - [Model.SignalResponseVirtualMachine](docs/SignalResponseVirtualMachine.md)
  - [Model.SignalResponseVpn](docs/SignalResponseVpn.md)
  - [Model.Subdivision](docs/Subdivision.md)
+ - [Model.SuspectScoreResult](docs/SuspectScoreResult.md)
  - [Model.TamperingResult](docs/TamperingResult.md)
  - [Model.TorResult](docs/TorResult.md)
  - [Model.VirtualMachineResult](docs/VirtualMachineResult.md)

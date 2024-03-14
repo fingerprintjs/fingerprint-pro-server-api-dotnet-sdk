@@ -151,7 +151,7 @@ public class SealedTest
                     new(Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq54="),
                         Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
-        
+
         var lastError = ex!.UnsealExceptions.Last();
         Assert.That(lastError.InnerException, Is.InstanceOf(typeof(InvalidCipherTextException)));
     }

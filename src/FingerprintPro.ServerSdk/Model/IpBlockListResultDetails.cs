@@ -23,12 +23,30 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResultDetails" /> class.
         /// </summary>
-        /// <param name="emailSpam">IP address was part of a known email spam attack (SMTP)..</param>
-        /// <param name="attackSource">IP address was part of a known network attack (SSH/HTTPS)..</param>
+        /// <param name="emailSpam">IP address was part of a known email spam attack (SMTP). (required).</param>
+        /// <param name="attackSource">IP address was part of a known network attack (SSH/HTTPS). (required).</param>
         public IpBlockListResultDetails(bool? emailSpam = default(bool?), bool? attackSource = default(bool?))
         {
-            this.EmailSpam = emailSpam;
-            this.AttackSource = attackSource;
+            // to ensure "emailSpam" is required (not null)
+
+            if (emailSpam == null)
+            {
+                throw new InvalidDataException("emailSpam is a required property for IpBlockListResultDetails and cannot be null");
+            }
+            else
+            {
+                this.EmailSpam = emailSpam;
+            }
+            // to ensure "attackSource" is required (not null)
+
+            if (attackSource == null)
+            {
+                throw new InvalidDataException("attackSource is a required property for IpBlockListResultDetails and cannot be null");
+            }
+            else
+            {
+                this.AttackSource = attackSource;
+            }
         }
 
         /// <summary>

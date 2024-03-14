@@ -62,6 +62,26 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Url = url;
             }
+            // to ensure "userAgent" is required (not null)
+
+            if (userAgent == null)
+            {
+                throw new InvalidDataException("userAgent is a required property for BotdResult and cannot be null");
+            }
+            else
+            {
+                this.UserAgent = userAgent;
+            }
+            // to ensure "requestId" is required (not null)
+
+            if (requestId == null)
+            {
+                throw new InvalidDataException("requestId is a required property for BotdResult and cannot be null");
+            }
+            else
+            {
+                this.RequestId = requestId;
+            }
             // to ensure "bot" is required (not null)
 
             if (bot == null)

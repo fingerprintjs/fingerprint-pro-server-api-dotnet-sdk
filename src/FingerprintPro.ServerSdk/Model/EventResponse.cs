@@ -23,10 +23,21 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EventResponse" /> class.
         /// </summary>
-        /// <param name="products">products.</param>
-        public EventResponse(ProductsResponse products = default(ProductsResponse))
+        /// <param name="products">products (required).</param>
+        /// <param name="error">error.</param>
+        public EventResponse(ProductsResponse products = default(ProductsResponse), ProductError error = default(ProductError))
         {
-            this.Products = products;
+            // to ensure "products" is required (not null)
+
+            if (products == null)
+            {
+                throw new InvalidDataException("products is a required property for EventResponse and cannot be null");
+            }
+            else
+            {
+                this.Products = products;
+            }
+            this.Error = error;
         }
 
         /// <summary>
@@ -34,6 +45,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "products", EmitDefaultValue = false)]
         public ProductsResponse Products { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        public ProductError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -44,6 +61,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class EventResponse {\n");
             sb.Append("  Products: ").Append(Products).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,6 +90,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Products == input.Products ||
                 (this.Products != null &&
                 this.Products.Equals(input.Products))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
                 );
         }
 
@@ -86,6 +109,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Products != null)
                     hashCode = hashCode * 59 + this.Products.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
             }
         }
