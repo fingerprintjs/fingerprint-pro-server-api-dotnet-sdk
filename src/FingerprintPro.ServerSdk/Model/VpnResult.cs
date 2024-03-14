@@ -23,14 +23,43 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResult" /> class.
         /// </summary>
-        /// <param name="result">VPN or other anonymizing service has been used when sending the request..</param>
-        /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method..</param>
-        /// <param name="methods">methods.</param>
-        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), VpnResultMethods methods = default(VpnResultMethods))
+        /// <param name="result">VPN or other anonymizing service has been used when sending the request. (required).</param>
+        /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method. (required).</param>
+        /// <param name="originCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown)..</param>
+        /// <param name="methods">methods (required).</param>
+        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), string originCountry = default(string), VpnResultMethods methods = default(VpnResultMethods))
         {
-            this.Result = result;
-            this.OriginTimezone = originTimezone;
-            this.Methods = methods;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for VpnResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
+            // to ensure "originTimezone" is required (not null)
+
+            if (originTimezone == null)
+            {
+                throw new InvalidDataException("originTimezone is a required property for VpnResult and cannot be null");
+            }
+            else
+            {
+                this.OriginTimezone = originTimezone;
+            }
+            // to ensure "methods" is required (not null)
+
+            if (methods == null)
+            {
+                throw new InvalidDataException("methods is a required property for VpnResult and cannot be null");
+            }
+            else
+            {
+                this.Methods = methods;
+            }
+            this.OriginCountry = originCountry;
         }
 
         /// <summary>
@@ -48,6 +77,13 @@ namespace FingerprintPro.ServerSdk.Model
         public string OriginTimezone { get; set; }
 
         /// <summary>
+        /// Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).
+        /// </summary>
+        /// <value>Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).</value>
+        [DataMember(Name = "originCountry", EmitDefaultValue = false)]
+        public string OriginCountry { get; set; }
+
+        /// <summary>
         /// Gets or Sets Methods
         /// </summary>
         [DataMember(Name = "methods", EmitDefaultValue = false)]
@@ -63,6 +99,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class VpnResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
+            sb.Append("  OriginCountry: ").Append(OriginCountry).Append("\n");
             sb.Append("  Methods: ").Append(Methods).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -99,6 +136,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.OriginTimezone.Equals(input.OriginTimezone))
                 ) &&
                 (
+                this.OriginCountry == input.OriginCountry ||
+                (this.OriginCountry != null &&
+                this.OriginCountry.Equals(input.OriginCountry))
+                ) &&
+                (
                 this.Methods == input.Methods ||
                 (this.Methods != null &&
                 this.Methods.Equals(input.Methods))
@@ -118,6 +160,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
                 if (this.OriginTimezone != null)
                     hashCode = hashCode * 59 + this.OriginTimezone.GetHashCode();
+                if (this.OriginCountry != null)
+                    hashCode = hashCode * 59 + this.OriginCountry.GetHashCode();
                 if (this.Methods != null)
                     hashCode = hashCode * 59 + this.Methods.GetHashCode();
                 return hashCode;
