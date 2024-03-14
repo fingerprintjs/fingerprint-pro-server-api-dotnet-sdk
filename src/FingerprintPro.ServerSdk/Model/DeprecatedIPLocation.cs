@@ -15,13 +15,13 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// IPLocation
+    /// This field is **deprecated** and will not return a result for **applications created after January 23rd, 2024**. Please use the [IP Geolocation Smart signal](https://dev.fingerprint.com/docs/smart-signals-overview#ip-geolocation) for geolocation information.
     /// </summary>
     [DataContract]
-    public partial class IPLocation : IEquatable<IPLocation>
+    public partial class DeprecatedIPLocation : IEquatable<DeprecatedIPLocation>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IPLocation" /> class.
+        /// Initializes a new instance of the <see cref="DeprecatedIPLocation" /> class.
         /// </summary>
         /// <param name="accuracyRadius">The IP address is likely to be within this radius (in km) of the specified location..</param>
         /// <param name="latitude">latitude.</param>
@@ -32,7 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="country">country.</param>
         /// <param name="continent">continent.</param>
         /// <param name="subdivisions">subdivisions.</param>
-        public IPLocation(int? accuracyRadius = default(int?), double? latitude = default(double?), double? longitude = default(double?), string postalCode = default(string), string timezone = default(string), IPLocationCity city = default(IPLocationCity), Location country = default(Location), Location continent = default(Location), List<Subdivision> subdivisions = default(List<Subdivision>))
+        public DeprecatedIPLocation(int? accuracyRadius = default(int?), double? latitude = default(double?), double? longitude = default(double?), string postalCode = default(string), string timezone = default(string), DeprecatedIPLocationCity city = default(DeprecatedIPLocationCity), Location country = default(Location), Location continent = default(Location), List<Subdivision> subdivisions = default(List<Subdivision>))
         {
             this.AccuracyRadius = accuracyRadius;
             this.Latitude = latitude;
@@ -80,7 +80,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets City
         /// </summary>
         [DataMember(Name = "city", EmitDefaultValue = false)]
-        public IPLocationCity City { get; set; }
+        public DeprecatedIPLocationCity City { get; set; }
 
         /// <summary>
         /// Gets or Sets Country
@@ -107,7 +107,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class IPLocation {\n");
+            sb.Append("class DeprecatedIPLocation {\n");
             sb.Append("  AccuracyRadius: ").Append(AccuracyRadius).Append("\n");
             sb.Append("  Latitude: ").Append(Latitude).Append("\n");
             sb.Append("  Longitude: ").Append(Longitude).Append("\n");
@@ -131,11 +131,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if IPLocation instances are equal
+        /// Returns true if DeprecatedIPLocation instances are equal
         /// </summary>
-        /// <param name="input">Instance of IPLocation to be compared</param>
+        /// <param name="input">Instance of DeprecatedIPLocation to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IPLocation input)
+        public bool Equals(DeprecatedIPLocation input)
         {
             if (input == null)
                 return false;

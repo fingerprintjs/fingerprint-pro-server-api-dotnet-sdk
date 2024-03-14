@@ -369,7 +369,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets IpLocation
         /// </summary>
         [DataMember(Name = "ipLocation", EmitDefaultValue = false)]
-        public IPLocation IpLocation { get; set; }
+        public DeprecatedIPLocation IpLocation { get; set; }
 
         /// <summary>
         /// Timestamp of the event with millisecond precision in Unix time.
