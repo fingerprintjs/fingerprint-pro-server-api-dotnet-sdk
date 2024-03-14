@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **RawDeviceAttributes** | [**RawDeviceAttributesResult**](RawDeviceAttributesResult.md) |  | [optional] 
 **HighActivity** | [**HighActivityResult**](HighActivityResult.md) |  | [optional] 
 **LocationSpoofing** | [**LocationSpoofingResult**](LocationSpoofingResult.md) |  | [optional] 
+**SuspectScore** | [**SuspectScoreResult**](SuspectScoreResult.md) |  | [optional] 
 **RequestId** | **string** | Unique identifier of the user's identification request. | 
 **BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | 
 **Ip** | **string** |  | 

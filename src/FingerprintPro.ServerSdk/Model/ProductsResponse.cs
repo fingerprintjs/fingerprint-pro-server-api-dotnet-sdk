@@ -42,8 +42,9 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="tampering">tampering.</param>
         /// <param name="highActivity">highActivity.</param>
         /// <param name="locationSpoofing">locationSpoofing.</param>
+        /// <param name="suspectScore">suspectScore.</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
-        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseClonedApp clonedApp = default(SignalResponseClonedApp), SignalResponseFactoryReset factoryReset = default(SignalResponseFactoryReset), SignalResponseJailbroken jailbroken = default(SignalResponseJailbroken), SignalResponseFrida frida = default(SignalResponseFrida), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponsePrivacySettings privacySettings = default(SignalResponsePrivacySettings), SignalResponseVirtualMachine virtualMachine = default(SignalResponseVirtualMachine), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering), SignalResponseHighActivity highActivity = default(SignalResponseHighActivity), SignalResponseLocationSpoofing locationSpoofing = default(SignalResponseLocationSpoofing), SignalResponseRawDeviceAttributes rawDeviceAttributes = default(SignalResponseRawDeviceAttributes))
+        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseClonedApp clonedApp = default(SignalResponseClonedApp), SignalResponseFactoryReset factoryReset = default(SignalResponseFactoryReset), SignalResponseJailbroken jailbroken = default(SignalResponseJailbroken), SignalResponseFrida frida = default(SignalResponseFrida), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponsePrivacySettings privacySettings = default(SignalResponsePrivacySettings), SignalResponseVirtualMachine virtualMachine = default(SignalResponseVirtualMachine), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering), SignalResponseHighActivity highActivity = default(SignalResponseHighActivity), SignalResponseLocationSpoofing locationSpoofing = default(SignalResponseLocationSpoofing), SignalResponseSuspectScore suspectScore = default(SignalResponseSuspectScore), SignalResponseRawDeviceAttributes rawDeviceAttributes = default(SignalResponseRawDeviceAttributes))
         {
             this.Identification = identification;
             this.Botd = botd;
@@ -64,6 +65,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.Tampering = tampering;
             this.HighActivity = highActivity;
             this.LocationSpoofing = locationSpoofing;
+            this.SuspectScore = suspectScore;
             this.RawDeviceAttributes = rawDeviceAttributes;
         }
 
@@ -182,6 +184,12 @@ namespace FingerprintPro.ServerSdk.Model
         public SignalResponseLocationSpoofing LocationSpoofing { get; set; }
 
         /// <summary>
+        /// Gets or Sets SuspectScore
+        /// </summary>
+        [DataMember(Name = "suspectScore", EmitDefaultValue = false)]
+        public SignalResponseSuspectScore SuspectScore { get; set; }
+
+        /// <summary>
         /// Gets or Sets RawDeviceAttributes
         /// </summary>
         [DataMember(Name = "rawDeviceAttributes", EmitDefaultValue = false)]
@@ -214,6 +222,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Tampering: ").Append(Tampering).Append("\n");
             sb.Append("  HighActivity: ").Append(HighActivity).Append("\n");
             sb.Append("  LocationSpoofing: ").Append(LocationSpoofing).Append("\n");
+            sb.Append("  SuspectScore: ").Append(SuspectScore).Append("\n");
             sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -335,6 +344,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LocationSpoofing.Equals(input.LocationSpoofing))
                 ) &&
                 (
+                this.SuspectScore == input.SuspectScore ||
+                (this.SuspectScore != null &&
+                this.SuspectScore.Equals(input.SuspectScore))
+                ) &&
+                (
                 this.RawDeviceAttributes == input.RawDeviceAttributes ||
                 (this.RawDeviceAttributes != null &&
                 this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
@@ -388,6 +402,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.HighActivity.GetHashCode();
                 if (this.LocationSpoofing != null)
                     hashCode = hashCode * 59 + this.LocationSpoofing.GetHashCode();
+                if (this.SuspectScore != null)
+                    hashCode = hashCode * 59 + this.SuspectScore.GetHashCode();
                 if (this.RawDeviceAttributes != null)
                     hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
                 return hashCode;

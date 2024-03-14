@@ -45,6 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         /// <param name="highActivity">highActivity.</param>
         /// <param name="locationSpoofing">locationSpoofing.</param>
+        /// <param name="suspectScore">suspectScore.</param>
         /// <param name="requestId">Unique identifier of the user's identification request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="ip">ip (required).</param>
@@ -200,6 +201,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.RawDeviceAttributes = rawDeviceAttributes;
             this.HighActivity = highActivity;
             this.LocationSpoofing = locationSpoofing;
+            this.SuspectScore = suspectScore;
             this.IpLocation = ipLocation;
             this.Tag = tag;
             this.LinkedId = linkedId;
@@ -339,6 +341,12 @@ namespace FingerprintPro.ServerSdk.Model
         public LocationSpoofingResult LocationSpoofing { get; set; }
 
         /// <summary>
+        /// Gets or Sets SuspectScore
+        /// </summary>
+        [DataMember(Name = "suspectScore", EmitDefaultValue = false)]
+        public SuspectScoreResult SuspectScore { get; set; }
+
+        /// <summary>
         /// Unique identifier of the user's identification request.
         /// </summary>
         /// <value>Unique identifier of the user's identification request.</value>
@@ -453,6 +461,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
             sb.Append("  HighActivity: ").Append(HighActivity).Append("\n");
             sb.Append("  LocationSpoofing: ").Append(LocationSpoofing).Append("\n");
+            sb.Append("  SuspectScore: ").Append(SuspectScore).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  BrowserDetails: ").Append(BrowserDetails).Append("\n");
             sb.Append("  Ip: ").Append(Ip).Append("\n");
@@ -601,6 +610,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LocationSpoofing.Equals(input.LocationSpoofing))
                 ) &&
                 (
+                this.SuspectScore == input.SuspectScore ||
+                (this.SuspectScore != null &&
+                this.SuspectScore.Equals(input.SuspectScore))
+                ) &&
+                (
                 this.RequestId == input.RequestId ||
                 (this.RequestId != null &&
                 this.RequestId.Equals(input.RequestId))
@@ -721,6 +735,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.HighActivity.GetHashCode();
                 if (this.LocationSpoofing != null)
                     hashCode = hashCode * 59 + this.LocationSpoofing.GetHashCode();
+                if (this.SuspectScore != null)
+                    hashCode = hashCode * 59 + this.SuspectScore.GetHashCode();
                 if (this.RequestId != null)
                     hashCode = hashCode * 59 + this.RequestId.GetHashCode();
                 if (this.BrowserDetails != null)
