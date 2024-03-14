@@ -6,6 +6,7 @@
         "requestId": "0KSh65EnVoB85JBmloQK",
         "incognito": true,
         "linkedId": "somelinkedId",
+        "tag": {},
         "time": "2019-05-21T16:40:13Z",
         "timestamp": 1582299576512,
         "url": "https://www.example.com/login",
@@ -59,8 +60,8 @@
     },
     "botd": {
       "error": {
-        "code": "Failed",
-        "message": "internal server error"
+        "code": "TooManyRequests",
+        "message": "too many requests"
       }
     }
   }
