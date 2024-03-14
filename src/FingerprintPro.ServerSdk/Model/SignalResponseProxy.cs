@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseProxy(SignalResponseProxyData data = default(SignalResponseProxyData), ProductError error = default(ProductError))
+        public SignalResponseProxy(ProxyResult data = default(ProxyResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseProxyData Data { get; set; }
+        public ProxyResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

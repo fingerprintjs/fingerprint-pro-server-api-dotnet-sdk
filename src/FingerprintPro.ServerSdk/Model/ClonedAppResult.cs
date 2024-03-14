@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseTor
+    /// ClonedAppResult
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseTor : IEquatable<WebhookSignalResponseTor>
+    public partial class ClonedAppResult : IEquatable<ClonedAppResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseTor" /> class.
+        /// Initializes a new instance of the <see cref="ClonedAppResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise. .</param>
-        public WebhookSignalResponseTor(bool? result = default(bool?))
+        /// <param name="result">Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android.  (required).</param>
+        public ClonedAppResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for ClonedAppResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
+        /// Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. 
         /// </summary>
-        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
+        /// <value>Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseTor {\n");
+            sb.Append("class ClonedAppResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseTor instances are equal
+        /// Returns true if ClonedAppResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseTor to be compared</param>
+        /// <param name="input">Instance of ClonedAppResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseTor input)
+        public bool Equals(ClonedAppResult input)
         {
             if (input == null)
                 return false;

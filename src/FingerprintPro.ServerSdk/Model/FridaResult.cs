@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponseIncognitoData
+    /// FridaResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponseIncognitoData : IEquatable<SignalResponseIncognitoData>
+    public partial class FridaResult : IEquatable<FridaResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponseIncognitoData" /> class.
+        /// Initializes a new instance of the <see cref="FridaResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if we detected incognito mode used in the browser, `false` otherwise. .</param>
-        public SignalResponseIncognitoData(bool? result = default(bool?))
+        /// <param name="result">[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: • `true` - Frida detected • `false` - No signs of Frida or the client is not a mobile device.  (required).</param>
+        public FridaResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for FridaResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if we detected incognito mode used in the browser, `false` otherwise. 
+        /// [Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: • `true` - Frida detected • `false` - No signs of Frida or the client is not a mobile device. 
         /// </summary>
-        /// <value>`true` if we detected incognito mode used in the browser, `false` otherwise. </value>
+        /// <value>[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: • `true` - Frida detected • `false` - No signs of Frida or the client is not a mobile device. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponseIncognitoData {\n");
+            sb.Append("class FridaResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponseIncognitoData instances are equal
+        /// Returns true if FridaResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponseIncognitoData to be compared</param>
+        /// <param name="input">Instance of FridaResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseIncognitoData input)
+        public bool Equals(FridaResult input)
         {
             if (input == null)
                 return false;

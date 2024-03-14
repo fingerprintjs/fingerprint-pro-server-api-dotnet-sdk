@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponseClonedAppData
+    /// JailbrokenResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponseClonedAppData : IEquatable<SignalResponseClonedAppData>
+    public partial class JailbrokenResult : IEquatable<JailbrokenResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponseClonedAppData" /> class.
+        /// Initializes a new instance of the <see cref="JailbrokenResult" /> class.
         /// </summary>
-        /// <param name="result">Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. .</param>
-        public SignalResponseClonedAppData(bool? result = default(bool?))
+        /// <param name="result">iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS.  (required).</param>
+        public JailbrokenResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for JailbrokenResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. 
+        /// iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. 
         /// </summary>
-        /// <value>Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. </value>
+        /// <value>iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponseClonedAppData {\n");
+            sb.Append("class JailbrokenResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponseClonedAppData instances are equal
+        /// Returns true if JailbrokenResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponseClonedAppData to be compared</param>
+        /// <param name="input">Instance of JailbrokenResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseClonedAppData input)
+        public bool Equals(JailbrokenResult input)
         {
             if (input == null)
                 return false;

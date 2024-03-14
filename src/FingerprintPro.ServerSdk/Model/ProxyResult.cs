@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponsePrivacySettings
+    /// ProxyResult
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponsePrivacySettings : IEquatable<WebhookSignalResponsePrivacySettings>
+    public partial class ProxyResult : IEquatable<ProxyResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponsePrivacySettings" /> class.
+        /// Initializes a new instance of the <see cref="ProxyResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
-        public WebhookSignalResponsePrivacySettings(bool? result = default(bool?))
+        /// <param name="result">`true` if the request IP address is used by a public proxy provider, `false` otherwise.  (required).</param>
+        public ProxyResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for ProxyResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
+        /// `true` if the request IP address is used by a public proxy provider, `false` otherwise. 
         /// </summary>
-        /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
+        /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponsePrivacySettings {\n");
+            sb.Append("class ProxyResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponsePrivacySettings instances are equal
+        /// Returns true if ProxyResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponsePrivacySettings to be compared</param>
+        /// <param name="input">Instance of ProxyResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponsePrivacySettings input)
+        public bool Equals(ProxyResult input)
         {
             if (input == null)
                 return false;

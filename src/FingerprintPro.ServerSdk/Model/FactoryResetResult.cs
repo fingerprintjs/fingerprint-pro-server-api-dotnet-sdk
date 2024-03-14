@@ -15,26 +15,44 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseFactoryReset
+    /// FactoryResetResult
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseFactoryReset : IEquatable<WebhookSignalResponseFactoryReset>
+    public partial class FactoryResetResult : IEquatable<FactoryResetResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseFactoryReset" /> class.
+        /// Initializes a new instance of the <see cref="FactoryResetResult" /> class.
         /// </summary>
-        /// <param name="time">Time in UTC for the Android client when recent factory reset was done.  If there is no sign of factory reset or the client isn't Android, the field will be epoch time. .</param>
-        /// <param name="timestamp">Same value as it's in the `time` field but represented in timestamp format..</param>
-        public WebhookSignalResponseFactoryReset(DateTime? time = default(DateTime?), long? timestamp = default(long?))
+        /// <param name="time">Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC.  (required).</param>
+        /// <param name="timestamp">Same value as it's in the `time` field but represented in timestamp format. (required).</param>
+        public FactoryResetResult(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
-            this.Time = time;
-            this.Timestamp = timestamp;
+            // to ensure "time" is required (not null)
+
+            if (time == null)
+            {
+                throw new InvalidDataException("time is a required property for FactoryResetResult and cannot be null");
+            }
+            else
+            {
+                this.Time = time;
+            }
+            // to ensure "timestamp" is required (not null)
+
+            if (timestamp == null)
+            {
+                throw new InvalidDataException("timestamp is a required property for FactoryResetResult and cannot be null");
+            }
+            else
+            {
+                this.Timestamp = timestamp;
+            }
         }
 
         /// <summary>
-        /// Time in UTC for the Android client when recent factory reset was done.  If there is no sign of factory reset or the client isn't Android, the field will be epoch time. 
+        /// Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC. 
         /// </summary>
-        /// <value>Time in UTC for the Android client when recent factory reset was done.  If there is no sign of factory reset or the client isn't Android, the field will be epoch time. </value>
+        /// <value>Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC. </value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
         public DateTime? Time { get; set; }
 
@@ -52,7 +70,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseFactoryReset {\n");
+            sb.Append("class FactoryResetResult {\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
             sb.Append("}\n");
@@ -69,11 +87,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseFactoryReset instances are equal
+        /// Returns true if FactoryResetResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseFactoryReset to be compared</param>
+        /// <param name="input">Instance of FactoryResetResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseFactoryReset input)
+        public bool Equals(FactoryResetResult input)
         {
             if (input == null)
                 return false;

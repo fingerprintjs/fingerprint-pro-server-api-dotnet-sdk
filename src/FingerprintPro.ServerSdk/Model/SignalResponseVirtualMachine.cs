@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseVirtualMachine(SignalResponseVirtualMachineData data = default(SignalResponseVirtualMachineData), ProductError error = default(ProductError))
+        public SignalResponseVirtualMachine(VirtualMachineResult data = default(VirtualMachineResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseVirtualMachineData Data { get; set; }
+        public VirtualMachineResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

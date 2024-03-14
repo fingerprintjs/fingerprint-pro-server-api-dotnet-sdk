@@ -1,9 +1,9 @@
-# FingerprintPro.ServerSdk.Model.SignalResponsePrivacySettingsData
+# FingerprintPro.ServerSdk.Model.VirtualMachineResult
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Result** | **bool?** | `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`.  | [optional] 
+**Result** | **bool?** | `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

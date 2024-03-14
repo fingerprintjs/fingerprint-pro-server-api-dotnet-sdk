@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponseRootAppsData
+    /// TorResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponseRootAppsData : IEquatable<SignalResponseRootAppsData>
+    public partial class TorResult : IEquatable<TorResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponseRootAppsData" /> class.
+        /// Initializes a new instance of the <see cref="TorResult" /> class.
         /// </summary>
-        /// <param name="result">Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client is not Android. .</param>
-        public SignalResponseRootAppsData(bool? result = default(bool?))
+        /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise.  (required).</param>
+        public TorResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for TorResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client is not Android. 
+        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
         /// </summary>
-        /// <value>Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client is not Android. </value>
+        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponseRootAppsData {\n");
+            sb.Append("class TorResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponseRootAppsData instances are equal
+        /// Returns true if TorResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponseRootAppsData to be compared</param>
+        /// <param name="input">Instance of TorResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseRootAppsData input)
+        public bool Equals(TorResult input)
         {
             if (input == null)
                 return false;

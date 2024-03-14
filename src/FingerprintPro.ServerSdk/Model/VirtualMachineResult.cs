@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponsePrivacySettingsData
+    /// VirtualMachineResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponsePrivacySettingsData : IEquatable<SignalResponsePrivacySettingsData>
+    public partial class VirtualMachineResult : IEquatable<VirtualMachineResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponsePrivacySettingsData" /> class.
+        /// Initializes a new instance of the <see cref="VirtualMachineResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. .</param>
-        public SignalResponsePrivacySettingsData(bool? result = default(bool?))
+        /// <param name="result">`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  (required).</param>
+        public VirtualMachineResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for VirtualMachineResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
+        /// `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
         /// </summary>
-        /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
+        /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponsePrivacySettingsData {\n");
+            sb.Append("class VirtualMachineResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponsePrivacySettingsData instances are equal
+        /// Returns true if VirtualMachineResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponsePrivacySettingsData to be compared</param>
+        /// <param name="input">Instance of VirtualMachineResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponsePrivacySettingsData input)
+        public bool Equals(VirtualMachineResult input)
         {
             if (input == null)
                 return false;

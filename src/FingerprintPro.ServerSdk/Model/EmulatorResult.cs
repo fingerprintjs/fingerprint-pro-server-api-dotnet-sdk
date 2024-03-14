@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// WebhookSignalResponseJailbroken
+    /// EmulatorResult
     /// </summary>
     [DataContract]
-    public partial class WebhookSignalResponseJailbroken : IEquatable<WebhookSignalResponseJailbroken>
+    public partial class EmulatorResult : IEquatable<EmulatorResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookSignalResponseJailbroken" /> class.
+        /// Initializes a new instance of the <see cref="EmulatorResult" /> class.
         /// </summary>
-        /// <param name="result">iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. .</param>
-        public WebhookSignalResponseJailbroken(bool? result = default(bool?))
+        /// <param name="result">Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client is not Android.  (required).</param>
+        public EmulatorResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for EmulatorResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. 
+        /// Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client is not Android. 
         /// </summary>
-        /// <value>iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. </value>
+        /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookSignalResponseJailbroken {\n");
+            sb.Append("class EmulatorResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if WebhookSignalResponseJailbroken instances are equal
+        /// Returns true if EmulatorResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookSignalResponseJailbroken to be compared</param>
+        /// <param name="input">Instance of EmulatorResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookSignalResponseJailbroken input)
+        public bool Equals(EmulatorResult input)
         {
             if (input == null)
                 return false;

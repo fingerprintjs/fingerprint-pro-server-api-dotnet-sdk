@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponseProxyData
+    /// IncognitoResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponseProxyData : IEquatable<SignalResponseProxyData>
+    public partial class IncognitoResult : IEquatable<IncognitoResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponseProxyData" /> class.
+        /// Initializes a new instance of the <see cref="IncognitoResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request IP address is used by a public proxy provider, `false` otherwise. .</param>
-        public SignalResponseProxyData(bool? result = default(bool?))
+        /// <param name="result">`true` if we detected incognito mode used in the browser, `false` otherwise.  (required).</param>
+        public IncognitoResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for IncognitoResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if the request IP address is used by a public proxy provider, `false` otherwise. 
+        /// `true` if we detected incognito mode used in the browser, `false` otherwise. 
         /// </summary>
-        /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
+        /// <value>`true` if we detected incognito mode used in the browser, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponseProxyData {\n");
+            sb.Append("class IncognitoResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponseProxyData instances are equal
+        /// Returns true if IncognitoResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponseProxyData to be compared</param>
+        /// <param name="input">Instance of IncognitoResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseProxyData input)
+        public bool Equals(IncognitoResult input)
         {
             if (input == null)
                 return false;

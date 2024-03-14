@@ -15,24 +15,33 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// SignalResponseTorData
+    /// RootAppsResult
     /// </summary>
     [DataContract]
-    public partial class SignalResponseTorData : IEquatable<SignalResponseTorData>
+    public partial class RootAppsResult : IEquatable<RootAppsResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalResponseTorData" /> class.
+        /// Initializes a new instance of the <see cref="RootAppsResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request IP address is a known tor exit node, `false` otherwise. .</param>
-        public SignalResponseTorData(bool? result = default(bool?))
+        /// <param name="result">Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client isn't Android.  (required).</param>
+        public RootAppsResult(bool? result = default(bool?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for RootAppsResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>
-        /// `true` if the request IP address is a known tor exit node, `false` otherwise. 
+        /// Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client isn't Android. 
         /// </summary>
-        /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
+        /// <value>Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client isn't Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         public bool? Result { get; set; }
 
@@ -43,7 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SignalResponseTorData {\n");
+            sb.Append("class RootAppsResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -59,11 +68,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SignalResponseTorData instances are equal
+        /// Returns true if RootAppsResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of SignalResponseTorData to be compared</param>
+        /// <param name="input">Instance of RootAppsResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseTorData input)
+        public bool Equals(RootAppsResult input)
         {
             if (input == null)
                 return false;
