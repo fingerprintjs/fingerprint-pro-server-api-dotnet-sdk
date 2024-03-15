@@ -39,7 +39,7 @@ public class SealedTest
             Convert.FromBase64String("noXc7VOpBstjjcavDKSKr4HTavt4mdq8h6NC32T0hUtw9S0jXT8lPjZiWL8SyHxmrF3uTGqO+g==");
         var key = Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq53=");
 
-        Assert.Throws<Sealed.InvalidSealedDataException>(() =>
+        Assert.Throws<InvalidDataException>(() =>
             Sealed.UnsealEventResponse(
                 sealedResult,
                 new Sealed.DecryptionKey[]
