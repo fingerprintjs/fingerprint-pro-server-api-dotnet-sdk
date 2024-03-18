@@ -1,3 +1,26 @@
+## [4.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v3.1.0...v4.0.0) (2024-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* make identification field `confidence` optional
+* deprecated `ipLocation` field uses `DeprecatedIpLocation` model
+* change models for the most smart signals
+
+### Features
+
+* add `linkedId` field to the `BotdResult` type ([cddcd3c](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/cddcd3c97c15b4699bf3fe10bff5a5b42194d32b))
+* add `originCountry` field to the `vpn` signal ([a8d9c42](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a8d9c426bbdd6cf901f458815a43d1fdf8f68cf8))
+* add `SuspectScore` smart signal support ([36bcf07](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36bcf0748fc1ee7a9b54453afd60b225e3d3a8df))
+* fix `ipLocation` deprecation ([ca56d40](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/ca56d40d0c9a45c9c2a9e90a9dd92a2eb198a02b))
+* make identification field `tag` required ([a2ba563](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a2ba563a9e5a04f2251860a964ec7b0a5a36fb49))
+* use shared structures for webhooks and event ([a0adeff](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a0adeff17f903731be6460a4f3f5c9c0755ff31a))
+
+
+### Bug Fixes
+
+* make fields required according to real API response ([461797e](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/461797e4a9fa01ae13d68f444acfe4b82d90de7c))
+
 ## [3.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v3.0.0...v3.1.0) (2024-02-13)
 
 
