@@ -1,6 +1,0 @@
-{
-  "error": {
-    "code": "RequestIdCannotBeParsed",
-    "message": "invalid format of request id"
-  }
-}

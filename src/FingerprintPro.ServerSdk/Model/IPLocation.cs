@@ -15,7 +15,7 @@ using Newtonsoft.Json.Converters;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// This field is **deprecated** and will not return a result for **accounts created after December 18th, 2023**. Please use the [`ipInfo` Smart signal](https://dev.fingerprint.com/docs/smart-signals-overview#ip-geolocation) for geolocation information.
+    /// IPLocation
     /// </summary>
     [DataContract]
     public partial class IPLocation : IEquatable<IPLocation>

@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseFrida(SignalResponseFridaData data = default(SignalResponseFridaData), ProductError error = default(ProductError))
+        public SignalResponseFrida(FridaResult data = default(FridaResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseFridaData Data { get; set; }
+        public FridaResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

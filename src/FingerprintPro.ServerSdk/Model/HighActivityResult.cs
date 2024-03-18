@@ -23,11 +23,20 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="HighActivityResult" /> class.
         /// </summary>
-        /// <param name="result">Flag indicating whether the request came from a high activity visitor..</param>
+        /// <param name="result">Flag indicating whether the request came from a high activity visitor. (required).</param>
         /// <param name="dailyRequests">Number of requests from the same visitor in the previous day..</param>
         public HighActivityResult(bool? result = default(bool?), decimal? dailyRequests = default(decimal?))
         {
-            this.Result = result;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for HighActivityResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
             this.DailyRequests = dailyRequests;
         }
 

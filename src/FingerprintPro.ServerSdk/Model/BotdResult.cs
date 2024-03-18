@@ -26,10 +26,11 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
         /// <param name="time">Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible (required).</param>
         /// <param name="url">Page URL from which identification request was sent. (required).</param>
-        /// <param name="userAgent">userAgent.</param>
-        /// <param name="requestId">requestId.</param>
+        /// <param name="userAgent">userAgent (required).</param>
+        /// <param name="requestId">requestId (required).</param>
+        /// <param name="linkedId">linkedId.</param>
         /// <param name="bot">bot (required).</param>
-        public BotdResult(string ip = default(string), DateTime? time = default(DateTime?), string url = default(string), string userAgent = default(string), string requestId = default(string), BotdDetectionResult bot = default(BotdDetectionResult))
+        public BotdResult(string ip = default(string), DateTime? time = default(DateTime?), string url = default(string), string userAgent = default(string), string requestId = default(string), string linkedId = default(string), BotdDetectionResult bot = default(BotdDetectionResult))
         {
             // to ensure "ip" is required (not null)
 
@@ -61,6 +62,26 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Url = url;
             }
+            // to ensure "userAgent" is required (not null)
+
+            if (userAgent == null)
+            {
+                throw new InvalidDataException("userAgent is a required property for BotdResult and cannot be null");
+            }
+            else
+            {
+                this.UserAgent = userAgent;
+            }
+            // to ensure "requestId" is required (not null)
+
+            if (requestId == null)
+            {
+                throw new InvalidDataException("requestId is a required property for BotdResult and cannot be null");
+            }
+            else
+            {
+                this.RequestId = requestId;
+            }
             // to ensure "bot" is required (not null)
 
             if (bot == null)
@@ -71,8 +92,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Bot = bot;
             }
-            this.UserAgent = userAgent;
-            this.RequestId = requestId;
+            this.LinkedId = linkedId;
         }
 
         /// <summary>
@@ -109,6 +129,12 @@ namespace FingerprintPro.ServerSdk.Model
         public string RequestId { get; set; }
 
         /// <summary>
+        /// Gets or Sets LinkedId
+        /// </summary>
+        [DataMember(Name = "linkedId", EmitDefaultValue = false)]
+        public string LinkedId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Bot
         /// </summary>
         [DataMember(Name = "bot", EmitDefaultValue = false)]
@@ -127,6 +153,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
+            sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -178,6 +205,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RequestId.Equals(input.RequestId))
                 ) &&
                 (
+                this.LinkedId == input.LinkedId ||
+                (this.LinkedId != null &&
+                this.LinkedId.Equals(input.LinkedId))
+                ) &&
+                (
                 this.Bot == input.Bot ||
                 (this.Bot != null &&
                 this.Bot.Equals(input.Bot))
@@ -203,6 +235,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
                 if (this.RequestId != null)
                     hashCode = hashCode * 59 + this.RequestId.GetHashCode();
+                if (this.LinkedId != null)
+                    hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
                 if (this.Bot != null)
                     hashCode = hashCode * 59 + this.Bot.GetHashCode();
                 return hashCode;

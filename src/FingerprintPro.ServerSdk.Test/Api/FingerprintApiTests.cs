@@ -141,9 +141,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEventTest()
         {
-            SetupMockResponse("get_event.json");
+            SetupMockResponse("get_event_200.json");
 
-            const string requestId = "0KSh65EnVoB85JBmloQK";
+            const string requestId = "1708102555327.NLOjmg";
             var response = _instance!.GetEvent(requestId);
 
             Assert.Multiple(() =>
@@ -188,14 +188,14 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.IsTrue(rawDeviceAttributes.ContainsKey("colorGamut"));
                 Assert.IsNotNull(rawDeviceAttributes["colorGamut"]);
                 var colorGamut = (JObject)rawDeviceAttributes["colorGamut"];
-                Assert.That(colorGamut["value"].ToString(), Is.EqualTo("srgb"));
+                Assert.That(colorGamut["value"].ToString(), Is.EqualTo("p3"));
             });
         }
 
         [Test]
         public void GetEventWithExtraFieldsTest()
         {
-            SetupMockResponse("get_event_extra_fields.json");
+            SetupMockResponse("get_event_200_extra_fields.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -220,7 +220,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEvenAllErrorsTest()
         {
-            SetupMockResponse("get_event_all_errors.json");
+            SetupMockResponse("get_event_200_all_errors.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -272,7 +272,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEventBotdTooManyRequestsErrorTest()
         {
-            SetupMockResponse("get_event_botd_too_many_requests_error.json");
+            SetupMockResponse("get_event_200_botd_too_many_requests_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -288,7 +288,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEventBotdFailedErorTest()
         {
-            SetupMockResponse("get_event_botd_failed_error.json");
+            SetupMockResponse("get_event_200_botd_failed_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -304,7 +304,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEventIdentificationTooManyRequestsErrorTest()
         {
-            SetupMockResponse("get_event_identification_too_many_requests_error.json");
+            SetupMockResponse("get_event_200_identification_too_many_requests_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -320,7 +320,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetEventIdentificationFailedErrorTest()
         {
-            SetupMockResponse("get_event_identification_failed_error.json");
+            SetupMockResponse("get_event_200_identification_failed_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -339,7 +339,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetVisitsLimit1Test()
         {
-            SetupMockResponse("visits_limit_1.json");
+            SetupMockResponse("get_visits_200_limit_1.json");
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const string requestId = "1655373953086.DDlfmP";
@@ -372,7 +372,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetVisitsLimit500Test()
         {
-            SetupMockResponse("visits_limit_500.json");
+            SetupMockResponse("get_visits_200_limit_500.json");
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const string requestId = "1655373953086.DDlfmP";
@@ -402,7 +402,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetVisitsTooManyRequestsErrorTest()
         {
-            SetupMockResponse("visits_too_many_requests_error.json");
+            SetupMockResponse("get_visits_429_too_many_requests_error.json");
 
             _mockResponseHeaders?.Add("Retry-After", "10");
             _mockResponseStatusCode = TooManyRequestsException.TooManyRequestsCode;

@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseTor(SignalResponseTorData data = default(SignalResponseTorData), ProductError error = default(ProductError))
+        public SignalResponseTor(TorResult data = default(TorResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseTorData Data { get; set; }
+        public TorResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

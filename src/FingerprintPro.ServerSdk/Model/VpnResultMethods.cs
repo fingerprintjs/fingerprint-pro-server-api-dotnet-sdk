@@ -23,14 +23,41 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResultMethods" /> class.
         /// </summary>
-        /// <param name="timezoneMismatch">User's browser timezone doesn't match the timezone from which the request was originally made..</param>
-        /// <param name="publicVPN">Request IP address is owned and used by a public VPN service provider..</param>
-        /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices..</param>
+        /// <param name="timezoneMismatch">User's browser timezone doesn't match the timezone from which the request was originally made. (required).</param>
+        /// <param name="publicVPN">Request IP address is owned and used by a public VPN service provider. (required).</param>
+        /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices. (required).</param>
         public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?))
         {
-            this.TimezoneMismatch = timezoneMismatch;
-            this.PublicVPN = publicVPN;
-            this.AuxiliaryMobile = auxiliaryMobile;
+            // to ensure "timezoneMismatch" is required (not null)
+
+            if (timezoneMismatch == null)
+            {
+                throw new InvalidDataException("timezoneMismatch is a required property for VpnResultMethods and cannot be null");
+            }
+            else
+            {
+                this.TimezoneMismatch = timezoneMismatch;
+            }
+            // to ensure "publicVPN" is required (not null)
+
+            if (publicVPN == null)
+            {
+                throw new InvalidDataException("publicVPN is a required property for VpnResultMethods and cannot be null");
+            }
+            else
+            {
+                this.PublicVPN = publicVPN;
+            }
+            // to ensure "auxiliaryMobile" is required (not null)
+
+            if (auxiliaryMobile == null)
+            {
+                throw new InvalidDataException("auxiliaryMobile is a required property for VpnResultMethods and cannot be null");
+            }
+            else
+            {
+                this.AuxiliaryMobile = auxiliaryMobile;
+            }
         }
 
         /// <summary>

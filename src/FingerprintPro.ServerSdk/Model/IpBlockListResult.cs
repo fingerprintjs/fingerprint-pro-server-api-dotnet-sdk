@@ -23,12 +23,30 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResult" /> class.
         /// </summary>
-        /// <param name="result">`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. .</param>
-        /// <param name="details">details.</param>
+        /// <param name="result">`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise.  (required).</param>
+        /// <param name="details">details (required).</param>
         public IpBlockListResult(bool? result = default(bool?), IpBlockListResultDetails details = default(IpBlockListResultDetails))
         {
-            this.Result = result;
-            this.Details = details;
+            // to ensure "result" is required (not null)
+
+            if (result == null)
+            {
+                throw new InvalidDataException("result is a required property for IpBlockListResult and cannot be null");
+            }
+            else
+            {
+                this.Result = result;
+            }
+            // to ensure "details" is required (not null)
+
+            if (details == null)
+            {
+                throw new InvalidDataException("details is a required property for IpBlockListResult and cannot be null");
+            }
+            else
+            {
+                this.Details = details;
+            }
         }
 
         /// <summary>

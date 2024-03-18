@@ -24,9 +24,11 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="SignalResponseRawDeviceAttributes" /> class.
         /// </summary>
         /// <param name="data">data.</param>
-        public SignalResponseRawDeviceAttributes(RawDeviceAttributesResult data = default(RawDeviceAttributesResult))
+        /// <param name="error">error.</param>
+        public SignalResponseRawDeviceAttributes(RawDeviceAttributesResult data = default(RawDeviceAttributesResult), ProductError error = default(ProductError))
         {
             this.Data = data;
+            this.Error = error;
         }
 
         /// <summary>
@@ -34,6 +36,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
         public RawDeviceAttributesResult Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        public ProductError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -44,6 +52,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class SignalResponseRawDeviceAttributes {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,6 +81,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Data == input.Data ||
                 (this.Data != null &&
                 this.Data.Equals(input.Data))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
                 );
         }
 
@@ -86,6 +100,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Data != null)
                     hashCode = hashCode * 59 + this.Data.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
             }
         }

@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseFactoryReset(SignalResponseFactoryResetData data = default(SignalResponseFactoryResetData), ProductError error = default(ProductError))
+        public SignalResponseFactoryReset(FactoryResetResult data = default(FactoryResetResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseFactoryResetData Data { get; set; }
+        public FactoryResetResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

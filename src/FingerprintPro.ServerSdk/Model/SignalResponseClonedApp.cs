@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseClonedApp(SignalResponseClonedAppData data = default(SignalResponseClonedAppData), ProductError error = default(ProductError))
+        public SignalResponseClonedApp(ClonedAppResult data = default(ClonedAppResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseClonedAppData Data { get; set; }
+        public ClonedAppResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

@@ -30,14 +30,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="ipLocation">ipLocation.</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format. (required).</param>
-        /// <param name="url">Page URL from which identification request was sent. (required).</param>
-        /// <param name="tag">A customer-provided value or an object that was sent with identification request..</param>
+        /// <param name="url">Page URL from which the identification request was sent. (required).</param>
+        /// <param name="tag">A customer-provided value or an object that was sent with identification request. (required).</param>
         /// <param name="linkedId">A customer-provided id that was sent with identification request..</param>
-        /// <param name="confidence">confidence (required).</param>
+        /// <param name="confidence">confidence.</param>
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
-        public Visit(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), IPLocation ipLocation = default(IPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
+        public Visit(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedIPLocation ipLocation = default(DeprecatedIPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
         {
             // to ensure "requestId" is required (not null)
 
@@ -109,15 +109,15 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Url = url;
             }
-            // to ensure "confidence" is required (not null)
+            // to ensure "tag" is required (not null)
 
-            if (confidence == null)
+            if (tag == null)
             {
-                throw new InvalidDataException("confidence is a required property for Visit and cannot be null");
+                throw new InvalidDataException("tag is a required property for Visit and cannot be null");
             }
             else
             {
-                this.Confidence = confidence;
+                this.Tag = tag;
             }
             // to ensure "visitorFound" is required (not null)
 
@@ -150,8 +150,8 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LastSeenAt = lastSeenAt;
             }
             this.IpLocation = ipLocation;
-            this.Tag = tag;
             this.LinkedId = linkedId;
+            this.Confidence = confidence;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets IpLocation
         /// </summary>
         [DataMember(Name = "ipLocation", EmitDefaultValue = false)]
-        public IPLocation IpLocation { get; set; }
+        public DeprecatedIPLocation IpLocation { get; set; }
 
         /// <summary>
         /// Timestamp of the event with millisecond precision in Unix time.
@@ -201,9 +201,9 @@ namespace FingerprintPro.ServerSdk.Model
         public DateTime? Time { get; set; }
 
         /// <summary>
-        /// Page URL from which identification request was sent.
+        /// Page URL from which the identification request was sent.
         /// </summary>
-        /// <value>Page URL from which identification request was sent.</value>
+        /// <value>Page URL from which the identification request was sent.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
         public string Url { get; set; }
 

@@ -25,7 +25,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseEmulator(SignalResponseEmulatorData data = default(SignalResponseEmulatorData), ProductError error = default(ProductError))
+        public SignalResponseEmulator(EmulatorResult data = default(EmulatorResult), ProductError error = default(ProductError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SignalResponseEmulatorData Data { get; set; }
+        public EmulatorResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error

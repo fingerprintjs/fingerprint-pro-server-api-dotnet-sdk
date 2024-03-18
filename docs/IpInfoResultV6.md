@@ -3,8 +3,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **string** |  | [optional] 
-**Geolocation** | [**IPLocation**](IPLocation.md) |  | [optional] 
+**Address** | **string** |  | 
+**Geolocation** | [**IPLocation**](IPLocation.md) |  | 
 **Asn** | [**ASN**](ASN.md) |  | [optional] 
 **Datacenter** | [**DataCenter**](DataCenter.md) |  | [optional] 
 

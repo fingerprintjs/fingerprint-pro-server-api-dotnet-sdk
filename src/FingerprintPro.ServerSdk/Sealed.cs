@@ -117,7 +117,7 @@ namespace FingerprintPro.ServerSdk
             var value = mapper.Deserialize<EventResponse>(
                 new JsonTextReader(new StreamReader(new MemoryStream(unsealed))));
 
-            if (value?.Products == null)
+            if (value == null)
             {
                 throw new InvalidSealedDataException();
             }
