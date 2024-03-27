@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        dotnet-version: [ 5.x, 6.x, 7.x, ]
+        dotnet-version: [ 5.x, 6.x, 7.x, 8.x ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
