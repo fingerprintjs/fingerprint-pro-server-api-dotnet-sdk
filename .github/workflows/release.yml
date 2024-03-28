@@ -10,11 +10,12 @@ jobs:
     name: 'Publish new version'
     uses: fingerprintjs/dx-team-toolkit/.github/workflows/release-server-sdk.yml@v1
     with:
+      appId: ${{ vars.APP_ID }}
       language: dotnet
       language-version: '8.x'
       prepare-command: |
         dotnet --version && dotnet restore && dotnet list package
         dotnet build --configuration Release --no-restore
     secrets:
-      GH_RELEASE_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
