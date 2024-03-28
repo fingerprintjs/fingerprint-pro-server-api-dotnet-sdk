@@ -11,7 +11,7 @@ jobs:
     uses: fingerprintjs/dx-team-toolkit/.github/workflows/release-server-sdk.yml@v1
     with:
       language: dotnet
-      language-version: '7.x'
+      language-version: '8.x'
       prepare-command: |
         dotnet --version && dotnet restore && dotnet list package
         dotnet build --configuration Release --no-restore
