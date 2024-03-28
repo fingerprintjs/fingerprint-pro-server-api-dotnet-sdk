@@ -1,3 +1,15 @@
+## [5.0.0-test.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v4.0.0...v5.0.0-test.1) (2024-03-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* now only .NET >= 6 is supported
+
+### Features
+
+* add .net v8 ([56959dc](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/56959dc3e320007d79a831c8b798a188806ba226))
+* drop support for .NET 5 ([866042e](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/866042e303accc528452bb81bdb0e49d7035c2b6))
+
 ## [4.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v3.1.0...v4.0.0) (2024-03-18)
 
 

@@ -1,6 +1,6 @@
 {
     "packageName": "FingerprintPro.ServerSdk",
-    "packageVersion": "4.0.0",
+    "packageVersion": "5.0.0-test.1",
     "packageUrl": "https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk",
     "gitUserId": "fingerprintjs",
     "gitRepoId": "fingerprint-pro-server-api-dotnet-sdk",
