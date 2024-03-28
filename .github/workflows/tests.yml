@@ -17,13 +17,13 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        dotnet-version: [ 5.x, 6.x, 7.x ]
+        dotnet-version: [ 6.x, 7.x, 8.x ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
 
