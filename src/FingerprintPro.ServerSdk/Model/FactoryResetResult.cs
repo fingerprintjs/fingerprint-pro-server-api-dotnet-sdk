@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// FactoryResetResult
     /// </summary>
     [DataContract]
-    public partial class FactoryResetResult : IEquatable<FactoryResetResult>
+    public class FactoryResetResult : Model<FactoryResetResult>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FactoryResetResult" /> class.
@@ -83,7 +82,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -91,7 +95,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of FactoryResetResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(FactoryResetResult input)
+        public override bool Equals(FactoryResetResult input)
         {
             if (input == null)
                 return false;

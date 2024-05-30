@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// Subdivision
     /// </summary>
     [DataContract]
-    public partial class Subdivision : IEquatable<Subdivision>
+    public class Subdivision : Model<Subdivision>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Subdivision" /> class.
@@ -63,7 +62,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Subdivision to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Subdivision input)
+        public override bool Equals(Subdivision input)
         {
             if (input == null)
                 return false;

@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// Stores bot detection result
     /// </summary>
     [DataContract]
-    public partial class BotdDetectionResult : IEquatable<BotdDetectionResult>
+    public class BotdDetectionResult : Model<BotdDetectionResult>
     {
         /// <summary>
         /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
@@ -96,7 +95,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -104,7 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of BotdDetectionResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(BotdDetectionResult input)
+        public override bool Equals(BotdDetectionResult input)
         {
             if (input == null)
                 return false;

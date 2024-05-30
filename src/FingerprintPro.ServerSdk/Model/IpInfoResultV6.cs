@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpInfoResultV6
     /// </summary>
     [DataContract]
-    public partial class IpInfoResultV6 : IEquatable<IpInfoResultV6>
+    public class IpInfoResultV6 : Model<IpInfoResultV6>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResultV6" /> class.
@@ -99,7 +98,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -107,7 +111,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IpInfoResultV6 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IpInfoResultV6 input)
+        public override bool Equals(IpInfoResultV6 input)
         {
             if (input == null)
                 return false;

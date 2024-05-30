@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpBlockListResult
     /// </summary>
     [DataContract]
-    public partial class IpBlockListResult : IEquatable<IpBlockListResult>
+    public class IpBlockListResult : Model<IpBlockListResult>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResult" /> class.
@@ -82,7 +81,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -90,7 +94,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IpBlockListResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IpBlockListResult input)
+        public override bool Equals(IpBlockListResult input)
         {
             if (input == null)
                 return false;

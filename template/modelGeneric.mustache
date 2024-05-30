@@ -9,7 +9,7 @@
 {{#generatePropertyChanged}}
     [ImplementPropertyChanged]
 {{/generatePropertyChanged}}
-{{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{/netStandard}}
+{{>visibility}} class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} Model<{{classname}}>{{^netStandard}}{{/netStandard}}
 {
 {{#vars}}
     {{#items.isEnum}}
@@ -141,7 +141,12 @@ return sb.ToString();
 /// <returns>JSON string presentation of the object</returns>
 public {{#parent}}{{^isArrayModel}}override {{/isArrayModel}}{{/parent}}{{^parent}}virtual {{/parent}}string ToJson()
 {
-return JsonConvert.SerializeObject(this, Formatting.Indented);
+var options = new JsonSerializerOptions
+{
+WriteIndented = true
+};
+
+return JsonSerializer.Serialize(this, options);
 }
 
 /// <summary>
@@ -149,7 +154,7 @@ return JsonConvert.SerializeObject(this, Formatting.Indented);
     /// </summary>
 /// <param name="input">Instance of {{classname}} to be compared</param>
 /// <returns>Boolean</returns>
-public bool Equals({{classname}} input)
+public override bool Equals({{classname}} input)
 {
 if (input == null)
 return false;

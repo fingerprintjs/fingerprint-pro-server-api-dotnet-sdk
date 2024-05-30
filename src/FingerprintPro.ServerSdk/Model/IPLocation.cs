@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// IPLocation
     /// </summary>
     [DataContract]
-    public partial class IPLocation : IEquatable<IPLocation>
+    public class IPLocation : Model<IPLocation>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IPLocation" /> class.
@@ -127,7 +126,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -135,7 +139,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IPLocation to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IPLocation input)
+        public override bool Equals(IPLocation input)
         {
             if (input == null)
                 return false;

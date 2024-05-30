@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// SignalResponseRawDeviceAttributes
     /// </summary>
     [DataContract]
-    public partial class SignalResponseRawDeviceAttributes : IEquatable<SignalResponseRawDeviceAttributes>
+    public class SignalResponseRawDeviceAttributes : Model<SignalResponseRawDeviceAttributes>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseRawDeviceAttributes" /> class.
@@ -63,7 +62,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SignalResponseRawDeviceAttributes to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SignalResponseRawDeviceAttributes input)
+        public override bool Equals(SignalResponseRawDeviceAttributes input)
         {
             if (input == null)
                 return false;

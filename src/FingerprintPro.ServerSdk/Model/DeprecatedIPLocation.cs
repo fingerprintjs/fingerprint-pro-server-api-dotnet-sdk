@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// This field is **deprecated** and will not return a result for **applications created after January 23rd, 2024**. Please use the [IP Geolocation Smart signal](https://dev.fingerprint.com/docs/smart-signals-overview#ip-geolocation) for geolocation information.
     /// </summary>
     [DataContract]
-    public partial class DeprecatedIPLocation : IEquatable<DeprecatedIPLocation>
+    public class DeprecatedIPLocation : Model<DeprecatedIPLocation>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DeprecatedIPLocation" /> class.
@@ -127,7 +126,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -135,7 +139,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of DeprecatedIPLocation to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeprecatedIPLocation input)
+        public override bool Equals(DeprecatedIPLocation input)
         {
             if (input == null)
                 return false;

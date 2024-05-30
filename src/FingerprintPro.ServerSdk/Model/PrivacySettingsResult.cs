@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// PrivacySettingsResult
     /// </summary>
     [DataContract]
-    public partial class PrivacySettingsResult : IEquatable<PrivacySettingsResult>
+    public class PrivacySettingsResult : Model<PrivacySettingsResult>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivacySettingsResult" /> class.
@@ -64,7 +63,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -72,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of PrivacySettingsResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(PrivacySettingsResult input)
+        public override bool Equals(PrivacySettingsResult input)
         {
             if (input == null)
                 return false;

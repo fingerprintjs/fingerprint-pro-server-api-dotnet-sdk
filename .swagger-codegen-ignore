@@ -27,6 +27,9 @@ git_push.sh
 
 **/packages.config
 src/FingerprintPro.ServerSdk.Test/**
+src/FingerprintPro.ServerSdk/Model/Model.cs
+src/FingerprintPro.ServerSdk/Client/ApiClient.cs
+src/FingerprintPro.ServerSdk/Client/ApiResponse.cs
 
 **/GlobalConfiguration.cs
 .gitignore

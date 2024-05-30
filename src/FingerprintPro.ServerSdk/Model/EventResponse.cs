@@ -9,8 +9,7 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,7 +17,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// Contains results from all activated products - Fingerprint Pro, Bot Detection, and others.
     /// </summary>
     [DataContract]
-    public partial class EventResponse : IEquatable<EventResponse>
+    public class EventResponse : Model<EventResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EventResponse" /> class.
@@ -72,7 +71,12 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(this, options);
         }
 
         /// <summary>
@@ -80,7 +84,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of EventResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EventResponse input)
+        public override bool Equals(EventResponse input)
         {
             if (input == null)
                 return false;
