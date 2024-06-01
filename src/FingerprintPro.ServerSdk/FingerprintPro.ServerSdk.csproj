@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <TargetFrameworks>net5;net6;net7;netstandard2.0;netstandard2.1;net47;net471;net472;net48;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>net6;net7;net8;netstandard2.0;netstandard2.1;net47;net471;net472;net48;net481</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10.0</LangVersion>
@@ -26,15 +26,15 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
         <PackageReference Include="RestSharp" Version="108.0.3" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <None Include="./README.md" Pack="true" PackagePath="/" />
         <None Include="../../LICENSE" Pack="true" PackagePath="/" />
         <None Include="../../res/logo.png" Pack="true" PackagePath="/" />
     </ItemGroup>
-    
+
     <ItemGroup>
-      <Reference Include="System.Net.Http" Condition="'$(TargetFramework)' == 'net48' OR '$(TargetFramework)' == 'net47' OR '$(TargetFramework)' == 'net471' OR '$(TargetFramework)' == 'net472'" />
+      <Reference Include="System.Net.Http" />
     </ItemGroup>
 
 </Project>
