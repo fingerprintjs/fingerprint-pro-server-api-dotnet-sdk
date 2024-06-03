@@ -15,8 +15,9 @@ namespace FingerprintPro.ServerSdk.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFingerprintApi : IApiAccessor
+    public interface IFingerprintApi
     {
+
         #region Synchronous Operations
         /// <summary>
         /// Get event by requestId
@@ -84,7 +85,7 @@ namespace FingerprintPro.ServerSdk.Api
         Task<EventResponse> GetEventAsync(string requestId);
 
         /// <summary>
-        /// Get event by requestId
+        /// Get event by requestIde
         /// </summary>
         /// <remarks>
         /// This endpoint allows you to get a detailed analysis of an individual request.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
@@ -110,7 +111,7 @@ namespace FingerprintPro.ServerSdk.Api
         Task<Response> GetVisitsAsync(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
 
         /// <summary>
-        /// Get visits by visitorId
+        /// Get visits by visitorIde
         /// </summary>
         /// <remarks>
         /// This endpoint allows you to get a history of visits for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
@@ -126,4 +127,49 @@ namespace FingerprintPro.ServerSdk.Api
         Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
         #endregion Asynchronous Operations
     }
+
+
+    internal class GetEventDefinition : OperationDefinition
+    {
+        public override string Path => "/events/{request_id}";
+
+        public override string OperationName => "GetEvent";
+
+        public override string[] PathParams => new[] { "request_id", };
+
+        public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+            {
+                {
+                    200, () => new EventResponse()
+                },
+                {
+                    403, () => new ErrorEvent403Response()
+                },
+                {
+                    404, () => new ErrorEvent404Response()
+                },
+            };
+    }
+    internal class GetVisitsDefinition : OperationDefinition
+    {
+        public override string Path => "/visitors/{visitor_id}";
+
+        public override string OperationName => "GetVisits";
+
+        public override string[] PathParams => new[] { "visitor_id", };
+
+        public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+            {
+                {
+                    200, () => new Response()
+                },
+                {
+                    403, () => new ErrorVisits403()
+                },
+                {
+                    429, () => new ManyRequestsResponse()
+                },
+            };
+    }
+
 }

@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ProductsResponseIdentification
     /// </summary>
     [DataContract]
-    public class ProductsResponseIdentification : Model<ProductsResponseIdentification>
+    public class ProductsResponseIdentification : IEquatable<ProductsResponseIdentification>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsResponseIdentification" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
         public ProductsResponseIdentificationData Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public IdentificationError Error { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductsResponseIdentification to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ProductsResponseIdentification input)
+        public bool Equals(ProductsResponseIdentification input)
         {
             if (input == null)
                 return false;

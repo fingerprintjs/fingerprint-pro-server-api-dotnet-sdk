@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ManyRequestsResponse
     /// </summary>
     [DataContract]
-    public class ManyRequestsResponse : Model<ManyRequestsResponse>
+    public class ManyRequestsResponse : IEquatable<ManyRequestsResponse>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ManyRequestsResponse" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ManyRequestsResponse(string error = default(string))
         {
             // to ensure "error" is required (not null)
+            // swagger debug: ManyRequestsResponse Error
 
             if (error == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Error text.</value>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public string Error { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ManyRequestsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ManyRequestsResponse input)
+        public bool Equals(ManyRequestsResponse input)
         {
             if (input == null)
                 return false;

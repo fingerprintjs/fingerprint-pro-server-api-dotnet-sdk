@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SeenAt
     /// </summary>
     [DataContract]
-    public class SeenAt : Model<SeenAt>
+    public class SeenAt : IEquatable<SeenAt>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SeenAt" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Global
         /// </summary>
         [DataMember(Name = "global", EmitDefaultValue = false)]
+        [JsonPropertyName("global")]
         public DateTime? Global { get; set; }
 
         /// <summary>
         /// Gets or Sets Subscription
         /// </summary>
         [DataMember(Name = "subscription", EmitDefaultValue = false)]
+        [JsonPropertyName("subscription")]
         public DateTime? Subscription { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SeenAt to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(SeenAt input)
+        public bool Equals(SeenAt input)
         {
             if (input == null)
                 return false;

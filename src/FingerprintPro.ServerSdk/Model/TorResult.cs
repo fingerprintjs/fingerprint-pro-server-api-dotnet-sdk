@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// TorResult
     /// </summary>
     [DataContract]
-    public class TorResult : Model<TorResult>
+    public class TorResult : IEquatable<TorResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TorResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public TorResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: TorResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if the request IP address is a known tor exit node, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of TorResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(TorResult input)
+        public bool Equals(TorResult input)
         {
             if (input == null)
                 return false;

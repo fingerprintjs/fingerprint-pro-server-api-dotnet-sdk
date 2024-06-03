@@ -9,8 +9,9 @@ namespace {{packageName}}.{{apiPackage}}
     /// <summary>
         /// Represents a collection of functions to interact with the API endpoints
         /// </summary>
-    {{>visibility}} interface {{interfacePrefix}}{{classname}} : IApiAccessor
+    {{>visibility}} interface {{interfacePrefix}}{{classname}}
     {
+
     #region Synchronous Operations
     {{#operation}}
         {{#contents}}
@@ -54,7 +55,7 @@ namespace {{packageName}}.{{apiPackage}}
                 {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task{{/returnType}} {{operationId}}Async ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null!{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}});
 
                     /// <summary>
-                    /// {{summary}}
+                    /// {{summary}}e
                     /// </summary>
                     /// <remarks>
                     /// {{{notes}}}
@@ -68,5 +69,26 @@ namespace {{packageName}}.{{apiPackage}}
             #endregion Asynchronous Operations
     {{/supportsAsync}}
         }
+
+
+    {{#operation}}
+        internal class {{nickname}}Definition: OperationDefinition {
+            public override string Path => "{{path}}";
+
+            public override string OperationName => "{{nickname}}";
+
+            public override string[] PathParams => new[] { {{#pathParams}}"{{baseName}}",{{/pathParams}} };
+
+            public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+            {
+        {{#responses}}{{#dataType}}
+                {
+                    {{code}}, () => new {{dataType}}()
+                },
+        {{/dataType}}{{/responses}}
+            };
+        }
+    {{/operation}}
+
 {{/operations}}
     }

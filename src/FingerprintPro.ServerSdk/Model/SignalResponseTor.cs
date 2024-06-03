@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SignalResponseTor
     /// </summary>
     [DataContract]
-    public class SignalResponseTor : Model<SignalResponseTor>
+    public class SignalResponseTor : IEquatable<SignalResponseTor>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseTor" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
         public TorResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ProductError Error { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SignalResponseTor to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(SignalResponseTor input)
+        public bool Equals(SignalResponseTor input)
         {
             if (input == null)
                 return false;

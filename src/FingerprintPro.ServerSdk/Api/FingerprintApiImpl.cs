@@ -1,22 +1,18 @@
+using System.Net.Http;
+using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
 using FingerprintPro.ServerSdk.Model;
 
 namespace FingerprintPro.ServerSdk.Api;
 
 public class FingerprintApi : IFingerprintApi
 {
-    // TODO Should come from swagger
-    public const string Version = "5.0.0";
-
     private readonly ApiClient _apiClient;
 
     private ExceptionFactory _exceptionFactory = (name, response) => null;
-
-    /// <summary>
-    /// Gets or sets the configuration object
-    /// </summary>
-    /// <value>An instance of the Configuration</value>
-    public Configuration Configuration { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FingerprintApi"/> class
@@ -26,46 +22,19 @@ public class FingerprintApi : IFingerprintApi
     /// <returns></returns>
     public FingerprintApi(Configuration configuration)
     {
-        Configuration = configuration;
         _apiClient = new ApiClient(configuration);
-
-        ExceptionFactory = Configuration.DefaultExceptionFactory!;
-    }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public string GetBasePath()
-    {
-        return this._apiClient.RestClient.Options.BaseUrl!.ToString();
-    }
-
-    /// <summary>
-    /// Provides a factory method hook for the creation of exceptions.
-    /// </summary>
-    public ExceptionFactory ExceptionFactory
-    {
-        get
-        {
-            if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-            {
-                throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-            }
-            return _exceptionFactory;
-        }
-        set { _exceptionFactory = value; }
     }
 
     public EventResponse GetEvent(string requestId)
     {
-        throw new NotImplementedException();
+        return GetEventWithHttpInfo(requestId).Data;
     }
 
     public ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId)
     {
-        throw new NotImplementedException();
+        return GetEventAsyncWithHttpInfo(requestId).Result;
     }
+
 
     public Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null,
         string paginationKey = null, long? before = null)
@@ -73,31 +42,86 @@ public class FingerprintApi : IFingerprintApi
         throw new NotImplementedException();
     }
 
-    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null,
+    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null,
+        string linkedId = null, int? limit = null,
         string paginationKey = null, long? before = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<EventResponse> GetEventAsync(string requestId)
+    public async Task<EventResponse> GetEventAsync(string requestId)
     {
-        throw new NotImplementedException();
+        return (await GetEventAsyncWithHttpInfo(requestId)).Data;
     }
 
-    public Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
+    public async Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
     {
-        throw new NotImplementedException();
+        var definition = new GetEventDefinition();
+
+        return await _apiClient.DoRequest<EventResponse>(definition, HttpMethod.Get, requestId);
     }
 
-    public Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null, int? limit = null,
+    public Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null,
+        int? limit = null,
         string paginationKey = null, long? before = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null, string linkedId = null, int? limit = null,
+    public async Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null,
+        string linkedId = null, int? limit = null,
         string paginationKey = null, long? before = null)
     {
+        Dictionary<string, dynamic> queryParams = new();
+
+        if (!string.IsNullOrEmpty(requestId))
+        {
+            queryParams.Add("request_id", requestId);
+
+        }
+
+        if (!string.IsNullOrEmpty(linkedId))
+        {
+            queryParams.Add("linked_id", linkedId);
+        }
+
+        if (limit != null)
+        {
+            queryParams.Add("limit", limit);
+        }
+
+        if (!string.IsNullOrEmpty(paginationKey))
+        {
+            queryParams.Add("paginationKey", paginationKey);
+        }
+
+        if (before != null)
+        {
+            queryParams.Add("before", before);
+        }
+
+        var definition = new GetVisitsDefinition();
+        var path = _apiClient.GetRequestPath(definition, visitorId);
+
+        var request = _apiClient.CreateRequestMessage(HttpMethod.Get, path);
+        var response = await _apiClient.Client.SendAsync(request);
+
         throw new NotImplementedException();
+    }
+
+    private Exception HandleException(string methodName, HttpResponseMessage response, string responseContent,
+        OperationDefinition operationDefinition)
+    {
+        var statusCode = (int)response.StatusCode;
+
+        var instance = operationDefinition.GetResponse(statusCode, responseContent);
+
+        if (instance is Exception exception)
+        {
+            return exception;
+        }
+
+        return new ApiException(statusCode,
+            $"Error calling {methodName}: {response.ReasonPhrase}", response.Content);
     }
 }

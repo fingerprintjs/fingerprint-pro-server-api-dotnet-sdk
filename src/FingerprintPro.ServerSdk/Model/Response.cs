@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Fields `lastTimestamp` and `paginationKey` added when `limit` or `before` parameter provided and there is more data to show
     /// </summary>
     [DataContract]
-    public class Response : Model<Response>
+    public class Response : IEquatable<Response>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Response" /> class.
         /// </summary>
@@ -29,6 +34,7 @@ namespace FingerprintPro.ServerSdk.Model
         public Response(string visitorId = default(string), List<ResponseVisits> visits = default(List<ResponseVisits>), long? lastTimestamp = default(long?), string paginationKey = default(string))
         {
             // to ensure "visitorId" is required (not null)
+            // swagger debug: Response VisitorId
 
             if (visitorId == null)
             {
@@ -39,6 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.VisitorId = visitorId;
             }
             // to ensure "visits" is required (not null)
+            // swagger debug: Response Visits
 
             if (visits == null)
             {
@@ -56,12 +63,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets VisitorId
         /// </summary>
         [DataMember(Name = "visitorId", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorId")]
         public string VisitorId { get; set; }
 
         /// <summary>
         /// Gets or Sets Visits
         /// </summary>
         [DataMember(Name = "visits", EmitDefaultValue = false)]
+        [JsonPropertyName("visits")]
         public List<ResponseVisits> Visits { get; set; }
 
         /// <summary>
@@ -69,6 +78,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>⚠️ Deprecated paging attribute, please use `paginationKey` instead. Timestamp of the last visit in the current page of results. </value>
         [DataMember(Name = "lastTimestamp", EmitDefaultValue = false)]
+        [JsonPropertyName("lastTimestamp")]
         public long? LastTimestamp { get; set; }
 
         /// <summary>
@@ -76,6 +86,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Request ID of the last visit in the current page of results. Use this value in the following request as the `paginationKey` parameter to get the next page of results.</value>
         [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
+        [JsonPropertyName("paginationKey")]
         public string PaginationKey { get; set; }
 
         /// <summary>
@@ -113,7 +124,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Response to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(Response input)
+        public bool Equals(Response input)
         {
             if (input == null)
                 return false;

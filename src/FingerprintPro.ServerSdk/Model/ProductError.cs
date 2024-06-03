@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,13 +20,13 @@ namespace FingerprintPro.ServerSdk.Model
     /// ProductError
     /// </summary>
     [DataContract]
-    public class ProductError : Model<ProductError>
+    public class ProductError : IEquatable<ProductError>
     {
         /// <summary>
         /// Error code:  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error 
         /// </summary>
         /// <value>Error code:  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
@@ -42,7 +45,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Error code:  * `TooManyRequests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductError" /> class.
         /// </summary>
@@ -51,6 +57,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ProductError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
+            // swagger debug: ProductError Code
 
             if (code == null)
             {
@@ -61,6 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
+            // swagger debug: ProductError Message
 
             if (message == null)
             {
@@ -77,6 +85,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
         /// <summary>
@@ -112,7 +121,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductError to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ProductError input)
+        public bool Equals(ProductError input)
         {
             if (input == null)
                 return false;

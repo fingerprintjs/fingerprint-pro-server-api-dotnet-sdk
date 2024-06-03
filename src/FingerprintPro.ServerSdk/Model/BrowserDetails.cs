@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// BrowserDetails
     /// </summary>
     [DataContract]
-    public class BrowserDetails : Model<BrowserDetails>
+    public class BrowserDetails : IEquatable<BrowserDetails>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowserDetails" /> class.
         /// </summary>
@@ -33,6 +38,7 @@ namespace FingerprintPro.ServerSdk.Model
         public BrowserDetails(string browserName = default(string), string browserMajorVersion = default(string), string browserFullVersion = default(string), string os = default(string), string osVersion = default(string), string device = default(string), string userAgent = default(string), int? botProbability = default(int?))
         {
             // to ensure "browserName" is required (not null)
+            // swagger debug: BrowserDetails BrowserName
 
             if (browserName == null)
             {
@@ -43,6 +49,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserName = browserName;
             }
             // to ensure "browserMajorVersion" is required (not null)
+            // swagger debug: BrowserDetails BrowserMajorVersion
 
             if (browserMajorVersion == null)
             {
@@ -53,6 +60,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserMajorVersion = browserMajorVersion;
             }
             // to ensure "browserFullVersion" is required (not null)
+            // swagger debug: BrowserDetails BrowserFullVersion
 
             if (browserFullVersion == null)
             {
@@ -63,6 +71,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserFullVersion = browserFullVersion;
             }
             // to ensure "os" is required (not null)
+            // swagger debug: BrowserDetails Os
 
             if (os == null)
             {
@@ -73,6 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Os = os;
             }
             // to ensure "osVersion" is required (not null)
+            // swagger debug: BrowserDetails OsVersion
 
             if (osVersion == null)
             {
@@ -83,6 +93,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.OsVersion = osVersion;
             }
             // to ensure "device" is required (not null)
+            // swagger debug: BrowserDetails Device
 
             if (device == null)
             {
@@ -93,6 +104,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Device = device;
             }
             // to ensure "userAgent" is required (not null)
+            // swagger debug: BrowserDetails UserAgent
 
             if (userAgent == null)
             {
@@ -109,48 +121,56 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets BrowserName
         /// </summary>
         [DataMember(Name = "browserName", EmitDefaultValue = false)]
+        [JsonPropertyName("browserName")]
         public string BrowserName { get; set; }
 
         /// <summary>
         /// Gets or Sets BrowserMajorVersion
         /// </summary>
         [DataMember(Name = "browserMajorVersion", EmitDefaultValue = false)]
+        [JsonPropertyName("browserMajorVersion")]
         public string BrowserMajorVersion { get; set; }
 
         /// <summary>
         /// Gets or Sets BrowserFullVersion
         /// </summary>
         [DataMember(Name = "browserFullVersion", EmitDefaultValue = false)]
+        [JsonPropertyName("browserFullVersion")]
         public string BrowserFullVersion { get; set; }
 
         /// <summary>
         /// Gets or Sets Os
         /// </summary>
         [DataMember(Name = "os", EmitDefaultValue = false)]
+        [JsonPropertyName("os")]
         public string Os { get; set; }
 
         /// <summary>
         /// Gets or Sets OsVersion
         /// </summary>
         [DataMember(Name = "osVersion", EmitDefaultValue = false)]
+        [JsonPropertyName("osVersion")]
         public string OsVersion { get; set; }
 
         /// <summary>
         /// Gets or Sets Device
         /// </summary>
         [DataMember(Name = "device", EmitDefaultValue = false)]
+        [JsonPropertyName("device")]
         public string Device { get; set; }
 
         /// <summary>
         /// Gets or Sets UserAgent
         /// </summary>
         [DataMember(Name = "userAgent", EmitDefaultValue = false)]
+        [JsonPropertyName("userAgent")]
         public string UserAgent { get; set; }
 
         /// <summary>
         /// Gets or Sets BotProbability
         /// </summary>
         [DataMember(Name = "botProbability", EmitDefaultValue = false)]
+        [JsonPropertyName("botProbability")]
         public int? BotProbability { get; set; }
 
         /// <summary>
@@ -192,7 +212,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of BrowserDetails to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(BrowserDetails input)
+        public bool Equals(BrowserDetails input)
         {
             if (input == null)
                 return false;

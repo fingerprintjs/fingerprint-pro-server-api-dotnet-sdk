@@ -10,6 +10,8 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Web;
+using FingerprintPro.ServerSdk.Api;
 
 namespace FingerprintPro.ServerSdk.Client
 {
@@ -19,7 +21,7 @@ namespace FingerprintPro.ServerSdk.Client
     public class ApiClient
     {
 
-        private JsonSerializerOptions serializerOptions = new JsonSerializerOptions
+        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
         {
             Converters = { new JsonStringEnumConverter() },
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
@@ -31,7 +33,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// </summary>
         /// <value>An instance of the HttpClient</value>
         public HttpClient Client { get; set; }
-        
+
         /// <summary>
         /// Gets or sets an instance of the IReadableConfiguration.
         /// </summary>
@@ -55,5 +57,82 @@ namespace FingerprintPro.ServerSdk.Client
             Client = new HttpClient();
             Client.BaseAddress = new Uri(Configuration.BasePath);
         }
+
+        public HttpRequestMessage CreateRequestMessage(HttpMethod method, UriBuilder uri)
+        {
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            query["ii"] = $"fingerprint-pro-server-api-dotnet-sdk/{ServerSdk.Client.Configuration.Version}";
+
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
+            {
+                query["api_key"] = this.Configuration.GetApiKeyWithPrefix("api_key");
+            }
+
+            uri.Query = query.ToString();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri.ToString());
+
+            request.Headers.TryAddWithoutValidation("User-Agent", Configuration.UserAgent);
+
+            var apiKey = Configuration.GetApiKeyWithPrefix("Auth-API-Key");
+
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                request.Headers.TryAddWithoutValidation("Auth-API-Key", apiKey);
+            }
+
+            return request;
+        }
+
+        public T? Deserialize<T>(string data)
+        {
+            return JsonSerializer.Deserialize<T>(data, _serializerOptions);
+        }
+
+        public UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
+        {
+            var uri = new UriBuilder(Configuration.BasePath)
+            {
+                Path = definition.GetPath(args)
+            };
+
+
+            return uri;
+        }
+
+        public async Task<ApiResponse<T>> DoRequest<T>(OperationDefinition definition, HttpMethod method, params string[] args)
+        {
+            var path = GetRequestPath(definition, args);
+            var request = CreateRequestMessage(method, path);
+
+            var response = await Client.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw HandleException(definition.OperationName, response, responseContent, definition);
+
+
+            var data = Deserialize<T>(responseContent);
+
+            return new ApiResponse<T>(response, data!);
+
+        }
+
+        private Exception HandleException(string methodName, HttpResponseMessage response, string responseContent,
+            OperationDefinition operationDefinition)
+        {
+            var statusCode = (int)response.StatusCode;
+
+            var instance = operationDefinition.GetResponse(statusCode, responseContent);
+
+            if (instance is Exception exception)
+            {
+                return exception;
+            }
+
+            return new ApiException(statusCode,
+                $"Error calling {methodName}: {response.ReasonPhrase}", response.Content);
+        }
+
     }
 }

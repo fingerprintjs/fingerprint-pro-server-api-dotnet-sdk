@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// EmulatorResult
     /// </summary>
     [DataContract]
-    public class EmulatorResult : Model<EmulatorResult>
+    public class EmulatorResult : IEquatable<EmulatorResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmulatorResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public EmulatorResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: EmulatorResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of EmulatorResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(EmulatorResult input)
+        public bool Equals(EmulatorResult input)
         {
             if (input == null)
                 return false;

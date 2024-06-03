@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// VirtualMachineResult
     /// </summary>
     [DataContract]
-    public class VirtualMachineResult : Model<VirtualMachineResult>
+    public class VirtualMachineResult : IEquatable<VirtualMachineResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMachineResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public VirtualMachineResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: VirtualMachineResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of VirtualMachineResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(VirtualMachineResult input)
+        public bool Equals(VirtualMachineResult input)
         {
             if (input == null)
                 return false;

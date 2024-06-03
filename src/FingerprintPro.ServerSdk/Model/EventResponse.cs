@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Contains results from all activated products - Fingerprint Pro, Bot Detection, and others.
     /// </summary>
     [DataContract]
-    public class EventResponse : Model<EventResponse>
+    public class EventResponse : IEquatable<EventResponse>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EventResponse" /> class.
         /// </summary>
@@ -27,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public EventResponse(ProductsResponse products = default(ProductsResponse), ProductError error = default(ProductError))
         {
             // to ensure "products" is required (not null)
+            // swagger debug: EventResponse Products
 
             if (products == null)
             {
@@ -43,12 +49,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Products
         /// </summary>
         [DataMember(Name = "products", EmitDefaultValue = false)]
+        [JsonPropertyName("products")]
         public ProductsResponse Products { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ProductError Error { get; set; }
 
         /// <summary>
@@ -84,7 +92,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of EventResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(EventResponse input)
+        public bool Equals(EventResponse input)
         {
             if (input == null)
                 return false;

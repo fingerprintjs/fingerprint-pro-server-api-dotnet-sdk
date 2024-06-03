@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// LocationSpoofingResult
     /// </summary>
     [DataContract]
-    public class LocationSpoofingResult : Model<LocationSpoofingResult>
+    public class LocationSpoofingResult : IEquatable<LocationSpoofingResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationSpoofingResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public LocationSpoofingResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: LocationSpoofingResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag indicating whether the request came from a mobile device with location spoofing enabled.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of LocationSpoofingResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(LocationSpoofingResult input)
+        public bool Equals(LocationSpoofingResult input)
         {
             if (input == null)
                 return false;

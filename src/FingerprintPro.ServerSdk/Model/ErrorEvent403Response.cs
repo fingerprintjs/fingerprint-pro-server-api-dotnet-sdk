@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ErrorEvent403Response
     /// </summary>
     [DataContract]
-    public class ErrorEvent403Response : Model<ErrorEvent403Response>
+    public class ErrorEvent403Response : IEquatable<ErrorEvent403Response>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorEvent403Response" /> class.
         /// </summary>
@@ -32,6 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ErrorEvent403ResponseError Error { get; set; }
 
         /// <summary>
@@ -66,7 +72,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ErrorEvent403Response to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ErrorEvent403Response input)
+        public bool Equals(ErrorEvent403Response input)
         {
             if (input == null)
                 return false;

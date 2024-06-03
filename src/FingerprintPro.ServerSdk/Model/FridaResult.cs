@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// FridaResult
     /// </summary>
     [DataContract]
-    public class FridaResult : Model<FridaResult>
+    public class FridaResult : IEquatable<FridaResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FridaResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public FridaResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: FridaResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>[Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: • `true` - Frida detected • `false` - No signs of Frida or the client is not a mobile device. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of FridaResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(FridaResult input)
+        public bool Equals(FridaResult input)
         {
             if (input == null)
                 return false;

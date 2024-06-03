@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ClonedAppResult
     /// </summary>
     [DataContract]
-    public class ClonedAppResult : Model<ClonedAppResult>
+    public class ClonedAppResult : IEquatable<ClonedAppResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ClonedAppResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ClonedAppResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: ClonedAppResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Android specific cloned application detection. There are 2 values: • `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). • `false` - No signs of cloned application detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ClonedAppResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ClonedAppResult input)
+        public bool Equals(ClonedAppResult input)
         {
             if (input == null)
                 return false;

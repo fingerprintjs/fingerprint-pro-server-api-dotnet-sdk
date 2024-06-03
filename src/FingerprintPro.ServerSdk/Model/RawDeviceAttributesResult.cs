@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// It includes 35+ raw browser identification attributes to provide Fingerprint users with even more information than our standard visitor ID provides. This enables Fingerprint users to not have to run our open-source product in conjunction with Fingerprint Pro Plus and Enterprise to get those additional attributes. Warning: The raw signals data can change at any moment as we improve the product. We cannot guarantee the internal shape of raw device attributes to be stable, so typical semantic versioning rules do not apply here. Use this data with caution without assuming a specific structure beyond the generic type provided here. 
     /// </summary>
     [DataContract]
-    public class RawDeviceAttributesResult : Dictionary<String, Object>, Model<RawDeviceAttributesResult>
+    public class RawDeviceAttributesResult : Dictionary<String, Object>, IEquatable<RawDeviceAttributesResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RawDeviceAttributesResult" /> class.
         /// </summary>
@@ -58,7 +63,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of RawDeviceAttributesResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(RawDeviceAttributesResult input)
+        public bool Equals(RawDeviceAttributesResult input)
         {
             if (input == null)
                 return false;

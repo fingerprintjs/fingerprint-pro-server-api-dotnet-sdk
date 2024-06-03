@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IPLocationCity
     /// </summary>
     [DataContract]
-    public class IPLocationCity : Model<IPLocationCity>
+    public class IPLocationCity : IEquatable<IPLocationCity>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IPLocationCity" /> class.
         /// </summary>
@@ -32,6 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -66,7 +72,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IPLocationCity to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(IPLocationCity input)
+        public bool Equals(IPLocationCity input)
         {
             if (input == null)
                 return false;

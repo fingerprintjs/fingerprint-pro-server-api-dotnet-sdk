@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SignalResponseJailbroken
     /// </summary>
     [DataContract]
-    public class SignalResponseJailbroken : Model<SignalResponseJailbroken>
+    public class SignalResponseJailbroken : IEquatable<SignalResponseJailbroken>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseJailbroken" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
         public JailbrokenResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ProductError Error { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SignalResponseJailbroken to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(SignalResponseJailbroken input)
+        public bool Equals(SignalResponseJailbroken input)
         {
             if (input == null)
                 return false;

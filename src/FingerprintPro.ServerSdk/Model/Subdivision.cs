@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Subdivision
     /// </summary>
     [DataContract]
-    public class Subdivision : Model<Subdivision>
+    public class Subdivision : IEquatable<Subdivision>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Subdivision" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets IsoCode
         /// </summary>
         [DataMember(Name = "isoCode", EmitDefaultValue = false)]
+        [JsonPropertyName("isoCode")]
         public string IsoCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Subdivision to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(Subdivision input)
+        public bool Equals(Subdivision input)
         {
             if (input == null)
                 return false;

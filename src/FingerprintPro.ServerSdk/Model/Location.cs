@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Location
     /// </summary>
     [DataContract]
-    public class Location : Model<Location>
+    public class Location : IEquatable<Location>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Location" /> class.
         /// </summary>
@@ -27,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public Location(string code = default(string), string name = default(string))
         {
             // to ensure "code" is required (not null)
+            // swagger debug: Location Code
 
             if (code == null)
             {
@@ -37,6 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Code = code;
             }
             // to ensure "name" is required (not null)
+            // swagger debug: Location Name
 
             if (name == null)
             {
@@ -52,12 +59,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Code
         /// </summary>
         [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -93,7 +102,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Location to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(Location input)
+        public bool Equals(Location input)
         {
             if (input == null)
                 return false;

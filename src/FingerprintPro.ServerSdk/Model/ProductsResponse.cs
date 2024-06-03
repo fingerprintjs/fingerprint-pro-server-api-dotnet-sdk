@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Contains all information about the request identified by `requestId`, depending on the pricing plan (Pro, Pro Plus, Enterprise)
     /// </summary>
     [DataContract]
-    public class ProductsResponse : Model<ProductsResponse>
+    public class ProductsResponse : IEquatable<ProductsResponse>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsResponse" /> class.
         /// </summary>
@@ -72,126 +77,147 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Identification
         /// </summary>
         [DataMember(Name = "identification", EmitDefaultValue = false)]
+        [JsonPropertyName("identification")]
         public ProductsResponseIdentification Identification { get; set; }
 
         /// <summary>
         /// Gets or Sets Botd
         /// </summary>
         [DataMember(Name = "botd", EmitDefaultValue = false)]
+        [JsonPropertyName("botd")]
         public ProductsResponseBotd Botd { get; set; }
 
         /// <summary>
         /// Gets or Sets IpInfo
         /// </summary>
         [DataMember(Name = "ipInfo", EmitDefaultValue = false)]
+        [JsonPropertyName("ipInfo")]
         public SignalResponseIpInfo IpInfo { get; set; }
 
         /// <summary>
         /// Gets or Sets Incognito
         /// </summary>
         [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        [JsonPropertyName("incognito")]
         public SignalResponseIncognito Incognito { get; set; }
 
         /// <summary>
         /// Gets or Sets RootApps
         /// </summary>
         [DataMember(Name = "rootApps", EmitDefaultValue = false)]
+        [JsonPropertyName("rootApps")]
         public SignalResponseRootApps RootApps { get; set; }
 
         /// <summary>
         /// Gets or Sets Emulator
         /// </summary>
         [DataMember(Name = "emulator", EmitDefaultValue = false)]
+        [JsonPropertyName("emulator")]
         public SignalResponseEmulator Emulator { get; set; }
 
         /// <summary>
         /// Gets or Sets ClonedApp
         /// </summary>
         [DataMember(Name = "clonedApp", EmitDefaultValue = false)]
+        [JsonPropertyName("clonedApp")]
         public SignalResponseClonedApp ClonedApp { get; set; }
 
         /// <summary>
         /// Gets or Sets FactoryReset
         /// </summary>
         [DataMember(Name = "factoryReset", EmitDefaultValue = false)]
+        [JsonPropertyName("factoryReset")]
         public SignalResponseFactoryReset FactoryReset { get; set; }
 
         /// <summary>
         /// Gets or Sets Jailbroken
         /// </summary>
         [DataMember(Name = "jailbroken", EmitDefaultValue = false)]
+        [JsonPropertyName("jailbroken")]
         public SignalResponseJailbroken Jailbroken { get; set; }
 
         /// <summary>
         /// Gets or Sets Frida
         /// </summary>
         [DataMember(Name = "frida", EmitDefaultValue = false)]
+        [JsonPropertyName("frida")]
         public SignalResponseFrida Frida { get; set; }
 
         /// <summary>
         /// Gets or Sets IpBlocklist
         /// </summary>
         [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
+        [JsonPropertyName("ipBlocklist")]
         public SignalResponseIpBlocklist IpBlocklist { get; set; }
 
         /// <summary>
         /// Gets or Sets Tor
         /// </summary>
         [DataMember(Name = "tor", EmitDefaultValue = false)]
+        [JsonPropertyName("tor")]
         public SignalResponseTor Tor { get; set; }
 
         /// <summary>
         /// Gets or Sets PrivacySettings
         /// </summary>
         [DataMember(Name = "privacySettings", EmitDefaultValue = false)]
+        [JsonPropertyName("privacySettings")]
         public SignalResponsePrivacySettings PrivacySettings { get; set; }
 
         /// <summary>
         /// Gets or Sets VirtualMachine
         /// </summary>
         [DataMember(Name = "virtualMachine", EmitDefaultValue = false)]
+        [JsonPropertyName("virtualMachine")]
         public SignalResponseVirtualMachine VirtualMachine { get; set; }
 
         /// <summary>
         /// Gets or Sets Vpn
         /// </summary>
         [DataMember(Name = "vpn", EmitDefaultValue = false)]
+        [JsonPropertyName("vpn")]
         public SignalResponseVpn Vpn { get; set; }
 
         /// <summary>
         /// Gets or Sets Proxy
         /// </summary>
         [DataMember(Name = "proxy", EmitDefaultValue = false)]
+        [JsonPropertyName("proxy")]
         public SignalResponseProxy Proxy { get; set; }
 
         /// <summary>
         /// Gets or Sets Tampering
         /// </summary>
         [DataMember(Name = "tampering", EmitDefaultValue = false)]
+        [JsonPropertyName("tampering")]
         public SignalResponseTampering Tampering { get; set; }
 
         /// <summary>
         /// Gets or Sets HighActivity
         /// </summary>
         [DataMember(Name = "highActivity", EmitDefaultValue = false)]
+        [JsonPropertyName("highActivity")]
         public SignalResponseHighActivity HighActivity { get; set; }
 
         /// <summary>
         /// Gets or Sets LocationSpoofing
         /// </summary>
         [DataMember(Name = "locationSpoofing", EmitDefaultValue = false)]
+        [JsonPropertyName("locationSpoofing")]
         public SignalResponseLocationSpoofing LocationSpoofing { get; set; }
 
         /// <summary>
         /// Gets or Sets SuspectScore
         /// </summary>
         [DataMember(Name = "suspectScore", EmitDefaultValue = false)]
+        [JsonPropertyName("suspectScore")]
         public SignalResponseSuspectScore SuspectScore { get; set; }
 
         /// <summary>
         /// Gets or Sets RawDeviceAttributes
         /// </summary>
         [DataMember(Name = "rawDeviceAttributes", EmitDefaultValue = false)]
+        [JsonPropertyName("rawDeviceAttributes")]
         public SignalResponseRawDeviceAttributes RawDeviceAttributes { get; set; }
 
         /// <summary>
@@ -246,7 +272,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ProductsResponse input)
+        public bool Equals(ProductsResponse input)
         {
             if (input == null)
                 return false;

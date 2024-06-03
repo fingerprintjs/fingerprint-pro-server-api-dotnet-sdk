@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// FactoryResetResult
     /// </summary>
     [DataContract]
-    public class FactoryResetResult : Model<FactoryResetResult>
+    public class FactoryResetResult : IEquatable<FactoryResetResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FactoryResetResult" /> class.
         /// </summary>
@@ -27,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public FactoryResetResult(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
             // to ensure "time" is required (not null)
+            // swagger debug: FactoryResetResult Time
 
             if (time == null)
             {
@@ -37,6 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Time = time;
             }
             // to ensure "timestamp" is required (not null)
+            // swagger debug: FactoryResetResult Timestamp
 
             if (timestamp == null)
             {
@@ -53,6 +60,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC. </value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
+        [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
 
         /// <summary>
@@ -60,6 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Same value as it's in the `time` field but represented in timestamp format.</value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }
 
         /// <summary>
@@ -95,7 +104,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of FactoryResetResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(FactoryResetResult input)
+        public bool Equals(FactoryResetResult input)
         {
             if (input == null)
                 return false;

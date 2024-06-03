@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ProxyResult
     /// </summary>
     [DataContract]
-    public class ProxyResult : Model<ProxyResult>
+    public class ProxyResult : IEquatable<ProxyResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProxyResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ProxyResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: ProxyResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProxyResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ProxyResult input)
+        public bool Equals(ProxyResult input)
         {
             if (input == null)
                 return false;

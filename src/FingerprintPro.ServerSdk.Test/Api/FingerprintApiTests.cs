@@ -135,9 +135,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.That(_instance, Is.InstanceOf(typeof(FingerprintApi)), "instance is a FingerprintApi");
         }
 
-        /// <summary>
-        /// Test GetEvent
-        /// </summary>
         [Test]
         public void GetEventTest()
         {
@@ -154,10 +151,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var request = _requests[0];
 
                 Assert.That(request.Headers.Get("User-Agent"),
-                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
                 Assert.That(response.Products.IpInfo.Data.V4.Address, Is.EqualTo("94.142.239.124"));
@@ -185,10 +182,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.PrivacySettings.Data.Result, Is.False);
                 Assert.That(response.Products.VirtualMachine.Data.Result, Is.False);
                 var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
-                Assert.IsTrue(rawDeviceAttributes.ContainsKey("colorGamut"));
-                Assert.IsNotNull(rawDeviceAttributes["colorGamut"]);
-                var colorGamut = (JObject)rawDeviceAttributes["colorGamut"];
-                Assert.That(colorGamut["value"].ToString(), Is.EqualTo("p3"));
+                Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
+                Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);
+                var colorGamut = (System.Text.Json.JsonElement)rawDeviceAttributes["colorGamut"];
+                Assert.That(colorGamut.GetProperty("value").ToString(), Is.EqualTo("p3"));
             });
         }
 
@@ -208,10 +205,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var request = _requests[0];
 
                 Assert.That(request.Headers.Get("User-Agent"),
-                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
             });
@@ -233,10 +230,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var request = _requests[0];
 
                 Assert.That(request.Headers.Get("User-Agent"),
-                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&api_key=123"));
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
@@ -256,13 +253,13 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.PrivacySettings.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.VirtualMachine.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
-                Assert.IsTrue(rawDeviceAttributes.ContainsKey("audio"));
-                Assert.IsNotNull(rawDeviceAttributes["audio"]);
+                Assert.That(rawDeviceAttributes.ContainsKey("audio"), Is.True);
+                Assert.That(rawDeviceAttributes["audio"], Is.Not.Null);
                 var audio = (JObject)rawDeviceAttributes["audio"];
                 var audioError = (JObject)audio["error"];
                 Assert.That(audioError["name"].ToString(), Is.EqualTo("Error"));
-                Assert.IsTrue(rawDeviceAttributes.ContainsKey("canvas"));
-                Assert.IsNotNull(rawDeviceAttributes["canvas"]);
+                Assert.That(rawDeviceAttributes.ContainsKey("canvas"), Is.True);
+                Assert.That(rawDeviceAttributes["canvas"], Is.Not.Null);
                 var canvas = (JObject)rawDeviceAttributes["canvas"];
                 var canvasError = (JObject)canvas["error"];
                 Assert.That(canvasError["name"].ToString(), Is.EqualTo("Error"));
@@ -358,10 +355,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var request = _requests[0];
 
                 Assert.That(request.Headers.Get("User-Agent"),
-                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&request_id={requestId}&limit={limit}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }
@@ -391,10 +388,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var request = _requests[0];
 
                 Assert.That(request.Headers.Get("User-Agent"),
-                    Is.EqualTo($"Swagger-Codegen/{FingerprintApi.Version}/csharp"));
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
-                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{FingerprintApi.Version}&request_id={requestId}&limit={limit}&api_key=123"));
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&request_id={requestId}&limit={limit}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
             });
         }

@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
     /// </summary>
     [DataContract]
-    public class IpInfoResult : Model<IpInfoResult>
+    public class IpInfoResult : IEquatable<IpInfoResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResult" /> class.
         /// </summary>
@@ -34,12 +39,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets V4
         /// </summary>
         [DataMember(Name = "v4", EmitDefaultValue = false)]
+        [JsonPropertyName("v4")]
         public IpInfoResultV4 V4 { get; set; }
 
         /// <summary>
         /// Gets or Sets V6
         /// </summary>
         [DataMember(Name = "v6", EmitDefaultValue = false)]
+        [JsonPropertyName("v6")]
         public IpInfoResultV6 V6 { get; set; }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IpInfoResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(IpInfoResult input)
+        public bool Equals(IpInfoResult input)
         {
             if (input == null)
                 return false;

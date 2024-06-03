@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// VpnResultMethods
     /// </summary>
     [DataContract]
-    public class VpnResultMethods : Model<VpnResultMethods>
+    public class VpnResultMethods : IEquatable<VpnResultMethods>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResultMethods" /> class.
         /// </summary>
@@ -28,6 +33,7 @@ namespace FingerprintPro.ServerSdk.Model
         public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?))
         {
             // to ensure "timezoneMismatch" is required (not null)
+            // swagger debug: VpnResultMethods TimezoneMismatch
 
             if (timezoneMismatch == null)
             {
@@ -38,6 +44,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.TimezoneMismatch = timezoneMismatch;
             }
             // to ensure "publicVPN" is required (not null)
+            // swagger debug: VpnResultMethods PublicVPN
 
             if (publicVPN == null)
             {
@@ -48,6 +55,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.PublicVPN = publicVPN;
             }
             // to ensure "auxiliaryMobile" is required (not null)
+            // swagger debug: VpnResultMethods AuxiliaryMobile
 
             if (auxiliaryMobile == null)
             {
@@ -64,6 +72,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>User's browser timezone doesn't match the timezone from which the request was originally made.</value>
         [DataMember(Name = "timezoneMismatch", EmitDefaultValue = false)]
+        [JsonPropertyName("timezoneMismatch")]
         public bool? TimezoneMismatch { get; set; }
 
         /// <summary>
@@ -71,6 +80,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Request IP address is owned and used by a public VPN service provider.</value>
         [DataMember(Name = "publicVPN", EmitDefaultValue = false)]
+        [JsonPropertyName("publicVPN")]
         public bool? PublicVPN { get; set; }
 
         /// <summary>
@@ -78,6 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices.</value>
         [DataMember(Name = "auxiliaryMobile", EmitDefaultValue = false)]
+        [JsonPropertyName("auxiliaryMobile")]
         public bool? AuxiliaryMobile { get; set; }
 
         /// <summary>
@@ -114,7 +125,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of VpnResultMethods to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(VpnResultMethods input)
+        public bool Equals(VpnResultMethods input)
         {
             if (input == null)
                 return false;

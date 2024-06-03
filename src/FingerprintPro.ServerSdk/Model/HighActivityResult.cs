@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// HighActivityResult
     /// </summary>
     [DataContract]
-    public class HighActivityResult : Model<HighActivityResult>
+    public class HighActivityResult : IEquatable<HighActivityResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HighActivityResult" /> class.
         /// </summary>
@@ -27,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public HighActivityResult(bool? result = default(bool?), decimal? dailyRequests = default(decimal?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: HighActivityResult Result
 
             if (result == null)
             {
@@ -44,6 +50,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag indicating whether the request came from a high activity visitor.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -51,6 +58,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Number of requests from the same visitor in the previous day.</value>
         [DataMember(Name = "dailyRequests", EmitDefaultValue = false)]
+        [JsonPropertyName("dailyRequests")]
         public decimal? DailyRequests { get; set; }
 
         /// <summary>
@@ -86,7 +94,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of HighActivityResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(HighActivityResult input)
+        public bool Equals(HighActivityResult input)
         {
             if (input == null)
                 return false;

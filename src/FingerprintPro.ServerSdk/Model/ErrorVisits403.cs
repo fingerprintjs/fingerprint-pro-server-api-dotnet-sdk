@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ErrorVisits403
     /// </summary>
     [DataContract]
-    public class ErrorVisits403 : Model<ErrorVisits403>
+    public class ErrorVisits403 : IEquatable<ErrorVisits403>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorVisits403" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ErrorVisits403(string error = default(string))
         {
             // to ensure "error" is required (not null)
+            // swagger debug: ErrorVisits403 Error
 
             if (error == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Error text.</value>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public string Error { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ErrorVisits403 to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ErrorVisits403 input)
+        public bool Equals(ErrorVisits403 input)
         {
             if (input == null)
                 return false;

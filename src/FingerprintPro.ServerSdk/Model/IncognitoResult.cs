@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IncognitoResult
     /// </summary>
     [DataContract]
-    public class IncognitoResult : Model<IncognitoResult>
+    public class IncognitoResult : IEquatable<IncognitoResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IncognitoResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IncognitoResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: IncognitoResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if we detected incognito mode used in the browser, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IncognitoResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(IncognitoResult input)
+        public bool Equals(IncognitoResult input)
         {
             if (input == null)
                 return false;

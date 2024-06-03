@@ -1,7 +1,7 @@
-/* 
+/*
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -10,15 +10,20 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ASN
+    /// ASN. Note: This mode is excluded from swagger codegen, because it sets the Asn property as _Asn, which breaks json serialization.
     /// </summary>
     [DataContract]
-    public class ASN : Model<ASN>
+    public class ASN : IEquatable<ASN>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ASN" /> class.
         /// </summary>
@@ -28,6 +33,7 @@ namespace FingerprintPro.ServerSdk.Model
         public ASN(string asn = default(string), string network = default(string), string name = default(string))
         {
             // to ensure "asn" is required (not null)
+            // swagger debug: ASN Asn
 
             if (asn == null)
             {
@@ -35,9 +41,10 @@ namespace FingerprintPro.ServerSdk.Model
             }
             else
             {
-                this._Asn = asn;
+                this.Asn = asn;
             }
             // to ensure "network" is required (not null)
+            // swagger debug: ASN Network
 
             if (network == null)
             {
@@ -51,21 +58,24 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Gets or Sets _Asn
+        /// Gets or Sets Asn
         /// </summary>
         [DataMember(Name = "asn", EmitDefaultValue = false)]
-        public string _Asn { get; set; }
+        [JsonPropertyName("asn")]
+        public string Asn { get; set; }
 
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
         [DataMember(Name = "network", EmitDefaultValue = false)]
+        [JsonPropertyName("network")]
         public string Network { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace FingerprintPro.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ASN {\n");
-            sb.Append("  _Asn: ").Append(_Asn).Append("\n");
+            sb.Append("  Asn: ").Append(Asn).Append("\n");
             sb.Append("  Network: ").Append(Network).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -102,16 +112,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ASN to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(ASN input)
+        public bool Equals(ASN input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this._Asn == input._Asn ||
-                (this._Asn != null &&
-                this._Asn.Equals(input._Asn))
+                this.Asn == input.Asn ||
+                (this.Asn != null &&
+                this.Asn.Equals(input.Asn))
                 ) &&
                 (
                 this.Network == input.Network ||
@@ -134,8 +144,8 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._Asn != null)
-                    hashCode = hashCode * 59 + this._Asn.GetHashCode();
+                if (this.Asn != null)
+                    hashCode = hashCode * 59 + this.Asn.GetHashCode();
                 if (this.Network != null)
                     hashCode = hashCode * 59 + this.Network.GetHashCode();
                 if (this.Name != null)

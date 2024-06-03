@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// JailbrokenResult
     /// </summary>
     [DataContract]
-    public class JailbrokenResult : Model<JailbrokenResult>
+    public class JailbrokenResult : IEquatable<JailbrokenResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JailbrokenResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public JailbrokenResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: JailbrokenResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>iOS specific jailbreak detection. There are 2 values: • `true` - Jailbreak detected • `false` - No signs of jailbreak or the client is not iOS. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of JailbrokenResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(JailbrokenResult input)
+        public bool Equals(JailbrokenResult input)
         {
             if (input == null)
                 return false;

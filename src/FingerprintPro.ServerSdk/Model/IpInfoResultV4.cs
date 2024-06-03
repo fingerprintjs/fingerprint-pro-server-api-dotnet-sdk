@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpInfoResultV4
     /// </summary>
     [DataContract]
-    public class IpInfoResultV4 : Model<IpInfoResultV4>
+    public class IpInfoResultV4 : IEquatable<IpInfoResultV4>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResultV4" /> class.
         /// </summary>
@@ -29,6 +34,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IpInfoResultV4(string address = default(string), IPLocation geolocation = default(IPLocation), ASN asn = default(ASN), DataCenter datacenter = default(DataCenter))
         {
             // to ensure "address" is required (not null)
+            // swagger debug: IpInfoResultV4 Address
 
             if (address == null)
             {
@@ -39,6 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Address = address;
             }
             // to ensure "geolocation" is required (not null)
+            // swagger debug: IpInfoResultV4 Geolocation
 
             if (geolocation == null)
             {
@@ -56,24 +63,28 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", EmitDefaultValue = false)]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets Geolocation
         /// </summary>
         [DataMember(Name = "geolocation", EmitDefaultValue = false)]
+        [JsonPropertyName("geolocation")]
         public IPLocation Geolocation { get; set; }
 
         /// <summary>
         /// Gets or Sets Asn
         /// </summary>
         [DataMember(Name = "asn", EmitDefaultValue = false)]
+        [JsonPropertyName("asn")]
         public ASN Asn { get; set; }
 
         /// <summary>
         /// Gets or Sets Datacenter
         /// </summary>
         [DataMember(Name = "datacenter", EmitDefaultValue = false)]
+        [JsonPropertyName("datacenter")]
         public DataCenter Datacenter { get; set; }
 
         /// <summary>
@@ -111,7 +122,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IpInfoResultV4 to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(IpInfoResultV4 input)
+        public bool Equals(IpInfoResultV4 input)
         {
             if (input == null)
                 return false;

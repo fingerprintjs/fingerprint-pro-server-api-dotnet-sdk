@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SuspectScoreResult
     /// </summary>
     [DataContract]
-    public class SuspectScoreResult : Model<SuspectScoreResult>
+    public class SuspectScoreResult : IEquatable<SuspectScoreResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SuspectScoreResult" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public SuspectScoreResult(int? result = default(int?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: SuspectScoreResult Result
 
             if (result == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public int? Result { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SuspectScoreResult to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(SuspectScoreResult input)
+        public bool Equals(SuspectScoreResult input)
         {
             if (input == null)
                 return false;

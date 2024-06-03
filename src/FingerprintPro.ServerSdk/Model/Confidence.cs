@@ -10,6 +10,9 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.ComponentModel;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -17,8 +20,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Confidence
     /// </summary>
     [DataContract]
-    public class Confidence : Model<Confidence>
+    public class Confidence : IEquatable<Confidence>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Confidence" /> class.
         /// </summary>
@@ -26,6 +31,7 @@ namespace FingerprintPro.ServerSdk.Model
         public Confidence(float? score = default(float?))
         {
             // to ensure "score" is required (not null)
+            // swagger debug: Confidence Score
 
             if (score == null)
             {
@@ -42,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification.</value>
         [DataMember(Name = "score", EmitDefaultValue = false)]
+        [JsonPropertyName("score")]
         public float? Score { get; set; }
 
         /// <summary>
@@ -76,7 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Confidence to be compared</param>
         /// <returns>Boolean</returns>
-        public override bool Equals(Confidence input)
+        public bool Equals(Confidence input)
         {
             if (input == null)
                 return false;
