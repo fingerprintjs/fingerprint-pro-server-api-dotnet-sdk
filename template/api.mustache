@@ -79,11 +79,11 @@ namespace {{packageName}}.{{apiPackage}}
 
             public override string[] PathParams => new[] { {{#pathParams}}"{{baseName}}",{{/pathParams}} };
 
-            public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+            public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {
         {{#responses}}{{#dataType}}
                 {
-                    {{code}}, () => new {{dataType}}()
+                    {{code}}, typeof({{dataType}})
                 },
         {{/dataType}}{{/responses}}
             };

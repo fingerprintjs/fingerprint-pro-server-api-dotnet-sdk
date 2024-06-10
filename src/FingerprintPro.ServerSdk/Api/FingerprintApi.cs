@@ -137,16 +137,16 @@ namespace FingerprintPro.ServerSdk.Api
 
         public override string[] PathParams => new[] { "request_id", };
 
-        public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+        public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {
                 {
-                    200, () => new EventResponse()
+                    200, typeof(EventResponse)
                 },
                 {
-                    403, () => new ErrorEvent403Response()
+                    403, typeof(ErrorEvent403Response)
                 },
                 {
-                    404, () => new ErrorEvent404Response()
+                    404, typeof(ErrorEvent404Response)
                 },
             };
     }
@@ -158,16 +158,16 @@ namespace FingerprintPro.ServerSdk.Api
 
         public override string[] PathParams => new[] { "visitor_id", };
 
-        public override Dictionary<int, Func<object>> ResponseStatusCodeMap => new()
+        public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {
                 {
-                    200, () => new Response()
+                    200, typeof(Response)
                 },
                 {
-                    403, () => new ErrorVisits403()
+                    403, typeof(ErrorVisits403)
                 },
                 {
-                    429, () => new ManyRequestsResponse()
+                    429, typeof(ManyRequestsResponse)
                 },
             };
     }

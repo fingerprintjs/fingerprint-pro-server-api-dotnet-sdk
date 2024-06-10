@@ -1,9 +1,5 @@
 using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
 using FingerprintPro.ServerSdk.Model;
 
 namespace FingerprintPro.ServerSdk.Api;
@@ -11,8 +7,6 @@ namespace FingerprintPro.ServerSdk.Api;
 public class FingerprintApi : IFingerprintApi
 {
     private readonly ApiClient _apiClient;
-
-    private ExceptionFactory _exceptionFactory = (name, response) => null;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FingerprintApi"/> class
@@ -36,17 +30,17 @@ public class FingerprintApi : IFingerprintApi
     }
 
 
-    public Response GetVisits(string visitorId, string requestId = null, string linkedId = null, int? limit = null,
-        string paginationKey = null, long? before = null)
+    public Response GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
+        string? paginationKey = null, long? before = null)
     {
-        throw new NotImplementedException();
+        return GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Data;
     }
 
-    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string requestId = null,
-        string linkedId = null, int? limit = null,
-        string paginationKey = null, long? before = null)
+    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string? requestId = null,
+        string? linkedId = null, int? limit = null,
+        string? paginationKey = null, long? before = null)
     {
-        throw new NotImplementedException();
+        return GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Result;
     }
 
     public async Task<EventResponse> GetEventAsync(string requestId)
@@ -54,74 +48,77 @@ public class FingerprintApi : IFingerprintApi
         return (await GetEventAsyncWithHttpInfo(requestId)).Data;
     }
 
-    public async Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
+    public Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
     {
         var definition = new GetEventDefinition();
 
-        return await _apiClient.DoRequest<EventResponse>(definition, HttpMethod.Get, requestId);
+        var request = new ApiRequest
+        {
+            OperationDefinition = definition,
+            Method = HttpMethod.Get,
+            Args = new[] { requestId },
+        };
+
+        return _apiClient.DoRequest<EventResponse>(request);
     }
 
-    public Task<Response> GetVisitsAsync(string visitorId, string requestId = null, string linkedId = null,
+    public async Task<Response> GetVisitsAsync(string visitorId, string? requestId = null, string? linkedId = null,
         int? limit = null,
-        string paginationKey = null, long? before = null)
+        string? paginationKey = null, long? before = null)
     {
-        throw new NotImplementedException();
+        return (await GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before)).Data;
     }
 
-    public async Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null,
-        string linkedId = null, int? limit = null,
-        string paginationKey = null, long? before = null)
+    public Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string? requestId = null,
+        string? linkedId = null, int? limit = null,
+        string? paginationKey = null, long? before = null)
     {
-        Dictionary<string, dynamic> queryParams = new();
+        Dictionary<string, string> queryParams = new();
 
         if (!string.IsNullOrEmpty(requestId))
         {
-            queryParams.Add("request_id", requestId);
-
+            queryParams.Add("request_id", requestId!);
         }
 
         if (!string.IsNullOrEmpty(linkedId))
         {
-            queryParams.Add("linked_id", linkedId);
+            queryParams.Add("linked_id", linkedId!);
         }
 
         if (limit != null)
         {
-            queryParams.Add("limit", limit);
+            var limitStr = limit.ToString();
+
+            if (!string.IsNullOrEmpty(limitStr))
+            {
+                queryParams.Add("limit", limitStr);
+            }
         }
 
         if (!string.IsNullOrEmpty(paginationKey))
         {
-            queryParams.Add("paginationKey", paginationKey);
+            queryParams.Add("paginationKey", paginationKey!);
         }
 
         if (before != null)
         {
-            queryParams.Add("before", before);
+            var beforeStr = before.ToString();
+
+            if (!string.IsNullOrEmpty(beforeStr))
+            {
+                queryParams.Add("before", beforeStr);
+            }
         }
 
         var definition = new GetVisitsDefinition();
-        var path = _apiClient.GetRequestPath(definition, visitorId);
-
-        var request = _apiClient.CreateRequestMessage(HttpMethod.Get, path);
-        var response = await _apiClient.Client.SendAsync(request);
-
-        throw new NotImplementedException();
-    }
-
-    private Exception HandleException(string methodName, HttpResponseMessage response, string responseContent,
-        OperationDefinition operationDefinition)
-    {
-        var statusCode = (int)response.StatusCode;
-
-        var instance = operationDefinition.GetResponse(statusCode, responseContent);
-
-        if (instance is Exception exception)
+        var request = new ApiRequest()
         {
-            return exception;
-        }
+            OperationDefinition = definition,
+            Method = HttpMethod.Get,
+            Args = new[] { visitorId },
+            QueryParams = queryParams
+        };
 
-        return new ApiException(statusCode,
-            $"Error calling {methodName}: {response.ReasonPhrase}", response.Content);
+        return _apiClient.DoRequest<Response>(request);
     }
 }

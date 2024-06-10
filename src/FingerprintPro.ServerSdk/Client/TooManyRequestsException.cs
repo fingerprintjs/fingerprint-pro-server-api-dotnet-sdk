@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace FingerprintPro.ServerSdk.Client
 {
     /// <summary>
@@ -14,9 +16,9 @@ namespace FingerprintPro.ServerSdk.Client
         /// </summary>
         public int? RetryAfter { get; private set; }
 
-        public TooManyRequestsException(string message, int? retryAfter) : base(TooManyRequestsCode, message)
+        public TooManyRequestsException(string message, HttpResponseMessage responseMessage, int? retryAfter) : base(TooManyRequestsCode, message, responseMessage)
         {
-            this.RetryAfter = retryAfter;
+            RetryAfter = retryAfter;
         }
     }
 }

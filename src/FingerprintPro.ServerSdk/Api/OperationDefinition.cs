@@ -11,7 +11,7 @@ public abstract class OperationDefinition
 
     public abstract string[] PathParams { get; }
 
-    public abstract Dictionary<int, Func<object>> ResponseStatusCodeMap { get; }
+    public abstract Dictionary<int, Type> ResponseStatusCodeMap { get; }
 
     public string GetPath(params string[] args)
     {
@@ -23,17 +23,5 @@ public abstract class OperationDefinition
         }
 
         return path;
-    }
-
-    public dynamic? GetResponse(int statusCode, string body)
-    {
-        var model = ResponseStatusCodeMap[statusCode]?.Invoke();
-
-        if (model != null)
-        {
-            return JsonSerializer.Deserialize(body, model.GetType());
-        }
-
-        throw new Exception("Unknown status code: " + statusCode);
     }
 }
