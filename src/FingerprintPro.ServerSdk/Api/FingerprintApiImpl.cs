@@ -1,5 +1,6 @@
 using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
+using System.Net.Http;
 
 namespace FingerprintPro.ServerSdk.Api;
 
