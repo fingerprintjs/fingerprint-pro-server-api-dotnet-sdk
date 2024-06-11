@@ -26,7 +26,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="Confidence" /> class.
         /// </summary>
         /// <param name="score">The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification. (required).</param>
-        public Confidence(float? score = default(float?))
+        /// <param name="revision">The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method..</param>
+        public Confidence(float? score = default(float?), string revision = default(string))
         {
             // to ensure "score" is required (not null)
             // swagger debug: Confidence Score
@@ -39,6 +40,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Score = score;
             }
+            this.Revision = revision;
         }
 
         /// <summary>
@@ -50,6 +52,14 @@ namespace FingerprintPro.ServerSdk.Model
         public float? Score { get; set; }
 
         /// <summary>
+        /// The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.
+        /// </summary>
+        /// <value>The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.</value>
+        [DataMember(Name = "revision", EmitDefaultValue = false)]
+        [JsonPropertyName("revision")]
+        public string Revision { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -58,6 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class Confidence {\n");
             sb.Append("  Score: ").Append(Score).Append("\n");
+            sb.Append("  Revision: ").Append(Revision).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,6 +102,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Score == input.Score ||
                 (this.Score != null &&
                 this.Score.Equals(input.Score))
+                ) &&
+                (
+                this.Revision == input.Revision ||
+                (this.Revision != null &&
+                this.Revision.Equals(input.Revision))
                 );
         }
 
@@ -105,6 +121,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Score != null)
                     hashCode = hashCode * 59 + this.Score.GetHashCode();
+                if (this.Revision != null)
+                    hashCode = hashCode * 59 + this.Revision.GetHashCode();
                 return hashCode;
             }
         }

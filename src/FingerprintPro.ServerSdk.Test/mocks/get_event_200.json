@@ -259,12 +259,7 @@
         },
         "cpuClass": {},
         "fonts": {
-          "value": [
-            "Arial Unicode MS",
-            "Gill Sans",
-            "Helvetica Neue",
-            "Menlo"
-          ]
+          "value": ["Arial Unicode MS", "Gill Sans", "Helvetica Neue", "Menlo"]
         }
       }
     },
