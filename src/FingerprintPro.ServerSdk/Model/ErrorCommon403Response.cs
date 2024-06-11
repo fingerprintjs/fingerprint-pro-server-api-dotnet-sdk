@@ -15,18 +15,18 @@ using System.Text.Json.Serialization;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent403Response
+    /// ErrorCommon403Response
     /// </summary>
     [DataContract]
-    public class ErrorEvent403Response : IEquatable<ErrorEvent403Response>
+    public class ErrorCommon403Response : IEquatable<ErrorCommon403Response>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent403Response" /> class.
+        /// Initializes a new instance of the <see cref="ErrorCommon403Response" /> class.
         /// </summary>
         /// <param name="error">error.</param>
-        public ErrorEvent403Response(ErrorEvent403ResponseError error = default(ErrorEvent403ResponseError))
+        public ErrorCommon403Response(Common403ErrorResponse error = default(Common403ErrorResponse))
         {
             this.Error = error;
         }
@@ -36,7 +36,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
         [JsonPropertyName("error")]
-        public ErrorEvent403ResponseError Error { get; set; }
+        public Common403ErrorResponse Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -45,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent403Response {\n");
+            sb.Append("class ErrorCommon403Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -66,11 +66,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent403Response instances are equal
+        /// Returns true if ErrorCommon403Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent403Response to be compared</param>
+        /// <param name="input">Instance of ErrorCommon403Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent403Response input)
+        public bool Equals(ErrorCommon403Response input)
         {
             if (input == null)
                 return false;

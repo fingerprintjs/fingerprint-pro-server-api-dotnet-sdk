@@ -15,57 +15,57 @@ using System.Text.Json.Serialization;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent404ResponseError
+    /// ErrorVisitsDelete404ResponseError
     /// </summary>
     [DataContract]
-    public class ErrorEvent404ResponseError : IEquatable<ErrorEvent404ResponseError>
+    public class ErrorVisitsDelete404ResponseError : IEquatable<ErrorVisitsDelete404ResponseError>
     {
         /// <summary>
-        /// Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. 
+        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
         /// </summary>
-        /// <value>Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. </value>
+        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
-            /// Enum RequestNotFound for value: RequestNotFound
+            /// Enum VisitorNotFound for value: VisitorNotFound
             /// </summary>
-            [EnumMember(Value = "RequestNotFound")]
-            RequestNotFound = 1
+            [EnumMember(Value = "VisitorNotFound")]
+            VisitorNotFound = 1
         }
         /// <summary>
-        /// Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. 
+        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
         /// </summary>
-        /// <value>Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. </value>
+        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent404ResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorVisitsDelete404ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted.  (required).</param>
+        /// <param name="code">Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  (required).</param>
         /// <param name="message">message (required).</param>
-        public ErrorEvent404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
+        public ErrorVisitsDelete404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
-            // swagger debug: ErrorEvent404ResponseError Code
+            // swagger debug: ErrorVisitsDelete404ResponseError Code
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for ErrorEvent404ResponseError and cannot be null");
+                throw new InvalidDataException("code is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
             }
             else
             {
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
-            // swagger debug: ErrorEvent404ResponseError Message
+            // swagger debug: ErrorVisitsDelete404ResponseError Message
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for ErrorEvent404ResponseError and cannot be null");
+                throw new InvalidDataException("message is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent404ResponseError {\n");
+            sb.Append("class ErrorVisitsDelete404ResponseError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -110,11 +110,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent404ResponseError instances are equal
+        /// Returns true if ErrorVisitsDelete404ResponseError instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent404ResponseError to be compared</param>
+        /// <param name="input">Instance of ErrorVisitsDelete404ResponseError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent404ResponseError input)
+        public bool Equals(ErrorVisitsDelete404ResponseError input)
         {
             if (input == null)
                 return false;

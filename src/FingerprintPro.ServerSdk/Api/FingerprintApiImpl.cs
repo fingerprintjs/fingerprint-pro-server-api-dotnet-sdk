@@ -1,4 +1,3 @@
-using System.Net.Http;
 using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
 
@@ -19,6 +18,8 @@ public class FingerprintApi : IFingerprintApi
         _apiClient = new ApiClient(configuration);
     }
 
+    #region GetEvent
+
     public EventResponse GetEvent(string requestId)
     {
         return GetEventWithHttpInfo(requestId).Data;
@@ -27,20 +28,6 @@ public class FingerprintApi : IFingerprintApi
     public ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId)
     {
         return GetEventAsyncWithHttpInfo(requestId).Result;
-    }
-
-
-    public Response GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
-        string? paginationKey = null, long? before = null)
-    {
-        return GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Data;
-    }
-
-    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string? requestId = null,
-        string? linkedId = null, int? limit = null,
-        string? paginationKey = null, long? before = null)
-    {
-        return GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Result;
     }
 
     public async Task<EventResponse> GetEventAsync(string requestId)
@@ -62,6 +49,10 @@ public class FingerprintApi : IFingerprintApi
         return _apiClient.DoRequest<EventResponse>(request);
     }
 
+    #endregion
+
+    #region GetVisits
+
     public async Task<Response> GetVisitsAsync(string visitorId, string? requestId = null, string? linkedId = null,
         int? limit = null,
         string? paginationKey = null, long? before = null)
@@ -77,12 +68,12 @@ public class FingerprintApi : IFingerprintApi
 
         if (!string.IsNullOrEmpty(requestId))
         {
-            queryParams.Add("request_id", requestId!);
+            queryParams.Add("request_id", requestId);
         }
 
         if (!string.IsNullOrEmpty(linkedId))
         {
-            queryParams.Add("linked_id", linkedId!);
+            queryParams.Add("linked_id", linkedId);
         }
 
         if (limit != null)
@@ -97,7 +88,7 @@ public class FingerprintApi : IFingerprintApi
 
         if (!string.IsNullOrEmpty(paginationKey))
         {
-            queryParams.Add("paginationKey", paginationKey!);
+            queryParams.Add("paginationKey", paginationKey);
         }
 
         if (before != null)
@@ -121,4 +112,52 @@ public class FingerprintApi : IFingerprintApi
 
         return _apiClient.DoRequest<Response>(request);
     }
+
+    public Response GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
+        string? paginationKey = null, long? before = null)
+    {
+        return GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Data;
+    }
+
+    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string? requestId = null,
+        string? linkedId = null, int? limit = null,
+        string? paginationKey = null, long? before = null)
+    {
+        return GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Result;
+    }
+
+    #endregion
+
+    #region DeleteVisitorData
+
+    public void DeleteVisitorData(string visitorId)
+    {
+        DeleteVisitorDataWithHttpInfo(visitorId);
+    }
+
+    public ApiResponse<object> DeleteVisitorDataWithHttpInfo(string visitorId)
+    {
+        return DeleteVisitorDataAsyncWithHttpInfo(visitorId).Result;
+    }
+
+    public async Task DeleteVisitorDataAsync(string visitorId)
+    {
+        await DeleteVisitorDataAsyncWithHttpInfo(visitorId);
+    }
+
+    public Task<ApiResponse<object>> DeleteVisitorDataAsyncWithHttpInfo(string visitorId)
+    {
+        var definition = new DeleteVisitorDataDefinition();
+
+        var request = new ApiRequest
+        {
+            OperationDefinition = definition,
+            Method = HttpMethod.Delete,
+            Args = new[] { visitorId }
+        };
+
+        return _apiClient.DoRequestEmpty(request);
+    }
+
+    #endregion
 }

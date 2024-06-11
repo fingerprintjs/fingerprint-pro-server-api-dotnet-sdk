@@ -107,17 +107,27 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine();
 
+                resp.StatusCode = _mockResponseStatusCode ?? (int)HttpStatusCode.OK;
+
+
+                if (_mockResponseHeaders != null)
+                {
+                    foreach (var key in _mockResponseHeaders.AllKeys)
+                    {
+                        var value = _mockResponseHeaders[key];
+
+                        if (value != null)
+                        {
+                            resp.AddHeader(key, value);
+                        }
+                    }
+                }
+
                 if (_mockResponseBytes != null)
                 {
                     resp.ContentType = "application/json";
                     resp.ContentEncoding = Encoding.UTF8;
                     resp.ContentLength64 = _mockResponseBytes.LongLength;
-                    resp.StatusCode = _mockResponseStatusCode ?? (int)HttpStatusCode.OK;
-
-                    foreach (var key in _mockResponseHeaders.AllKeys)
-                    {
-                        resp.AddHeader(key, _mockResponseHeaders[key]);
-                    }
 
                     await resp.OutputStream.WriteAsync(_mockResponseBytes);
                 }
@@ -413,6 +423,65 @@ namespace FingerprintPro.ServerSdk.Test.Api
             await Assert.ThatAsync(async () => await _instance!.GetVisitsAsync(visitorId), Throws
                 .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
+        }
+
+        [Test]
+        public void DeleteVisitorDataTest()
+        {
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            var response = _instance!.DeleteVisitorDataWithHttpInfo(visitorId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/visitors/{visitorId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("DELETE"));
+            });
+        }
+
+        [Test]
+        public async Task DeleteVisitorData403ErrorTest()
+        {
+            SetupMockResponse("delete_visits_403_error.json");
+
+            _mockResponseStatusCode = 403;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorCommon403Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+            );
+        }
+
+        [Test]
+        public async Task DeleteVisitorData404ErrorTest()
+        {
+            SetupMockResponse("delete_visits_404_error.json");
+
+            _mockResponseStatusCode = 404;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorVisitsDelete404Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+            );
         }
     }
 }

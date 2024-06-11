@@ -15,15 +15,15 @@ using System.Text.Json.Serialization;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent403ResponseError
+    /// Common403ErrorResponse
     /// </summary>
     [DataContract]
-    public class ErrorEvent403ResponseError : IEquatable<ErrorEvent403ResponseError>
+    public class Common403ErrorResponse : IEquatable<Common403ErrorResponse>
     {
         /// <summary>
-        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ 
+        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - No Fingerprint application found for specified secret key  * `SubscriptionNotActive` - Fingerprint application is not active  * `WrongRegion` - server and application region differ  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application  
         /// </summary>
-        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ </value>
+        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - No Fingerprint application found for specified secret key  * `SubscriptionNotActive` - Fingerprint application is not active  * `WrongRegion` - server and application region differ  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application  </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
@@ -46,41 +46,46 @@ namespace FingerprintPro.ServerSdk.Model
             /// Enum WrongRegion for value: WrongRegion
             /// </summary>
             [EnumMember(Value = "WrongRegion")]
-            WrongRegion = 4
+            WrongRegion = 4,
+            /// <summary>
+            /// Enum FeatureNotEnabled for value: FeatureNotEnabled
+            /// </summary>
+            [EnumMember(Value = "FeatureNotEnabled")]
+            FeatureNotEnabled = 5
         }
         /// <summary>
-        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ 
+        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - No Fingerprint application found for specified secret key  * `SubscriptionNotActive` - Fingerprint application is not active  * `WrongRegion` - server and application region differ  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application  
         /// </summary>
-        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ </value>
+        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - No Fingerprint application found for specified secret key  * `SubscriptionNotActive` - Fingerprint application is not active  * `WrongRegion` - server and application region differ  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application  </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent403ResponseError" /> class.
+        /// Initializes a new instance of the <see cref="Common403ErrorResponse" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ  (required).</param>
+        /// <param name="code">Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - No Fingerprint application found for specified secret key  * `SubscriptionNotActive` - Fingerprint application is not active  * `WrongRegion` - server and application region differ  * `FeatureNotEnabled` - this feature (for example, Delete API) is not enabled for your application   (required).</param>
         /// <param name="message">message (required).</param>
-        public ErrorEvent403ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
+        public Common403ErrorResponse(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
-            // swagger debug: ErrorEvent403ResponseError Code
+            // swagger debug: Common403ErrorResponse Code
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for ErrorEvent403ResponseError and cannot be null");
+                throw new InvalidDataException("code is a required property for Common403ErrorResponse and cannot be null");
             }
             else
             {
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
-            // swagger debug: ErrorEvent403ResponseError Message
+            // swagger debug: Common403ErrorResponse Message
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for ErrorEvent403ResponseError and cannot be null");
+                throw new InvalidDataException("message is a required property for Common403ErrorResponse and cannot be null");
             }
             else
             {
@@ -103,7 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent403ResponseError {\n");
+            sb.Append("class Common403ErrorResponse {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -125,11 +130,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent403ResponseError instances are equal
+        /// Returns true if Common403ErrorResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent403ResponseError to be compared</param>
+        /// <param name="input">Instance of Common403ErrorResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent403ResponseError input)
+        public bool Equals(Common403ErrorResponse input)
         {
             if (input == null)
                 return false;

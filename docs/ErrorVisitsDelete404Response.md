@@ -1,10 +1,9 @@
-# FingerprintPro.ServerSdk.Model.ErrorEvent404ResponseError
+# FingerprintPro.ServerSdk.Model.ErrorVisitsDelete404Response
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Code** | **string** | Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted.  | 
-**Message** | **string** |  | 
+**Error** | [**ErrorVisitsDelete404ResponseError**](ErrorVisitsDelete404ResponseError.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -108,8 +108,9 @@ All URIs are relative to *https://api.fpjs.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FingerprintApi* | [**GetEvent**](docs/FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by requestId
-*FingerprintApi* | [**GetVisits**](docs/FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitorId
+*FingerprintApi* | [**DeleteVisitorData**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
+*FingerprintApi* | [**GetEvent**](docs/FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
+*FingerprintApi* | [**GetVisits**](docs/FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
@@ -119,16 +120,18 @@ Class | Method | HTTP request | Description
  - [Model.BotdResult](docs/BotdResult.md)
  - [Model.BrowserDetails](docs/BrowserDetails.md)
  - [Model.ClonedAppResult](docs/ClonedAppResult.md)
+ - [Model.Common403ErrorResponse](docs/Common403ErrorResponse.md)
  - [Model.Confidence](docs/Confidence.md)
  - [Model.DataCenter](docs/DataCenter.md)
  - [Model.DeprecatedIPLocation](docs/DeprecatedIPLocation.md)
  - [Model.DeprecatedIPLocationCity](docs/DeprecatedIPLocationCity.md)
  - [Model.EmulatorResult](docs/EmulatorResult.md)
- - [Model.ErrorEvent403Response](docs/ErrorEvent403Response.md)
- - [Model.ErrorEvent403ResponseError](docs/ErrorEvent403ResponseError.md)
+ - [Model.ErrorCommon403Response](docs/ErrorCommon403Response.md)
  - [Model.ErrorEvent404Response](docs/ErrorEvent404Response.md)
  - [Model.ErrorEvent404ResponseError](docs/ErrorEvent404ResponseError.md)
  - [Model.ErrorVisits403](docs/ErrorVisits403.md)
+ - [Model.ErrorVisitsDelete404Response](docs/ErrorVisitsDelete404Response.md)
+ - [Model.ErrorVisitsDelete404ResponseError](docs/ErrorVisitsDelete404ResponseError.md)
  - [Model.EventResponse](docs/EventResponse.md)
  - [Model.FactoryResetResult](docs/FactoryResetResult.md)
  - [Model.FridaResult](docs/FridaResult.md)

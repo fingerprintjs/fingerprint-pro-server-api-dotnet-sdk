@@ -20,34 +20,55 @@ namespace FingerprintPro.ServerSdk.Api
 
         #region Synchronous Operations
         /// <summary>
-        /// Get event by requestId
+        /// Delete data by visitor ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a detailed analysis of an individual request.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. All delete requests are queued:   * Recent data (10 days or newer) belonging to the specified visitor will be deleted within 24 hours. * Data from older (11 days or more) identification events  will be deleted after 90 days.  If you are interested in using this API, please [contact our support team](https://fingerprint.com/support/) to activate it for you. Otherwise, you will receive a 403. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each analysis request.</param>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) you want to delete.</param>
+        /// <returns></returns>
+        void DeleteVisitorData(string visitorId);
+
+        /// <summary>
+        /// Delete data by visitor ID
+        /// </summary>
+        /// <remarks>
+        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. All delete requests are queued:   * Recent data (10 days or newer) belonging to the specified visitor will be deleted within 24 hours. * Data from older (11 days or more) identification events  will be deleted after 90 days.  If you are interested in using this API, please [contact our support team](https://fingerprint.com/support/) to activate it for you. Otherwise, you will receive a 403. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) you want to delete.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteVisitorDataWithHttpInfo(string visitorId);
+        /// <summary>
+        /// Get event by request ID
+        /// </summary>
+        /// <remarks>
+        /// Get a detailed analysis of an individual identification event, including Smart Signals.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each identification request.</param>
         /// <returns>EventResponse</returns>
         EventResponse GetEvent(string requestId);
 
         /// <summary>
-        /// Get event by requestId
+        /// Get event by request ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a detailed analysis of an individual request.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// Get a detailed analysis of an individual identification event, including Smart Signals.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each analysis request.</param>
+        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each identification request.</param>
         /// <returns>ApiResponse of EventResponse</returns>
         ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId);
         /// <summary>
-        /// Get visits by visitorId
+        /// Get visits by visitor ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a history of visits for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
+        /// Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">Unique identifier of the visitor issued by Fingerprint Pro.</param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/docs/js-agent#visitorid) issued by Fingerprint Pro.</param>
         /// <param name="requestId">Filter visits by `requestId`.   Every identification request has a unique identifier associated with it called `requestId`. This identifier is returned to the client in the identification [result](https://dev.fingerprint.com/docs/js-agent#requestid). When you filter visits by `requestId`, only one visit will be returned.  (optional)</param>
         /// <param name="linkedId">Filter visits by your custom identifier.   You can use [`linkedId`](https://dev.fingerprint.com/docs/js-agent#linkedid) to associate identification requests with your own identifier, for example: session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="limit">Limit scanned results.   For performance reasons, the API first scans some number of events before filtering them. Use `limit` to specify how many events are scanned before they are filtered by `requestId` or `linkedId`. Results are always returned sorted by the timestamp (most recent first). By default, the most recent 100 visits are scanned, the maximum is 500.  (optional)</param>
@@ -57,13 +78,13 @@ namespace FingerprintPro.ServerSdk.Api
         Response GetVisits(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
 
         /// <summary>
-        /// Get visits by visitorId
+        /// Get visits by visitor ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a history of visits for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
+        /// Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">Unique identifier of the visitor issued by Fingerprint Pro.</param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/docs/js-agent#visitorid) issued by Fingerprint Pro.</param>
         /// <param name="requestId">Filter visits by `requestId`.   Every identification request has a unique identifier associated with it called `requestId`. This identifier is returned to the client in the identification [result](https://dev.fingerprint.com/docs/js-agent#requestid). When you filter visits by `requestId`, only one visit will be returned.  (optional)</param>
         /// <param name="linkedId">Filter visits by your custom identifier.   You can use [`linkedId`](https://dev.fingerprint.com/docs/js-agent#linkedid) to associate identification requests with your own identifier, for example: session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="limit">Limit scanned results.   For performance reasons, the API first scans some number of events before filtering them. Use `limit` to specify how many events are scanned before they are filtered by `requestId` or `linkedId`. Results are always returned sorted by the timestamp (most recent first). By default, the most recent 100 visits are scanned, the maximum is 500.  (optional)</param>
@@ -74,34 +95,55 @@ namespace FingerprintPro.ServerSdk.Api
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Get event by requestId
+        /// Delete data by visitor ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a detailed analysis of an individual request.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. All delete requests are queued:   * Recent data (10 days or newer) belonging to the specified visitor will be deleted within 24 hours. * Data from older (11 days or more) identification events  will be deleted after 90 days.  If you are interested in using this API, please [contact our support team](https://fingerprint.com/support/) to activate it for you. Otherwise, you will receive a 403. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each analysis request.</param>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) you want to delete.</param>
+        /// <returns>Task of void</returns>
+        Task DeleteVisitorDataAsync(string visitorId);
+
+        /// <summary>
+        /// Delete data by visitor IDe
+        /// </summary>
+        /// <remarks>
+        /// Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. All delete requests are queued:   * Recent data (10 days or newer) belonging to the specified visitor will be deleted within 24 hours. * Data from older (11 days or more) identification events  will be deleted after 90 days.  If you are interested in using this API, please [contact our support team](https://fingerprint.com/support/) to activate it for you. Otherwise, you will receive a 403. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) you want to delete.</param>
+        /// <returns>Task of ApiResponse</returns>
+        Task<ApiResponse<Object>> DeleteVisitorDataAsyncWithHttpInfo(string visitorId);
+        /// <summary>
+        /// Get event by request ID
+        /// </summary>
+        /// <remarks>
+        /// Get a detailed analysis of an individual identification event, including Smart Signals.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each identification request.</param>
         /// <returns>Task of EventResponse</returns>
         Task<EventResponse> GetEventAsync(string requestId);
 
         /// <summary>
-        /// Get event by requestIde
+        /// Get event by request IDe
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a detailed analysis of an individual request.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+        /// Get a detailed analysis of an individual identification event, including Smart Signals.  **Only for Enterprise customers:** Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each analysis request.</param>
+        /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each identification request.</param>
         /// <returns>Task of ApiResponse (EventResponse)</returns>
         Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId);
         /// <summary>
-        /// Get visits by visitorId
+        /// Get visits by visitor ID
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a history of visits for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
+        /// Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">Unique identifier of the visitor issued by Fingerprint Pro.</param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/docs/js-agent#visitorid) issued by Fingerprint Pro.</param>
         /// <param name="requestId">Filter visits by `requestId`.   Every identification request has a unique identifier associated with it called `requestId`. This identifier is returned to the client in the identification [result](https://dev.fingerprint.com/docs/js-agent#requestid). When you filter visits by `requestId`, only one visit will be returned.  (optional)</param>
         /// <param name="linkedId">Filter visits by your custom identifier.   You can use [`linkedId`](https://dev.fingerprint.com/docs/js-agent#linkedid) to associate identification requests with your own identifier, for example: session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="limit">Limit scanned results.   For performance reasons, the API first scans some number of events before filtering them. Use `limit` to specify how many events are scanned before they are filtered by `requestId` or `linkedId`. Results are always returned sorted by the timestamp (most recent first). By default, the most recent 100 visits are scanned, the maximum is 500.  (optional)</param>
@@ -111,13 +153,13 @@ namespace FingerprintPro.ServerSdk.Api
         Task<Response> GetVisitsAsync(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
 
         /// <summary>
-        /// Get visits by visitorIde
+        /// Get visits by visitor IDe
         /// </summary>
         /// <remarks>
-        /// This endpoint allows you to get a history of visits for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
+        /// Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
         /// </remarks>
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="visitorId">Unique identifier of the visitor issued by Fingerprint Pro.</param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/docs/js-agent#visitorid) issued by Fingerprint Pro.</param>
         /// <param name="requestId">Filter visits by `requestId`.   Every identification request has a unique identifier associated with it called `requestId`. This identifier is returned to the client in the identification [result](https://dev.fingerprint.com/docs/js-agent#requestid). When you filter visits by `requestId`, only one visit will be returned.  (optional)</param>
         /// <param name="linkedId">Filter visits by your custom identifier.   You can use [`linkedId`](https://dev.fingerprint.com/docs/js-agent#linkedid) to associate identification requests with your own identifier, for example: session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="limit">Limit scanned results.   For performance reasons, the API first scans some number of events before filtering them. Use `limit` to specify how many events are scanned before they are filtered by `requestId` or `linkedId`. Results are always returned sorted by the timestamp (most recent first). By default, the most recent 100 visits are scanned, the maximum is 500.  (optional)</param>
@@ -129,6 +171,24 @@ namespace FingerprintPro.ServerSdk.Api
     }
 
 
+    internal class DeleteVisitorDataDefinition : OperationDefinition
+    {
+        public override string Path => "/visitors/{visitor_id}";
+
+        public override string OperationName => "DeleteVisitorData";
+
+        public override string[] PathParams => new[] { "visitor_id", };
+
+        public override Dictionary<int, Type> ResponseStatusCodeMap => new()
+            {
+                {
+                    403, typeof(ErrorCommon403Response)
+                },
+                {
+                    404, typeof(ErrorVisitsDelete404Response)
+                },
+            };
+    }
     internal class GetEventDefinition : OperationDefinition
     {
         public override string Path => "/events/{request_id}";
@@ -143,7 +203,7 @@ namespace FingerprintPro.ServerSdk.Api
                     200, typeof(EventResponse)
                 },
                 {
-                    403, typeof(ErrorEvent403Response)
+                    403, typeof(ErrorCommon403Response)
                 },
                 {
                     404, typeof(ErrorEvent404Response)
