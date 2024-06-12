@@ -23,14 +23,6 @@ namespace FingerprintPro.ServerSdk.Client
     /// </summary>
     public class ApiClient
     {
-        private readonly JsonSerializerOptions _serializerOptions = new()
-        {
-            Converters = { new JsonEnumMemberStringEnumConverter() },
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            IncludeFields = true,
-
-        };
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
         /// with default base path (https://api.fpjs.io).
@@ -92,11 +84,6 @@ namespace FingerprintPro.ServerSdk.Client
             return request;
         }
 
-        private T? Deserialize<T>(string data)
-        {
-            return JsonSerializer.Deserialize<T>(data, _serializerOptions);
-        }
-
         private UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
         {
             var uri = new UriBuilder(Configuration.BasePath)
@@ -136,7 +123,7 @@ namespace FingerprintPro.ServerSdk.Client
             if (!response.IsSuccessStatusCode)
                 HandleException(definition.OperationName, response, responseContent, definition);
 
-            var data = Deserialize<T>(responseContent);
+            var data = JsonUtils.Deserialize<T>(responseContent);
             return new ApiResponse<T>(response, data!);
         }
 
@@ -150,7 +137,7 @@ namespace FingerprintPro.ServerSdk.Client
 
             if (model != null)
             {
-                var result = JsonSerializer.Deserialize(responseContent, model, _serializerOptions);
+                var result = JsonUtils.Deserialize(responseContent, model);
 
                 if (result is not ManyRequestsResponse)
                     throw new ApiException(statusCode, message, response, result);

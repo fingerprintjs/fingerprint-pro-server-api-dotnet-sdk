@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -48,12 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-
-            return JsonSerializer.Serialize(this, options);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
