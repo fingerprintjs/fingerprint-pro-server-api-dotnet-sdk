@@ -3,7 +3,7 @@
 # clean models and docs before generating
 shopt -s extglob
 rm -f ./src/FingerprintPro.ServerSdk/Model/!(*ASN).cs
-find ./docs -type f ! -name "DecryptionKey.md" ! -name "Sealed.md" -exec rm {} +
+find ./docs -type f ! -name "DecryptionKey.md" ! -name "Sealed.md" ! -name -name "Webhook.md" -exec rm {} +
 
 # jar was downloaded from here https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.34/
 
