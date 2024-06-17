@@ -125,6 +125,67 @@ Console.WriteLine(events.ToJson());
 ```
 To learn more, refer to example located in [src/FingerprintPro.ServerSdk.SealedResultExampleNet7/Program.cs](src/FingerprintPro.ServerSdk.SealedResultExampleNet7/Program.cs).
 
+## Webhook signature validation
+
+This SDK provides utility method for verifying the HMAC signature of the incoming webhook request.
+```csharp
+namespace FingerprintAspNetCore.Areas.Identity.Pages;
+
+using FingerprintPro.ServerSdk;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+[Route("api/[controller]")]
+[ApiController]
+public class WebhookController : ControllerBase
+{
+    [HttpPost]
+    public async Task<IActionResult> Post()
+    {
+        try
+        {
+            var secret = Environment.GetEnvironmentVariable("WEBHOOK_SIGNATURE_SECRET");
+            if (string.IsNullOrEmpty(secret))
+            {
+                return BadRequest(new { message = "Secret key is not configured." });
+            }
+
+            var header = Request.Headers["fpjs-event-signature"].ToString();
+            if (string.IsNullOrEmpty(header))
+            {
+                return BadRequest(new { message = "Missing fpjs-event-signature header." });
+            }
+
+            using var memoryStream = new MemoryStream();
+            await Request.Body.CopyToAsync(memoryStream);
+            var data = memoryStream.ToArray();
+
+            // Validate webhook signature
+            var isValid = Webhook.IsValidWebhookSignature(
+                header,
+                data,
+                secret);
+
+            if (!isValid)
+            {
+                return Forbid(new { message = "Webhook signature is invalid." });
+            }
+
+            // Process the webhook data here
+            return Ok(new { message = "Webhook received." });
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new { error = e.Message });
+        }
+    }
+}
+
+```
+To learn more, refer to example located in [src/FingerprintPro.ServerSdk.WebhookExampleNet8/Program.cs](src/FingerprintPro.ServerSdk.WebhookExampleNet8/Program.cs).
+
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
