@@ -9,7 +9,7 @@
 {{#generatePropertyChanged}}
     [ImplementPropertyChanged]
 {{/generatePropertyChanged}}
-{{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{/netStandard}}
+{{>visibility}} class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{/netStandard}}
 {
 {{#vars}}
     {{#items.isEnum}}
@@ -32,15 +32,18 @@
             /// <value>{{{description}}}</value>
         {{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
+        [JsonPropertyName("{{baseName}}")]
         public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }
     {{/isEnum}}
 {{/vars}}
+
+
 {{#hasRequired}}
     {{^hasOnlyReadOnly}}
         /// <summary>
             /// Initializes a new instance of the <see cref="{{classname}}" /> class.
             /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected {{classname}}() { }
     {{/hasOnlyReadOnly}}
 {{/hasRequired}}
@@ -53,7 +56,7 @@
     {{/isReadOnly}}
 {{/vars}}
 {{#hasOnlyReadOnly}}
-    [JsonConstructorAttribute]
+    [JsonConstructor]
 {{/hasOnlyReadOnly}}
 public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} = {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}default({{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}}){{/defaultValue}}{{^@last}}, {{/@last}}{{/readWriteVars}}){{#parent}} : base({{#parentVars}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/parentVars}}){{/parent}}
 {
@@ -63,6 +66,7 @@ public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isCon
             {{#required}}
                 {{^nullable}}
                     // to ensure "{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}" is required (not null)
+                    // swagger debug: {{classname}} {{name}}
 
                     if ({{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} == null)
                     {
@@ -110,7 +114,8 @@ public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isCon
                 /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}
                 /// </summary>{{#description}}
                 /// <value>{{{description}}}</value>{{/description}}
-            [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]{{#isDate}}
+            [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
+            [JsonPropertyName("{{baseName}}")]{{#isDate}}
                 [JsonConverter(typeof(SwaggerDateConverter))]{{/isDate}}
             public {{{datatype}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
         {{/isEnum}}
@@ -141,7 +146,7 @@ return sb.ToString();
 /// <returns>JSON string presentation of the object</returns>
 public {{#parent}}{{^isArrayModel}}override {{/isArrayModel}}{{/parent}}{{^parent}}virtual {{/parent}}string ToJson()
 {
-return JsonConvert.SerializeObject(this, Formatting.Indented);
+return JsonUtils.Serialize(this);
 }
 
 /// <summary>

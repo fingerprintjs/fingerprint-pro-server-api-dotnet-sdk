@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// RootAppsResult
     /// </summary>
     [DataContract]
-    public partial class RootAppsResult : IEquatable<RootAppsResult>
+    public class RootAppsResult : IEquatable<RootAppsResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RootAppsResult" /> class.
         /// </summary>
@@ -27,6 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         public RootAppsResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: RootAppsResult Result
 
             if (result == null)
             {
@@ -43,6 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Android specific root management apps detection. There are 2 values: • `true` - Root Management Apps detected (e.g. Magisk) • `false` - No Root Management Apps detected or the client isn't Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -64,7 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

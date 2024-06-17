@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,13 +18,13 @@ namespace FingerprintPro.ServerSdk.Model
     /// IdentificationError
     /// </summary>
     [DataContract]
-    public partial class IdentificationError : IEquatable<IdentificationError>
+    public class IdentificationError : IEquatable<IdentificationError>
     {
         /// <summary>
         /// Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error 
         /// </summary>
         /// <value>Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
@@ -43,7 +43,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Error code:  * `429 Too Many Requests` - the limit on secret API key requests per second has been exceeded  * `Failed` - internal server error </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentificationError" /> class.
         /// </summary>
@@ -52,6 +55,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IdentificationError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
+            // swagger debug: IdentificationError Code
 
             if (code == null)
             {
@@ -62,6 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
+            // swagger debug: IdentificationError Message
 
             if (message == null)
             {
@@ -78,6 +83,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
         /// <summary>
@@ -100,7 +106,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

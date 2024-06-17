@@ -41,8 +41,9 @@ public class ApiTests
         var getEvents = () => _api.GetEventAsync("1662542583652.pLBzes");
 
         Assert.That(getEvents,
-        Throws.TypeOf<ApiException>().With.Message.Contains("request id not found").And
-        .Property(nameof(ApiException.ErrorCode)).EqualTo(404));
+            Throws.TypeOf<ApiException>().With.Message.Contains("Error calling GetEvent: Not Found")
+                .And.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                .And.Property(nameof(ApiException.ErrorContent)).InstanceOf(typeof(ErrorEvent404Response)));
     }
 
     [Test]

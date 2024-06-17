@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SignalResponseEmulator
     /// </summary>
     [DataContract]
-    public partial class SignalResponseEmulator : IEquatable<SignalResponseEmulator>
+    public class SignalResponseEmulator : IEquatable<SignalResponseEmulator>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseEmulator" /> class.
         /// </summary>
@@ -35,12 +37,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
         public EmulatorResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ProductError Error { get; set; }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

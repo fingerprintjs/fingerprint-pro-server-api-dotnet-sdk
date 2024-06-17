@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// VpnResult
     /// </summary>
     [DataContract]
-    public partial class VpnResult : IEquatable<VpnResult>
+    public class VpnResult : IEquatable<VpnResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResult" /> class.
         /// </summary>
@@ -30,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public VpnResult(bool? result = default(bool?), string originTimezone = default(string), string originCountry = default(string), VpnResultMethods methods = default(VpnResultMethods))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: VpnResult Result
 
             if (result == null)
             {
@@ -40,6 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result = result;
             }
             // to ensure "originTimezone" is required (not null)
+            // swagger debug: VpnResult OriginTimezone
 
             if (originTimezone == null)
             {
@@ -50,6 +54,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.OriginTimezone = originTimezone;
             }
             // to ensure "methods" is required (not null)
+            // swagger debug: VpnResult Methods
 
             if (methods == null)
             {
@@ -67,6 +72,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>VPN or other anonymizing service has been used when sending the request.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -74,6 +80,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Local timezone which is used in timezoneMismatch method.</value>
         [DataMember(Name = "originTimezone", EmitDefaultValue = false)]
+        [JsonPropertyName("originTimezone")]
         public string OriginTimezone { get; set; }
 
         /// <summary>
@@ -81,12 +88,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).</value>
         [DataMember(Name = "originCountry", EmitDefaultValue = false)]
+        [JsonPropertyName("originCountry")]
         public string OriginCountry { get; set; }
 
         /// <summary>
         /// Gets or Sets Methods
         /// </summary>
         [DataMember(Name = "methods", EmitDefaultValue = false)]
+        [JsonPropertyName("methods")]
         public VpnResultMethods Methods { get; set; }
 
         /// <summary>
@@ -111,7 +120,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

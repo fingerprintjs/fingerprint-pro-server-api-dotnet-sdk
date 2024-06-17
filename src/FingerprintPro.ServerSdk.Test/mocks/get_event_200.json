@@ -178,7 +178,8 @@
         "methods": {
           "timezoneMismatch": false,
           "publicVPN": false,
-          "auxiliaryMobile": false
+          "auxiliaryMobile": false,
+          "osMismatch": false
         }
       }
     },
@@ -258,12 +259,7 @@
         },
         "cpuClass": {},
         "fonts": {
-          "value": [
-            "Arial Unicode MS",
-            "Gill Sans",
-            "Helvetica Neue",
-            "Menlo"
-          ]
+          "value": ["Arial Unicode MS", "Gill Sans", "Helvetica Neue", "Menlo"]
         }
       }
     },

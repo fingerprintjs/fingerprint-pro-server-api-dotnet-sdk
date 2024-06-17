@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// EmulatorResult
     /// </summary>
     [DataContract]
-    public partial class EmulatorResult : IEquatable<EmulatorResult>
+    public class EmulatorResult : IEquatable<EmulatorResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmulatorResult" /> class.
         /// </summary>
@@ -27,6 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         public EmulatorResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: EmulatorResult Result
 
             if (result == null)
             {
@@ -43,6 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Android specific emulator detection. There are 2 values: • `true` - Emulated environment detected (e.g. launch inside of AVD) • `false` - No signs of emulated environment detected or the client is not Android. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -64,7 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

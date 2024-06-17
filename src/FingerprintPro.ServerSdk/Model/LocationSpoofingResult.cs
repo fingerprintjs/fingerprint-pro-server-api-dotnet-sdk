@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// LocationSpoofingResult
     /// </summary>
     [DataContract]
-    public partial class LocationSpoofingResult : IEquatable<LocationSpoofingResult>
+    public class LocationSpoofingResult : IEquatable<LocationSpoofingResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationSpoofingResult" /> class.
         /// </summary>
@@ -27,6 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         public LocationSpoofingResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: LocationSpoofingResult Result
 
             if (result == null)
             {
@@ -43,6 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag indicating whether the request came from a mobile device with location spoofing enabled.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -64,7 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

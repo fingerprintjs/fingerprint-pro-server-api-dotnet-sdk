@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,13 +18,13 @@ namespace FingerprintPro.ServerSdk.Model
     /// Stores bot detection result
     /// </summary>
     [DataContract]
-    public partial class BotdDetectionResult : IEquatable<BotdDetectionResult>
+    public class BotdDetectionResult : IEquatable<BotdDetectionResult>
     {
         /// <summary>
         /// Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
         /// </summary>
         /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum ResultEnum
         {
             /// <summary>
@@ -48,7 +48,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Bot detection result:  * `notDetected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public ResultEnum Result { get; set; }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BotdDetectionResult" /> class.
         /// </summary>
@@ -57,6 +60,7 @@ namespace FingerprintPro.ServerSdk.Model
         public BotdDetectionResult(ResultEnum result = default(ResultEnum), string type = default(string))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: BotdDetectionResult Result
 
             if (result == null)
             {
@@ -74,6 +78,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = false)]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -96,7 +101,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

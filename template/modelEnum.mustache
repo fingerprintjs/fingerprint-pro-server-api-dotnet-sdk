@@ -5,7 +5,7 @@
     /// <value>{{{description}}}</value>
     {{/description}}
     {{#allowableValues}}{{#enumVars}}{{#@first}}{{#isString}}
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     {{/isString}}{{/@first}}{{/enumVars}}{{/allowableValues}}
     {{>visibility}} enum {{#datatypeWithEnum}}{{.}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}{{#vendorExtensions.x-enum-byte}}: byte{{/vendorExtensions.x-enum-byte}}
     {

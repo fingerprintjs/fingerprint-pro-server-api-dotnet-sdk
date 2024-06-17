@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Contains all the information from Bot Detection product
     /// </summary>
     [DataContract]
-    public partial class BotdResult : IEquatable<BotdResult>
+    public class BotdResult : IEquatable<BotdResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BotdResult" /> class.
         /// </summary>
@@ -33,6 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         public BotdResult(string ip = default(string), DateTime? time = default(DateTime?), string url = default(string), string userAgent = default(string), string requestId = default(string), string linkedId = default(string), BotdDetectionResult bot = default(BotdDetectionResult))
         {
             // to ensure "ip" is required (not null)
+            // swagger debug: BotdResult Ip
 
             if (ip == null)
             {
@@ -43,6 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Ip = ip;
             }
             // to ensure "time" is required (not null)
+            // swagger debug: BotdResult Time
 
             if (time == null)
             {
@@ -53,6 +57,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Time = time;
             }
             // to ensure "url" is required (not null)
+            // swagger debug: BotdResult Url
 
             if (url == null)
             {
@@ -63,6 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Url = url;
             }
             // to ensure "userAgent" is required (not null)
+            // swagger debug: BotdResult UserAgent
 
             if (userAgent == null)
             {
@@ -73,6 +79,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.UserAgent = userAgent;
             }
             // to ensure "requestId" is required (not null)
+            // swagger debug: BotdResult RequestId
 
             if (requestId == null)
             {
@@ -83,6 +90,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RequestId = requestId;
             }
             // to ensure "bot" is required (not null)
+            // swagger debug: BotdResult Bot
 
             if (bot == null)
             {
@@ -100,6 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>IP address of the requesting browser or bot.</value>
         [DataMember(Name = "ip", EmitDefaultValue = false)]
+        [JsonPropertyName("ip")]
         public string Ip { get; set; }
 
         /// <summary>
@@ -107,6 +116,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Time in UTC when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible</value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
+        [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
 
         /// <summary>
@@ -114,30 +124,35 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Page URL from which identification request was sent.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
         /// <summary>
         /// Gets or Sets UserAgent
         /// </summary>
         [DataMember(Name = "userAgent", EmitDefaultValue = false)]
+        [JsonPropertyName("userAgent")]
         public string UserAgent { get; set; }
 
         /// <summary>
         /// Gets or Sets RequestId
         /// </summary>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
+        [JsonPropertyName("requestId")]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Gets or Sets LinkedId
         /// </summary>
         [DataMember(Name = "linkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("linkedId")]
         public string LinkedId { get; set; }
 
         /// <summary>
         /// Gets or Sets Bot
         /// </summary>
         [DataMember(Name = "bot", EmitDefaultValue = false)]
+        [JsonPropertyName("bot")]
         public BotdDetectionResult Bot { get; set; }
 
         /// <summary>
@@ -165,7 +180,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// PrivacySettingsResult
     /// </summary>
     [DataContract]
-    public partial class PrivacySettingsResult : IEquatable<PrivacySettingsResult>
+    public class PrivacySettingsResult : IEquatable<PrivacySettingsResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivacySettingsResult" /> class.
         /// </summary>
@@ -27,6 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         public PrivacySettingsResult(bool? result = default(bool?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: PrivacySettingsResult Result
 
             if (result == null)
             {
@@ -43,6 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -64,7 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

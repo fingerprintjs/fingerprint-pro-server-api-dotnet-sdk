@@ -9,22 +9,24 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent403Response
+    /// ErrorVisitsDelete404Response
     /// </summary>
     [DataContract]
-    public partial class ErrorEvent403Response : IEquatable<ErrorEvent403Response>
+    public class ErrorVisitsDelete404Response : IEquatable<ErrorVisitsDelete404Response>
     {
+
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent403Response" /> class.
+        /// Initializes a new instance of the <see cref="ErrorVisitsDelete404Response" /> class.
         /// </summary>
         /// <param name="error">error.</param>
-        public ErrorEvent403Response(ErrorEvent403ResponseError error = default(ErrorEvent403ResponseError))
+        public ErrorVisitsDelete404Response(ErrorVisitsDelete404ResponseError error = default(ErrorVisitsDelete404ResponseError))
         {
             this.Error = error;
         }
@@ -33,7 +35,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ErrorEvent403ResponseError Error { get; set; }
+        [JsonPropertyName("error")]
+        public ErrorVisitsDelete404ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -42,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent403Response {\n");
+            sb.Append("class ErrorVisitsDelete404Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -54,15 +57,15 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent403Response instances are equal
+        /// Returns true if ErrorVisitsDelete404Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent403Response to be compared</param>
+        /// <param name="input">Instance of ErrorVisitsDelete404Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent403Response input)
+        public bool Equals(ErrorVisitsDelete404Response input)
         {
             if (input == null)
                 return false;

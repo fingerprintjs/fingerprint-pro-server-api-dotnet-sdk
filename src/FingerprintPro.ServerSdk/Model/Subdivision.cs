@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Subdivision
     /// </summary>
     [DataContract]
-    public partial class Subdivision : IEquatable<Subdivision>
+    public class Subdivision : IEquatable<Subdivision>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Subdivision" /> class.
         /// </summary>
@@ -35,12 +37,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets IsoCode
         /// </summary>
         [DataMember(Name = "isoCode", EmitDefaultValue = false)]
+        [JsonPropertyName("isoCode")]
         public string IsoCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// DataCenter
     /// </summary>
     [DataContract]
-    public partial class DataCenter : IEquatable<DataCenter>
+    public class DataCenter : IEquatable<DataCenter>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DataCenter" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public DataCenter(bool? result = default(bool?), string name = default(string))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: DataCenter Result
 
             if (result == null)
             {
@@ -44,12 +47,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Result
         /// </summary>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

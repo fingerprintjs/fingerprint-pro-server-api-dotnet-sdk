@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,13 +18,13 @@ namespace FingerprintPro.ServerSdk.Model
     /// ErrorEvent404ResponseError
     /// </summary>
     [DataContract]
-    public partial class ErrorEvent404ResponseError : IEquatable<ErrorEvent404ResponseError>
+    public class ErrorEvent404ResponseError : IEquatable<ErrorEvent404ResponseError>
     {
         /// <summary>
-        /// Error code:  * `RequestNotFound` - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. 
         /// </summary>
-        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        /// <value>Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. </value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
@@ -34,19 +34,23 @@ namespace FingerprintPro.ServerSdk.Model
             RequestNotFound = 1
         }
         /// <summary>
-        /// Error code:  * `RequestNotFound` - request not found for specified id 
+        /// Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. 
         /// </summary>
-        /// <value>Error code:  * `RequestNotFound` - request not found for specified id </value>
+        /// <value>Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted. </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorEvent404ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * `RequestNotFound` - request not found for specified id  (required).</param>
+        /// <param name="code">Error code:  * `RequestNotFound` - The specified request ID was not found. It never existed, expired, or it has been deleted.  (required).</param>
         /// <param name="message">message (required).</param>
         public ErrorEvent404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
+            // swagger debug: ErrorEvent404ResponseError Code
 
             if (code == null)
             {
@@ -57,6 +61,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
+            // swagger debug: ErrorEvent404ResponseError Message
 
             if (message == null)
             {
@@ -73,6 +78,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
         /// <summary>
@@ -95,7 +101,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

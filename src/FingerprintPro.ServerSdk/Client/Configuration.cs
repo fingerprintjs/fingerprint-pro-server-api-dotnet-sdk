@@ -1,7 +1,7 @@
-/* 
+/*
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -43,44 +43,6 @@ namespace FingerprintPro.ServerSdk.Client
         public const string ISO8601_DATETIME_FORMAT = "o";
 
         #endregion Constants
-
-        #region Static Members
-
-        private static readonly object GlobalConfigSync = new { };
-
-        /// <summary>
-        /// Default creation of exceptions for a given method name and response object
-        /// </summary>
-        public static readonly ExceptionFactory? DefaultExceptionFactory = (methodName, response) =>
-        {
-            var status = (int)response.StatusCode;
-
-            if (status >= 400)
-            {
-                var message = $"Error calling {methodName}: {response.Content}";
-
-                if (status == TooManyRequestsException.TooManyRequestsCode)
-                {
-                    var retryAfterHeader = response.Headers.FirstOrDefault(h => h.Name == "Retry-After");
-                    var retryAfterValue = retryAfterHeader != null ? (string)retryAfterHeader.Value : null;
-                    int? retryAfterInt = retryAfterValue != null ? int.Parse(retryAfterValue) : null;
-
-                    return new TooManyRequestsException(message, retryAfterInt);
-                }
-
-                return new ApiException(status, message, response.Content);
-            }
-
-            if (status == 0)
-            {
-                return new ApiException(status,
-        $"Error calling {methodName}: {response.ErrorMessage}", response.ErrorMessage);
-            }
-
-            return null;
-        };
-
-        #endregion Static Members
 
         #region Private Members
 
