@@ -483,5 +483,21 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
             );
         }
+
+        [Test]
+        public async Task DeleteVisitorDataNotMappedStatusCodeText()
+        {
+            // It's ok to use this response even though it matches different status code
+            SetupMockResponse("delete_visits_403_error.json");
+
+            _mockResponseStatusCode = 400;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .Null
+            );
+        }
     }
 }
