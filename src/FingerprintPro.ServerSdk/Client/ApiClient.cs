@@ -139,7 +139,7 @@ namespace FingerprintPro.ServerSdk.Client
             {
                 var result = JsonUtils.Deserialize(responseContent, model);
 
-                if (result is not ManyRequestsResponse)
+                if (result is not TooManyRequestsResponse)
                     throw new ApiException(statusCode, message, response, result);
 
 
