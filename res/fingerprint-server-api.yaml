@@ -213,8 +213,8 @@ paths:
           headers:
             Retry-After:
               description: >-
-                Indicates how long you should wait before attempting the next
-                request.
+                Indicates how many seconds you should wait before attempting the
+                next request.
               schema:
                 type: integer
                 format: int32
@@ -222,7 +222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManyRequestsResponse'
+                $ref: '#/components/schemas/TooManyRequestsResponse'
     delete:
       tags:
         - Fingerprint
@@ -664,7 +664,7 @@ components:
           example: Forbidden (HTTP 403)
       required:
         - error
-    ManyRequestsResponse:
+    TooManyRequestsResponse:
       type: object
       additionalProperties: false
       properties:

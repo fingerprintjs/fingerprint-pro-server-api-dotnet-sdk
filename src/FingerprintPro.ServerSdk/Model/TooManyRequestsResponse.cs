@@ -15,25 +15,25 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ManyRequestsResponse
+    /// TooManyRequestsResponse
     /// </summary>
     [DataContract]
-    public class ManyRequestsResponse : IEquatable<ManyRequestsResponse>
+    public class TooManyRequestsResponse : IEquatable<TooManyRequestsResponse>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManyRequestsResponse" /> class.
+        /// Initializes a new instance of the <see cref="TooManyRequestsResponse" /> class.
         /// </summary>
         /// <param name="error">Error text. (required).</param>
-        public ManyRequestsResponse(string error = default(string))
+        public TooManyRequestsResponse(string error = default(string))
         {
             // to ensure "error" is required (not null)
-            // swagger debug: ManyRequestsResponse Error
+            // swagger debug: TooManyRequestsResponse Error
 
             if (error == null)
             {
-                throw new InvalidDataException("error is a required property for ManyRequestsResponse and cannot be null");
+                throw new InvalidDataException("error is a required property for TooManyRequestsResponse and cannot be null");
             }
             else
             {
@@ -56,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ManyRequestsResponse {\n");
+            sb.Append("class TooManyRequestsResponse {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -72,11 +72,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ManyRequestsResponse instances are equal
+        /// Returns true if TooManyRequestsResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of ManyRequestsResponse to be compared</param>
+        /// <param name="input">Instance of TooManyRequestsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ManyRequestsResponse input)
+        public bool Equals(TooManyRequestsResponse input)
         {
             if (input == null)
                 return false;
