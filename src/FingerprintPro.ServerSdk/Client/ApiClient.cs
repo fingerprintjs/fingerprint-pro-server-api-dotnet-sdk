@@ -133,25 +133,23 @@ namespace FingerprintPro.ServerSdk.Client
             var message = $"Error calling {methodName}: {response.ReasonPhrase}";
             var statusCode = (int)response.StatusCode;
 
-            var model = operationDefinition.ResponseStatusCodeMap[statusCode];
-
-            if (model != null)
-            {
-                var result = JsonUtils.Deserialize(responseContent, model);
-
-                if (result is not ManyRequestsResponse)
-                    throw new ApiException(statusCode, message, response, result);
+            if (!operationDefinition.ResponseStatusCodeMap.TryGetValue(statusCode, out var model))
+                throw new ApiException(statusCode,
+                    message, response);
 
 
-                var retryAfterHeader = response.Headers.FirstOrDefault(h => h.Key == "Retry-After").Value
-                    ?.FirstOrDefault();
-                int? retryAfterInt = !string.IsNullOrEmpty(retryAfterHeader) ? int.Parse(retryAfterHeader) : null;
+            var result = JsonUtils.Deserialize(responseContent, model);
 
-                throw new TooManyRequestsException(message, response, retryAfterInt);
-            }
+            if (result is not TooManyRequestsResponse)
+                throw new ApiException(statusCode, message, response, result);
 
-            throw new ApiException(statusCode,
-                message, response);
+
+            var retryAfterHeader = response.Headers.FirstOrDefault(h => h.Key == "Retry-After").Value
+                ?.FirstOrDefault();
+            int? retryAfterInt = !string.IsNullOrEmpty(retryAfterHeader) ? int.Parse(retryAfterHeader) : null;
+
+            throw new TooManyRequestsException(message, response, retryAfterInt);
+
         }
     }
 }

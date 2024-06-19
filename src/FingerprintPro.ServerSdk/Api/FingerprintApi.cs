@@ -227,7 +227,7 @@ namespace FingerprintPro.ServerSdk.Api
                     403, typeof(ErrorVisits403)
                 },
                 {
-                    429, typeof(ManyRequestsResponse)
+                    429, typeof(TooManyRequestsResponse)
                 },
             };
     }
