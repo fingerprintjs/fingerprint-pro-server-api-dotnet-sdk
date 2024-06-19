@@ -1,3 +1,14 @@
+## [6.0.0-test.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.0-test.1...v6.0.0-test.2) (2024-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename `ManyRequestsResponse` to `TooManyRequestsResponse`
+
+### Features
+
+* rename `ManyRequestsResponse` to `TooManyRequestsResponse` ([69506b7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/69506b7eb49e58f2a3fe03a9e350d59a5d2cc967))
+
 ## [6.0.0-test.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v5.0.0...v6.0.0-test.1) (2024-06-17)
 
 
