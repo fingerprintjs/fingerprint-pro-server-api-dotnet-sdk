@@ -468,6 +468,36 @@ namespace FingerprintPro.ServerSdk.Test.Api
         }
 
         [Test]
+        public async Task DeleteVisitorData400ErrorTest()
+        {
+            SetupMockResponse("delete_visits_400_error.json");
+
+            _mockResponseStatusCode = 400;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorVisitsDelete400Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+            );
+        }
+
+        [Test]
+        public async Task DeleteVisitorData429ErrorTest()
+        {
+            SetupMockResponse("delete_visits_429_error.json");
+
+            _mockResponseStatusCode = 429;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<TooManyRequestsException>());
+        }
+
+        [Test]
         public async Task DeleteVisitorData404ErrorTest()
         {
             SetupMockResponse("delete_visits_404_error.json");
@@ -490,7 +520,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             // It's ok to use this response even though it matches different status code
             SetupMockResponse("delete_visits_403_error.json");
 
-            _mockResponseStatusCode = 400;
+            _mockResponseStatusCode = 401;
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 

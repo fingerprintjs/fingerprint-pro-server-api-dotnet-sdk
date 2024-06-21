@@ -182,10 +182,16 @@ namespace FingerprintPro.ServerSdk.Api
         public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {
                 {
+                    400, typeof(ErrorVisitsDelete400Response)
+                },
+                {
                     403, typeof(ErrorCommon403Response)
                 },
                 {
                     404, typeof(ErrorVisitsDelete404Response)
+                },
+                {
+                    429, typeof(ErrorCommon429Response)
                 },
             };
     }
