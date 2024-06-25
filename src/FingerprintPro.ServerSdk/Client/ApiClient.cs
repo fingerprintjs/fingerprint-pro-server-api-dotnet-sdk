@@ -123,7 +123,17 @@ namespace FingerprintPro.ServerSdk.Client
             if (!response.IsSuccessStatusCode)
                 HandleException(definition.OperationName, response, responseContent, definition);
 
-            var data = JsonUtils.Deserialize<T>(responseContent);
+            T? data;
+
+            try
+            {
+                data = JsonUtils.Deserialize<T>(responseContent);
+            }
+            catch (Exception e)
+            {
+                throw new JsonDeserializeException(response, e);
+            }
+
             return new ApiResponse<T>(response, data!);
         }
 
@@ -140,7 +150,7 @@ namespace FingerprintPro.ServerSdk.Client
 
             var result = JsonUtils.Deserialize(responseContent, model);
 
-            if (result is not TooManyRequestsResponse)
+            if (result is not TooManyRequestsResponse && result is not ErrorCommon429Response)
                 throw new ApiException(statusCode, message, response, result);
 
 
@@ -149,7 +159,6 @@ namespace FingerprintPro.ServerSdk.Client
             int? retryAfterInt = !string.IsNullOrEmpty(retryAfterHeader) ? int.Parse(retryAfterHeader) : null;
 
             throw new TooManyRequestsException(message, response, retryAfterInt);
-
         }
     }
 }

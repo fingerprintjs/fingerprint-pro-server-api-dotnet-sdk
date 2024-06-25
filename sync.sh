@@ -17,8 +17,10 @@ examplesList=(
   'get_event_200_botd_too_many_requests_error.json'
   'get_event_200_identification_failed_error.json'
   'get_event_200_identification_too_many_requests_error.json'
+  'delete_visits_400_error.json'
   'delete_visits_404_error.json'
   'delete_visits_403_error.json'
+  'delete_visits_429_error.json'
 )
 
 for example in ${examplesList[*]}; do
