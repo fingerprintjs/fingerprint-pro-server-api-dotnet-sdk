@@ -1,3 +1,10 @@
+## [6.0.0-test.3](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.0-test.2...v6.0.0-test.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* add `JsonDeserializeException` when json deserialization fails ([de72363](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/de7236334e25093d5a091995c7f7f1db2ede3b37))
+
 ## [6.0.0-test.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.0-test.1...v6.0.0-test.2) (2024-06-19)
 
 
