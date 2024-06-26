@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseIncognito(IncognitoResult data = default(IncognitoResult), ProductError error = default(ProductError))
+        public SignalResponseIncognito(IncognitoResult data = default(IncognitoResult), IdentificationError error = default(IdentificationError))
         {
             this.Data = data;
             this.Error = error;
@@ -45,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
         [JsonPropertyName("error")]
-        public ProductError Error { get; set; }
+        public IdentificationError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

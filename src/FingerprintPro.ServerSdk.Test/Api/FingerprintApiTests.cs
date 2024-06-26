@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.Json;
 using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Json;
 using FingerprintPro.ServerSdk.Model;
 using FingerprintPro.ServerSdk.Test.Utils;
 
@@ -250,14 +251,14 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     Is.EqualTo(IdentificationError.CodeEnum.Failed));
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.IpInfo.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Incognito.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Incognito.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
                 Assert.That(response.Products.RootApps.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Emulator.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.IpBlocklist.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Tor.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Vpn.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Proxy.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
                 Assert.That(response.Products.ClonedApp.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.FactoryReset.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
                 Assert.That(response.Products.Jailbroken.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
@@ -291,6 +292,23 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
                 Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.TooManyRequests));
+            });
+        }
+
+        [Test]
+        public void GetEventTooManyRequestsErrorTest()
+        {
+            SetupMockResponse("get_event_200_identification_too_many_requests_error_all_fields.json");
+            var mockResponse = JsonUtils.Deserialize<EventResponse>(Encoding.UTF8.GetString(_mockResponseBytes!));
+
+            const string requestId = "0KSh65EnVoB85JBmloQK";
+            var response = _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.EqualTo(mockResponse));
             });
         }
 
