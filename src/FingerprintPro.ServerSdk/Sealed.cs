@@ -1,6 +1,7 @@
 using System.IO.Compression;
+using System.Text;
+using FingerprintPro.ServerSdk.Json;
 using FingerprintPro.ServerSdk.Model;
-using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -112,10 +113,8 @@ namespace FingerprintPro.ServerSdk
         public static EventResponse UnsealEventResponse(byte[] sealedData, DecryptionKey[] keys)
         {
             var unsealed = Unseal(sealedData, keys);
-            var mapper = new JsonSerializer();
 
-            var value = mapper.Deserialize<EventResponse>(
-                new JsonTextReader(new StreamReader(new MemoryStream(unsealed))));
+            var value = JsonUtils.Deserialize<EventResponse>(Encoding.UTF8.GetString(unsealed));
 
             if (value == null)
             {
