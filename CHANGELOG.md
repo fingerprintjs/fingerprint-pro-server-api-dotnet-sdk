@@ -1,3 +1,15 @@
+## [6.0.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.0...v6.0.1) (2024-06-28)
+
+
+### Bug Fixes
+
+* remove usage of Newtonsoft.Json in `Sealed` class ([25a26ed](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/25a26ed4a1ec07f10367a7b4779c7d8daad76791))
+
+
+### Build System
+
+* **deps:** update BouncyCastle.Cryptography to 2.4.0 ([a1d63ba](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a1d63babe74d38bbc11987bccd46d65858971c01))
+
 ## [6.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v5.0.0...v6.0.0) (2024-06-28)
 
 
