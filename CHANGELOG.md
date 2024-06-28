@@ -1,3 +1,34 @@
+## [6.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v5.0.0...v6.0.0) (2024-06-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename `ManyRequestsResponse` to `TooManyRequestsResponse`
+* drop support for netcoreapp3.1 and older,
+
+### Features
+
+* add `Webhook.IsValidWebhookSignature` function for validating webhook signature ([7b4a7fb](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/7b4a7fb952af3837ed82fc4adf675dc9a20a7e29))
+* add DELETE API ([6a457b7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/6a457b7ccfe7a888a9ca4fa6933c6f0366ba20ae))
+* add os Mismatch ([85ec77b](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/85ec77b49069ba7419e706f2a801f441ae9b78cf))
+* add revision string field to confidence object ([d2af0ac](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d2af0ac90467b24061ecf85c9470d08ecc02463a))
+* drop support for frameworks that reached EOL ([a39d863](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a39d8639ead451792361ba235dc361ae255ada56))
+* migrate swagger generated code in request logic to manual implementation ([b7e60c0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/b7e60c0e6928a7da200e7ed2a028b17fbe1ad92c))
+* remove usage of Newtonsoft.Json and RestSharp ([77eed3d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/77eed3dc79fb9e8ed73095f83023e94180b67eab))
+* rename `ManyRequestsResponse` to `TooManyRequestsResponse` ([8eae642](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/8eae642de09e55383794162ecbc91ff80b5bd263))
+
+
+### Bug Fixes
+
+* add `JsonDeserializeException` when json deserialization fails ([7aab037](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/7aab037d6c0aae76bf546a223b682bb74d9ff1b5))
+* use correct error type for `incognito`, `rawDeviceAttributes` and `tampering` in the `GetEvent` method ([4b4120e](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/4b4120e812e9c4aa9a948e40ce5c25a626156c73))
+
+
+### Documentation
+
+* **README:** mention how to access raw HTTP response ([fd324e1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/fd324e1d82ba700f26672dd09694698c5bf63db0))
+* **README:** remove dependencies section ([9d7ae2a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/9d7ae2af56f13bec54d4f952345b2eb7fdec7209))
+
 ## [5.0.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v4.0.0...v5.0.0) (2024-03-28)
 
 
