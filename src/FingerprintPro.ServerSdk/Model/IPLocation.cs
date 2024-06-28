@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IPLocation
     /// </summary>
     [DataContract]
-    public partial class IPLocation : IEquatable<IPLocation>
+    public class IPLocation : IEquatable<IPLocation>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IPLocation" /> class.
         /// </summary>
@@ -50,54 +52,63 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>The IP address is likely to be within this radius (in km) of the specified location.</value>
         [DataMember(Name = "accuracyRadius", EmitDefaultValue = false)]
+        [JsonPropertyName("accuracyRadius")]
         public int? AccuracyRadius { get; set; }
 
         /// <summary>
         /// Gets or Sets Latitude
         /// </summary>
         [DataMember(Name = "latitude", EmitDefaultValue = false)]
+        [JsonPropertyName("latitude")]
         public double? Latitude { get; set; }
 
         /// <summary>
         /// Gets or Sets Longitude
         /// </summary>
         [DataMember(Name = "longitude", EmitDefaultValue = false)]
+        [JsonPropertyName("longitude")]
         public double? Longitude { get; set; }
 
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
         [DataMember(Name = "postalCode", EmitDefaultValue = false)]
+        [JsonPropertyName("postalCode")]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Timezone
         /// </summary>
         [DataMember(Name = "timezone", EmitDefaultValue = false)]
+        [JsonPropertyName("timezone")]
         public string Timezone { get; set; }
 
         /// <summary>
         /// Gets or Sets City
         /// </summary>
         [DataMember(Name = "city", EmitDefaultValue = false)]
+        [JsonPropertyName("city")]
         public IPLocationCity City { get; set; }
 
         /// <summary>
         /// Gets or Sets Country
         /// </summary>
         [DataMember(Name = "country", EmitDefaultValue = false)]
+        [JsonPropertyName("country")]
         public Location Country { get; set; }
 
         /// <summary>
         /// Gets or Sets Continent
         /// </summary>
         [DataMember(Name = "continent", EmitDefaultValue = false)]
+        [JsonPropertyName("continent")]
         public Location Continent { get; set; }
 
         /// <summary>
         /// Gets or Sets Subdivisions
         /// </summary>
         [DataMember(Name = "subdivisions", EmitDefaultValue = false)]
+        [JsonPropertyName("subdivisions")]
         public List<Subdivision> Subdivisions { get; set; }
 
         /// <summary>
@@ -127,7 +138,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// ErrorEvent404Response
     /// </summary>
     [DataContract]
-    public partial class ErrorEvent404Response : IEquatable<ErrorEvent404Response>
+    public class ErrorEvent404Response : IEquatable<ErrorEvent404Response>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorEvent404Response" /> class.
         /// </summary>
@@ -33,6 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ErrorEvent404ResponseError Error { get; set; }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

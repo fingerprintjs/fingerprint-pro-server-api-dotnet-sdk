@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// HighActivityResult
     /// </summary>
     [DataContract]
-    public partial class HighActivityResult : IEquatable<HighActivityResult>
+    public class HighActivityResult : IEquatable<HighActivityResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HighActivityResult" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public HighActivityResult(bool? result = default(bool?), decimal? dailyRequests = default(decimal?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: HighActivityResult Result
 
             if (result == null)
             {
@@ -45,6 +48,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag indicating whether the request came from a high activity visitor.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -52,6 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Number of requests from the same visitor in the previous day.</value>
         [DataMember(Name = "dailyRequests", EmitDefaultValue = false)]
+        [JsonPropertyName("dailyRequests")]
         public decimal? DailyRequests { get; set; }
 
         /// <summary>
@@ -74,7 +79,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

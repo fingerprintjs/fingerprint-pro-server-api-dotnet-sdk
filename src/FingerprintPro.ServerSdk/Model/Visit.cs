@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Visit
     /// </summary>
     [DataContract]
-    public partial class Visit : IEquatable<Visit>
+    public class Visit : IEquatable<Visit>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Visit" /> class.
         /// </summary>
@@ -40,6 +42,7 @@ namespace FingerprintPro.ServerSdk.Model
         public Visit(string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedIPLocation ipLocation = default(DeprecatedIPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
         {
             // to ensure "requestId" is required (not null)
+            // swagger debug: Visit RequestId
 
             if (requestId == null)
             {
@@ -50,6 +53,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RequestId = requestId;
             }
             // to ensure "browserDetails" is required (not null)
+            // swagger debug: Visit BrowserDetails
 
             if (browserDetails == null)
             {
@@ -60,6 +64,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserDetails = browserDetails;
             }
             // to ensure "incognito" is required (not null)
+            // swagger debug: Visit Incognito
 
             if (incognito == null)
             {
@@ -70,6 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Incognito = incognito;
             }
             // to ensure "ip" is required (not null)
+            // swagger debug: Visit Ip
 
             if (ip == null)
             {
@@ -80,6 +86,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Ip = ip;
             }
             // to ensure "timestamp" is required (not null)
+            // swagger debug: Visit Timestamp
 
             if (timestamp == null)
             {
@@ -90,6 +97,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Timestamp = timestamp;
             }
             // to ensure "time" is required (not null)
+            // swagger debug: Visit Time
 
             if (time == null)
             {
@@ -100,6 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Time = time;
             }
             // to ensure "url" is required (not null)
+            // swagger debug: Visit Url
 
             if (url == null)
             {
@@ -110,6 +119,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Url = url;
             }
             // to ensure "tag" is required (not null)
+            // swagger debug: Visit Tag
 
             if (tag == null)
             {
@@ -120,6 +130,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Tag = tag;
             }
             // to ensure "visitorFound" is required (not null)
+            // swagger debug: Visit VisitorFound
 
             if (visitorFound == null)
             {
@@ -130,6 +141,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.VisitorFound = visitorFound;
             }
             // to ensure "firstSeenAt" is required (not null)
+            // swagger debug: Visit FirstSeenAt
 
             if (firstSeenAt == null)
             {
@@ -140,6 +152,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.FirstSeenAt = firstSeenAt;
             }
             // to ensure "lastSeenAt" is required (not null)
+            // swagger debug: Visit LastSeenAt
 
             if (lastSeenAt == null)
             {
@@ -159,12 +172,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Unique identifier of the user's identification request.</value>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
+        [JsonPropertyName("requestId")]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Gets or Sets BrowserDetails
         /// </summary>
         [DataMember(Name = "browserDetails", EmitDefaultValue = false)]
+        [JsonPropertyName("browserDetails")]
         public BrowserDetails BrowserDetails { get; set; }
 
         /// <summary>
@@ -172,18 +187,21 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag if user used incognito session.</value>
         [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        [JsonPropertyName("incognito")]
         public bool? Incognito { get; set; }
 
         /// <summary>
         /// Gets or Sets Ip
         /// </summary>
         [DataMember(Name = "ip", EmitDefaultValue = false)]
+        [JsonPropertyName("ip")]
         public string Ip { get; set; }
 
         /// <summary>
         /// Gets or Sets IpLocation
         /// </summary>
         [DataMember(Name = "ipLocation", EmitDefaultValue = false)]
+        [JsonPropertyName("ipLocation")]
         public DeprecatedIPLocation IpLocation { get; set; }
 
         /// <summary>
@@ -191,6 +209,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Timestamp of the event with millisecond precision in Unix time.</value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }
 
         /// <summary>
@@ -198,6 +217,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Time expressed according to ISO 8601 in UTC format.</value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
+        [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
 
         /// <summary>
@@ -205,6 +225,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Page URL from which the identification request was sent.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
         /// <summary>
@@ -212,6 +233,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>A customer-provided value or an object that was sent with identification request.</value>
         [DataMember(Name = "tag", EmitDefaultValue = false)]
+        [JsonPropertyName("tag")]
         public Dictionary<string, Object> Tag { get; set; }
 
         /// <summary>
@@ -219,12 +241,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>A customer-provided id that was sent with identification request.</value>
         [DataMember(Name = "linkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("linkedId")]
         public string LinkedId { get; set; }
 
         /// <summary>
         /// Gets or Sets Confidence
         /// </summary>
         [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
         public Confidence Confidence { get; set; }
 
         /// <summary>
@@ -232,18 +256,21 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Attribute represents if a visitor had been identified before.</value>
         [DataMember(Name = "visitorFound", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorFound")]
         public bool? VisitorFound { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstSeenAt
         /// </summary>
         [DataMember(Name = "firstSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("firstSeenAt")]
         public SeenAt FirstSeenAt { get; set; }
 
         /// <summary>
         /// Gets or Sets LastSeenAt
         /// </summary>
         [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("lastSeenAt")]
         public SeenAt LastSeenAt { get; set; }
 
         /// <summary>
@@ -278,7 +305,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

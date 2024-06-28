@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// SeenAt
     /// </summary>
     [DataContract]
-    public partial class SeenAt : IEquatable<SeenAt>
+    public class SeenAt : IEquatable<SeenAt>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SeenAt" /> class.
         /// </summary>
@@ -35,12 +37,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Global
         /// </summary>
         [DataMember(Name = "global", EmitDefaultValue = false)]
+        [JsonPropertyName("global")]
         public DateTime? Global { get; set; }
 
         /// <summary>
         /// Gets or Sets Subscription
         /// </summary>
         [DataMember(Name = "subscription", EmitDefaultValue = false)]
+        [JsonPropertyName("subscription")]
         public DateTime? Subscription { get; set; }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

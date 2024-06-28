@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpInfoResultV4
     /// </summary>
     [DataContract]
-    public partial class IpInfoResultV4 : IEquatable<IpInfoResultV4>
+    public class IpInfoResultV4 : IEquatable<IpInfoResultV4>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResultV4" /> class.
         /// </summary>
@@ -30,6 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IpInfoResultV4(string address = default(string), IPLocation geolocation = default(IPLocation), ASN asn = default(ASN), DataCenter datacenter = default(DataCenter))
         {
             // to ensure "address" is required (not null)
+            // swagger debug: IpInfoResultV4 Address
 
             if (address == null)
             {
@@ -40,6 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Address = address;
             }
             // to ensure "geolocation" is required (not null)
+            // swagger debug: IpInfoResultV4 Geolocation
 
             if (geolocation == null)
             {
@@ -57,24 +61,28 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name = "address", EmitDefaultValue = false)]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or Sets Geolocation
         /// </summary>
         [DataMember(Name = "geolocation", EmitDefaultValue = false)]
+        [JsonPropertyName("geolocation")]
         public IPLocation Geolocation { get; set; }
 
         /// <summary>
         /// Gets or Sets Asn
         /// </summary>
         [DataMember(Name = "asn", EmitDefaultValue = false)]
+        [JsonPropertyName("asn")]
         public ASN Asn { get; set; }
 
         /// <summary>
         /// Gets or Sets Datacenter
         /// </summary>
         [DataMember(Name = "datacenter", EmitDefaultValue = false)]
+        [JsonPropertyName("datacenter")]
         public DataCenter Datacenter { get; set; }
 
         /// <summary>
@@ -99,7 +107,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

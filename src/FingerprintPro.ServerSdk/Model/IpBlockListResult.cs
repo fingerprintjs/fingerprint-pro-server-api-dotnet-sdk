@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpBlockListResult
     /// </summary>
     [DataContract]
-    public partial class IpBlockListResult : IEquatable<IpBlockListResult>
+    public class IpBlockListResult : IEquatable<IpBlockListResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResult" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IpBlockListResult(bool? result = default(bool?), IpBlockListResultDetails details = default(IpBlockListResultDetails))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: IpBlockListResult Result
 
             if (result == null)
             {
@@ -38,6 +41,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result = result;
             }
             // to ensure "details" is required (not null)
+            // swagger debug: IpBlockListResult Details
 
             if (details == null)
             {
@@ -54,12 +58,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>`true` if request IP address is part of any database that we use to search for known malicious actors, `false` otherwise. </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
         [DataMember(Name = "details", EmitDefaultValue = false)]
+        [JsonPropertyName("details")]
         public IpBlockListResultDetails Details { get; set; }
 
         /// <summary>
@@ -82,7 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

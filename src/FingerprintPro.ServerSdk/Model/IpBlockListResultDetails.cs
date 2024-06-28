@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// IpBlockListResultDetails
     /// </summary>
     [DataContract]
-    public partial class IpBlockListResultDetails : IEquatable<IpBlockListResultDetails>
+    public class IpBlockListResultDetails : IEquatable<IpBlockListResultDetails>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpBlockListResultDetails" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public IpBlockListResultDetails(bool? emailSpam = default(bool?), bool? attackSource = default(bool?))
         {
             // to ensure "emailSpam" is required (not null)
+            // swagger debug: IpBlockListResultDetails EmailSpam
 
             if (emailSpam == null)
             {
@@ -38,6 +41,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.EmailSpam = emailSpam;
             }
             // to ensure "attackSource" is required (not null)
+            // swagger debug: IpBlockListResultDetails AttackSource
 
             if (attackSource == null)
             {
@@ -54,6 +58,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>IP address was part of a known email spam attack (SMTP).</value>
         [DataMember(Name = "emailSpam", EmitDefaultValue = false)]
+        [JsonPropertyName("emailSpam")]
         public bool? EmailSpam { get; set; }
 
         /// <summary>
@@ -61,6 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>IP address was part of a known network attack (SSH/HTTPS).</value>
         [DataMember(Name = "attackSource", EmitDefaultValue = false)]
+        [JsonPropertyName("attackSource")]
         public bool? AttackSource { get; set; }
 
         /// <summary>
@@ -83,7 +89,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

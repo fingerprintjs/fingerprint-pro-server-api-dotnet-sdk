@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
     /// </summary>
     [DataContract]
-    public partial class IpInfoResult : IEquatable<IpInfoResult>
+    public class IpInfoResult : IEquatable<IpInfoResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IpInfoResult" /> class.
         /// </summary>
@@ -35,12 +37,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets V4
         /// </summary>
         [DataMember(Name = "v4", EmitDefaultValue = false)]
+        [JsonPropertyName("v4")]
         public IpInfoResultV4 V4 { get; set; }
 
         /// <summary>
         /// Gets or Sets V6
         /// </summary>
         [DataMember(Name = "v6", EmitDefaultValue = false)]
+        [JsonPropertyName("v6")]
         public IpInfoResultV6 V6 { get; set; }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

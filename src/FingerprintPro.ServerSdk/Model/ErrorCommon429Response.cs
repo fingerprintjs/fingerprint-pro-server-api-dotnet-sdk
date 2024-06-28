@@ -9,41 +9,34 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ManyRequestsResponse
+    /// ErrorCommon429Response
     /// </summary>
     [DataContract]
-    public partial class ManyRequestsResponse : IEquatable<ManyRequestsResponse>
+    public class ErrorCommon429Response : IEquatable<ErrorCommon429Response>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ManyRequestsResponse" /> class.
-        /// </summary>
-        /// <param name="error">Error text. (required).</param>
-        public ManyRequestsResponse(string error = default(string))
-        {
-            // to ensure "error" is required (not null)
 
-            if (error == null)
-            {
-                throw new InvalidDataException("error is a required property for ManyRequestsResponse and cannot be null");
-            }
-            else
-            {
-                this.Error = error;
-            }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ErrorCommon429Response" /> class.
+        /// </summary>
+        /// <param name="error">error.</param>
+        public ErrorCommon429Response(ErrorCommon429ResponseError error = default(ErrorCommon429ResponseError))
+        {
+            this.Error = error;
         }
 
         /// <summary>
-        /// Error text.
+        /// Gets or Sets Error
         /// </summary>
-        /// <value>Error text.</value>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public string Error { get; set; }
+        [JsonPropertyName("error")]
+        public ErrorCommon429ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -52,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ManyRequestsResponse {\n");
+            sb.Append("class ErrorCommon429Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -64,15 +57,15 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
-        /// Returns true if ManyRequestsResponse instances are equal
+        /// Returns true if ErrorCommon429Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ManyRequestsResponse to be compared</param>
+        /// <param name="input">Instance of ErrorCommon429Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ManyRequestsResponse input)
+        public bool Equals(ErrorCommon429Response input)
         {
             if (input == null)
                 return false;

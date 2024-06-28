@@ -9,31 +9,45 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent403Response
+    /// TooManyRequestsResponse
     /// </summary>
     [DataContract]
-    public partial class ErrorEvent403Response : IEquatable<ErrorEvent403Response>
+    public class TooManyRequestsResponse : IEquatable<TooManyRequestsResponse>
     {
+
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent403Response" /> class.
+        /// Initializes a new instance of the <see cref="TooManyRequestsResponse" /> class.
         /// </summary>
-        /// <param name="error">error.</param>
-        public ErrorEvent403Response(ErrorEvent403ResponseError error = default(ErrorEvent403ResponseError))
+        /// <param name="error">Error text. (required).</param>
+        public TooManyRequestsResponse(string error = default(string))
         {
-            this.Error = error;
+            // to ensure "error" is required (not null)
+            // swagger debug: TooManyRequestsResponse Error
+
+            if (error == null)
+            {
+                throw new InvalidDataException("error is a required property for TooManyRequestsResponse and cannot be null");
+            }
+            else
+            {
+                this.Error = error;
+            }
         }
 
         /// <summary>
-        /// Gets or Sets Error
+        /// Error text.
         /// </summary>
+        /// <value>Error text.</value>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ErrorEvent403ResponseError Error { get; set; }
+        [JsonPropertyName("error")]
+        public string Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -42,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent403Response {\n");
+            sb.Append("class TooManyRequestsResponse {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -54,15 +68,15 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent403Response instances are equal
+        /// Returns true if TooManyRequestsResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent403Response to be compared</param>
+        /// <param name="input">Instance of TooManyRequestsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent403Response input)
+        public bool Equals(TooManyRequestsResponse input)
         {
             if (input == null)
                 return false;

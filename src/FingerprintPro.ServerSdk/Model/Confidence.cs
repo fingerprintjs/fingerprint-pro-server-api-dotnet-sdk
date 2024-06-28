@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,15 +18,19 @@ namespace FingerprintPro.ServerSdk.Model
     /// Confidence
     /// </summary>
     [DataContract]
-    public partial class Confidence : IEquatable<Confidence>
+    public class Confidence : IEquatable<Confidence>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Confidence" /> class.
         /// </summary>
         /// <param name="score">The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification. (required).</param>
-        public Confidence(float? score = default(float?))
+        /// <param name="revision">The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method..</param>
+        public Confidence(float? score = default(float?), string revision = default(string))
         {
             // to ensure "score" is required (not null)
+            // swagger debug: Confidence Score
 
             if (score == null)
             {
@@ -36,6 +40,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Score = score;
             }
+            this.Revision = revision;
         }
 
         /// <summary>
@@ -43,7 +48,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>The confidence score is a floating-point number between 0 and 1 that represents the probability of accurate identification.</value>
         [DataMember(Name = "score", EmitDefaultValue = false)]
+        [JsonPropertyName("score")]
         public float? Score { get; set; }
+
+        /// <summary>
+        /// The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.
+        /// </summary>
+        /// <value>The revision name of the method used to calculate the Confidence score. This field is only present for customers who opted in to an alternative calculation method.</value>
+        [DataMember(Name = "revision", EmitDefaultValue = false)]
+        [JsonPropertyName("revision")]
+        public string Revision { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -54,6 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class Confidence {\n");
             sb.Append("  Score: ").Append(Score).Append("\n");
+            sb.Append("  Revision: ").Append(Revision).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +79,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
@@ -82,6 +97,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Score == input.Score ||
                 (this.Score != null &&
                 this.Score.Equals(input.Score))
+                ) &&
+                (
+                this.Revision == input.Revision ||
+                (this.Revision != null &&
+                this.Revision.Equals(input.Revision))
                 );
         }
 
@@ -96,6 +116,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Score != null)
                     hashCode = hashCode * 59 + this.Score.GetHashCode();
+                if (this.Revision != null)
+                    hashCode = hashCode * 59 + this.Revision.GetHashCode();
                 return hashCode;
             }
         }

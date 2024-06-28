@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// DeprecatedIPLocationCity
     /// </summary>
     [DataContract]
-    public partial class DeprecatedIPLocationCity : IEquatable<DeprecatedIPLocationCity>
+    public class DeprecatedIPLocationCity : IEquatable<DeprecatedIPLocationCity>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeprecatedIPLocationCity" /> class.
         /// </summary>
@@ -33,6 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

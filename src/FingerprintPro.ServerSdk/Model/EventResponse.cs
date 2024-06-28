@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// Contains results from all activated products - Fingerprint Pro, Bot Detection, and others.
     /// </summary>
     [DataContract]
-    public partial class EventResponse : IEquatable<EventResponse>
+    public class EventResponse : IEquatable<EventResponse>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EventResponse" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public EventResponse(ProductsResponse products = default(ProductsResponse), ProductError error = default(ProductError))
         {
             // to ensure "products" is required (not null)
+            // swagger debug: EventResponse Products
 
             if (products == null)
             {
@@ -44,12 +47,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Products
         /// </summary>
         [DataMember(Name = "products", EmitDefaultValue = false)]
+        [JsonPropertyName("products")]
         public ProductsResponse Products { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
         public ProductError Error { get; set; }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

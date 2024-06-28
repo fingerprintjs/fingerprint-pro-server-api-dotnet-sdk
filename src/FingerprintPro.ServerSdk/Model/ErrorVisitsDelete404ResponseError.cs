@@ -9,73 +9,63 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorEvent403ResponseError
+    /// ErrorVisitsDelete404ResponseError
     /// </summary>
     [DataContract]
-    public partial class ErrorEvent403ResponseError : IEquatable<ErrorEvent403ResponseError>
+    public class ErrorVisitsDelete404ResponseError : IEquatable<ErrorVisitsDelete404ResponseError>
     {
         /// <summary>
-        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ 
+        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
         /// </summary>
-        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ </value>
-        [JsonConverter(typeof(StringEnumConverter))]
+        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
-            /// Enum TokenRequired for value: TokenRequired
+            /// Enum VisitorNotFound for value: VisitorNotFound
             /// </summary>
-            [EnumMember(Value = "TokenRequired")]
-            TokenRequired = 1,
-            /// <summary>
-            /// Enum TokenNotFound for value: TokenNotFound
-            /// </summary>
-            [EnumMember(Value = "TokenNotFound")]
-            TokenNotFound = 2,
-            /// <summary>
-            /// Enum SubscriptionNotActive for value: SubscriptionNotActive
-            /// </summary>
-            [EnumMember(Value = "SubscriptionNotActive")]
-            SubscriptionNotActive = 3,
-            /// <summary>
-            /// Enum WrongRegion for value: WrongRegion
-            /// </summary>
-            [EnumMember(Value = "WrongRegion")]
-            WrongRegion = 4
+            [EnumMember(Value = "VisitorNotFound")]
+            VisitorNotFound = 1
         }
         /// <summary>
-        /// Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ 
+        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
         /// </summary>
-        /// <value>Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ </value>
+        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
+        [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
+
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorEvent403ResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorVisitsDelete404ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code:  * `TokenRequired` - `Auth-API-Key` header is missing or empty  * `TokenNotFound` - subscription not found for specified secret key  * `SubscriptionNotActive` - subscription is not active  * `WrongRegion` - server and subscription region differ  (required).</param>
+        /// <param name="code">Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  (required).</param>
         /// <param name="message">message (required).</param>
-        public ErrorEvent403ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
+        public ErrorVisitsDelete404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
+            // swagger debug: ErrorVisitsDelete404ResponseError Code
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for ErrorEvent403ResponseError and cannot be null");
+                throw new InvalidDataException("code is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
             }
             else
             {
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
+            // swagger debug: ErrorVisitsDelete404ResponseError Message
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for ErrorEvent403ResponseError and cannot be null");
+                throw new InvalidDataException("message is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
             }
             else
             {
@@ -88,6 +78,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = false)]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
         /// <summary>
@@ -97,7 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorEvent403ResponseError {\n");
+            sb.Append("class ErrorVisitsDelete404ResponseError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -110,15 +101,15 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
-        /// Returns true if ErrorEvent403ResponseError instances are equal
+        /// Returns true if ErrorVisitsDelete404ResponseError instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorEvent403ResponseError to be compared</param>
+        /// <param name="input">Instance of ErrorVisitsDelete404ResponseError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorEvent403ResponseError input)
+        public bool Equals(ErrorVisitsDelete404ResponseError input)
         {
             if (input == null)
                 return false;

@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,14 +18,16 @@ namespace FingerprintPro.ServerSdk.Model
     /// SignalResponseTampering
     /// </summary>
     [DataContract]
-    public partial class SignalResponseTampering : IEquatable<SignalResponseTampering>
+    public class SignalResponseTampering : IEquatable<SignalResponseTampering>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalResponseTampering" /> class.
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="error">error.</param>
-        public SignalResponseTampering(TamperingResult data = default(TamperingResult), ProductError error = default(ProductError))
+        public SignalResponseTampering(TamperingResult data = default(TamperingResult), IdentificationError error = default(IdentificationError))
         {
             this.Data = data;
             this.Error = error;
@@ -35,13 +37,15 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
+        [JsonPropertyName("data")]
         public TamperingResult Data { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
-        public ProductError Error { get; set; }
+        [JsonPropertyName("error")]
+        public IdentificationError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -63,7 +67,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

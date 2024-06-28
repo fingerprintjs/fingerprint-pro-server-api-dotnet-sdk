@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// TamperingResult
     /// </summary>
     [DataContract]
-    public partial class TamperingResult : IEquatable<TamperingResult>
+    public class TamperingResult : IEquatable<TamperingResult>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TamperingResult" /> class.
         /// </summary>
@@ -28,6 +30,7 @@ namespace FingerprintPro.ServerSdk.Model
         public TamperingResult(bool? result = default(bool?), decimal? anomalyScore = default(decimal?))
         {
             // to ensure "result" is required (not null)
+            // swagger debug: TamperingResult Result
 
             if (result == null)
             {
@@ -38,6 +41,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result = result;
             }
             // to ensure "anomalyScore" is required (not null)
+            // swagger debug: TamperingResult AnomalyScore
 
             if (anomalyScore == null)
             {
@@ -54,6 +58,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag indicating whether browser tampering was detected according to our internal thresholds.</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
+        [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
@@ -61,6 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers.</value>
         [DataMember(Name = "anomalyScore", EmitDefaultValue = false)]
+        [JsonPropertyName("anomalyScore")]
         public decimal? AnomalyScore { get; set; }
 
         /// <summary>
@@ -83,7 +89,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

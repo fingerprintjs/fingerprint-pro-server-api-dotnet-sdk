@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,8 +18,10 @@ namespace FingerprintPro.ServerSdk.Model
     /// WebhookVisit
     /// </summary>
     [DataContract]
-    public partial class WebhookVisit : IEquatable<WebhookVisit>
+    public class WebhookVisit : IEquatable<WebhookVisit>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookVisit" /> class.
         /// </summary>
@@ -62,6 +64,7 @@ namespace FingerprintPro.ServerSdk.Model
         public WebhookVisit(string visitorId = default(string), string clientReferrer = default(string), string userAgent = default(string), BotdDetectionResult bot = default(BotdDetectionResult), IpInfoResult ipInfo = default(IpInfoResult), bool? incognito = default(bool?), RootAppsResult rootApps = default(RootAppsResult), EmulatorResult emulator = default(EmulatorResult), ClonedAppResult clonedApp = default(ClonedAppResult), FactoryResetResult factoryReset = default(FactoryResetResult), JailbrokenResult jailbroken = default(JailbrokenResult), FridaResult frida = default(FridaResult), IpBlockListResult ipBlocklist = default(IpBlockListResult), TorResult tor = default(TorResult), PrivacySettingsResult privacySettings = default(PrivacySettingsResult), VirtualMachineResult virtualMachine = default(VirtualMachineResult), VpnResult vpn = default(VpnResult), ProxyResult proxy = default(ProxyResult), TamperingResult tampering = default(TamperingResult), RawDeviceAttributesResult rawDeviceAttributes = default(RawDeviceAttributesResult), HighActivityResult highActivity = default(HighActivityResult), LocationSpoofingResult locationSpoofing = default(LocationSpoofingResult), SuspectScoreResult suspectScore = default(SuspectScoreResult), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), string ip = default(string), DeprecatedIPLocation ipLocation = default(DeprecatedIPLocation), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Dictionary<string, Object> tag = default(Dictionary<string, Object>), string linkedId = default(string), Confidence confidence = default(Confidence), bool? visitorFound = default(bool?), SeenAt firstSeenAt = default(SeenAt), SeenAt lastSeenAt = default(SeenAt))
         {
             // to ensure "visitorId" is required (not null)
+            // swagger debug: WebhookVisit VisitorId
 
             if (visitorId == null)
             {
@@ -72,6 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.VisitorId = visitorId;
             }
             // to ensure "incognito" is required (not null)
+            // swagger debug: WebhookVisit Incognito
 
             if (incognito == null)
             {
@@ -82,6 +86,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Incognito = incognito;
             }
             // to ensure "requestId" is required (not null)
+            // swagger debug: WebhookVisit RequestId
 
             if (requestId == null)
             {
@@ -92,6 +97,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RequestId = requestId;
             }
             // to ensure "browserDetails" is required (not null)
+            // swagger debug: WebhookVisit BrowserDetails
 
             if (browserDetails == null)
             {
@@ -102,6 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.BrowserDetails = browserDetails;
             }
             // to ensure "ip" is required (not null)
+            // swagger debug: WebhookVisit Ip
 
             if (ip == null)
             {
@@ -112,6 +119,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Ip = ip;
             }
             // to ensure "timestamp" is required (not null)
+            // swagger debug: WebhookVisit Timestamp
 
             if (timestamp == null)
             {
@@ -122,6 +130,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Timestamp = timestamp;
             }
             // to ensure "time" is required (not null)
+            // swagger debug: WebhookVisit Time
 
             if (time == null)
             {
@@ -132,6 +141,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Time = time;
             }
             // to ensure "url" is required (not null)
+            // swagger debug: WebhookVisit Url
 
             if (url == null)
             {
@@ -142,6 +152,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Url = url;
             }
             // to ensure "tag" is required (not null)
+            // swagger debug: WebhookVisit Tag
 
             if (tag == null)
             {
@@ -152,6 +163,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Tag = tag;
             }
             // to ensure "visitorFound" is required (not null)
+            // swagger debug: WebhookVisit VisitorFound
 
             if (visitorFound == null)
             {
@@ -162,6 +174,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.VisitorFound = visitorFound;
             }
             // to ensure "firstSeenAt" is required (not null)
+            // swagger debug: WebhookVisit FirstSeenAt
 
             if (firstSeenAt == null)
             {
@@ -172,6 +185,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.FirstSeenAt = firstSeenAt;
             }
             // to ensure "lastSeenAt" is required (not null)
+            // swagger debug: WebhookVisit LastSeenAt
 
             if (lastSeenAt == null)
             {
@@ -211,30 +225,35 @@ namespace FingerprintPro.ServerSdk.Model
         /// Gets or Sets VisitorId
         /// </summary>
         [DataMember(Name = "visitorId", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorId")]
         public string VisitorId { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferrer
         /// </summary>
         [DataMember(Name = "clientReferrer", EmitDefaultValue = false)]
+        [JsonPropertyName("clientReferrer")]
         public string ClientReferrer { get; set; }
 
         /// <summary>
         /// Gets or Sets UserAgent
         /// </summary>
         [DataMember(Name = "userAgent", EmitDefaultValue = false)]
+        [JsonPropertyName("userAgent")]
         public string UserAgent { get; set; }
 
         /// <summary>
         /// Gets or Sets Bot
         /// </summary>
         [DataMember(Name = "bot", EmitDefaultValue = false)]
+        [JsonPropertyName("bot")]
         public BotdDetectionResult Bot { get; set; }
 
         /// <summary>
         /// Gets or Sets IpInfo
         /// </summary>
         [DataMember(Name = "ipInfo", EmitDefaultValue = false)]
+        [JsonPropertyName("ipInfo")]
         public IpInfoResult IpInfo { get; set; }
 
         /// <summary>
@@ -242,108 +261,126 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Flag if user used incognito session.</value>
         [DataMember(Name = "incognito", EmitDefaultValue = false)]
+        [JsonPropertyName("incognito")]
         public bool? Incognito { get; set; }
 
         /// <summary>
         /// Gets or Sets RootApps
         /// </summary>
         [DataMember(Name = "rootApps", EmitDefaultValue = false)]
+        [JsonPropertyName("rootApps")]
         public RootAppsResult RootApps { get; set; }
 
         /// <summary>
         /// Gets or Sets Emulator
         /// </summary>
         [DataMember(Name = "emulator", EmitDefaultValue = false)]
+        [JsonPropertyName("emulator")]
         public EmulatorResult Emulator { get; set; }
 
         /// <summary>
         /// Gets or Sets ClonedApp
         /// </summary>
         [DataMember(Name = "clonedApp", EmitDefaultValue = false)]
+        [JsonPropertyName("clonedApp")]
         public ClonedAppResult ClonedApp { get; set; }
 
         /// <summary>
         /// Gets or Sets FactoryReset
         /// </summary>
         [DataMember(Name = "factoryReset", EmitDefaultValue = false)]
+        [JsonPropertyName("factoryReset")]
         public FactoryResetResult FactoryReset { get; set; }
 
         /// <summary>
         /// Gets or Sets Jailbroken
         /// </summary>
         [DataMember(Name = "jailbroken", EmitDefaultValue = false)]
+        [JsonPropertyName("jailbroken")]
         public JailbrokenResult Jailbroken { get; set; }
 
         /// <summary>
         /// Gets or Sets Frida
         /// </summary>
         [DataMember(Name = "frida", EmitDefaultValue = false)]
+        [JsonPropertyName("frida")]
         public FridaResult Frida { get; set; }
 
         /// <summary>
         /// Gets or Sets IpBlocklist
         /// </summary>
         [DataMember(Name = "ipBlocklist", EmitDefaultValue = false)]
+        [JsonPropertyName("ipBlocklist")]
         public IpBlockListResult IpBlocklist { get; set; }
 
         /// <summary>
         /// Gets or Sets Tor
         /// </summary>
         [DataMember(Name = "tor", EmitDefaultValue = false)]
+        [JsonPropertyName("tor")]
         public TorResult Tor { get; set; }
 
         /// <summary>
         /// Gets or Sets PrivacySettings
         /// </summary>
         [DataMember(Name = "privacySettings", EmitDefaultValue = false)]
+        [JsonPropertyName("privacySettings")]
         public PrivacySettingsResult PrivacySettings { get; set; }
 
         /// <summary>
         /// Gets or Sets VirtualMachine
         /// </summary>
         [DataMember(Name = "virtualMachine", EmitDefaultValue = false)]
+        [JsonPropertyName("virtualMachine")]
         public VirtualMachineResult VirtualMachine { get; set; }
 
         /// <summary>
         /// Gets or Sets Vpn
         /// </summary>
         [DataMember(Name = "vpn", EmitDefaultValue = false)]
+        [JsonPropertyName("vpn")]
         public VpnResult Vpn { get; set; }
 
         /// <summary>
         /// Gets or Sets Proxy
         /// </summary>
         [DataMember(Name = "proxy", EmitDefaultValue = false)]
+        [JsonPropertyName("proxy")]
         public ProxyResult Proxy { get; set; }
 
         /// <summary>
         /// Gets or Sets Tampering
         /// </summary>
         [DataMember(Name = "tampering", EmitDefaultValue = false)]
+        [JsonPropertyName("tampering")]
         public TamperingResult Tampering { get; set; }
 
         /// <summary>
         /// Gets or Sets RawDeviceAttributes
         /// </summary>
         [DataMember(Name = "rawDeviceAttributes", EmitDefaultValue = false)]
+        [JsonPropertyName("rawDeviceAttributes")]
         public RawDeviceAttributesResult RawDeviceAttributes { get; set; }
 
         /// <summary>
         /// Gets or Sets HighActivity
         /// </summary>
         [DataMember(Name = "highActivity", EmitDefaultValue = false)]
+        [JsonPropertyName("highActivity")]
         public HighActivityResult HighActivity { get; set; }
 
         /// <summary>
         /// Gets or Sets LocationSpoofing
         /// </summary>
         [DataMember(Name = "locationSpoofing", EmitDefaultValue = false)]
+        [JsonPropertyName("locationSpoofing")]
         public LocationSpoofingResult LocationSpoofing { get; set; }
 
         /// <summary>
         /// Gets or Sets SuspectScore
         /// </summary>
         [DataMember(Name = "suspectScore", EmitDefaultValue = false)]
+        [JsonPropertyName("suspectScore")]
         public SuspectScoreResult SuspectScore { get; set; }
 
         /// <summary>
@@ -351,24 +388,28 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Unique identifier of the user's identification request.</value>
         [DataMember(Name = "requestId", EmitDefaultValue = false)]
+        [JsonPropertyName("requestId")]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Gets or Sets BrowserDetails
         /// </summary>
         [DataMember(Name = "browserDetails", EmitDefaultValue = false)]
+        [JsonPropertyName("browserDetails")]
         public BrowserDetails BrowserDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets Ip
         /// </summary>
         [DataMember(Name = "ip", EmitDefaultValue = false)]
+        [JsonPropertyName("ip")]
         public string Ip { get; set; }
 
         /// <summary>
         /// Gets or Sets IpLocation
         /// </summary>
         [DataMember(Name = "ipLocation", EmitDefaultValue = false)]
+        [JsonPropertyName("ipLocation")]
         public DeprecatedIPLocation IpLocation { get; set; }
 
         /// <summary>
@@ -376,6 +417,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Timestamp of the event with millisecond precision in Unix time.</value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }
 
         /// <summary>
@@ -383,6 +425,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Time expressed according to ISO 8601 in UTC format.</value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
+        [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
 
         /// <summary>
@@ -390,6 +433,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Page URL from which the identification request was sent.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
         /// <summary>
@@ -397,6 +441,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>A customer-provided value or an object that was sent with identification request.</value>
         [DataMember(Name = "tag", EmitDefaultValue = false)]
+        [JsonPropertyName("tag")]
         public Dictionary<string, Object> Tag { get; set; }
 
         /// <summary>
@@ -404,12 +449,14 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>A customer-provided id that was sent with identification request.</value>
         [DataMember(Name = "linkedId", EmitDefaultValue = false)]
+        [JsonPropertyName("linkedId")]
         public string LinkedId { get; set; }
 
         /// <summary>
         /// Gets or Sets Confidence
         /// </summary>
         [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
         public Confidence Confidence { get; set; }
 
         /// <summary>
@@ -417,18 +464,21 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Attribute represents if a visitor had been identified before.</value>
         [DataMember(Name = "visitorFound", EmitDefaultValue = false)]
+        [JsonPropertyName("visitorFound")]
         public bool? VisitorFound { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstSeenAt
         /// </summary>
         [DataMember(Name = "firstSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("firstSeenAt")]
         public SeenAt FirstSeenAt { get; set; }
 
         /// <summary>
         /// Gets or Sets LastSeenAt
         /// </summary>
         [DataMember(Name = "lastSeenAt", EmitDefaultValue = false)]
+        [JsonPropertyName("lastSeenAt")]
         public SeenAt LastSeenAt { get; set; }
 
         /// <summary>
@@ -485,7 +535,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>

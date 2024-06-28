@@ -9,8 +9,8 @@
  */
 using System.Text;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
 {
@@ -18,17 +18,21 @@ namespace FingerprintPro.ServerSdk.Model
     /// VpnResultMethods
     /// </summary>
     [DataContract]
-    public partial class VpnResultMethods : IEquatable<VpnResultMethods>
+    public class VpnResultMethods : IEquatable<VpnResultMethods>
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VpnResultMethods" /> class.
         /// </summary>
-        /// <param name="timezoneMismatch">User's browser timezone doesn't match the timezone from which the request was originally made. (required).</param>
+        /// <param name="timezoneMismatch">The browser timezone doesn't match the timezone inferred from the request IP address. (required).</param>
         /// <param name="publicVPN">Request IP address is owned and used by a public VPN service provider. (required).</param>
         /// <param name="auxiliaryMobile">This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices. (required).</param>
-        public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?))
+        /// <param name="osMismatch">The browser runs on a different operating system than the operating system inferred from the  request network signature. (required).</param>
+        public VpnResultMethods(bool? timezoneMismatch = default(bool?), bool? publicVPN = default(bool?), bool? auxiliaryMobile = default(bool?), bool? osMismatch = default(bool?))
         {
             // to ensure "timezoneMismatch" is required (not null)
+            // swagger debug: VpnResultMethods TimezoneMismatch
 
             if (timezoneMismatch == null)
             {
@@ -39,6 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.TimezoneMismatch = timezoneMismatch;
             }
             // to ensure "publicVPN" is required (not null)
+            // swagger debug: VpnResultMethods PublicVPN
 
             if (publicVPN == null)
             {
@@ -49,6 +54,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.PublicVPN = publicVPN;
             }
             // to ensure "auxiliaryMobile" is required (not null)
+            // swagger debug: VpnResultMethods AuxiliaryMobile
 
             if (auxiliaryMobile == null)
             {
@@ -58,13 +64,25 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.AuxiliaryMobile = auxiliaryMobile;
             }
+            // to ensure "osMismatch" is required (not null)
+            // swagger debug: VpnResultMethods OsMismatch
+
+            if (osMismatch == null)
+            {
+                throw new InvalidDataException("osMismatch is a required property for VpnResultMethods and cannot be null");
+            }
+            else
+            {
+                this.OsMismatch = osMismatch;
+            }
         }
 
         /// <summary>
-        /// User's browser timezone doesn't match the timezone from which the request was originally made.
+        /// The browser timezone doesn't match the timezone inferred from the request IP address.
         /// </summary>
-        /// <value>User's browser timezone doesn't match the timezone from which the request was originally made.</value>
+        /// <value>The browser timezone doesn't match the timezone inferred from the request IP address.</value>
         [DataMember(Name = "timezoneMismatch", EmitDefaultValue = false)]
+        [JsonPropertyName("timezoneMismatch")]
         public bool? TimezoneMismatch { get; set; }
 
         /// <summary>
@@ -72,6 +90,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>Request IP address is owned and used by a public VPN service provider.</value>
         [DataMember(Name = "publicVPN", EmitDefaultValue = false)]
+        [JsonPropertyName("publicVPN")]
         public bool? PublicVPN { get; set; }
 
         /// <summary>
@@ -79,7 +98,16 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <value>This method applies to mobile devices only. Indicates the result of additional methods used to detect a VPN in mobile devices.</value>
         [DataMember(Name = "auxiliaryMobile", EmitDefaultValue = false)]
+        [JsonPropertyName("auxiliaryMobile")]
         public bool? AuxiliaryMobile { get; set; }
+
+        /// <summary>
+        /// The browser runs on a different operating system than the operating system inferred from the  request network signature.
+        /// </summary>
+        /// <value>The browser runs on a different operating system than the operating system inferred from the  request network signature.</value>
+        [DataMember(Name = "osMismatch", EmitDefaultValue = false)]
+        [JsonPropertyName("osMismatch")]
+        public bool? OsMismatch { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -92,6 +120,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  TimezoneMismatch: ").Append(TimezoneMismatch).Append("\n");
             sb.Append("  PublicVPN: ").Append(PublicVPN).Append("\n");
             sb.Append("  AuxiliaryMobile: ").Append(AuxiliaryMobile).Append("\n");
+            sb.Append("  OsMismatch: ").Append(OsMismatch).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,7 +131,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonUtils.Serialize(this);
         }
 
         /// <summary>
@@ -130,6 +159,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.AuxiliaryMobile == input.AuxiliaryMobile ||
                 (this.AuxiliaryMobile != null &&
                 this.AuxiliaryMobile.Equals(input.AuxiliaryMobile))
+                ) &&
+                (
+                this.OsMismatch == input.OsMismatch ||
+                (this.OsMismatch != null &&
+                this.OsMismatch.Equals(input.OsMismatch))
                 );
         }
 
@@ -148,6 +182,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.PublicVPN.GetHashCode();
                 if (this.AuxiliaryMobile != null)
                     hashCode = hashCode * 59 + this.AuxiliaryMobile.GetHashCode();
+                if (this.OsMismatch != null)
+                    hashCode = hashCode * 59 + this.OsMismatch.GetHashCode();
                 return hashCode;
             }
         }
