@@ -1,3 +1,10 @@
+## [6.0.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.1...v6.0.2) (2024-07-10)
+
+
+### Build System
+
+* **deps:** update System.Text.Json to 8.0.4 ([2c4939b](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/2c4939b802da029ebfb0f7f5603a23e58eebcc3d))
+
 ## [6.0.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.0...v6.0.1) (2024-06-28)
 
 
