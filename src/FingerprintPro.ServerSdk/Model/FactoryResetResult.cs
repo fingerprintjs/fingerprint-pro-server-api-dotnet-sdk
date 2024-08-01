@@ -25,8 +25,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FactoryResetResult" /> class.
         /// </summary>
-        /// <param name="time">Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC.  (required).</param>
-        /// <param name="timestamp">Same value as it's in the `time` field but represented in timestamp format. (required).</param>
+        /// <param name="time">Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser, this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal.  (required).</param>
+        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.  (required).</param>
         public FactoryResetResult(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
             // to ensure "time" is required (not null)
@@ -54,17 +54,17 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC. 
+        /// Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser, this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. 
         /// </summary>
-        /// <value>Time in UTC when the most recent factory reset of the Android or iOS device was done.  If there is no sign of factory reset or the client is not a mobile device, the field will contain the epoch time (1 January 1970) in UTC. </value>
+        /// <value>Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser, this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. </value>
         [DataMember(Name = "time", EmitDefaultValue = false)]
         [JsonPropertyName("time")]
         public DateTime? Time { get; set; }
 
         /// <summary>
-        /// Same value as it's in the `time` field but represented in timestamp format.
+        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. 
         /// </summary>
-        /// <value>Same value as it's in the `time` field but represented in timestamp format.</value>
+        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. </value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
         [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }
