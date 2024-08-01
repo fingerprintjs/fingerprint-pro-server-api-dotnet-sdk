@@ -26,6 +26,9 @@ Name | Type | Description | Notes
 **HighActivity** | [**HighActivityResult**](HighActivityResult.md) |  | [optional] 
 **LocationSpoofing** | [**LocationSpoofingResult**](LocationSpoofingResult.md) |  | [optional] 
 **SuspectScore** | [**SuspectScoreResult**](SuspectScoreResult.md) |  | [optional] 
+**RemoteControl** | [**RemoteControlResult**](RemoteControlResult.md) |  | [optional] 
+**Velocity** | [**VelocityResult**](VelocityResult.md) |  | [optional] 
+**DeveloperTools** | [**DeveloperToolsResult**](DeveloperToolsResult.md) |  | [optional] 
 **RequestId** | **string** | Unique identifier of the user's identification request. | 
 **BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | 
 **Ip** | **string** |  | 

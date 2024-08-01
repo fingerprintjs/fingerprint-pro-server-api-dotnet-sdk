@@ -46,7 +46,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="locationSpoofing">locationSpoofing.</param>
         /// <param name="suspectScore">suspectScore.</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
-        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseClonedApp clonedApp = default(SignalResponseClonedApp), SignalResponseFactoryReset factoryReset = default(SignalResponseFactoryReset), SignalResponseJailbroken jailbroken = default(SignalResponseJailbroken), SignalResponseFrida frida = default(SignalResponseFrida), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponsePrivacySettings privacySettings = default(SignalResponsePrivacySettings), SignalResponseVirtualMachine virtualMachine = default(SignalResponseVirtualMachine), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering), SignalResponseHighActivity highActivity = default(SignalResponseHighActivity), SignalResponseLocationSpoofing locationSpoofing = default(SignalResponseLocationSpoofing), SignalResponseSuspectScore suspectScore = default(SignalResponseSuspectScore), SignalResponseRawDeviceAttributes rawDeviceAttributes = default(SignalResponseRawDeviceAttributes))
+        /// <param name="remoteControl">remoteControl.</param>
+        /// <param name="velocity">velocity.</param>
+        /// <param name="developerTools">developerTools.</param>
+        public ProductsResponse(ProductsResponseIdentification identification = default(ProductsResponseIdentification), ProductsResponseBotd botd = default(ProductsResponseBotd), SignalResponseIpInfo ipInfo = default(SignalResponseIpInfo), SignalResponseIncognito incognito = default(SignalResponseIncognito), SignalResponseRootApps rootApps = default(SignalResponseRootApps), SignalResponseEmulator emulator = default(SignalResponseEmulator), SignalResponseClonedApp clonedApp = default(SignalResponseClonedApp), SignalResponseFactoryReset factoryReset = default(SignalResponseFactoryReset), SignalResponseJailbroken jailbroken = default(SignalResponseJailbroken), SignalResponseFrida frida = default(SignalResponseFrida), SignalResponseIpBlocklist ipBlocklist = default(SignalResponseIpBlocklist), SignalResponseTor tor = default(SignalResponseTor), SignalResponsePrivacySettings privacySettings = default(SignalResponsePrivacySettings), SignalResponseVirtualMachine virtualMachine = default(SignalResponseVirtualMachine), SignalResponseVpn vpn = default(SignalResponseVpn), SignalResponseProxy proxy = default(SignalResponseProxy), SignalResponseTampering tampering = default(SignalResponseTampering), SignalResponseHighActivity highActivity = default(SignalResponseHighActivity), SignalResponseLocationSpoofing locationSpoofing = default(SignalResponseLocationSpoofing), SignalResponseSuspectScore suspectScore = default(SignalResponseSuspectScore), SignalResponseRawDeviceAttributes rawDeviceAttributes = default(SignalResponseRawDeviceAttributes), SignalResponseRemoteControl remoteControl = default(SignalResponseRemoteControl), SignalResponseVelocity velocity = default(SignalResponseVelocity), SignalResponseDeveloperTools developerTools = default(SignalResponseDeveloperTools))
         {
             this.Identification = identification;
             this.Botd = botd;
@@ -69,6 +72,9 @@ namespace FingerprintPro.ServerSdk.Model
             this.LocationSpoofing = locationSpoofing;
             this.SuspectScore = suspectScore;
             this.RawDeviceAttributes = rawDeviceAttributes;
+            this.RemoteControl = remoteControl;
+            this.Velocity = velocity;
+            this.DeveloperTools = developerTools;
         }
 
         /// <summary>
@@ -219,6 +225,27 @@ namespace FingerprintPro.ServerSdk.Model
         public SignalResponseRawDeviceAttributes RawDeviceAttributes { get; set; }
 
         /// <summary>
+        /// Gets or Sets RemoteControl
+        /// </summary>
+        [DataMember(Name = "remoteControl", EmitDefaultValue = false)]
+        [JsonPropertyName("remoteControl")]
+        public SignalResponseRemoteControl RemoteControl { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Velocity
+        /// </summary>
+        [DataMember(Name = "velocity", EmitDefaultValue = false)]
+        [JsonPropertyName("velocity")]
+        public SignalResponseVelocity Velocity { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DeveloperTools
+        /// </summary>
+        [DataMember(Name = "developerTools", EmitDefaultValue = false)]
+        [JsonPropertyName("developerTools")]
+        public SignalResponseDeveloperTools DeveloperTools { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -247,6 +274,9 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  LocationSpoofing: ").Append(LocationSpoofing).Append("\n");
             sb.Append("  SuspectScore: ").Append(SuspectScore).Append("\n");
             sb.Append("  RawDeviceAttributes: ").Append(RawDeviceAttributes).Append("\n");
+            sb.Append("  RemoteControl: ").Append(RemoteControl).Append("\n");
+            sb.Append("  Velocity: ").Append(Velocity).Append("\n");
+            sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -375,6 +405,21 @@ namespace FingerprintPro.ServerSdk.Model
                 this.RawDeviceAttributes == input.RawDeviceAttributes ||
                 (this.RawDeviceAttributes != null &&
                 this.RawDeviceAttributes.Equals(input.RawDeviceAttributes))
+                ) &&
+                (
+                this.RemoteControl == input.RemoteControl ||
+                (this.RemoteControl != null &&
+                this.RemoteControl.Equals(input.RemoteControl))
+                ) &&
+                (
+                this.Velocity == input.Velocity ||
+                (this.Velocity != null &&
+                this.Velocity.Equals(input.Velocity))
+                ) &&
+                (
+                this.DeveloperTools == input.DeveloperTools ||
+                (this.DeveloperTools != null &&
+                this.DeveloperTools.Equals(input.DeveloperTools))
                 );
         }
 
@@ -429,6 +474,12 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.SuspectScore.GetHashCode();
                 if (this.RawDeviceAttributes != null)
                     hashCode = hashCode * 59 + this.RawDeviceAttributes.GetHashCode();
+                if (this.RemoteControl != null)
+                    hashCode = hashCode * 59 + this.RemoteControl.GetHashCode();
+                if (this.Velocity != null)
+                    hashCode = hashCode * 59 + this.Velocity.GetHashCode();
+                if (this.DeveloperTools != null)
+                    hashCode = hashCode * 59 + this.DeveloperTools.GetHashCode();
                 return hashCode;
             }
         }
