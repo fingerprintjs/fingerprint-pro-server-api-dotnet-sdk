@@ -33,7 +33,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format. (required).</param>
         /// <param name="url">Page URL from which the identification request was sent. (required).</param>
-        /// <param name="tag">A customer-provided value or an object that was sent with identification request. (required).</param>
+        /// <param name="tag">A customer-provided value or an object that was sent with identification request..</param>
         /// <param name="linkedId">A customer-provided id that was sent with identification request..</param>
         /// <param name="confidence">confidence.</param>
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before. (required).</param>
@@ -118,17 +118,6 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Url = url;
             }
-            // to ensure "tag" is required (not null)
-            // swagger debug: Visit Tag
-
-            if (tag == null)
-            {
-                throw new InvalidDataException("tag is a required property for Visit and cannot be null");
-            }
-            else
-            {
-                this.Tag = tag;
-            }
             // to ensure "visitorFound" is required (not null)
             // swagger debug: Visit VisitorFound
 
@@ -163,6 +152,7 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LastSeenAt = lastSeenAt;
             }
             this.IpLocation = ipLocation;
+            this.Tag = tag;
             this.LinkedId = linkedId;
             this.Confidence = confidence;
         }
