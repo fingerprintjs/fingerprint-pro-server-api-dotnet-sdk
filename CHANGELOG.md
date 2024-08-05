@@ -1,3 +1,15 @@
+## [6.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.2...v6.1.0) (2024-08-05)
+
+
+### Features
+
+* add `remoteControl`, `velocity` and `developerTools` signals ([cb04c99](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/cb04c99e0f5996065a7ec55879655e06ed830fc9))
+
+
+### Bug Fixes
+
+* make `tag` field optional for Webhook ([acae9de](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/acae9deb39c4eb10a13dd716f79539483188b90a))
+
 ## [6.0.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.1...v6.0.2) (2024-07-10)
 
 
