@@ -147,6 +147,35 @@ namespace FingerprintPro.ServerSdk.Test.Api
         }
 
         [Test]
+        public void HeadersFromConfigurationTest()
+        {
+            SetupMockResponse("get_event_200.json");
+
+            var config = new Configuration("123")
+            {
+                BasePath = _serverUrl,
+                DefaultHeader = new Dictionary<string, string>
+                {
+                    {"x-test-header", "test"}
+                }
+            };
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            _instance = new FingerprintApi(config);
+            _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("x-test-header"), Is.EqualTo("test"));
+            });
+        }
+
+        [Test]
         public void GetEventTest()
         {
             SetupMockResponse("get_event_200.json");

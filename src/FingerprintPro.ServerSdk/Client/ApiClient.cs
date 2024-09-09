@@ -34,6 +34,11 @@ namespace FingerprintPro.ServerSdk.Client
 
             Client = new HttpClient();
             Client.BaseAddress = new Uri(Configuration.BasePath);
+
+            foreach (var header in config.DefaultHeader)
+            {
+                Client.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
         }
 
         /// <summary>
