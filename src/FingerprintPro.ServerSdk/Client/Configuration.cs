@@ -34,7 +34,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "5.0.0";
+        public const string Version = "6.1.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -73,7 +73,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="apiKey">User provided API Key</param>
         public Configuration(string apiKey)
         {
-            UserAgent = "Swagger-Codegen/5.0.0/csharp";
+            UserAgent = $"Swagger-Codegen/{Version}/csharp";
             BasePath = "https://api.fpjs.io";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
