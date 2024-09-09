@@ -9,6 +9,7 @@
  */
 
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace FingerprintPro.ServerSdk.Client
 {

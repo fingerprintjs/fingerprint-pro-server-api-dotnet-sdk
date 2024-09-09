@@ -9,6 +9,7 @@
  */
 using System.Collections.Concurrent;
 using System.Runtime.Serialization;
+using System.Net.Http;
 
 namespace FingerprintPro.ServerSdk.Client
 {
