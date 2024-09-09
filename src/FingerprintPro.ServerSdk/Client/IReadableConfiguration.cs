@@ -1,7 +1,7 @@
-/* 
+/*
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -39,6 +39,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the base path.
         /// </summary>
         /// <value>Base path.</value>
+        [Obsolete("This property is deprecated. To set default base path, provide HttpClient and use the HttpClient.BaseAddress property.")]
         string BasePath { get; }
 
         /// <summary>
@@ -51,7 +52,13 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the default header.
         /// </summary>
         /// <value>Default header.</value>
+        [Obsolete("This property is deprecated. To set default headers, provide HttpClient and use the HttpClient.DefaultRequestHeaders property.")]
         IDictionary<string, string> DefaultHeader { get; }
+
+        /// <summary>
+        /// Gets or sets the HTTP Client that will be used for sending requests.
+        /// </summary>
+        public HttpClient? HttpClient { get; set; }
 
         /// <summary>
         /// Gets the temp folder path.
@@ -63,6 +70,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the HTTP connection timeout (in milliseconds)
         /// </summary>
         /// <value>HTTP connection timeout.</value>
+        [Obsolete("This property is deprecated. To set timeout, provide HttpClient and use the HttpClient.Timeout property.")]
         int Timeout { get; }
 
         /// <summary>

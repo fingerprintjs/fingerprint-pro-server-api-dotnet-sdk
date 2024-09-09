@@ -77,10 +77,9 @@ namespace FingerprintPro.ServerSdk.Client
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
+            Timeout = 100000;
 
             AddApiKey("api_key", apiKey);
-
-            Timeout = 100000;
         }
 
         #endregion Constructors
@@ -94,16 +93,24 @@ namespace FingerprintPro.ServerSdk.Client
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
+        [Obsolete("This property is deprecated. To set default base path, provide HttpClient and use the HttpClient.BaseAddress property.")]
         public string BasePath { get; set; }
 
         /// <summary>
         /// Gets or sets the default header.
         /// </summary>
+        [Obsolete("This property is deprecated. To set default headers, provide HttpClient and use the HttpClient.DefaultRequestHeaders property.")]
         public IDictionary<string, string> DefaultHeader { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTTP Client that will be used for sending requests.
+        /// </summary>
+        public HttpClient? HttpClient { get; set; }
 
         /// <summary>
         /// Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
         /// </summary>
+        [Obsolete("This property is deprecated. To set timeout, provide HttpClient and use the HttpClient.Timeout property.")]
         public int Timeout { get; set; }
 
         /// <summary>
