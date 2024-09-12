@@ -1,3 +1,15 @@
+## [6.2.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.1.0...v6.2.0) (2024-09-12)
+
+
+### Features
+
+* introduce `HttpClient` parameter to the `Configuration` ([41dafb3](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/41dafb3d083903991d89b7c48a5e08a772cef5b2))
+
+
+### Bug Fixes
+
+* correctly set default headers in HttpClient using `Configuration.DefaultHeader` ([b057874](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/b057874e711287438b43e1cf3e10c9f0eeb39a05))
+
 ## [6.1.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.0.2...v6.1.0) (2024-08-05)
 
 
