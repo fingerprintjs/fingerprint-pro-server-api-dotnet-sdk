@@ -33,7 +33,7 @@ src/FingerprintPro.ServerSdk/Client/ApiClient.cs
 src/FingerprintPro.ServerSdk/Client/ApiResponse.cs
 src/FingerprintPro.ServerSdk/Client/IApiAccessor.cs
 src/FingerprintPro.ServerSdk/Client/ApiException.cs
-src/FingerprintPro.ServerSdk/Client/Configuration.cs
+src/FingerprintPro.ServerSdk/Client/IReadableConfiguration.cs
 src/FingerprintPro.ServerSdk/Client/ExceptionFactory.cs
 src/FingerprintPro.ServerSdk/Client/SwaggerDateConverter.cs
 

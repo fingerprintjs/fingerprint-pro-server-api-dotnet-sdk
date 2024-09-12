@@ -1,7 +1,7 @@
-/*
+/* 
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -9,6 +9,7 @@
  */
 using System.Collections.Concurrent;
 using System.Runtime.Serialization;
+using System.Net.Http;
 
 namespace FingerprintPro.ServerSdk.Client
 {
@@ -33,7 +34,7 @@ namespace FingerprintPro.ServerSdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "5.0.0";
+        public const string Version = "6.1.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -72,15 +73,14 @@ namespace FingerprintPro.ServerSdk.Client
         /// <param name="apiKey">User provided API Key</param>
         public Configuration(string apiKey)
         {
-            UserAgent = "Swagger-Codegen/5.0.0/csharp";
+            UserAgent = $"Swagger-Codegen/{Version}/csharp";
             BasePath = "https://api.fpjs.io";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
+            Timeout = 100000;
 
             AddApiKey("api_key", apiKey);
-
-            Timeout = 100000;
         }
 
         #endregion Constructors
@@ -94,16 +94,24 @@ namespace FingerprintPro.ServerSdk.Client
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
+        [Obsolete("This property is deprecated. To set default base path, provide HttpClient and use the HttpClient.BaseAddress property.")]
         public string BasePath { get; set; }
 
         /// <summary>
         /// Gets or sets the default header.
         /// </summary>
+        [Obsolete("This property is deprecated. To set default headers, provide HttpClient and use the HttpClient.DefaultRequestHeaders property.")]
         public IDictionary<string, string> DefaultHeader { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTTP Client that will be used for sending requests.
+        /// </summary>
+        public HttpClient? HttpClient { get; set; }
 
         /// <summary>
         /// Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
         /// </summary>
+        [Obsolete("This property is deprecated. To set timeout, provide HttpClient and use the HttpClient.Timeout property.")]
         public int Timeout { get; set; }
 
         /// <summary>
@@ -295,7 +303,7 @@ namespace FingerprintPro.ServerSdk.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version + "\n";
             report += "    Version of the API: 3\n";
-            report += "    SDK Package Version: 5.0.0\n";
+            report += $"    SDK Package Version: {Version}\n";
 
             return report;
         }

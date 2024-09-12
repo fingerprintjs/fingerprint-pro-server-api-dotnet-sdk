@@ -50,9 +50,14 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             Console.WriteLine("Started server");
 
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(_serverUrl)
+            };
+
             var config = new Configuration("123")
             {
-                BasePath = _serverUrl
+                HttpClient = httpClient
             };
 
             _instance = new FingerprintApi(config);
@@ -144,6 +149,64 @@ namespace FingerprintPro.ServerSdk.Test.Api
         public void InstanceTest()
         {
             Assert.That(_instance, Is.InstanceOf(typeof(FingerprintApi)), "instance is a FingerprintApi");
+        }
+
+        [Test]
+        public void HeadersFromConfigurationTest()
+        {
+            SetupMockResponse("get_event_200.json");
+
+            var config = new Configuration("123")
+            {
+                BasePath = _serverUrl,
+                DefaultHeader = new Dictionary<string, string>
+                {
+                    { "x-test-header", "test" }
+                }
+            };
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            _instance = new FingerprintApi(config);
+            _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("x-test-header"), Is.EqualTo("test"));
+            });
+        }
+
+        [Test]
+        public void CustomHttpClientTest()
+        {
+            SetupMockResponse("get_event_200.json");
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("x-test-header", "test");
+            client.BaseAddress = new Uri(_serverUrl);
+
+            var config = new Configuration("123")
+            {
+                HttpClient = client
+            };
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            _instance = new FingerprintApi(config);
+            _instance!.GetEvent(requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+
+                var request = _requests[0];
+
+                Assert.That(request.Headers.Get("x-test-header"), Is.EqualTo("test"));
+            });
         }
 
         [Test]

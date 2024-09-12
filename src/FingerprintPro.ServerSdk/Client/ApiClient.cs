@@ -32,8 +32,17 @@ namespace FingerprintPro.ServerSdk.Client
         {
             Configuration = config;
 
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(Configuration.BasePath);
+            Client = config.HttpClient ?? new HttpClient();
+
+            if (Client.BaseAddress == null)
+            {
+                Client.BaseAddress = new Uri(Configuration.BasePath);
+            }
+
+            foreach (var header in config.DefaultHeader)
+            {
+                Client.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
         }
 
         /// <summary>
@@ -86,7 +95,7 @@ namespace FingerprintPro.ServerSdk.Client
 
         private UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
         {
-            var uri = new UriBuilder(Configuration.BasePath)
+            var uri = new UriBuilder(Client.BaseAddress!)
             {
                 Path = definition.GetPath(args)
             };
