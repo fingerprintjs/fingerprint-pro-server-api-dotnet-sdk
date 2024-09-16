@@ -32,7 +32,11 @@ namespace FingerprintPro.ServerSdk.Client
         {
             Configuration = config;
 
-            Client = config.HttpClient ?? new HttpClient() { BaseAddress = new Uri(Configuration.BasePath)};
+            Client = config.HttpClient ?? new HttpClient()
+            {
+                BaseAddress = new Uri(Configuration.BasePath),
+                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout)
+            };
         }
 
         /// <summary>
