@@ -1,7 +1,7 @@
-/* 
+/*
  * Fingerprint Pro Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -94,13 +94,11 @@ namespace FingerprintPro.ServerSdk.Client
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
-        [Obsolete("This property is deprecated. To set default base path, provide HttpClient and use the HttpClient.BaseAddress property.")]
         public string BasePath { get; set; }
 
         /// <summary>
         /// Gets or sets the default header.
         /// </summary>
-        [Obsolete("This property is deprecated. To set default headers, provide HttpClient and use the HttpClient.DefaultRequestHeaders property.")]
         public IDictionary<string, string> DefaultHeader { get; set; }
 
         /// <summary>
@@ -111,7 +109,6 @@ namespace FingerprintPro.ServerSdk.Client
         /// <summary>
         /// Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
         /// </summary>
-        [Obsolete("This property is deprecated. To set timeout, provide HttpClient and use the HttpClient.Timeout property.")]
         public int Timeout { get; set; }
 
         /// <summary>
