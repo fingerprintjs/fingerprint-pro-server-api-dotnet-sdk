@@ -40,7 +40,6 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the base path.
         /// </summary>
         /// <value>Base path.</value>
-        [Obsolete("This property is deprecated. To set default base path, provide HttpClient and use the HttpClient.BaseAddress property.")]
         string BasePath { get; }
 
         /// <summary>
@@ -53,7 +52,6 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the default header.
         /// </summary>
         /// <value>Default header.</value>
-        [Obsolete("This property is deprecated. To set default headers, provide HttpClient and use the HttpClient.DefaultRequestHeaders property.")]
         IDictionary<string, string> DefaultHeader { get; }
 
         /// <summary>
@@ -71,7 +69,6 @@ namespace FingerprintPro.ServerSdk.Client
         /// Gets the HTTP connection timeout (in milliseconds)
         /// </summary>
         /// <value>HTTP connection timeout.</value>
-        [Obsolete("This property is deprecated. To set timeout, provide HttpClient and use the HttpClient.Timeout property.")]
         int Timeout { get; }
 
         /// <summary>
