@@ -32,17 +32,7 @@ namespace FingerprintPro.ServerSdk.Client
         {
             Configuration = config;
 
-            Client = config.HttpClient ?? new HttpClient();
-
-            if (Client.BaseAddress == null)
-            {
-                Client.BaseAddress = new Uri(Configuration.BasePath);
-            }
-
-            foreach (var header in config.DefaultHeader)
-            {
-                Client.DefaultRequestHeaders.Add(header.Key, header.Value);
-            }
+            Client = config.HttpClient ?? new HttpClient() { BaseAddress = new Uri(Configuration.BasePath)};
         }
 
         /// <summary>
@@ -88,6 +78,11 @@ namespace FingerprintPro.ServerSdk.Client
             if (!string.IsNullOrEmpty(apiKey))
             {
                 request.Headers.TryAddWithoutValidation("Auth-API-Key", apiKey);
+            }
+
+            foreach (var header in Configuration.DefaultHeader)
+            {
+                request.Headers.TryAddWithoutValidation(header.Key, header.Value);
             }
 
             return request;
