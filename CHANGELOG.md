@@ -1,3 +1,11 @@
+## [6.2.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.2.0...v6.2.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* avoid making direct changes to passed `HttpClient` ([cee0146](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/cee014606538fe6e97b1e661aa9a187ee1122f5b))
+* correctly pass `Configuration.Timeout` when creating `HttpClient` ([4edd39a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/4edd39a7766e19ce81b52ce09225d3d07e84ca80))
+
 ## [6.2.0](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.1.0...v6.2.0) (2024-09-12)
 
 
