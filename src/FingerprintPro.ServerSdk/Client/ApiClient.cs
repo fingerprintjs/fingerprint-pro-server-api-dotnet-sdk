@@ -94,7 +94,7 @@ namespace FingerprintPro.ServerSdk.Client
 
         private UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
         {
-            var uri = new UriBuilder(Client.BaseAddress!)
+            var uri = new UriBuilder(Configuration.BasePath!)
             {
                 Path = definition.GetPath(args)
             };
