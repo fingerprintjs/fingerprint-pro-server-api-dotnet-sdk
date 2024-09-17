@@ -1,3 +1,10 @@
+## [6.2.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.2.1...v6.2.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* fallback to `Configuration.BasePath` it `HttpClient` is provided with null `BaseAddress` ([1c69113](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/1c69113b3681f3981855ab265e92b75efda6e59e))
+
 ## [6.2.1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.2.0...v6.2.1) (2024-09-16)
 
 
