@@ -94,12 +94,12 @@ namespace FingerprintPro.ServerSdk.Client
 
         private UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
         {
-            var uri = new UriBuilder(Client.BaseAddress!)
+            var uriBuilder = new UriBuilder(Client.BaseAddress?.ToString() ?? Configuration.BasePath)
             {
                 Path = definition.GetPath(args)
             };
 
-            return uri;
+            return uriBuilder;
         }
 
         public async Task<ApiResponse<object>> DoRequestEmpty(ApiRequest apiRequest)
