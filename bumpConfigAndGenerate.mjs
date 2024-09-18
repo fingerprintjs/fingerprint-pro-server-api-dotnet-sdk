@@ -1,4 +1,5 @@
 import config from './config.json' assert {type: 'json'};
+import pkg from './package.json' assert {type: 'json'};
 import fs from 'fs'
 import cp from 'child_process'
 import { fileURLToPath } from 'url';
@@ -16,18 +17,6 @@ const paths = {
 
 console.info('paths', paths);
 
-function getVersion() {
-    const version = process.env.NEW_VERSION;
-
-    if (!version) {
-        throw new Error('NEW_VERSION environment variable is not set');
-    }
-
-    console.info('New version:', version);
-
-    return version;
-}
-
 function bumpConfigVersion(version) {
     config.packageVersion = version;
 
@@ -39,7 +28,7 @@ function bumpCsprojVersion(version) {
 
     // Replace <Version> tag with given version
     const newCsproj = csproj.replace(/<Version>.*<\/Version>/, `<Version>${version}</Version>`);
-    
+
     console.info('newCsproj', newCsproj);
 
     fs.writeFileSync(paths.csproj, newCsproj);
@@ -51,12 +40,8 @@ function generateSwaggerCode() {
     });
 }
 
-function main() {
-    const version = getVersion();
+const version = pkg.version
 
-    bumpConfigVersion(version);
-    bumpCsprojVersion(version);
-    generateSwaggerCode();
-}
-
-main();
+bumpConfigVersion(version);
+bumpCsprojVersion(version);
+generateSwaggerCode();

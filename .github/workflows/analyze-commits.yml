@@ -9,3 +9,5 @@ jobs:
   analyze-commits:
     name: Analyze commits
     uses: fingerprintjs/dx-team-toolkit/.github/workflows/analyze-commits.yml@v1
+    with:
+      previewNotes: false
