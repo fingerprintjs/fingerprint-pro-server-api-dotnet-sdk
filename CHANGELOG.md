@@ -1,3 +1,6 @@
+# Fingerprint Server API Dotnet SDK
+
+
 ## [6.2.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.2.1...v6.2.2) (2024-09-17)
 
 
