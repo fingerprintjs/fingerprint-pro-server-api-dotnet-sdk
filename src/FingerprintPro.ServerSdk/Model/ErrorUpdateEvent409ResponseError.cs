@@ -15,57 +15,57 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorVisitsDelete400ResponseError
+    /// ErrorUpdateEvent409ResponseError
     /// </summary>
     [DataContract]
-    public class ErrorVisitsDelete400ResponseError : IEquatable<ErrorVisitsDelete400ResponseError>
+    public class ErrorUpdateEvent409ResponseError : IEquatable<ErrorUpdateEvent409ResponseError>
     {
         /// <summary>
-        /// Error code: * `RequestCannotBeParsed` - The visitor ID parameter is missing or in the wrong format. 
+        /// Error code: * `StateNotReady` - The event specified with request id is not ready for updates yet. Try again. This error happens in rare cases when update API is called immediately after receiving the request id on the client. In case you need to send information right away, we recommend using the JS agent API instead. 
         /// </summary>
-        /// <value>Error code: * `RequestCannotBeParsed` - The visitor ID parameter is missing or in the wrong format. </value>
+        /// <value>Error code: * `StateNotReady` - The event specified with request id is not ready for updates yet. Try again. This error happens in rare cases when update API is called immediately after receiving the request id on the client. In case you need to send information right away, we recommend using the JS agent API instead. </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
-            /// Enum RequestCannotBeParsed for value: RequestCannotBeParsed
+            /// Enum StateNotReady for value: StateNotReady
             /// </summary>
-            [EnumMember(Value = "RequestCannotBeParsed")]
-            RequestCannotBeParsed = 1
+            [EnumMember(Value = "StateNotReady")]
+            StateNotReady = 1
         }
         /// <summary>
-        /// Error code: * `RequestCannotBeParsed` - The visitor ID parameter is missing or in the wrong format. 
+        /// Error code: * `StateNotReady` - The event specified with request id is not ready for updates yet. Try again. This error happens in rare cases when update API is called immediately after receiving the request id on the client. In case you need to send information right away, we recommend using the JS agent API instead. 
         /// </summary>
-        /// <value>Error code: * `RequestCannotBeParsed` - The visitor ID parameter is missing or in the wrong format. </value>
+        /// <value>Error code: * `StateNotReady` - The event specified with request id is not ready for updates yet. Try again. This error happens in rare cases when update API is called immediately after receiving the request id on the client. In case you need to send information right away, we recommend using the JS agent API instead. </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorVisitsDelete400ResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorUpdateEvent409ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code: * `RequestCannotBeParsed` - The visitor ID parameter is missing or in the wrong format.  (required).</param>
+        /// <param name="code">Error code: * `StateNotReady` - The event specified with request id is not ready for updates yet. Try again. This error happens in rare cases when update API is called immediately after receiving the request id on the client. In case you need to send information right away, we recommend using the JS agent API instead.  (required).</param>
         /// <param name="message">message (required).</param>
-        public ErrorVisitsDelete400ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
+        public ErrorUpdateEvent409ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
-            // swagger debug: ErrorVisitsDelete400ResponseError Code
+            // swagger debug: ErrorUpdateEvent409ResponseError Code
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for ErrorVisitsDelete400ResponseError and cannot be null");
+                throw new InvalidDataException("code is a required property for ErrorUpdateEvent409ResponseError and cannot be null");
             }
             else
             {
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
-            // swagger debug: ErrorVisitsDelete400ResponseError Message
+            // swagger debug: ErrorUpdateEvent409ResponseError Message
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for ErrorVisitsDelete400ResponseError and cannot be null");
+                throw new InvalidDataException("message is a required property for ErrorUpdateEvent409ResponseError and cannot be null");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorVisitsDelete400ResponseError {\n");
+            sb.Append("class ErrorUpdateEvent409ResponseError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -105,11 +105,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorVisitsDelete400ResponseError instances are equal
+        /// Returns true if ErrorUpdateEvent409ResponseError instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorVisitsDelete400ResponseError to be compared</param>
+        /// <param name="input">Instance of ErrorUpdateEvent409ResponseError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorVisitsDelete400ResponseError input)
+        public bool Equals(ErrorUpdateEvent409ResponseError input)
         {
             if (input == null)
                 return false;

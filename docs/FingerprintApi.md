@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteVisitorData**](FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
 [**GetEvent**](FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
 [**GetVisits**](FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
+[**UpdateEvent**](FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
 <a name="deletevisitordata"></a>
 # **DeleteVisitorData**
@@ -14,7 +15,7 @@ Method | HTTP request | Description
 
 Delete data by visitor ID
 
-Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. All delete requests are queued:   * Recent data (10 days or newer) belonging to the specified visitor will be deleted within 24 hours. * Data from older (11 days or more) identification events  will be deleted after 90 days.  If you are interested in using this API, please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Application](https://dev.fingerprint.com/docs/glossary#fingerprint-application).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/events` API](https://dev.fingerprint.com/reference/getevent) with a `request_id` that was made outside of the 10 days, you will still receive a valid response. - If you request [`/visitors` API](https://dev.fingerprint.com/reference/getvisits) for the deleted visitor ID, the response will include identification requests that were made outside of those 10 days.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
 
 ### Example
 ```csharp
@@ -197,6 +198,68 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+<a name="updateevent"></a>
+# **UpdateEvent**
+> void UpdateEvent (EventUpdateRequest body, string requestId)
+
+Update an event with a given request ID
+
+Change information in existing events specified by `requestId` or *flag suspicious events*.  When an event is created, it is assigned `linkedId` and `tag` submitted through the JS agent parameters. This information might not be available on the client so the Server API allows for updating the attributes after the fact.  **Warning** It's not possible to update events older than 10 days. 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
+
+namespace Example
+{
+    public class UpdateEventExample
+    {
+        public void main()
+        {
+            var configuration = new Configuration("YOUR_API_KEY");
+            var apiInstance = new FingerprintApi(configuration);
+            var body = new EventUpdateRequest(); // EventUpdateRequest | 
+            var requestId = requestId_example;  // string | The unique event [identifier](https://dev.fingerprint.com/docs/js-agent#requestid).
+
+            try
+            {
+                // Update an event with a given request ID
+                apiInstance.UpdateEvent(body, requestId);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling FingerprintApi.UpdateEvent: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**EventUpdateRequest**](EventUpdateRequest.md)|  | 
+ **requestId** | **string**| The unique event [identifier](https://dev.fingerprint.com/docs/js-agent#requestid). | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKeyHeader](../README.md#ApiKeyHeader), [ApiKeyQuery](../README.md#ApiKeyQuery)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

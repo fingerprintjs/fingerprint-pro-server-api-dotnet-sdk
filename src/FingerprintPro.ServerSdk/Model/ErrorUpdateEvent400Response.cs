@@ -15,18 +15,18 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorVisitsDelete400Response
+    /// ErrorUpdateEvent400Response
     /// </summary>
     [DataContract]
-    public class ErrorVisitsDelete400Response : IEquatable<ErrorVisitsDelete400Response>
+    public class ErrorUpdateEvent400Response : IEquatable<ErrorUpdateEvent400Response>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorVisitsDelete400Response" /> class.
+        /// Initializes a new instance of the <see cref="ErrorUpdateEvent400Response" /> class.
         /// </summary>
         /// <param name="error">error.</param>
-        public ErrorVisitsDelete400Response(ErrorVisitsDelete400ResponseError error = default(ErrorVisitsDelete400ResponseError))
+        public ErrorUpdateEvent400Response(ErrorUpdateEvent400ResponseError error = default(ErrorUpdateEvent400ResponseError))
         {
             this.Error = error;
         }
@@ -36,7 +36,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
         [JsonPropertyName("error")]
-        public ErrorVisitsDelete400ResponseError Error { get; set; }
+        public ErrorUpdateEvent400ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -45,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorVisitsDelete400Response {\n");
+            sb.Append("class ErrorUpdateEvent400Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -61,11 +61,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorVisitsDelete400Response instances are equal
+        /// Returns true if ErrorUpdateEvent400Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorVisitsDelete400Response to be compared</param>
+        /// <param name="input">Instance of ErrorUpdateEvent400Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorVisitsDelete400Response input)
+        public bool Equals(ErrorUpdateEvent400Response input)
         {
             if (input == null)
                 return false;

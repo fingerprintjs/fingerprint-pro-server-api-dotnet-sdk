@@ -15,18 +15,18 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorVisitsDelete404Response
+    /// ErrorVisitor404Response
     /// </summary>
     [DataContract]
-    public class ErrorVisitsDelete404Response : IEquatable<ErrorVisitsDelete404Response>
+    public class ErrorVisitor404Response : IEquatable<ErrorVisitor404Response>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorVisitsDelete404Response" /> class.
+        /// Initializes a new instance of the <see cref="ErrorVisitor404Response" /> class.
         /// </summary>
         /// <param name="error">error.</param>
-        public ErrorVisitsDelete404Response(ErrorVisitsDelete404ResponseError error = default(ErrorVisitsDelete404ResponseError))
+        public ErrorVisitor404Response(ErrorVisitor404ResponseError error = default(ErrorVisitor404ResponseError))
         {
             this.Error = error;
         }
@@ -36,7 +36,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = false)]
         [JsonPropertyName("error")]
-        public ErrorVisitsDelete404ResponseError Error { get; set; }
+        public ErrorVisitor404ResponseError Error { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -45,7 +45,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorVisitsDelete404Response {\n");
+            sb.Append("class ErrorVisitor404Response {\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -61,11 +61,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorVisitsDelete404Response instances are equal
+        /// Returns true if ErrorVisitor404Response instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorVisitsDelete404Response to be compared</param>
+        /// <param name="input">Instance of ErrorVisitor404Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorVisitsDelete404Response input)
+        public bool Equals(ErrorVisitor404Response input)
         {
             if (input == null)
                 return false;
