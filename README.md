@@ -196,6 +196,7 @@ Class | Method | HTTP request | Description
 *FingerprintApi* | [**DeleteVisitorData**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
 *FingerprintApi* | [**GetEvent**](docs/FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
 *FingerprintApi* | [**GetVisits**](docs/FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
+*FingerprintApi* | [**UpdateEvent**](docs/FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
@@ -217,12 +218,17 @@ Class | Method | HTTP request | Description
  - [Model.ErrorCommon429ResponseError](docs/ErrorCommon429ResponseError.md)
  - [Model.ErrorEvent404Response](docs/ErrorEvent404Response.md)
  - [Model.ErrorEvent404ResponseError](docs/ErrorEvent404ResponseError.md)
+ - [Model.ErrorUpdateEvent400Response](docs/ErrorUpdateEvent400Response.md)
+ - [Model.ErrorUpdateEvent400ResponseError](docs/ErrorUpdateEvent400ResponseError.md)
+ - [Model.ErrorUpdateEvent409Response](docs/ErrorUpdateEvent409Response.md)
+ - [Model.ErrorUpdateEvent409ResponseError](docs/ErrorUpdateEvent409ResponseError.md)
+ - [Model.ErrorVisitor400Response](docs/ErrorVisitor400Response.md)
+ - [Model.ErrorVisitor400ResponseError](docs/ErrorVisitor400ResponseError.md)
+ - [Model.ErrorVisitor404Response](docs/ErrorVisitor404Response.md)
+ - [Model.ErrorVisitor404ResponseError](docs/ErrorVisitor404ResponseError.md)
  - [Model.ErrorVisits403](docs/ErrorVisits403.md)
- - [Model.ErrorVisitsDelete400Response](docs/ErrorVisitsDelete400Response.md)
- - [Model.ErrorVisitsDelete400ResponseError](docs/ErrorVisitsDelete400ResponseError.md)
- - [Model.ErrorVisitsDelete404Response](docs/ErrorVisitsDelete404Response.md)
- - [Model.ErrorVisitsDelete404ResponseError](docs/ErrorVisitsDelete404ResponseError.md)
  - [Model.EventResponse](docs/EventResponse.md)
+ - [Model.EventUpdateRequest](docs/EventUpdateRequest.md)
  - [Model.FactoryResetResult](docs/FactoryResetResult.md)
  - [Model.FridaResult](docs/FridaResult.md)
  - [Model.HighActivityResult](docs/HighActivityResult.md)
@@ -282,7 +288,6 @@ Class | Method | HTTP request | Description
  - [Model.VelocityIntervals](docs/VelocityIntervals.md)
  - [Model.VelocityResult](docs/VelocityResult.md)
  - [Model.VirtualMachineResult](docs/VirtualMachineResult.md)
- - [Model.Visit](docs/Visit.md)
  - [Model.VpnResult](docs/VpnResult.md)
  - [Model.VpnResultMethods](docs/VpnResultMethods.md)
  - [Model.WebhookVisit](docs/WebhookVisit.md)
