@@ -11,5 +11,7 @@ public class ApiRequest
 
     public Dictionary<string, string>? QueryParams;
 
+    public HttpContent? Body;
+
     public string[] Args;
 }

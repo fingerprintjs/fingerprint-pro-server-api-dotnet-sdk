@@ -20,6 +20,14 @@ using FingerprintPro.ServerSdk.Test.Utils;
 
 namespace FingerprintPro.ServerSdk.Test.Api
 {
+    internal class ApiRequest
+    {
+        public HttpListenerRequest Request;
+
+        public string? Body;
+
+    }
+
     /// <summary>
     ///  Class for testing FingerprintApi
     /// </summary>
@@ -81,7 +89,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
         private HttpListener? _mockServer;
 
-        private readonly List<HttpListenerRequest> _requests = new List<HttpListenerRequest>();
+        private readonly List<ApiRequest> _requests = [];
 
         private byte[]? _mockResponseBytes;
 
@@ -104,7 +112,21 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var req = ctx.Request;
                 var resp = ctx.Response;
 
-                _requests.Add(req);
+                var body = "";
+
+                if (req.HasEntityBody)
+                {
+                    using var reader = new StreamReader(req.InputStream, req.ContentEncoding);
+
+                    body = await reader.ReadToEndAsync();
+
+                }
+
+                _requests.Add(new ApiRequest()
+                {
+                    Request = req,
+                    Body = body
+                });
 
                 // Print out some info about the request
                 Console.WriteLine(req.Url?.ToString());
@@ -197,7 +219,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("x-test-header"), Is.EqualTo("test"));
             });
@@ -226,7 +248,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("x-test-header"), Is.EqualTo("test"));
             });
@@ -245,7 +267,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -300,7 +322,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -325,7 +347,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -470,7 +492,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(1));
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -503,7 +525,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(62));
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -541,7 +563,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(_requests, Has.Count.EqualTo(1));
                 Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
-                var request = _requests[0];
+                var request = _requests[0].Request;
 
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
@@ -631,6 +653,152 @@ namespace FingerprintPro.ServerSdk.Test.Api
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .Null
+            );
+        }
+
+        [Test]
+        public void UpdateEventTest()
+        {
+            const string requestId = "1708102555327.NLOjmg";
+
+            var body = new EventUpdateRequest()
+            {
+                Suspect = false,
+                LinkedId = "new_linked_id",
+                Tag = new Dictionary<string, string>()
+                {
+                    { "key", "value" }
+                }
+            };
+            var response = _instance!.UpdateEventWithHttpInfo(body, requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0].Request;
+                var bodyStr = _requests[0].Body;
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("PUT"));
+                Assert.That(request.ContentType, Is.EqualTo("application/json; charset=utf-8"));
+
+                Assert.That(bodyStr, Is.EqualTo(JsonUtils.Serialize(body)));
+            });
+        }
+
+        [Test]
+        public async Task UpdateEvent400ErrorTest()
+        {
+            SetupMockResponse("update_event_400_error.json");
+
+            _mockResponseStatusCode = 400;
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            var body = new EventUpdateRequest()
+            {
+                Suspect = false,
+                LinkedId = "new_linked_id",
+                Tag = new Dictionary<string, string>()
+                {
+                    { "key", "value" }
+                }
+            };
+
+            await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorUpdateEvent400Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+            );
+        }
+
+        [Test]
+        public async Task UpdateEvent403ErrorTest()
+        {
+            SetupMockResponse("update_event_403_error.json");
+
+            _mockResponseStatusCode = 403;
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            var body = new EventUpdateRequest()
+            {
+                Suspect = false,
+                LinkedId = "new_linked_id",
+                Tag = new Dictionary<string, string>()
+                {
+                    { "key", "value" }
+                }
+            };
+
+            await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorCommon403Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+            );
+        }
+
+        [Test]
+        public async Task UpdateEvent404ErrorTest()
+        {
+            SetupMockResponse("update_event_404_error.json");
+
+            _mockResponseStatusCode = 404;
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            var body = new EventUpdateRequest()
+            {
+                Suspect = false,
+                LinkedId = "new_linked_id",
+                Tag = new Dictionary<string, string>()
+                {
+                    { "key", "value" }
+                }
+            };
+
+            await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorEvent404Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+            );
+        }
+
+        [Test]
+        public async Task UpdateEvent409ErrorTest()
+        {
+            SetupMockResponse("update_event_409_error.json");
+
+            _mockResponseStatusCode = 409;
+
+            const string requestId = "1708102555327.NLOjmg";
+
+            var body = new EventUpdateRequest()
+            {
+                Suspect = false,
+                LinkedId = "new_linked_id",
+                Tag = new Dictionary<string, string>()
+                {
+                    { "key", "value" }
+                }
+            };
+
+            await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorUpdateEvent409Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(409)
             );
         }
     }

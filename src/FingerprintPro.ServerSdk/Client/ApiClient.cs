@@ -57,7 +57,7 @@ namespace FingerprintPro.ServerSdk.Client
         public IReadableConfiguration Configuration { get; set; }
 
         private HttpRequestMessage CreateRequestMessage(HttpMethod method, UriBuilder uri,
-            Dictionary<string, string>? queryParams)
+            Dictionary<string, string>? queryParams, HttpContent? body = null)
         {
             var query = HttpUtility.ParseQueryString(uri.Query);
             query["ii"] = $"fingerprint-pro-server-api-dotnet-sdk/{ServerSdk.Client.Configuration.Version}";
@@ -77,6 +77,7 @@ namespace FingerprintPro.ServerSdk.Client
             uri.Query = query.ToString();
 
             var request = new HttpRequestMessage(method, uri.ToString());
+            request.Content = body;
             request.Headers.TryAddWithoutValidation("User-Agent", Configuration.UserAgent);
             var apiKey = Configuration.GetApiKeyWithPrefix("Auth-API-Key");
             if (!string.IsNullOrEmpty(apiKey))
@@ -107,7 +108,7 @@ namespace FingerprintPro.ServerSdk.Client
             var definition = apiRequest.OperationDefinition;
 
             var path = GetRequestPath(definition, apiRequest.Args);
-            var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams);
+            var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams, apiRequest.Body);
 
             var response = await Client.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -123,7 +124,7 @@ namespace FingerprintPro.ServerSdk.Client
             var definition = apiRequest.OperationDefinition;
 
             var path = GetRequestPath(definition, apiRequest.Args);
-            var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams);
+            var request = CreateRequestMessage(apiRequest.Method, path, apiRequest.QueryParams, apiRequest.Body);
 
             var response = await Client.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
