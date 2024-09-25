@@ -557,7 +557,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData403ErrorTest()
         {
-            SetupMockResponse("delete_visits_403_error.json");
+            SetupMockResponse("shared/403_error_feature_not_enabled.json");
 
             _mockResponseStatusCode = 403;
 
@@ -574,7 +574,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData400ErrorTest()
         {
-            SetupMockResponse("delete_visits_400_error.json");
+            SetupMockResponse("shared/400_error_incorrect_visitor_id.json");
 
             _mockResponseStatusCode = 400;
 
@@ -582,7 +582,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitsDelete400Response>()
+                    .InstanceOf<ErrorVisitor400Response>()
                     .And
                     .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
             );
@@ -591,7 +591,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData429ErrorTest()
         {
-            SetupMockResponse("delete_visits_429_error.json");
+            SetupMockResponse("shared/429_error_too_many_requests.json");
 
             _mockResponseStatusCode = 429;
 
@@ -604,7 +604,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData404ErrorTest()
         {
-            SetupMockResponse("delete_visits_404_error.json");
+            SetupMockResponse("shared/404_error_visitor_not_found.json");
 
             _mockResponseStatusCode = 404;
 
@@ -612,7 +612,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitsDelete404Response>()
+                    .InstanceOf<ErrorVisitor404Response>()
                     .And
                     .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
             );
@@ -622,7 +622,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         public async Task DeleteVisitorDataNotMappedStatusCodeText()
         {
             // It's ok to use this response even though it matches different status code
-            SetupMockResponse("delete_visits_403_error.json");
+            SetupMockResponse("shared/403_error_token_not_found.json");
 
             _mockResponseStatusCode = 401;
 
