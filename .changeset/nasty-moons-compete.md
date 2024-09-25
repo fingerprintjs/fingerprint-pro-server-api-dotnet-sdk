@@ -1,5 +1,5 @@
 ---
-"fingerprint-pro-server-api-dotnet-sdk": minor
+"fingerprint-pro-server-api-dotnet-sdk": major
 ---
 
 Rename errors models related to visits:
