@@ -26,7 +26,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="FactoryResetResult" /> class.
         /// </summary>
         /// <param name="time">Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser, this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal.  (required).</param>
-        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.  (required).</param>
+        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.         (required).</param>
         public FactoryResetResult(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
             // to ensure "time" is required (not null)
@@ -62,9 +62,9 @@ namespace FingerprintPro.ServerSdk.Model
         public DateTime? Time { get; set; }
 
         /// <summary>
-        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. 
+        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.        
         /// </summary>
-        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. </value>
+        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.        </value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
         [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }

@@ -15,57 +15,62 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ErrorVisitsDelete404ResponseError
+    /// ErrorUpdateEvent400ResponseError
     /// </summary>
     [DataContract]
-    public class ErrorVisitsDelete404ResponseError : IEquatable<ErrorVisitsDelete404ResponseError>
+    public class ErrorUpdateEvent400ResponseError : IEquatable<ErrorUpdateEvent400ResponseError>
     {
         /// <summary>
-        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
+        /// Error code: * `RequestCannotBeParsed` - the JSON content of the request contains some errors that prevented us from parsing it (wrong type/surpassed limits) * `Failed` - the event is more than 10 days old and cannot be updated 
         /// </summary>
-        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
+        /// <value>Error code: * `RequestCannotBeParsed` - the JSON content of the request contains some errors that prevented us from parsing it (wrong type/surpassed limits) * `Failed` - the event is more than 10 days old and cannot be updated </value>
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum CodeEnum
         {
             /// <summary>
-            /// Enum VisitorNotFound for value: VisitorNotFound
+            /// Enum RequestCannotBeParsed for value: RequestCannotBeParsed
             /// </summary>
-            [EnumMember(Value = "VisitorNotFound")]
-            VisitorNotFound = 1
+            [EnumMember(Value = "RequestCannotBeParsed")]
+            RequestCannotBeParsed = 1,
+            /// <summary>
+            /// Enum Failed for value: Failed
+            /// </summary>
+            [EnumMember(Value = "Failed")]
+            Failed = 2
         }
         /// <summary>
-        /// Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. 
+        /// Error code: * `RequestCannotBeParsed` - the JSON content of the request contains some errors that prevented us from parsing it (wrong type/surpassed limits) * `Failed` - the event is more than 10 days old and cannot be updated 
         /// </summary>
-        /// <value>Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted. </value>
+        /// <value>Error code: * `RequestCannotBeParsed` - the JSON content of the request contains some errors that prevented us from parsing it (wrong type/surpassed limits) * `Failed` - the event is more than 10 days old and cannot be updated </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         [JsonPropertyName("code")]
         public CodeEnum Code { get; set; }
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorVisitsDelete404ResponseError" /> class.
+        /// Initializes a new instance of the <see cref="ErrorUpdateEvent400ResponseError" /> class.
         /// </summary>
-        /// <param name="code">Error code: * `VisitorNotFound` - The specified visitor ID was not found. It never existed or it may have already been deleted.  (required).</param>
-        /// <param name="message">message (required).</param>
-        public ErrorVisitsDelete404ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
+        /// <param name="code">Error code: * `RequestCannotBeParsed` - the JSON content of the request contains some errors that prevented us from parsing it (wrong type/surpassed limits) * `Failed` - the event is more than 10 days old and cannot be updated  (required).</param>
+        /// <param name="message">Details about the underlying issue with the input payload (required).</param>
+        public ErrorUpdateEvent400ResponseError(CodeEnum code = default(CodeEnum), string message = default(string))
         {
             // to ensure "code" is required (not null)
-            // swagger debug: ErrorVisitsDelete404ResponseError Code
+            // swagger debug: ErrorUpdateEvent400ResponseError Code
 
             if (code == null)
             {
-                throw new InvalidDataException("code is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
+                throw new InvalidDataException("code is a required property for ErrorUpdateEvent400ResponseError and cannot be null");
             }
             else
             {
                 this.Code = code;
             }
             // to ensure "message" is required (not null)
-            // swagger debug: ErrorVisitsDelete404ResponseError Message
+            // swagger debug: ErrorUpdateEvent400ResponseError Message
 
             if (message == null)
             {
-                throw new InvalidDataException("message is a required property for ErrorVisitsDelete404ResponseError and cannot be null");
+                throw new InvalidDataException("message is a required property for ErrorUpdateEvent400ResponseError and cannot be null");
             }
             else
             {
@@ -75,8 +80,9 @@ namespace FingerprintPro.ServerSdk.Model
 
 
         /// <summary>
-        /// Gets or Sets Message
+        /// Details about the underlying issue with the input payload
         /// </summary>
+        /// <value>Details about the underlying issue with the input payload</value>
         [DataMember(Name = "message", EmitDefaultValue = false)]
         [JsonPropertyName("message")]
         public string Message { get; set; }
@@ -88,7 +94,7 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ErrorVisitsDelete404ResponseError {\n");
+            sb.Append("class ErrorUpdateEvent400ResponseError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
@@ -105,11 +111,11 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if ErrorVisitsDelete404ResponseError instances are equal
+        /// Returns true if ErrorUpdateEvent400ResponseError instances are equal
         /// </summary>
-        /// <param name="input">Instance of ErrorVisitsDelete404ResponseError to be compared</param>
+        /// <param name="input">Instance of ErrorUpdateEvent400ResponseError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ErrorVisitsDelete404ResponseError input)
+        public bool Equals(ErrorUpdateEvent400ResponseError input)
         {
             if (input == null)
                 return false;

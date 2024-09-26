@@ -1,6 +1,9 @@
 using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Api;
 
@@ -48,6 +51,39 @@ public class FingerprintApi : IFingerprintApi
         };
 
         return _apiClient.DoRequest<EventResponse>(request);
+    }
+
+    #endregion
+
+    #region UpdateEvent
+
+    public void UpdateEvent(EventUpdateRequest body, string requestId)
+    {
+        UpdateEventWithHttpInfo(body, requestId);
+    }
+
+    public ApiResponse<object> UpdateEventWithHttpInfo(EventUpdateRequest body, string requestId)
+    {
+        return UpdateEventAsyncWithHttpInfo(body, requestId).Result;
+    }
+
+    public async Task UpdateEventAsync(EventUpdateRequest body, string requestId)
+    {
+        await UpdateEventAsyncWithHttpInfo(body, requestId);
+    }
+
+    public Task<ApiResponse<object>> UpdateEventAsyncWithHttpInfo(EventUpdateRequest body, string requestId)
+    {
+        var definition = new UpdateEventDefinition();
+        var request = new ApiRequest()
+        {
+            OperationDefinition = definition,
+            Method = HttpMethod.Put,
+            Args = new[] { requestId },
+            Body = new StringContent(JsonUtils.Serialize(body), Encoding.UTF8, "application/json"),
+        };
+
+        return _apiClient.DoRequestEmpty(request);
     }
 
     #endregion
