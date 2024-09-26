@@ -21,7 +21,8 @@ Object.entries(paths).forEach(([key, value]) => {
 console.info('Publishing SDK to NuGet',);
 console.info('Paths:', paths);
 
-const version = process.env.NEW_VERSION;
+// version without "v" prefix
+const version = process.env.NEW_VERSION?.replace(/^v/, '');
 const apiKey = process.env.NUGET_API_KEY;
 
 if (!version) {
@@ -46,7 +47,6 @@ cp.execSync('dotnet pack --configuration Release --no-restore', {
     stdio: 'inherit',
     cwd: paths.sdk
 })
-
 
 const fileName = `FingerprintPro.ServerSdk.${version}.nupkg`;
 
