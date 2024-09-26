@@ -23,7 +23,8 @@ jobs:
           dotnet --version && dotnet restore && dotnet list package
           dotnet build --configuration Release --no-restore
 
-      - name: 'Publish'
+      - name: 'Publish '
+        if: github.event_name == 'release'
         run: node publish.mjs
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
