@@ -4,5 +4,8 @@
   "initialVersions": {
     "fingerprint-pro-server-api-dotnet-sdk": "6.2.2"
   },
-  "changesets": []
+  "changesets": [
+    "nasty-moons-compete",
+    "wild-oranges-feel"
+  ]
 }
