@@ -62,6 +62,27 @@ namespace FingerprintPro.ServerSdk.Api
         /// <returns>ApiResponse of EventResponse</returns>
         ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId);
         /// <summary>
+        /// Get Related Visitors
+        /// </summary>
+        /// <remarks>
+        /// Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device.</param>
+        /// <returns>RelatedVisitorsResponse</returns>
+        RelatedVisitorsResponse GetRelatedVisitors(string visitorId);
+
+        /// <summary>
+        /// Get Related Visitors
+        /// </summary>
+        /// <remarks>
+        /// Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device.</param>
+        /// <returns>ApiResponse of RelatedVisitorsResponse</returns>
+        ApiResponse<RelatedVisitorsResponse> GetRelatedVisitorsWithHttpInfo(string visitorId);
+        /// <summary>
         /// Get visits by visitor ID
         /// </summary>
         /// <remarks>
@@ -159,6 +180,27 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="requestId">The unique [identifier](https://dev.fingerprint.com/docs/js-agent#requestid) of each identification request.</param>
         /// <returns>Task of ApiResponse (EventResponse)</returns>
         Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId);
+        /// <summary>
+        /// Get Related Visitors
+        /// </summary>
+        /// <remarks>
+        /// Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device.</param>
+        /// <returns>Task of RelatedVisitorsResponse</returns>
+        Task<RelatedVisitorsResponse> GetRelatedVisitorsAsync(string visitorId);
+
+        /// <summary>
+        /// Get Related Visitorse
+        /// </summary>
+        /// <remarks>
+        /// Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="visitorId">The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device.</param>
+        /// <returns>Task of ApiResponse (RelatedVisitorsResponse)</returns>
+        Task<ApiResponse<RelatedVisitorsResponse>> GetRelatedVisitorsAsyncWithHttpInfo(string visitorId);
         /// <summary>
         /// Get visits by visitor ID
         /// </summary>
@@ -259,6 +301,33 @@ namespace FingerprintPro.ServerSdk.Api
                 },
                 {
                     404, typeof(ErrorEvent404Response)
+                },
+            };
+    }
+    internal class GetRelatedVisitorsDefinition : OperationDefinition
+    {
+        public override string Path => "/related-visitors";
+
+        public override string OperationName => "GetRelatedVisitors";
+
+        public override string[] PathParams => new[] { };
+
+        public override Dictionary<int, Type> ResponseStatusCodeMap => new()
+            {
+                {
+                    200, typeof(RelatedVisitorsResponse)
+                },
+                {
+                    400, typeof(ErrorVisitor400Response)
+                },
+                {
+                    403, typeof(ErrorCommon403Response)
+                },
+                {
+                    404, typeof(ErrorVisitor404Response)
+                },
+                {
+                    429, typeof(ErrorCommon429Response)
                 },
             };
     }

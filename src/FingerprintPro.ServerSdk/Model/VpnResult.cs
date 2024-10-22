@@ -20,6 +20,36 @@ namespace FingerprintPro.ServerSdk.Model
     [DataContract]
     public class VpnResult : IEquatable<VpnResult>
     {
+        /// <summary>
+        /// A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.
+        /// </summary>
+        /// <value>A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.</value>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public enum ConfidenceEnum
+        {
+            /// <summary>
+            /// Enum Low for value: low
+            /// </summary>
+            [EnumMember(Value = "low")]
+            Low = 1,
+            /// <summary>
+            /// Enum Medium for value: medium
+            /// </summary>
+            [EnumMember(Value = "medium")]
+            Medium = 2,
+            /// <summary>
+            /// Enum High for value: high
+            /// </summary>
+            [EnumMember(Value = "high")]
+            High = 3
+        }
+        /// <summary>
+        /// A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.
+        /// </summary>
+        /// <value>A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.</value>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public ConfidenceEnum Confidence { get; set; }
 
 
         /// <summary>
@@ -29,7 +59,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="originTimezone">Local timezone which is used in timezoneMismatch method. (required).</param>
         /// <param name="originCountry">Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown)..</param>
         /// <param name="methods">methods (required).</param>
-        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), string originCountry = default(string), VpnResultMethods methods = default(VpnResultMethods))
+        /// <param name="confidence">A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods. (required).</param>
+        public VpnResult(bool? result = default(bool?), string originTimezone = default(string), string originCountry = default(string), VpnResultMethods methods = default(VpnResultMethods), ConfidenceEnum confidence = default(ConfidenceEnum))
         {
             // to ensure "result" is required (not null)
             // swagger debug: VpnResult Result
@@ -63,6 +94,17 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.Methods = methods;
+            }
+            // to ensure "confidence" is required (not null)
+            // swagger debug: VpnResult Confidence
+
+            if (confidence == null)
+            {
+                throw new InvalidDataException("confidence is a required property for VpnResult and cannot be null");
+            }
+            else
+            {
+                this.Confidence = confidence;
             }
             this.OriginCountry = originCountry;
         }
@@ -98,6 +140,7 @@ namespace FingerprintPro.ServerSdk.Model
         [JsonPropertyName("methods")]
         public VpnResultMethods Methods { get; set; }
 
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -110,6 +153,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  OriginTimezone: ").Append(OriginTimezone).Append("\n");
             sb.Append("  OriginCountry: ").Append(OriginCountry).Append("\n");
             sb.Append("  Methods: ").Append(Methods).Append("\n");
+            sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -153,6 +197,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Methods == input.Methods ||
                 (this.Methods != null &&
                 this.Methods.Equals(input.Methods))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
                 );
         }
 
@@ -173,6 +222,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.OriginCountry.GetHashCode();
                 if (this.Methods != null)
                     hashCode = hashCode * 59 + this.Methods.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
                 return hashCode;
             }
         }

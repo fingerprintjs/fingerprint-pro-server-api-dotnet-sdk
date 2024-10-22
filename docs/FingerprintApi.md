@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteVisitorData**](FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
 [**GetEvent**](FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
+[**GetRelatedVisitors**](FingerprintApi.md#getrelatedvisitors) | **GET** /related-visitors | Get Related Visitors
 [**GetVisits**](FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
 [**UpdateEvent**](FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
@@ -119,6 +120,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EventResponse**](EventResponse.md)
+
+### Authorization
+
+[ApiKeyHeader](../README.md#ApiKeyHeader), [ApiKeyQuery](../README.md#ApiKeyQuery)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+<a name="getrelatedvisitors"></a>
+# **GetRelatedVisitors**
+> RelatedVisitorsResponse GetRelatedVisitors (string visitorId)
+
+Get Related Visitors
+
+Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
+
+namespace Example
+{
+    public class GetRelatedVisitorsExample
+    {
+        public void main()
+        {
+            var configuration = new Configuration("YOUR_API_KEY");
+            var apiInstance = new FingerprintApi(configuration);
+            var visitorId = visitorId_example;  // string | The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device.
+
+            try
+            {
+                // Get Related Visitors
+                RelatedVisitorsResponse result = apiInstance.GetRelatedVisitors(visitorId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling FingerprintApi.GetRelatedVisitors: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **visitorId** | **string**| The [visitor ID](https://dev.fingerprint.com/docs/js-agent#visitorid) for which you want to find the other visitor IDs that originated from the same mobile device. | 
+
+### Return type
+
+[**RelatedVisitorsResponse**](RelatedVisitorsResponse.md)
 
 ### Authorization
 

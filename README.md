@@ -195,6 +195,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *FingerprintApi* | [**DeleteVisitorData**](docs/FingerprintApi.md#deletevisitordata) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
 *FingerprintApi* | [**GetEvent**](docs/FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
+*FingerprintApi* | [**GetRelatedVisitors**](docs/FingerprintApi.md#getrelatedvisitors) | **GET** /related-visitors | Get Related Visitors
 *FingerprintApi* | [**GetVisits**](docs/FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
 *FingerprintApi* | [**UpdateEvent**](docs/FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
@@ -252,6 +253,8 @@ Class | Method | HTTP request | Description
  - [Model.ProductsResponseIdentificationData](docs/ProductsResponseIdentificationData.md)
  - [Model.ProxyResult](docs/ProxyResult.md)
  - [Model.RawDeviceAttributesResult](docs/RawDeviceAttributesResult.md)
+ - [Model.RelatedVisitor](docs/RelatedVisitor.md)
+ - [Model.RelatedVisitorsResponse](docs/RelatedVisitorsResponse.md)
  - [Model.RemoteControlResult](docs/RemoteControlResult.md)
  - [Model.Response](docs/Response.md)
  - [Model.ResponseVisits](docs/ResponseVisits.md)
