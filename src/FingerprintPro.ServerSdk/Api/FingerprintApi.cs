@@ -310,7 +310,7 @@ namespace FingerprintPro.ServerSdk.Api
 
         public override string OperationName => "GetRelatedVisitors";
 
-        public override string[] PathParams => new[] { };
+        public override string[] PathParams => Array.Empty<string>();
 
         public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {

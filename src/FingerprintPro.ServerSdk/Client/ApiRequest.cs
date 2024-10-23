@@ -13,5 +13,5 @@ public class ApiRequest
 
     public HttpContent? Body;
 
-    public string[] Args;
+    public string[]? Args;
 }

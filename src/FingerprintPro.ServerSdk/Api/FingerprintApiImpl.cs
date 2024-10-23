@@ -197,4 +197,41 @@ public class FingerprintApi : IFingerprintApi
     }
 
     #endregion
+
+    #region GetRelatedVisitors
+
+    public RelatedVisitorsResponse GetRelatedVisitors(string visitorId)
+    {
+        return GetRelatedVisitorsWithHttpInfo(visitorId).Data;
+    }
+
+    public ApiResponse<RelatedVisitorsResponse> GetRelatedVisitorsWithHttpInfo(string visitorId)
+    {
+        return GetRelatedVisitorsAsyncWithHttpInfo(visitorId).Result;
+    }
+
+    public async Task<RelatedVisitorsResponse> GetRelatedVisitorsAsync(string visitorId)
+    {
+        var response = await GetRelatedVisitorsAsyncWithHttpInfo(visitorId);
+        return response.Data;
+    }
+
+    public Task<ApiResponse<RelatedVisitorsResponse>> GetRelatedVisitorsAsyncWithHttpInfo(string visitorId)
+    {
+        var definition = new GetRelatedVisitorsDefinition();
+
+        var request = new ApiRequest
+        {
+            OperationDefinition = definition,
+            Method = HttpMethod.Get,
+            QueryParams = new Dictionary<string, string>()
+            {
+                { "visitor_id", visitorId }
+            }
+        };
+
+        return _apiClient.DoRequest<RelatedVisitorsResponse>(request);
+    }
+
+    #endregion
 }
