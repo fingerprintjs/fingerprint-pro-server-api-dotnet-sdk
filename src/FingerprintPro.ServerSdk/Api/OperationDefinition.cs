@@ -13,9 +13,11 @@ public abstract class OperationDefinition
 
     public abstract Dictionary<int, Type> ResponseStatusCodeMap { get; }
 
-    public string GetPath(params string[] args)
+    public string GetPath(params string[]? args)
     {
         var path = Path;
+
+        if (args == null) return path;
 
         for (var i = 0; i < args.Length; i++)
         {

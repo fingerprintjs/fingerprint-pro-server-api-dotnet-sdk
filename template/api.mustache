@@ -77,7 +77,7 @@ namespace {{packageName}}.{{apiPackage}}
 
             public override string OperationName => "{{nickname}}";
 
-            public override string[] PathParams => new[] { {{#pathParams}}"{{baseName}}",{{/pathParams}} };
+            public override string[] PathParams => {{#pathParams}} new[] {"{{baseName}}", } {{/pathParams}} {{^pathParams}}Array.Empty<string>(){{/pathParams}};
 
             public override Dictionary<int, Type> ResponseStatusCodeMap => new()
             {

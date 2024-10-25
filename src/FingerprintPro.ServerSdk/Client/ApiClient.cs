@@ -93,7 +93,7 @@ namespace FingerprintPro.ServerSdk.Client
             return request;
         }
 
-        private UriBuilder GetRequestPath(OperationDefinition definition, params string[] args)
+        private UriBuilder GetRequestPath(OperationDefinition definition, params string[]? args)
         {
             var uriBuilder = new UriBuilder(Client.BaseAddress?.ToString() ?? Configuration.BasePath)
             {

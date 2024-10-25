@@ -25,9 +25,10 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TamperingResult" /> class.
         /// </summary>
-        /// <param name="result">Flag indicating whether browser tampering was detected according to our internal thresholds. (required).</param>
-        /// <param name="anomalyScore">Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers. (required).</param>
-        public TamperingResult(bool? result = default(bool?), decimal? anomalyScore = default(decimal?))
+        /// <param name="result">Flag indicating browser tampering was detected. This happens when either of these conditions is true:   * There are inconsistencies in the browser configuration that cross our internal tampering thresholds (indicated by `anomalyScore`).   * The browser signature resembles one of \"anti-detect\" browsers specifically designed to evade identification and fingerprinting, for example, Incognition (indicated by `antiDetectBrowser`). (required).</param>
+        /// <param name="anomalyScore">Confidence score (`0.0 - 1.0`) for tampering detection. Values above `0.5` indicate that there was a tampering attempt. Values below `0.5` indicate genuine browsers. (required).</param>
+        /// <param name="antiDetectBrowser">Is `true` if the identified browser resembles one of \"anti-detect\" browsers, for example, Incognition. Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations. (required).</param>
+        public TamperingResult(bool? result = default(bool?), decimal? anomalyScore = default(decimal?), bool? antiDetectBrowser = default(bool?))
         {
             // to ensure "result" is required (not null)
             // swagger debug: TamperingResult Result
@@ -51,23 +52,42 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.AnomalyScore = anomalyScore;
             }
+            // to ensure "antiDetectBrowser" is required (not null)
+            // swagger debug: TamperingResult AntiDetectBrowser
+
+            if (antiDetectBrowser == null)
+            {
+                throw new InvalidDataException("antiDetectBrowser is a required property for TamperingResult and cannot be null");
+            }
+            else
+            {
+                this.AntiDetectBrowser = antiDetectBrowser;
+            }
         }
 
         /// <summary>
-        /// Flag indicating whether browser tampering was detected according to our internal thresholds.
+        /// Flag indicating browser tampering was detected. This happens when either of these conditions is true:   * There are inconsistencies in the browser configuration that cross our internal tampering thresholds (indicated by `anomalyScore`).   * The browser signature resembles one of \"anti-detect\" browsers specifically designed to evade identification and fingerprinting, for example, Incognition (indicated by `antiDetectBrowser`).
         /// </summary>
-        /// <value>Flag indicating whether browser tampering was detected according to our internal thresholds.</value>
+        /// <value>Flag indicating browser tampering was detected. This happens when either of these conditions is true:   * There are inconsistencies in the browser configuration that cross our internal tampering thresholds (indicated by `anomalyScore`).   * The browser signature resembles one of \"anti-detect\" browsers specifically designed to evade identification and fingerprinting, for example, Incognition (indicated by `antiDetectBrowser`).</value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         [JsonPropertyName("result")]
         public bool? Result { get; set; }
 
         /// <summary>
-        /// Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers.
+        /// Confidence score (`0.0 - 1.0`) for tampering detection. Values above `0.5` indicate that there was a tampering attempt. Values below `0.5` indicate genuine browsers.
         /// </summary>
-        /// <value>Confidence score (`0.0 - 1.0`) for the tampering detection. Values above `0.5` suggest that we're reasonably sure there was a tampering attempt. Values below `0.5` are genuine browsers.</value>
+        /// <value>Confidence score (`0.0 - 1.0`) for tampering detection. Values above `0.5` indicate that there was a tampering attempt. Values below `0.5` indicate genuine browsers.</value>
         [DataMember(Name = "anomalyScore", EmitDefaultValue = false)]
         [JsonPropertyName("anomalyScore")]
         public decimal? AnomalyScore { get; set; }
+
+        /// <summary>
+        /// Is `true` if the identified browser resembles one of \"anti-detect\" browsers, for example, Incognition. Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations.
+        /// </summary>
+        /// <value>Is `true` if the identified browser resembles one of \"anti-detect\" browsers, for example, Incognition. Anti-detect browsers try to evade identification by masking or manipulating their fingerprint to imitate legitimate browser configurations.</value>
+        [DataMember(Name = "antiDetectBrowser", EmitDefaultValue = false)]
+        [JsonPropertyName("antiDetectBrowser")]
+        public bool? AntiDetectBrowser { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,6 +99,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class TamperingResult {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  AnomalyScore: ").Append(AnomalyScore).Append("\n");
+            sb.Append("  AntiDetectBrowser: ").Append(AntiDetectBrowser).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,6 +133,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.AnomalyScore == input.AnomalyScore ||
                 (this.AnomalyScore != null &&
                 this.AnomalyScore.Equals(input.AnomalyScore))
+                ) &&
+                (
+                this.AntiDetectBrowser == input.AntiDetectBrowser ||
+                (this.AntiDetectBrowser != null &&
+                this.AntiDetectBrowser.Equals(input.AntiDetectBrowser))
                 );
         }
 
@@ -128,6 +154,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
                 if (this.AnomalyScore != null)
                     hashCode = hashCode * 59 + this.AnomalyScore.GetHashCode();
+                if (this.AntiDetectBrowser != null)
+                    hashCode = hashCode * 59 + this.AntiDetectBrowser.GetHashCode();
                 return hashCode;
             }
         }

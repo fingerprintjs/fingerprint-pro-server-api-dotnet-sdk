@@ -97,6 +97,11 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
         private int? _mockResponseStatusCode;
 
+        private T GetMockResponse<T>()
+        {
+            return JsonUtils.Deserialize<T>(Encoding.UTF8.GetString(_mockResponseBytes!))!;
+        }
+
         private void SetupMockResponse(string fileName)
         {
             _mockResponseBytes = MockLoader.Load(fileName);
@@ -800,6 +805,95 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     .And
                     .With.Property(nameof(ApiException.ErrorCode)).EqualTo(409)
             );
+        }
+
+        [Test]
+        public void GetRelatedVisitorsTest()
+        {
+            SetupMockResponse("related-visitors/get_related_visitors_200.json");
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            var response = _instance!.GetRelatedVisitorsWithHttpInfo(visitorId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0].Request;
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/related-visitors?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&visitor_id={visitorId}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+                Assert.That(response.Data, Is.EqualTo(GetMockResponse<RelatedVisitorsResponse>()));
+            });
+        }
+
+        [Test]
+        public async Task GetRelatedVisitors400ErrorTest()
+        {
+            SetupMockResponse("shared/400_error_empty_visitor_id.json");
+            _mockResponseStatusCode = 400;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorVisitor400Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+            );
+        }
+
+        [Test]
+        public async Task GetRelatedVisitors403ErrorTest()
+        {
+            SetupMockResponse("shared/403_error_feature_not_enabled.json");
+            _mockResponseStatusCode = 403;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorCommon403Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+            );
+        }
+
+        [Test]
+        public async Task GetRelatedVisitors404ErrorTest()
+        {
+            SetupMockResponse("shared/404_error_visitor_not_found.json");
+            _mockResponseStatusCode = 404;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorVisitor404Response>()
+                    .And
+                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+            );
+        }
+
+        [Test]
+        public async Task GetRelatedVisitors429ErrorTest()
+        {
+            SetupMockResponse("shared/429_error_too_many_requests.json");
+            _mockResponseStatusCode = 429;
+
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+
+            await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId), Throws
+                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
+                .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
     }
 }
