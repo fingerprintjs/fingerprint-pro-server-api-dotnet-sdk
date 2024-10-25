@@ -32,8 +32,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="osVersion">osVersion (required).</param>
         /// <param name="device">device (required).</param>
         /// <param name="userAgent">userAgent (required).</param>
-        /// <param name="botProbability">botProbability.</param>
-        public BrowserDetails(string browserName = default(string), string browserMajorVersion = default(string), string browserFullVersion = default(string), string os = default(string), string osVersion = default(string), string device = default(string), string userAgent = default(string), int? botProbability = default(int?))
+        public BrowserDetails(string browserName = default(string), string browserMajorVersion = default(string), string browserFullVersion = default(string), string os = default(string), string osVersion = default(string), string device = default(string), string userAgent = default(string))
         {
             // to ensure "browserName" is required (not null)
             // swagger debug: BrowserDetails BrowserName
@@ -112,7 +111,6 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.UserAgent = userAgent;
             }
-            this.BotProbability = botProbability;
         }
 
         /// <summary>
@@ -165,13 +163,6 @@ namespace FingerprintPro.ServerSdk.Model
         public string UserAgent { get; set; }
 
         /// <summary>
-        /// Gets or Sets BotProbability
-        /// </summary>
-        [DataMember(Name = "botProbability", EmitDefaultValue = false)]
-        [JsonPropertyName("botProbability")]
-        public int? BotProbability { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -186,7 +177,6 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  OsVersion: ").Append(OsVersion).Append("\n");
             sb.Append("  Device: ").Append(Device).Append("\n");
             sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
-            sb.Append("  BotProbability: ").Append(BotProbability).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -245,11 +235,6 @@ namespace FingerprintPro.ServerSdk.Model
                 this.UserAgent == input.UserAgent ||
                 (this.UserAgent != null &&
                 this.UserAgent.Equals(input.UserAgent))
-                ) &&
-                (
-                this.BotProbability == input.BotProbability ||
-                (this.BotProbability != null &&
-                this.BotProbability.Equals(input.BotProbability))
                 );
         }
 
@@ -276,8 +261,6 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Device.GetHashCode();
                 if (this.UserAgent != null)
                     hashCode = hashCode * 59 + this.UserAgent.GetHashCode();
-                if (this.BotProbability != null)
-                    hashCode = hashCode * 59 + this.BotProbability.GetHashCode();
                 return hashCode;
             }
         }
