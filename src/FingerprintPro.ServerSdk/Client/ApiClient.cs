@@ -160,7 +160,8 @@ namespace FingerprintPro.ServerSdk.Client
 
             var result = JsonUtils.Deserialize(responseContent, model);
 
-            if (response.StatusCode != HttpStatusCode.TooManyRequests)
+            // https://github.com/dotnet/runtime/issues/54321
+            if (response.StatusCode != (HttpStatusCode)429)
                 throw new ApiException(statusCode, message, response, result);
 
 
