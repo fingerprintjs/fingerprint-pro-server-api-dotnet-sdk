@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of RelatedVisitorsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(RelatedVisitorsResponse input)
+        public bool Equals(RelatedVisitorsResponse? input)
         {
             if (input == null)
                 return false;

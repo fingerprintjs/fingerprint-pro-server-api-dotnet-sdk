@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Emulator to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Emulator input)
+        public bool Equals(Emulator? input)
         {
             if (input == null)
                 return false;

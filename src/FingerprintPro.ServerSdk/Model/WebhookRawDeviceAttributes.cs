@@ -18,7 +18,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// It includes 35+ raw browser identification attributes to provide Fingerprint users with even more information than our standard visitor ID provides. This enables Fingerprint users to not have to run our open-source product in conjunction with Fingerprint Pro Plus and Enterprise to get those additional attributes. Warning: The raw signals data can change at any moment as we improve the product. We cannot guarantee the internal shape of raw device attributes to be stable, so typical semantic versioning rules do not apply here. Use this data with caution without assuming a specific structure beyond the generic type provided here. 
     /// </summary>
     [DataContract]
-    public class WebhookRawDeviceAttributes : Dictionary<String, RawDeviceAttribute>, IEquatable<WebhookRawDeviceAttributes>
+    public class WebhookRawDeviceAttributes : DictionaryModel<String, RawDeviceAttribute>, IEquatable<WebhookRawDeviceAttributes>
     {
 
 
@@ -37,7 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class WebhookRawDeviceAttributes {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -46,7 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public override string ToJson()
+        public string ToJson()
         {
             return JsonUtils.Serialize(this);
         }
@@ -56,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookRawDeviceAttributes to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookRawDeviceAttributes input)
+        public bool Equals(WebhookRawDeviceAttributes? input)
         {
             if (input == null)
                 return false;

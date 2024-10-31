@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of DeveloperTools to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DeveloperTools input)
+        public bool Equals(DeveloperTools? input)
         {
             if (input == null)
                 return false;

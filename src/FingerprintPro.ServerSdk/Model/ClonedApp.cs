@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ClonedApp to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ClonedApp input)
+        public bool Equals(ClonedApp? input)
         {
             if (input == null)
                 return false;

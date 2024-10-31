@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductProxy to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductProxy input)
+        public bool Equals(ProductProxy? input)
         {
             if (input == null)
                 return false;

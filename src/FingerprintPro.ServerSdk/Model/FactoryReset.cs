@@ -97,7 +97,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of FactoryReset to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(FactoryReset input)
+        public bool Equals(FactoryReset? input)
         {
             if (input == null)
                 return false;

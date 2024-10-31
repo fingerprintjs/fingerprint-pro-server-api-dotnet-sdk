@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductIPBlocklist to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductIPBlocklist input)
+        public bool Equals(ProductIPBlocklist? input)
         {
             if (input == null)
                 return false;

@@ -118,7 +118,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Tampering to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Tampering input)
+        public bool Equals(Tampering? input)
         {
             if (input == null)
                 return false;

@@ -108,7 +108,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookVPN to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookVPN input)
+        public bool Equals(WebhookVPN? input)
         {
             if (input == null)
                 return false;

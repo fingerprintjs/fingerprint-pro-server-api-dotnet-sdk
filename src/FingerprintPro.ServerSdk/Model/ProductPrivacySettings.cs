@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductPrivacySettings to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductPrivacySettings input)
+        public bool Equals(ProductPrivacySettings? input)
         {
             if (input == null)
                 return false;

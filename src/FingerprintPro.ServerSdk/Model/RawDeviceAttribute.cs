@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="value">value.</param>
         /// <param name="error">error.</param>
-        public RawDeviceAttribute(value = default(), RawDeviceAttributeError error = default(RawDeviceAttributeError))
+        public RawDeviceAttribute(dynamic value = null, RawDeviceAttributeError error = default(RawDeviceAttributeError))
         {
             this.Value = value;
             this.Error = error;
@@ -38,77 +38,77 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         [JsonPropertyName("value")]
-        public Value { get; set; }
+        public dynamic Value { get; set; }
 
-    /// <summary>
-    /// Gets or Sets Error
-    /// </summary>
-    [DataMember(Name = "error", EmitDefaultValue = false)]
-    [JsonPropertyName("error")]
-    public RawDeviceAttributeError Error { get; set; }
+        /// <summary>
+        /// Gets or Sets Error
+        /// </summary>
+        [DataMember(Name = "error", EmitDefaultValue = false)]
+        [JsonPropertyName("error")]
+        public RawDeviceAttributeError Error { get; set; }
 
-    /// <summary>
-    /// Returns the string presentation of the object
-    /// </summary>
-    /// <returns>String presentation of the object</returns>
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-        sb.Append("class RawDeviceAttribute {\n");
-        sb.Append("  Value: ").Append(Value).Append("\n");
-        sb.Append("  Error: ").Append(Error).Append("\n");
-        sb.Append("}\n");
-        return sb.ToString();
-    }
-
-    /// <summary>
-    /// Returns the JSON string presentation of the object
-    /// </summary>
-    /// <returns>JSON string presentation of the object</returns>
-    public virtual string ToJson()
-    {
-        return JsonUtils.Serialize(this);
-    }
-
-    /// <summary>
-    /// Returns true if RawDeviceAttribute instances are equal
-    /// </summary>
-    /// <param name="input">Instance of RawDeviceAttribute to be compared</param>
-    /// <returns>Boolean</returns>
-    public bool Equals(RawDeviceAttribute input)
-    {
-        if (input == null)
-            return false;
-
-        return
-            (
-            this.Value == input.Value ||
-            (this.Value != null &&
-            this.Value.Equals(input.Value))
-            ) &&
-            (
-            this.Error == input.Error ||
-            (this.Error != null &&
-            this.Error.Equals(input.Error))
-            );
-    }
-
-    /// <summary>
-    /// Gets the hash code
-    /// </summary>
-    /// <returns>Hash code</returns>
-    public override int GetHashCode()
-    {
-        unchecked // Overflow is fine, just wrap
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
         {
-            int hashCode = 41;
-            if (this.Value != null)
-                hashCode = hashCode * 59 + this.Value.GetHashCode();
-            if (this.Error != null)
-                hashCode = hashCode * 59 + this.Error.GetHashCode();
-            return hashCode;
+            var sb = new StringBuilder();
+            sb.Append("class RawDeviceAttribute {\n");
+            sb.Append("  Value: ").Append(Value).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("}\n");
+            return sb.ToString();
         }
-    }
 
-}
+        /// <summary>
+        /// Returns the JSON string presentation of the object
+        /// </summary>
+        /// <returns>JSON string presentation of the object</returns>
+        public virtual string ToJson()
+        {
+            return JsonUtils.Serialize(this);
+        }
+
+        /// <summary>
+        /// Returns true if RawDeviceAttribute instances are equal
+        /// </summary>
+        /// <param name="input">Instance of RawDeviceAttribute to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(RawDeviceAttribute? input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                this.Value == input.Value ||
+                (this.Value != null &&
+                this.Value.Equals(input.Value))
+                ) &&
+                (
+                this.Error == input.Error ||
+                (this.Error != null &&
+                this.Error.Equals(input.Error))
+                );
+        }
+
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns>Hash code</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = 41;
+                if (this.Value != null)
+                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                if (this.Error != null)
+                    hashCode = hashCode * 59 + this.Error.GetHashCode();
+                return hashCode;
+            }
+        }
+
+    }
 }

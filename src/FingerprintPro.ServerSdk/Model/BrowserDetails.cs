@@ -195,7 +195,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of BrowserDetails to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(BrowserDetails input)
+        public bool Equals(BrowserDetails? input)
         {
             if (input == null)
                 return false;

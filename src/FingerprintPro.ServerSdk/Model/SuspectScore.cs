@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of SuspectScore to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SuspectScore input)
+        public bool Equals(SuspectScore? input)
         {
             if (input == null)
                 return false;

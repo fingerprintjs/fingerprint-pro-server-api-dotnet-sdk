@@ -18,7 +18,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// A customer-provided value or an object that was sent with identification request.
     /// </summary>
     [DataContract]
-    public class Tag : Dictionary<String, Object>, IEquatable<Tag>
+    public class Tag : DictionaryModel<String, Object>, IEquatable<Tag>
     {
 
 
@@ -37,7 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tag {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -46,7 +46,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public override string ToJson()
+        public string ToJson()
         {
             return JsonUtils.Serialize(this);
         }
@@ -56,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Tag to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Tag input)
+        public bool Equals(Tag? input)
         {
             if (input == null)
                 return false;

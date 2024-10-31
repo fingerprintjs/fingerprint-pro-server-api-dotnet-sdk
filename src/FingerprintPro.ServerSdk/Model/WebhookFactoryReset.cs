@@ -77,7 +77,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookFactoryReset to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookFactoryReset input)
+        public bool Equals(WebhookFactoryReset? input)
         {
             if (input == null)
                 return false;

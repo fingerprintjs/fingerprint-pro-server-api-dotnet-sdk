@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductVirtualMachine to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductVirtualMachine input)
+        public bool Equals(ProductVirtualMachine? input)
         {
             if (input == null)
                 return false;

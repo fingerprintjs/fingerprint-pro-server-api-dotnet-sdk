@@ -323,7 +323,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Visit to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Visit input)
+        public bool Equals(Visit? input)
         {
             if (input == null)
                 return false;

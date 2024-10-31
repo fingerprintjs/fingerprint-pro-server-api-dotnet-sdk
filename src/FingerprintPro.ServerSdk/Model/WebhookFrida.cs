@@ -66,7 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookFrida to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookFrida input)
+        public bool Equals(WebhookFrida? input)
         {
             if (input == null)
                 return false;

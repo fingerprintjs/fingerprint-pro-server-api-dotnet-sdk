@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of RemoteControl to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(RemoteControl input)
+        public bool Equals(RemoteControl? input)
         {
             if (input == null)
                 return false;

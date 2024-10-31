@@ -110,11 +110,11 @@ namespace FingerprintPro.ServerSdk
         /// <remarks>
         /// The SDK will try to decrypt the result with each key until it succeeds.
         /// </remarks>
-        public static EventResponse UnsealEventResponse(byte[] sealedData, DecryptionKey[] keys)
+        public static EventsGetResponse UnsealEventResponse(byte[] sealedData, DecryptionKey[] keys)
         {
             var unsealed = Unseal(sealedData, keys);
 
-            var value = JsonUtils.Deserialize<EventResponse>(Encoding.UTF8.GetString(unsealed));
+            var value = JsonUtils.Deserialize<EventsGetResponse>(Encoding.UTF8.GetString(unsealed));
 
             if (value == null)
             {

@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductTor to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductTor input)
+        public bool Equals(ProductTor? input)
         {
             if (input == null)
                 return false;

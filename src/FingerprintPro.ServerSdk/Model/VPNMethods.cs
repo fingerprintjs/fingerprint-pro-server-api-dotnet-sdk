@@ -139,7 +139,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of VPNMethods to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VPNMethods input)
+        public bool Equals(VPNMethods? input)
         {
             if (input == null)
                 return false;

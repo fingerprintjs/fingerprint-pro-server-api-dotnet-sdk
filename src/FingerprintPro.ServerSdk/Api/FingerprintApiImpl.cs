@@ -24,22 +24,22 @@ public class FingerprintApi : IFingerprintApi
 
     #region GetEvent
 
-    public EventResponse GetEvent(string requestId)
+    public EventsGetResponse GetEvent(string requestId)
     {
         return GetEventWithHttpInfo(requestId).Data;
     }
 
-    public ApiResponse<EventResponse> GetEventWithHttpInfo(string requestId)
+    public ApiResponse<EventsGetResponse> GetEventWithHttpInfo(string requestId)
     {
         return GetEventAsyncWithHttpInfo(requestId).Result;
     }
 
-    public async Task<EventResponse> GetEventAsync(string requestId)
+    public async Task<EventsGetResponse> GetEventAsync(string requestId)
     {
         return (await GetEventAsyncWithHttpInfo(requestId)).Data;
     }
 
-    public Task<ApiResponse<EventResponse>> GetEventAsyncWithHttpInfo(string requestId)
+    public Task<ApiResponse<EventsGetResponse>> GetEventAsyncWithHttpInfo(string requestId)
     {
         var definition = new GetEventDefinition();
 
@@ -50,29 +50,29 @@ public class FingerprintApi : IFingerprintApi
             Args = new[] { requestId },
         };
 
-        return _apiClient.DoRequest<EventResponse>(request);
+        return _apiClient.DoRequest<EventsGetResponse>(request);
     }
 
     #endregion
 
     #region UpdateEvent
 
-    public void UpdateEvent(EventUpdateRequest body, string requestId)
+    public void UpdateEvent(EventsUpdateRequest body, string requestId)
     {
         UpdateEventWithHttpInfo(body, requestId);
     }
 
-    public ApiResponse<object> UpdateEventWithHttpInfo(EventUpdateRequest body, string requestId)
+    public ApiResponse<object> UpdateEventWithHttpInfo(EventsUpdateRequest body, string requestId)
     {
         return UpdateEventAsyncWithHttpInfo(body, requestId).Result;
     }
 
-    public async Task UpdateEventAsync(EventUpdateRequest body, string requestId)
+    public async Task UpdateEventAsync(EventsUpdateRequest body, string requestId)
     {
         await UpdateEventAsyncWithHttpInfo(body, requestId);
     }
 
-    public Task<ApiResponse<object>> UpdateEventAsyncWithHttpInfo(EventUpdateRequest body, string requestId)
+    public Task<ApiResponse<object>> UpdateEventAsyncWithHttpInfo(EventsUpdateRequest body, string requestId)
     {
         var definition = new UpdateEventDefinition();
         var request = new ApiRequest()
@@ -90,14 +90,14 @@ public class FingerprintApi : IFingerprintApi
 
     #region GetVisits
 
-    public async Task<Response> GetVisitsAsync(string visitorId, string? requestId = null, string? linkedId = null,
+    public async Task<VisitorsGetResponse> GetVisitsAsync(string visitorId, string? requestId = null, string? linkedId = null,
         int? limit = null,
         string? paginationKey = null, long? before = null)
     {
         return (await GetVisitsAsyncWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before)).Data;
     }
 
-    public Task<ApiResponse<Response>> GetVisitsAsyncWithHttpInfo(string visitorId, string? requestId = null,
+    public Task<ApiResponse<VisitorsGetResponse>> GetVisitsAsyncWithHttpInfo(string visitorId, string? requestId = null,
         string? linkedId = null, int? limit = null,
         string? paginationKey = null, long? before = null)
     {
@@ -147,16 +147,16 @@ public class FingerprintApi : IFingerprintApi
             QueryParams = queryParams
         };
 
-        return _apiClient.DoRequest<Response>(request);
+        return _apiClient.DoRequest<VisitorsGetResponse>(request);
     }
 
-    public Response GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
+    public VisitorsGetResponse GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
         string? paginationKey = null, long? before = null)
     {
         return GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Data;
     }
 
-    public ApiResponse<Response> GetVisitsWithHttpInfo(string visitorId, string? requestId = null,
+    public ApiResponse<VisitorsGetResponse> GetVisitsWithHttpInfo(string visitorId, string? requestId = null,
         string? linkedId = null, int? limit = null,
         string? paginationKey = null, long? before = null)
     {

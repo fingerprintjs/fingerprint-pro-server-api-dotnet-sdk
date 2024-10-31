@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of LocationSpoofing to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LocationSpoofing input)
+        public bool Equals(LocationSpoofing? input)
         {
             if (input == null)
                 return false;

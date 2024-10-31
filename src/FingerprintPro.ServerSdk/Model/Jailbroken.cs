@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Jailbroken to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Jailbroken input)
+        public bool Equals(Jailbroken? input)
         {
             if (input == null)
                 return false;

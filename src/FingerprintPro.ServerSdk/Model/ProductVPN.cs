@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of ProductVPN to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ProductVPN input)
+        public bool Equals(ProductVPN? input)
         {
             if (input == null)
                 return false;

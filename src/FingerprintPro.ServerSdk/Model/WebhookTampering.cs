@@ -88,7 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookTampering to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookTampering input)
+        public bool Equals(WebhookTampering? input)
         {
             if (input == null)
                 return false;

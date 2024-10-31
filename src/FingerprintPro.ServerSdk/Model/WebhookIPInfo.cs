@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookIPInfo to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookIPInfo input)
+        public bool Equals(WebhookIPInfo? input)
         {
             if (input == null)
                 return false;

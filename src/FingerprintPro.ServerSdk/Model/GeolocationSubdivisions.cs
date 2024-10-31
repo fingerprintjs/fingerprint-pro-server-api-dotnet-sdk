@@ -37,7 +37,7 @@ namespace FingerprintPro.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GeolocationSubdivisions {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  ").Append(base.ToString()!.Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -56,7 +56,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of GeolocationSubdivisions to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GeolocationSubdivisions input)
+        public bool Equals(GeolocationSubdivisions? input)
         {
             if (input == null)
                 return false;

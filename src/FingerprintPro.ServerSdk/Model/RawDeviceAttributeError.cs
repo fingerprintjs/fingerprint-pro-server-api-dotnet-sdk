@@ -75,7 +75,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of RawDeviceAttributeError to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(RawDeviceAttributeError input)
+        public bool Equals(RawDeviceAttributeError? input)
         {
             if (input == null)
                 return false;

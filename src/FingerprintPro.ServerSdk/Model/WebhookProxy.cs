@@ -66,7 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookProxy to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookProxy input)
+        public bool Equals(WebhookProxy? input)
         {
             if (input == null)
                 return false;

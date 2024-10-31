@@ -87,7 +87,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of EventsUpdateRequest to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EventsUpdateRequest input)
+        public bool Equals(EventsUpdateRequest? input)
         {
             if (input == null)
                 return false;

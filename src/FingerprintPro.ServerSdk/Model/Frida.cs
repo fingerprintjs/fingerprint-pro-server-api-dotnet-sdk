@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Frida to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Frida input)
+        public bool Equals(Frida? input)
         {
             if (input == null)
                 return false;

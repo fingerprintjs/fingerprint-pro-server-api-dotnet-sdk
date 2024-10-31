@@ -66,7 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookVirtualMachine to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookVirtualMachine input)
+        public bool Equals(WebhookVirtualMachine? input)
         {
             if (input == null)
                 return false;

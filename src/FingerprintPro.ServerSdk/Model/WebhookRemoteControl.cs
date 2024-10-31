@@ -66,7 +66,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookRemoteControl to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookRemoteControl input)
+        public bool Equals(WebhookRemoteControl? input)
         {
             if (input == null)
                 return false;

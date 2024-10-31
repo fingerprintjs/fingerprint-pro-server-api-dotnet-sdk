@@ -95,7 +95,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Error to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Error input)
+        public bool Equals(Error? input)
         {
             if (input == null)
                 return false;

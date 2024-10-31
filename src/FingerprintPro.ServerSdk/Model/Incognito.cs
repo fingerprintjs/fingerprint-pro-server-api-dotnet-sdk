@@ -76,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Incognito to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Incognito input)
+        public bool Equals(Incognito? input)
         {
             if (input == null)
                 return false;

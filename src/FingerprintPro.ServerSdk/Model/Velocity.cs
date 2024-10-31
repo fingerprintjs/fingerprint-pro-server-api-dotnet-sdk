@@ -195,7 +195,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of Velocity to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Velocity input)
+        public bool Equals(Velocity? input)
         {
             if (input == null)
                 return false;

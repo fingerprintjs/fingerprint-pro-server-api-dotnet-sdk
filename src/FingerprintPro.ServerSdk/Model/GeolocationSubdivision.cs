@@ -95,7 +95,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of GeolocationSubdivision to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GeolocationSubdivision input)
+        public bool Equals(GeolocationSubdivision? input)
         {
             if (input == null)
                 return false;

@@ -125,7 +125,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of WebhookVelocity to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookVelocity input)
+        public bool Equals(WebhookVelocity? input)
         {
             if (input == null)
                 return false;

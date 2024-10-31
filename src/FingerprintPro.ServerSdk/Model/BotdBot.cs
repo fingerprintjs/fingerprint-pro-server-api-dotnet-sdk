@@ -85,7 +85,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of BotdBot to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(BotdBot input)
+        public bool Equals(BotdBot? input)
         {
             if (input == null)
                 return false;

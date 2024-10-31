@@ -115,7 +115,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of IPInfoASN to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IPInfoASN input)
+        public bool Equals(IPInfoASN? input)
         {
             if (input == null)
                 return false;
