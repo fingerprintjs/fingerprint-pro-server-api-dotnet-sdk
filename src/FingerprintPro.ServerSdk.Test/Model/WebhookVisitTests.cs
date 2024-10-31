@@ -13,8 +13,8 @@ public class WebhookVisitTests
     {
         var bytes = MockLoader.Load("webhook.json");
         var json = Encoding.UTF8.GetString(bytes);
-        var webhook = JsonUtils.Deserialize<WebhookVisit>(json);
+        var webhook = JsonUtils.Deserialize<ServerSdk.Model.Webhook>(json);
 
-        Assert.That(webhook, Is.InstanceOf<WebhookVisit>());
+        Assert.That(webhook, Is.InstanceOf<ServerSdk.Model.Webhook>());
     }
 }
