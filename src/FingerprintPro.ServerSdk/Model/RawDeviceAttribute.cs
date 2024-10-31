@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="value">value.</param>
         /// <param name="error">error.</param>
-        public RawDeviceAttribute(dynamic value = null, RawDeviceAttributeError error = default(RawDeviceAttributeError))
+        public RawDeviceAttribute(object value = null, RawDeviceAttributeError error = default(RawDeviceAttributeError))
         {
             this.Value = value;
             this.Error = error;
@@ -38,7 +38,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         [JsonPropertyName("value")]
-        public dynamic Value { get; set; }
+        public object Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
