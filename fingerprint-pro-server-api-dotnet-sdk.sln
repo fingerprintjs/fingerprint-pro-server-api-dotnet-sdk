@@ -5,13 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.Test", "src\FingerprintPro.ServerSdk.Test\FingerprintPro.ServerSdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.ExamplesNet7", "src\FingerprintPro.ServerSdk.ExamplesNet7\FingerprintPro.ServerSdk.ExamplesNet7.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.Examples", "src\FingerprintPro.ServerSdk.Examples\FingerprintPro.ServerSdk.Examples.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.FunctionalTest", "src\FingerprintPro.ServerSdk.FunctionalTest\FingerprintPro.ServerSdk.FunctionalTest.csproj", "{60A3F0A3-764A-43CA-9BDD-E2A727F86347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.SealedResultExampleNet7", "src\FingerprintPro.ServerSdk.SealedResultExampleNet7\FingerprintPro.ServerSdk.SealedResultExampleNet7.csproj", "{68302477-4772-4F13-B569-54881B84F6B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.SealedResultExample", "src\FingerprintPro.ServerSdk.SealedResultExample\FingerprintPro.ServerSdk.SealedResultExample.csproj", "{68302477-4772-4F13-B569-54881B84F6B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.WebhookExampleNet8", "src\FingerprintPro.ServerSdk.WebhookExampleNet8\FingerprintPro.ServerSdk.WebhookExampleNet8.csproj", "{F95774AB-BC02-45AE-8916-0EFF0689E89F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerprintPro.ServerSdk.WebhookExample", "src\FingerprintPro.ServerSdk.WebhookExample\FingerprintPro.ServerSdk.WebhookExample.csproj", "{F95774AB-BC02-45AE-8916-0EFF0689E89F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
