@@ -40,3 +40,11 @@ done
     sed -i "/^------------ |/c\\" "$readme_filename"
   fi
 )
+
+# Fix for empty type in RawDeviceAttribute docs
+if [ "$platform" = "Darwin" ]; then
+sed -i '' 's/\[\*\*\*\*\](\.md)/**object**/g' docs/RawDeviceAttribute.md
+else
+sed -i 's/\[\*\*\*\*\](\.md)/**object**/g' docs/RawDeviceAttribute.md
+fi
+
