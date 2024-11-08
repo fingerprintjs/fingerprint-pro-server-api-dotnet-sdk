@@ -310,8 +310,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
                 Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);
                 Assert.That(rawDeviceAttributes["colorGamut"].Value.ToString(), Is.EqualTo("p3"));
-                //  var colorGamut = (JsonElement)rawDeviceAttributes["colorGamut"];
-                // Assert.That(colorGamut.GetProperty("value").ToString(), Is.EqualTo("p3"));
+                var colorGamut = rawDeviceAttributes["colorGamut"].Value;
+                Assert.That(colorGamut.Value.ToString(), Is.EqualTo("p3"));
+                var canvas = rawDeviceAttributes["canvas"].Value;
+                Assert.That(canvas.Value.GetProperty("Geometry").ToString(), Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
             });
         }
 

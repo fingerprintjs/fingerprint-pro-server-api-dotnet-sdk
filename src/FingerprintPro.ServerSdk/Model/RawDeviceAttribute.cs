@@ -10,6 +10,7 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
@@ -27,7 +28,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="value">value.</param>
         /// <param name="error">error.</param>
-        public RawDeviceAttribute(object value = null, RawDeviceAttributeError error = default(RawDeviceAttributeError))
+        public RawDeviceAttribute(JsonElement? value = null, RawDeviceAttributeError error = default(RawDeviceAttributeError))
         {
             this.Value = value;
             this.Error = error;
@@ -38,7 +39,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         [JsonPropertyName("value")]
-        public object Value { get; set; }
+        public JsonElement? Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Error
@@ -82,9 +83,9 @@ namespace FingerprintPro.ServerSdk.Model
 
             return
                 (
-                this.Value == input.Value ||
-                (this.Value != null &&
-                this.Value.Equals(input.Value))
+                this.Value.HasValue == input.Value.HasValue &&
+                (!this.Value.HasValue ||
+                this.Value.Value.Equals(input.Value.Value))
                 ) &&
                 (
                 this.Error == input.Error ||
@@ -102,8 +103,8 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                if (this.Value.HasValue)
+                    hashCode = hashCode * 59 + this.Value.Value.GetHashCode();
                 if (this.Error != null)
                     hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;

@@ -58,7 +58,7 @@
 {{#hasOnlyReadOnly}}
     [JsonConstructor]
 {{/hasOnlyReadOnly}}
-public {{classname}}({{#readWriteVars}}{{#datatypeWithEnum}}{{/datatypeWithEnum}}{{{datatypeWithEnum}}}{{^datatypeWithEnum}}object{{/datatypeWithEnum}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} = {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#datatypeWithEnum}}default({{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}}){{/datatypeWithEnum}}{{/defaultValue}}{{^datatypeWithEnum}}null{{/datatypeWithEnum}}{{^@last}}, {{/@last}}{{/readWriteVars}}){{#parent}} : base({{#parentVars}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/parentVars}}){{/parent}}
+public {{classname}}({{#readWriteVars}}{{#datatypeWithEnum}}{{/datatypeWithEnum}}{{{datatypeWithEnum}}}{{^datatypeWithEnum}}JsonElement?{{/datatypeWithEnum}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} = {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{#datatypeWithEnum}}default({{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}}){{/datatypeWithEnum}}{{/defaultValue}}{{^datatypeWithEnum}}null{{/datatypeWithEnum}}{{^@last}}, {{/@last}}{{/readWriteVars}}){{#parent}} : base({{#parentVars}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/parentVars}}){{/parent}}
 {
 {{#vars}}
     {{^isInherited}}
@@ -117,7 +117,7 @@ public {{classname}}({{#readWriteVars}}{{#datatypeWithEnum}}{{/datatypeWithEnum}
             [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]
             [JsonPropertyName("{{baseName}}")]{{#isDate}}
                 [JsonConverter(typeof(SwaggerDateConverter))]{{/isDate}}
-            public {{#datatype}}{{/datatype}}{{{datatype}}}{{^datatype}}object{{/datatype}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
+            public {{#datatype}}{{{datatype}}}{{/datatype}}{{^datatype}}JsonElement?{{/datatype}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
         {{/isEnum}}
     {{/isInherited}}
 
@@ -160,11 +160,15 @@ if (input == null)
 return false;
 
 return {{#vars}}{{#parent}}base.Equals(input) && {{/parent}}{{#isNotContainer}}
-    (
+    {{#datatype}}(
     this.{{name}} == input.{{name}} ||
     (this.{{name}} != null &&
     this.{{name}}.Equals(input.{{name}}))
-    ){{#hasMore}} && {{/hasMore}}{{/isNotContainer}}{{^isNotContainer}}
+    ){{/datatype}}{{^datatype}}(
+    this.{{name}}.HasValue == input.{{name}}.HasValue &&
+    (!this.{{name}}.HasValue ||
+    this.{{name}}.Value.Equals(input.{{name}}.Value))
+    ){{/datatype}}{{#hasMore}} && {{/hasMore}}{{/isNotContainer}}{{^isNotContainer}}
     (
     this.{{name}} == input.{{name}} ||
     this.{{name}} != null &&
@@ -188,8 +192,8 @@ unchecked // Overflow is fine, just wrap
     int hashCode = 41;
 {{/parent}}
 {{#vars}}
-    if (this.{{name}} != null)
-    hashCode = hashCode * 59 + this.{{name}}.GetHashCode();
+    if ({{#datatype}}this.{{name}} != null{{/datatype}}{{^datatype}}this.{{name}}.HasValue{{/datatype}})
+    hashCode = hashCode * 59 + this.{{name}}{{^datatype}}.Value{{/datatype}}.GetHashCode();
 {{/vars}}
 return hashCode;
 }
