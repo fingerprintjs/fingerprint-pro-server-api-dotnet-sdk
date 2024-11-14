@@ -555,7 +555,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetVisitsAsync(visitorId), Throws
-                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
+                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.HttpCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
 
@@ -597,7 +597,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
@@ -614,7 +614,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
@@ -644,7 +644,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
@@ -725,7 +725,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
@@ -752,7 +752,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
@@ -779,7 +779,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
@@ -806,7 +806,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(409)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(409)
             );
         }
 
@@ -850,7 +850,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
@@ -866,7 +866,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
@@ -882,7 +882,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
                     .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
@@ -895,7 +895,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId), Throws
-                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
+                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.HttpCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
     }

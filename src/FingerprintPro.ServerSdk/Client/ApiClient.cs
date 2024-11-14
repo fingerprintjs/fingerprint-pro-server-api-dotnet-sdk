@@ -152,17 +152,29 @@ namespace FingerprintPro.ServerSdk.Client
         {
             var message = $"Error calling {methodName}: {response.ReasonPhrase}";
             var statusCode = (int)response.StatusCode;
+            var errorCode = ErrorCode.Failed;
 
             if (!operationDefinition.ResponseStatusCodeMap.TryGetValue(statusCode, out var model))
                 throw new ApiException(statusCode,
-                    message, response);
+                    message, errorCode, response);
 
 
             var result = JsonUtils.Deserialize(responseContent, model);
 
+            switch (result)
+            {
+                case ErrorResponse errorResponse:
+                    message = errorResponse.Error.Message;
+                    errorCode = errorResponse.Error.Code;
+                    break;
+                case ErrorPlainResponse errorPlainResponse:
+                    message = errorPlainResponse.Error;
+                    break;
+            }
+
             // https://github.com/dotnet/runtime/issues/54321
             if (response.StatusCode != (HttpStatusCode)429)
-                throw new ApiException(statusCode, message, response, result);
+                throw new ApiException(statusCode, message, errorCode, response, result);
 
 
             var retryAfterHeader = response.Headers.FirstOrDefault(h => h.Key == "Retry-After").Value

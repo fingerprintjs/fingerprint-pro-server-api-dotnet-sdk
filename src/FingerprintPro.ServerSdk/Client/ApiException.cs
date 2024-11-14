@@ -9,6 +9,7 @@
  */
 
 using System.Net.Http;
+using FingerprintPro.ServerSdk.Model;
 
 namespace FingerprintPro.ServerSdk.Client
 {
@@ -18,10 +19,16 @@ namespace FingerprintPro.ServerSdk.Client
     public class ApiException : Exception
     {
         /// <summary>
-        /// Gets or sets the error code (HTTP status code)
+        /// Gets or sets the HTTP status code
         /// </summary>
-        /// <value>The error code (HTTP status code).</value>
-        public int ErrorCode { get; set; }
+        /// <value>The HTTP status code</value>
+        public int HttpCode { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the error code
+        /// </summary>
+        /// <value>The error code.</value>
+        public ErrorCode ErrorCode { get; private set; }
 
         /// <summary>
         /// Gets or sets the error content (body json object)
@@ -34,12 +41,14 @@ namespace FingerprintPro.ServerSdk.Client
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiException"/> class.
         /// </summary>
-        /// <param name="errorCode">HTTP status code.</param>
+        /// <param name="httpCode">HTTP status code.</param>
+        /// <param name="errorCode">Error code.</param>
         /// <param name="message">Error message.</param>
         /// <param name="responseMessage">Raw HTTP response</param>
         /// <param name="errorContent">Error content.</param>
-        public ApiException(int errorCode, string message, HttpResponseMessage? responseMessage = null, dynamic? errorContent = null) : base(message)
+        public ApiException(int httpCode, string message, ErrorCode errorCode, HttpResponseMessage? responseMessage = null, dynamic? errorContent = null) : base(message)
         {
+            HttpCode = httpCode;
             ErrorCode = errorCode;
             ErrorContent = errorContent;
             ResponseMessage = responseMessage;
