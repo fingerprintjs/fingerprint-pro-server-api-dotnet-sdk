@@ -27,20 +27,6 @@ do
   )
 done
 
-
-(
-  # Readme file fix
-  replacement=$(printf 'The rawAttributes object follows this general shape: `{ value: any } | { error: { name: string; message: string; } }`\n')
-  readme_filename="./docs/RawDeviceAttributesResult.md"
-  if [ "$platform" = "Darwin" ]; then
-    sed -i '' "s/^Name |.*/${replacement}/" "$readme_filename"
-    sed -i '' "/^------------ |/c\\" "$readme_filename"
-  else
-    sed -i "s/^Name |.*/${replacement}/" "$readme_filename"
-    sed -i "/^------------ |/c\\" "$readme_filename"
-  fi
-)
-
 # Fix for empty type in RawDeviceAttribute docs
 if [ "$platform" = "Darwin" ]; then
 sed -i '' 's/\[\*\*\*\*\](\.md)/**JsonElement**/g' docs/RawDeviceAttribute.md
