@@ -331,6 +331,10 @@ Class | Method | HTTP request | Description
 - [Sealed](docs/Sealed.md)
 - [DecryptionKey](docs/DecryptionKey.md)
 
+## Documentation for webhooks
+
+- [Webhook](docs/SdkWebhook.md)
+
 ## Support and feedback
 
 To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-node-sdk/issues). If you need private support, you can email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
