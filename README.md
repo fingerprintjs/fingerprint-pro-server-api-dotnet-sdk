@@ -333,7 +333,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for webhooks
 
-- [Webhook](docs/SdkWebhook.md)
+- [WebhookValidation](docs/WebhookValidation.md)
 
 ## Support and feedback
 
