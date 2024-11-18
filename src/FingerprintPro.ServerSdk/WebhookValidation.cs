@@ -22,7 +22,7 @@ public static class WebhookValidation
     /// <param name="header">The value of the "fpjs-event-signature" header.</param>
     /// <param name="data">The raw data of the incoming request.</param>
     /// <param name="secret">The secret key used to sign the request</param>
-    public static bool IsValidWebhookSignature(string header, byte[] data, string secret)
+    public static bool IsValidSignature(string header, byte[] data, string secret)
     {
         var signatures = header.Split(',');
 

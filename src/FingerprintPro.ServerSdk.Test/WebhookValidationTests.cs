@@ -12,7 +12,7 @@ public class WebhookValidationTests
     [Test]
     public void ValidHeaderTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature(_validHeader, Data, _secret);
+        var result = WebhookValidation.IsValidSignature(_validHeader, Data, _secret);
 
         Assert.That(result, Is.True);
     }
@@ -20,7 +20,7 @@ public class WebhookValidationTests
     [Test]
     public void InvalidHeaderTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature("v2=invalid", Data, _secret);
+        var result = WebhookValidation.IsValidSignature("v2=invalid", Data, _secret);
 
         Assert.That(result, Is.False);
     }
@@ -29,7 +29,7 @@ public class WebhookValidationTests
     [Test]
     public void HeaderWithoutVersionTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature("invalid", Data, _secret);
+        var result = WebhookValidation.IsValidSignature("invalid", Data, _secret);
 
         Assert.That(result, Is.False);
     }
@@ -37,7 +37,7 @@ public class WebhookValidationTests
     [Test]
     public void EmptyHeaderTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature("invalid", Data, _secret);
+        var result = WebhookValidation.IsValidSignature("invalid", Data, _secret);
 
         Assert.That(result, Is.False);
     }
@@ -45,7 +45,7 @@ public class WebhookValidationTests
     [Test]
     public void EmptySecretTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature("invalid", Data, "");
+        var result = WebhookValidation.IsValidSignature("invalid", Data, "");
 
         Assert.That(result, Is.False);
     }
@@ -53,7 +53,7 @@ public class WebhookValidationTests
     [Test]
     public void EmptyDataTest()
     {
-        var result = WebhookValidation.IsValidWebhookSignature(_validHeader, ""u8.ToArray(), _secret);
+        var result = WebhookValidation.IsValidSignature(_validHeader, ""u8.ToArray(), _secret);
 
         Assert.That(result, Is.False);
     }

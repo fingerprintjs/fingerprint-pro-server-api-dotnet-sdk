@@ -163,7 +163,7 @@ public class WebhookController : ControllerBase
             var data = memoryStream.ToArray();
 
             // Validate webhook signature
-            var isValid = Webhook.IsValidWebhookSignature(
+            var isValid = Webhook.IsValidSignature(
                 header,
                 data,
                 secret);

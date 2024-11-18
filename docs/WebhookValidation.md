@@ -1,8 +1,8 @@
 # FingerprintPro.ServerSdk.WebhookValidation
 
-## **IsValidWebhookSignature**
+## **IsValidSignature**
 
-> bool IsValidWebhookSignature(string header, byte[] data, string secret)
+> bool IsValidSignature(string header, byte[] data, string secret)
 
 Verifies the HMAC signature extracted from the "fpjs-event-signature" header of the incoming request. This is a part of
 the webhook signing process, which is available only for enterprise customers.
