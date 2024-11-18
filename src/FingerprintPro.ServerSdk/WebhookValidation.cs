@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FingerprintPro.ServerSdk;
 
-public static class Webhook
+public static class WebhookValidation
 {
     private static bool IsValidHmacSignature(string signature, byte[] data, string secret)
     {

@@ -2,7 +2,7 @@
 
 # clean models and docs before generating
 find ./src/FingerprintPro.ServerSdk/Model -type f ! -name "DictionaryModel.cs" -exec rm {} +
-find ./docs -type f ! -name "DecryptionKey.md" ! -name "Sealed.md" ! -name "SdkWebhook.md" -exec rm {} +
+find ./docs -type f ! -name "DecryptionKey.md" ! -name "Sealed.md" ! -name "WebhookValidation.md" -exec rm {} +
 
 # jar was downloaded from here https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.34/
 

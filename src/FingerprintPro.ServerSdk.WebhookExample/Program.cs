@@ -4,6 +4,6 @@ const string header = "v1=1b2c16b75bd2a870c114153ccda5bcfca63314bc722fa160d690de
 const string secret = "secret";
 var data = "data"u8.ToArray();
 
-var isValid = Webhook.IsValidWebhookSignature(header, data, secret);
+var isValid = WebhookValidation.IsValidWebhookSignature(header, data, secret);
 
 Console.WriteLine(isValid ? "Webhook signature is correct!" : "Webhook signature is incorrect!");
