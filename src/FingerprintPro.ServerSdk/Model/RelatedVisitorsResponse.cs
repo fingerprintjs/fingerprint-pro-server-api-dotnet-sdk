@@ -10,6 +10,7 @@
 using System.Text;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Model
@@ -75,7 +76,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="input">Instance of RelatedVisitorsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(RelatedVisitorsResponse input)
+        public bool Equals(RelatedVisitorsResponse? input)
         {
             if (input == null)
                 return false;

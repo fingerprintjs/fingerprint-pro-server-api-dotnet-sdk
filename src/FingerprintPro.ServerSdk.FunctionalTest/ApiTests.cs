@@ -27,10 +27,10 @@ public class ApiTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(events, Is.InstanceOf<EventResponse>());
-            Assert.That(events.Products, Is.InstanceOf<ProductsResponse>());
-            Assert.That(events.Products.Botd, Is.InstanceOf<ProductsResponseBotd>());
-            Assert.That(events.Products.Identification, Is.InstanceOf<ProductsResponseIdentification>());
+            Assert.That(events, Is.InstanceOf<EventsGetResponse>());
+            Assert.That(events.Products, Is.InstanceOf<Products>());
+            Assert.That(events.Products.Botd, Is.InstanceOf<ProductBotd>());
+            Assert.That(events.Products.Identification, Is.InstanceOf<ProductIdentification>());
             Assert.That(events.Products.Identification.Data.RequestId, Is.EqualTo(requestId));
         });
     }
@@ -41,9 +41,10 @@ public class ApiTests
         var getEvents = () => _api.GetEventAsync("1662542583652.pLBzes");
 
         Assert.That(getEvents,
-            Throws.TypeOf<ApiException>().With.Message.Contains("Error calling GetEvent: Not Found")
-                .And.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
-                .And.Property(nameof(ApiException.ErrorContent)).InstanceOf(typeof(ErrorEvent404Response)));
+            Throws.TypeOf<ApiException>().With.Message.Contains("request id not found")
+                .And.Property(nameof(ApiException.HttpCode)).EqualTo(404)
+                .And.Property(nameof(ApiException.ErrorCode)).EqualTo(ErrorCode.RequestNotFound)
+                .And.Property(nameof(ApiException.ErrorContent)).InstanceOf(typeof(ErrorResponse)));
     }
 
     [Test]
@@ -55,9 +56,9 @@ public class ApiTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(response, Is.InstanceOf<Response>());
+            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
             Assert.That(response.Visits, Has.Count.AtLeast(4));
-            Assert.That(response.Visits, Is.All.InstanceOf<ResponseVisits>());
+            Assert.That(response.Visits, Is.All.InstanceOf<Visit>());
             Assert.That(response.VisitorId, Is.EqualTo(visitorId));
         });
     }
@@ -74,7 +75,7 @@ public class ApiTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(response, Is.InstanceOf<Response>());
+            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
             Assert.That(response.Visits, Has.Count.EqualTo(1));
             Assert.That(response.Visits[0].RequestId, Is.EqualTo(requestId));
             Assert.That(response.VisitorId, Is.EqualTo(visitorId));
@@ -93,7 +94,7 @@ public class ApiTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(response, Is.InstanceOf<Response>());
+            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
             Assert.That(response.Visits, Has.Count.EqualTo(2));
             Assert.That(response.Visits, Is.All.Property("LinkedId").EqualTo(linkedId));
             Assert.That(response.VisitorId, Is.EqualTo(visitorId));

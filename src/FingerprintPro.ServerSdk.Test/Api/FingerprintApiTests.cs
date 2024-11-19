@@ -270,7 +270,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
 
                 var request = _requests[0].Request;
 
@@ -309,8 +309,11 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
                 Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
                 Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);
-                var colorGamut = (JsonElement)rawDeviceAttributes["colorGamut"];
-                Assert.That(colorGamut.GetProperty("value").ToString(), Is.EqualTo("p3"));
+                Assert.That(rawDeviceAttributes["colorGamut"].Value.ToString(), Is.EqualTo("p3"));
+                var colorGamut = rawDeviceAttributes["colorGamut"].Value;
+                Assert.That(colorGamut.Value.ToString(), Is.EqualTo("p3"));
+                var canvas = rawDeviceAttributes["canvas"].Value;
+                Assert.That(canvas.Value.GetProperty("Geometry").ToString(), Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
             });
         }
 
@@ -325,7 +328,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
 
                 var request = _requests[0].Request;
 
@@ -350,7 +353,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
 
                 var request = _requests[0].Request;
 
@@ -361,41 +364,41 @@ namespace FingerprintPro.ServerSdk.Test.Api
                         $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
                 Assert.That(request.HttpMethod, Is.EqualTo("GET"));
                 Assert.That(response.Products.Identification.Error.Code,
-                    Is.EqualTo(IdentificationError.CodeEnum.Failed));
-                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.IpInfo.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Incognito.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
-                Assert.That(response.Products.RootApps.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Emulator.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.IpBlocklist.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Tor.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Vpn.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Proxy.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(IdentificationError.CodeEnum.Failed));
-                Assert.That(response.Products.ClonedApp.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.FactoryReset.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Jailbroken.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.Frida.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.PrivacySettings.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
-                Assert.That(response.Products.VirtualMachine.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                    Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.IpInfo.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Incognito.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.RootApps.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Emulator.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.IpBlocklist.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Tor.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Vpn.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Proxy.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Tampering.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.ClonedApp.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.FactoryReset.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Jailbroken.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.Frida.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.PrivacySettings.Error.Code, Is.EqualTo(ErrorCode.Failed));
+                Assert.That(response.Products.VirtualMachine.Error.Code, Is.EqualTo(ErrorCode.Failed));
                 var rawDeviceAttributes = response.Products.RawDeviceAttributes.Data;
                 Assert.That(rawDeviceAttributes.ContainsKey("audio"), Is.True);
                 Assert.That(rawDeviceAttributes["audio"], Is.Not.Null);
-                var audio = (JsonElement)rawDeviceAttributes["audio"];
-                var audioError = audio.GetProperty("error");
-                Assert.That(audioError.GetProperty("name").ToString(), Is.EqualTo("Error"));
+                var audio = rawDeviceAttributes["audio"];
+                var audioError = audio.Error;
+                Assert.That(audioError.Name, Is.EqualTo("Error"));
                 Assert.That(rawDeviceAttributes.ContainsKey("canvas"), Is.True);
                 Assert.That(rawDeviceAttributes["canvas"], Is.Not.Null);
-                var canvas = (JsonElement)rawDeviceAttributes["canvas"];
-                var canvasError = canvas.GetProperty("error");
-                Assert.That(canvasError.GetProperty("name").ToString(), Is.EqualTo("Error"));
+                var canvas = rawDeviceAttributes["canvas"];
+                var canvasError = canvas.Error;
+                Assert.That(canvasError.Name, Is.EqualTo("Error"));
             });
         }
 
         [Test]
-        public void GetEventBotdTooManyRequestsErrorTest()
+        public void GetEventBotdErrorTest()
         {
-            SetupMockResponse("get_event_200_botd_too_many_requests_error.json");
+            SetupMockResponse("get_event_200_botd_failed_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -403,16 +406,16 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
-                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.TooManyRequests));
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ErrorCode.Failed));
             });
         }
 
         [Test]
-        public void GetEventTooManyRequestsErrorTest()
+        public void GetEventAllErrorsTest()
         {
-            SetupMockResponse("get_event_200_identification_too_many_requests_error_all_fields.json");
-            var mockResponse = JsonUtils.Deserialize<EventResponse>(Encoding.UTF8.GetString(_mockResponseBytes!));
+            SetupMockResponse("get_event_200_all_errors.json");
+            var mockResponse = JsonUtils.Deserialize<EventsGetResponse>(Encoding.UTF8.GetString(_mockResponseBytes!));
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -420,7 +423,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
                 Assert.That(response, Is.EqualTo(mockResponse));
             });
         }
@@ -436,15 +439,15 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
-                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ProductError.CodeEnum.Failed));
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
+                Assert.That(response.Products.Botd.Error.Code, Is.EqualTo(ErrorCode.Failed));
             });
         }
 
         [Test]
-        public void GetEventIdentificationTooManyRequestsErrorTest()
+        public void GetEventIdentificationErrorTest()
         {
-            SetupMockResponse("get_event_200_identification_too_many_requests_error.json");
+            SetupMockResponse("get_event_200_identification_failed_error.json");
 
             const string requestId = "0KSh65EnVoB85JBmloQK";
             var response = _instance!.GetEvent(requestId);
@@ -452,9 +455,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
                 Assert.That(response.Products.Identification.Error.Code,
-                    Is.EqualTo(IdentificationError.CodeEnum._429TooManyRequests));
+                    Is.EqualTo(ErrorCode.Failed));
             });
         }
 
@@ -469,9 +472,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<EventResponse>(), "response is EventResponse");
+                Assert.That(response, Is.InstanceOf<EventsGetResponse>(), "response is EventsGetResponse");
                 Assert.That(response.Products.Identification.Error.Code,
-                    Is.EqualTo(IdentificationError.CodeEnum.Failed));
+                    Is.EqualTo(ErrorCode.Failed));
             });
         }
 
@@ -481,7 +484,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetVisitsLimit1Test()
         {
-            SetupMockResponse("get_visits_200_limit_1.json");
+            SetupMockResponse("get_visitors_200_limit_1.json");
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const string requestId = "1655373953086.DDlfmP";
@@ -493,7 +496,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<Response>(), "response is Response");
+                Assert.That(response, Is.InstanceOf<VisitorsGetResponse>(), "response is VisitorsGetResponse");
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(1));
 
@@ -514,7 +517,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public void GetVisitsLimit500Test()
         {
-            SetupMockResponse("get_visits_200_limit_500.json");
+            SetupMockResponse("get_visitors_200_limit_500.json");
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
             const string requestId = "1655373953086.DDlfmP";
@@ -526,7 +529,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             Assert.Multiple(() =>
             {
                 Assert.That(_requests, Has.Count.EqualTo(1));
-                Assert.That(response, Is.InstanceOf<Response>(), "response is Response");
+                Assert.That(response, Is.InstanceOf<VisitorsGetResponse>(), "response is VisitorsGetResponse");
                 Assert.That(response.VisitorId, Is.EqualTo(visitorId));
                 Assert.That(response.Visits, Has.Count.EqualTo(62));
 
@@ -544,7 +547,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task GetVisitsTooManyRequestsErrorTest()
         {
-            SetupMockResponse("get_visits_429_too_many_requests_error.json");
+            SetupMockResponse("get_visitors_429_too_many_requests.json");
 
             _mockResponseHeaders?.Add("Retry-After", "10");
             _mockResponseStatusCode = TooManyRequestsException.TooManyRequestsCode;
@@ -552,7 +555,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetVisitsAsync(visitorId), Throws
-                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
+                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.HttpCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
 
@@ -584,7 +587,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData403ErrorTest()
         {
-            SetupMockResponse("shared/403_error_feature_not_enabled.json");
+            SetupMockResponse("errors/403_feature_not_enabled.json");
 
             _mockResponseStatusCode = 403;
 
@@ -592,16 +595,16 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorCommon403Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
         [Test]
         public async Task DeleteVisitorData400ErrorTest()
         {
-            SetupMockResponse("shared/400_error_incorrect_visitor_id.json");
+            SetupMockResponse("errors/400_request_body_invalid.json");
 
             _mockResponseStatusCode = 400;
 
@@ -609,16 +612,16 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitor400Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
         [Test]
         public async Task DeleteVisitorData429ErrorTest()
         {
-            SetupMockResponse("shared/429_error_too_many_requests.json");
+            SetupMockResponse("errors/429_too_many_requests.json");
 
             _mockResponseStatusCode = 429;
 
@@ -631,7 +634,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task DeleteVisitorData404ErrorTest()
         {
-            SetupMockResponse("shared/404_error_visitor_not_found.json");
+            SetupMockResponse("errors/404_visitor_not_found.json");
 
             _mockResponseStatusCode = 404;
 
@@ -639,9 +642,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.DeleteVisitorDataAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitor404Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
@@ -649,7 +652,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         public async Task DeleteVisitorDataNotMappedStatusCodeText()
         {
             // It's ok to use this response even though it matches different status code
-            SetupMockResponse("shared/403_error_token_not_found.json");
+            SetupMockResponse("errors/403_token_not_found.json");
 
             _mockResponseStatusCode = 401;
 
@@ -666,11 +669,11 @@ namespace FingerprintPro.ServerSdk.Test.Api
         {
             const string requestId = "1708102555327.NLOjmg";
 
-            var body = new EventUpdateRequest()
+            var body = new EventsUpdateRequest()
             {
                 Suspect = false,
                 LinkedId = "new_linked_id",
-                Tag = new Dictionary<string, string>()
+                Tag = new Tag()
                 {
                     { "key", "value" }
                 }
@@ -702,17 +705,17 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task UpdateEvent400ErrorTest()
         {
-            SetupMockResponse("update_event_400_error.json");
+            SetupMockResponse("errors/400_request_body_invalid.json");
 
             _mockResponseStatusCode = 400;
 
             const string requestId = "1708102555327.NLOjmg";
 
-            var body = new EventUpdateRequest()
+            var body = new EventsUpdateRequest()
             {
                 Suspect = false,
                 LinkedId = "new_linked_id",
-                Tag = new Dictionary<string, string>()
+                Tag = new Tag()
                 {
                     { "key", "value" }
                 }
@@ -720,26 +723,26 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorUpdateEvent400Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
         [Test]
         public async Task UpdateEvent403ErrorTest()
         {
-            SetupMockResponse("update_event_403_error.json");
+            SetupMockResponse("errors/403_feature_not_enabled.json");
 
             _mockResponseStatusCode = 403;
 
             const string requestId = "1708102555327.NLOjmg";
 
-            var body = new EventUpdateRequest()
+            var body = new EventsUpdateRequest()
             {
                 Suspect = false,
                 LinkedId = "new_linked_id",
-                Tag = new Dictionary<string, string>()
+                Tag = new Tag()
                 {
                     { "key", "value" }
                 }
@@ -747,26 +750,26 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorCommon403Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
         [Test]
         public async Task UpdateEvent404ErrorTest()
         {
-            SetupMockResponse("update_event_404_error.json");
+            SetupMockResponse("errors/404_visitor_not_found.json");
 
             _mockResponseStatusCode = 404;
 
             const string requestId = "1708102555327.NLOjmg";
 
-            var body = new EventUpdateRequest()
+            var body = new EventsUpdateRequest()
             {
                 Suspect = false,
                 LinkedId = "new_linked_id",
-                Tag = new Dictionary<string, string>()
+                Tag = new Tag()
                 {
                     { "key", "value" }
                 }
@@ -774,26 +777,26 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorEvent404Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
         [Test]
         public async Task UpdateEvent409ErrorTest()
         {
-            SetupMockResponse("update_event_409_error.json");
+            SetupMockResponse("errors/409_state_not_ready.json");
 
             _mockResponseStatusCode = 409;
 
             const string requestId = "1708102555327.NLOjmg";
 
-            var body = new EventUpdateRequest()
+            var body = new EventsUpdateRequest()
             {
                 Suspect = false,
                 LinkedId = "new_linked_id",
-                Tag = new Dictionary<string, string>()
+                Tag = new Tag()
                 {
                     { "key", "value" }
                 }
@@ -801,9 +804,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
             await Assert.ThatAsync(async () => await _instance!.UpdateEventAsyncWithHttpInfo(body, requestId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorUpdateEvent409Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(409)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(409)
             );
         }
 
@@ -838,61 +841,61 @@ namespace FingerprintPro.ServerSdk.Test.Api
         [Test]
         public async Task GetRelatedVisitors400ErrorTest()
         {
-            SetupMockResponse("shared/400_error_empty_visitor_id.json");
+            SetupMockResponse("errors/400_visitor_id_invalid.json");
             _mockResponseStatusCode = 400;
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitor400Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(400)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
             );
         }
 
         [Test]
         public async Task GetRelatedVisitors403ErrorTest()
         {
-            SetupMockResponse("shared/403_error_feature_not_enabled.json");
+            SetupMockResponse("errors/403_feature_not_enabled.json");
             _mockResponseStatusCode = 403;
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorCommon403Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(403)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
             );
         }
 
         [Test]
         public async Task GetRelatedVisitors404ErrorTest()
         {
-            SetupMockResponse("shared/404_error_visitor_not_found.json");
+            SetupMockResponse("errors/404_visitor_not_found.json");
             _mockResponseStatusCode = 404;
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId),
                 Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
-                    .InstanceOf<ErrorVisitor404Response>()
+                    .InstanceOf<ErrorResponse>()
                     .And
-                    .With.Property(nameof(ApiException.ErrorCode)).EqualTo(404)
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(404)
             );
         }
 
         [Test]
         public async Task GetRelatedVisitors429ErrorTest()
         {
-            SetupMockResponse("shared/429_error_too_many_requests.json");
+            SetupMockResponse("errors/429_too_many_requests.json");
             _mockResponseStatusCode = 429;
 
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
 
             await Assert.ThatAsync(async () => await _instance!.GetRelatedVisitorsAsyncWithHttpInfo(visitorId), Throws
-                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.ErrorCode))
+                .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.HttpCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
     }
