@@ -47,7 +47,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public override string ToJson()
         {
             return JsonUtils.Serialize(this);
         }
