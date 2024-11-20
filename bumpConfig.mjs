@@ -34,14 +34,7 @@ function bumpCsprojVersion(version) {
     fs.writeFileSync(paths.csproj, newCsproj);
 }
 
-function generateSwaggerCode() {
-    cp.execSync(`sh ${path.resolve(dirname, 'generate.sh')}`, {
-        stdio: 'inherit'
-    });
-}
-
 const version = pkg.version
 
 bumpConfigVersion(version);
 bumpCsprojVersion(version);
-generateSwaggerCode();
