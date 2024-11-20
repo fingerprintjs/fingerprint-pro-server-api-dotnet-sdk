@@ -22,6 +22,7 @@ do
       sed -i '' 's/public override string ToJson()/public string ToJson()/' "$i"
       sed -i '' 's/: Dictionary/: DictionaryModel/' "$i"
     else
+      sed -i 's/public override string ToJson()/public string ToJson()/' "$i"
       sed -i 's/: Dictionary/: DictionaryModel/' "$i"
     fi
   )
