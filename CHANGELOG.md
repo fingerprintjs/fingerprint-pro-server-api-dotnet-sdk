@@ -1,5 +1,136 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.0.0
+
+### Major Changes
+
+- Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
+- - Remove the `BrowserDetails` field `botProbability`.
+  - Update the `IdentificationConfidence` field `score` type format: `float` -> `double`.
+  - Make the `RawDeviceAttributeError` field `name` **optional** .
+  - Make the `RawDeviceAttributeError` field `message` **optional** .
+  - **events**: Remove the `EventsResponse` field `error`.
+    - [note]: The errors are represented by `ErrorResponse` model.
+  - **events**: Update the `HighActivity` field `dailyRequests` type format: `number` -> `int64`.
+  - **events**: Specify the `Tampering` field `anomalyScore` type format: `double`.
+  - **webhook**: Make the `Webhook` fields **optional**: `visitorId`, `visitorFound`, `firstSeenAt`, `lastSeenAt`, `browserDetails`, `incognito`.
+  - **webhook**: Make the `WebhookClonedApp` field `result` **optional**.
+  - **webhook**: Make the `WebhookDeveloperTools` field `result` **optional**.
+  - **webhook**: Make the `WebhookEmulator` field `result` **optional**.
+  - **webhook**: Make the `WebhookFactoryReset` fields `time` and `timestamp` **optional**.
+  - **webhook**: Make the `WebhookFrida` field `result` **optional**.
+  - **webhook**: Update the `WebhookHighActivity` field `dailyRequests` type format: `number` -> `int64`.
+  - **webhook**: Make the `WebhookIPBlocklist` fields `result` and `details` **optional**.
+  - **webhook**: Make the `WebhookJailbroken` field `result` **optional**.
+  - **webhook**: Make the `WebhookLocationSpoofing` field `result` **optional**.
+  - **webhook**: Make the `WebhookPrivacySettings` field `result` **optional**.
+  - **webhook**: Make the `WebhookProxy` field `result` **optional**.
+  - **webhook**: Make the `WebhookRemoteControl` field `result` **optional**.
+  - **webhook**: Make the `WebhookRootApps` field `result` **optional**.
+  - **webhook**: Make the `WebhookSuspectScore` field `result` **optional**.
+  - **webhook**: Make the `WebhookTampering` fields `result`, `anomalyScore` and `antiDetectBrowser` **optional**.
+  - **webhook**: Specify the `WebhookTampering` field `anomalyScore` type format: `double`.
+  - **webhook**: Make the `WebhookTor` field `result` **optional**.
+  - **webhook**: Make the `WebhookVelocity` fields **optional**: `distinctIp`, `distinctLinkedId`, `distinctCountry`, `events`, `ipEvents`, `distinctIpByLinkedId`, `distinctVisitorIdByLinkedId`.
+  - **webhook**: Make the `WebhookVirtualMachine` field `result` **optional**.
+  - **webhook**: Make the `WebhookVPN` fields **optional**: `result`, `confidence`, `originTimezone`, `methods`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Rename errors models related to visits:
+  - rename `ErrorVisitsDelete400Response` to `ErrorVisitor400Response`
+  - rename `ErrorVisitsDelete404ResponseError` to `ErrorVisitor404ResponseError`
+  - rename `ErrorVisitsDelete404Response` to `ErrorVisitor404Response` ([c32807b](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/c32807b8cf88cbddf5167763f20ee2dbfd1117a2))
+- Rename `IsValidWebhookSignature` to `IsValidSignature` in `WebhookValidation` ([a8058e2](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/a8058e29f70206f387271fbcd9c3b810a867c414))
+- - Rename `BotdResult` -> `Botd`.
+  - Rename `BotdDetectionResult` -> `BotdBot`:
+    - Extract `result` type as `BotdBotResult`.
+  - Rename `ClonedAppResult` -> `ClonedApp`.
+  - Rename `DeveloperToolsResult` -> `DeveloperTools`.
+  - Rename `EmulatorResult` -> `Emulator`.
+  - Refactor error models:
+    - Remove `ErrorCommon403Response`, `ErrorCommon429Response`, `ErrorEvent404Response`, `TooManyRequestsResponse`, `ErrorVisits403`, `ErrorUpdateEvent400Response`, `ErrorUpdateEvent409Response`, `ErrorVisitor400Response`, `ErrorVisitor404Response`, `IdentificationError`, `ProductError`.
+    - Introduce `ErrorResponse` and `ErrorPlainResponse`.
+      - [note]: `ErrorPlainResponse` has a different format `{ "error": string }` and it is used only in `GET /visitors`.
+    - Extract `error` type as `Error`.
+    - Extract `error.code` type as `ErrorCode`.
+  - Rename `EventResponse` -> `EventsGetResponse`.
+  - Rename `EventUpdateRequest` -> `EventsUpdateRequest`.
+  - Rename `FactoryResetResult` -> `FactoryReset`.
+  - Rename `FridaResult` -> `Frida`.
+  - Rename `IPLocation` -> `Geolocation`:
+    - Rename `IPLocationCity` -> `GeolocationCity`.
+    - Extract `subdivisions` type as `GeolocationSubdivisions`.
+    - Rename `Location` -> `GeolocationContinent`:
+    - Introduce a dedicated type `GeolocationCountry`.
+    - Rename `Subdivision` -> `GeolocationSubdivision`.
+  - Rename `HighActivityResult` -> `HighActivity`.
+  - Rename `Confidence` -> `IdentificationConfidence`.
+  - Rename `SeenAt` -> `IdentificationSeenAt`.
+  - Rename `IncognitoResult` -> `Incognito`.
+  - Rename `IpBlockListResult` -> `IPBlocklist`:
+    - Extract `details` type as `IPBlocklistDetails`.
+  - Rename `IpInfoResult` -> `IPInfo`:
+    - Rename `IpInfoResultV4` -> `IPInfoV4`.
+    - Rename `IpInfoResultV6` -> `IPInfoV6`.
+    - Rename `ASN` -> `IPInfoASN`.
+    - Rename `DataCenter` -> `IPInfoDataCenter`.
+  - Rename `JailbrokenResult` -> `Jailbroken`.
+  - Rename `LocationSpoofingResult` -> `LocationSpoofing`.
+  - Rename `PrivacySettingsResult` -> `PrivacySettings`.
+  - Rename `ProductsResponse` -> `Products`:
+    - Rename inner types: `ProductsResponseIdentification` -> `ProductIdentification`, `ProductsResponseIdentificationData` -> `Identification`, `ProductsResponseBotd` -> `ProductBotd`, `SignalResponseRootApps` -> `ProductRootApps`, `SignalResponseEmulator` -> `ProductEmulator`, `SignalResponseIpInfo` -> `ProductIPInfo`, `SignalResponseIpBlocklist` -> `ProductIPBlocklist`, `SignalResponseTor` -> `ProductTor`, `SignalResponseVpn` -> `ProductVPN`, `SignalResponseProxy` -> `ProductProxy`, `ProxyResult` -> `Proxy`, `SignalResponseIncognito` -> `ProductIncognito`, `SignalResponseTampering` -> `ProductTampering`, `SignalResponseClonedApp` -> `ProductClonedApp`, `SignalResponseFactoryReset` -> `ProductFactoryReset`, `SignalResponseJailbroken` -> `ProductJailbroken`, `SignalResponseFrida` -> `ProductFrida`, `SignalResponsePrivacySettings` -> `ProductPrivacySettings`, `SignalResponseVirtualMachine` -> `ProductVirtualMachine`, `SignalResponseRawDeviceAttributes` -> `ProductRawDeviceAttributes`, `RawDeviceAttributesResultValue` -> `RawDeviceAttributes`, `SignalResponseHighActivity` -> `ProductHighActivity`, `SignalResponseLocationSpoofing` -> `ProductLocationSpoofing`, `SignalResponseSuspectScore` -> `ProductSuspectScore`, `SignalResponseRemoteControl` -> `ProductRemoteControl`, `SignalResponseVelocity` -> `ProductVelocity`, `SignalResponseDeveloperTools` -> `ProductDeveloperTools`.
+    - Extract `identification.data` type as `Identification`.
+  - Rename `RawDeviceAttributesResult` -> `RawDeviceAttributes`:
+    - Extract item type as `RawDeviceAttribute`.
+    - Extract `error` type as `RawDeviceAttributeError`.
+  - Rename `RemoteControlResult` -> `RemoteControl`.
+  - Rename `RootAppsResult` -> `RootApps`.
+  - Rename `SuspectScoreResult` -> `SuspectScore`.
+  - Extract new model `Tag`.
+  - Rename `TamperingResult` -> `Tampering`.
+  - Rename `TorResult` -> `Tor`.
+  - Rename `VelocityResult` -> `Velocity`:
+    - Rename `VelocityIntervals` -> `VelocityData`.
+    - Rename `VelocityIntervalResult` -> `VelocityIntervals`.
+  - Rename `VirtualMachineResult` -> `VirtualMachine`.
+  - Rename the `Visit` field `ipLocation` type `DeprecatedIPLocation` -> `DeprecatedGeolocation`.
+    - Instead of `DeprecatedIPLocationCity` use common `GeolocationCity`
+  - Rename `Response` -> `VisitorsGetResponse`.
+    - Omit extra inner type `ResponseVisits`
+  - Rename `VpnResult` -> `VPN`.
+    - Extract `confidence` type as `VPNConfidence`.
+    - Extract `methods` type as `VPNMethods`.
+  - Rename `WebhookVisit` -> `Webhook`.
+    - Introduce new inner types: `WebhookRootApps`, `WebhookEmulator`, `WebhookIPInfo`, `WebhookIPBlocklist`, `WebhookTor`, `WebhookVPN`, `WebhookProxy`, `WebhookTampering`, `WebhookClonedApp`, `WebhookFactoryReset`, `WebhookJailbroken`, `WebhookFrida`, `WebhookPrivacySettings`, `WebhookVirtualMachine`, `WebhookRawDeviceAttributes`, `WebhookHighActivity`, `WebhookLocationSpoofing`, `WebhookSuspectScore`, `WebhookRemoteControl`, `WebhookVelocity`, `WebhookDeveloperTools`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Drop support for .NET6 and .NET7 because they reached EOL ([d9febcb](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d9febcb2fcac9d57f8ca7e70d3157e1358bcf900))
+- Store `ErrorCode` enum in `ErrorCode` property in `ApiException`. Http code in now available in `HttpCode` property. ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+- Rename `Webhook` class to `WebhookValidation`.
+  Right now, `Webhook` class points to the actual data model. ([77e0c16](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/77e0c166b11935e5a29ee5a320eba097f910e355))
+- Expose actual error message in `ApiException.Message` if available ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+
+### Minor Changes
+
+- Update System.Text.Json to 8.0.5 ([606c84a](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/606c84a1b8220ffdd8256eb7407d2bc440e2cd89))
+- **related-visitors**: Add GET `/related-visitors` endpoint ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Added new `ipEvents`, `distinctIpByLinkedId`, and `distinctVisitorIdByLinkedId` fields to the `velocity` Smart Signal. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- - Make the `GeolocationCity` field `name` **required**.
+  - Make the `GeolocationSubdivision` field `isoCode` **required**.
+  - Make the `GeolocationSubdivision` field `name` **required**.
+  - Make the `IPInfoASN` field `name` **required** .
+  - Make the `IPInfoDataCenter` field `name` **required**.
+  - Add **optional** `IdentificationConfidence` field `comment`.
+  - **events**: Add **optional** `Botd` field `meta`.
+  - **events**: Add **optional** `Identification` field `components`.
+  - **events**: Make the `VPN` field `originCountry` **required**.
+  - **visitors**: Add **optional** `Visit` field `components`.
+  - **webhook**: Add **optional** `Webhook` field `components`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- **visitors**: Add the confidence field to the VPN Detection Smart Signal ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Remove `ipv4` format from `ip` field in `Botd`, `Identification`, `Visit` and `Webhook` models. ([0cceba7](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/0cceba71ae867f8740175164bff7a4a4bd07b719))
+- **events**: Add `antiDetectBrowser` detection method to the `tampering` Smart Signal. ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- **events**: Introduce `PUT` endpoint for `/events` API ([b2c086c](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/b2c086c6855de802ba4b06d5b23e096dba288885))
+
+### Patch Changes
+
+- **related-visitors**: Add mention that the API is billable ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+
 ## 7.0.0-test.1
 
 ### Major Changes
