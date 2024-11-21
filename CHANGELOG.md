@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+The underlying Server API hasn’t changed, but we made SDK type and class generation more precise, resulting in small breaking changes for the SDK itself. This change should make the SDK API a lot more stable going forward
+
+
 - Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
 - - Remove the `BrowserDetails` field `botProbability`.
   - Update the `IdentificationConfidence` field `score` type format: `float` -> `double`.
