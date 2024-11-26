@@ -33,6 +33,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
         /// <param name="ipLocation">ipLocation.</param>
         /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
+        /// <param name="suspect">Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent)..</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format, when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
         /// <param name="url">Page URL from which the request was sent. (required).</param>
@@ -42,7 +43,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
         /// <param name="components">components.</param>
-        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes))
+        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes))
         {
             // to ensure "visitorId" is required (not null)
             // swagger debug: Identification VisitorId
@@ -178,6 +179,7 @@ namespace FingerprintPro.ServerSdk.Model
             }
             this.IpLocation = ipLocation;
             this.LinkedId = linkedId;
+            this.Suspect = suspect;
             this.Confidence = confidence;
             this.Components = components;
         }
@@ -235,6 +237,14 @@ namespace FingerprintPro.ServerSdk.Model
         [DataMember(Name = "linkedId", EmitDefaultValue = false)]
         [JsonPropertyName("linkedId")]
         public string LinkedId { get; set; }
+
+        /// <summary>
+        /// Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).
+        /// </summary>
+        /// <value>Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).</value>
+        [DataMember(Name = "suspect", EmitDefaultValue = false)]
+        [JsonPropertyName("suspect")]
+        public bool? Suspect { get; set; }
 
         /// <summary>
         /// Timestamp of the event with millisecond precision in Unix time.
@@ -318,6 +328,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Ip: ").Append(Ip).Append("\n");
             sb.Append("  IpLocation: ").Append(IpLocation).Append("\n");
             sb.Append("  LinkedId: ").Append(LinkedId).Append("\n");
+            sb.Append("  Suspect: ").Append(Suspect).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
@@ -385,6 +396,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.LinkedId == input.LinkedId ||
                 (this.LinkedId != null &&
                 this.LinkedId.Equals(input.LinkedId))
+                ) &&
+                (
+                this.Suspect == input.Suspect ||
+                (this.Suspect != null &&
+                this.Suspect.Equals(input.Suspect))
                 ) &&
                 (
                 this.Timestamp == input.Timestamp ||
@@ -456,6 +472,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.IpLocation.GetHashCode();
                 if (this.LinkedId != null)
                     hashCode = hashCode * 59 + this.LinkedId.GetHashCode();
+                if (this.Suspect != null)
+                    hashCode = hashCode * 59 + this.Suspect.GetHashCode();
                 if (this.Timestamp != null)
                     hashCode = hashCode * 59 + this.Timestamp.GetHashCode();
                 if (this.Time != null)
