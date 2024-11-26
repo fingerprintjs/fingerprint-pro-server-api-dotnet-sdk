@@ -1,11 +1,17 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.1.0
+
+### Minor Changes
+
+- Add `relay` detection method to the VPN Detection Smart Signal ([e5f305d](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
+- **events**: Add a `suspect` field to the `identification` product schema ([e5f305d](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
+
 ## 7.0.0
 
 ### Major Changes
 
 The underlying Server API hasn’t changed, but we made SDK type and class generation more precise, resulting in small breaking changes for the SDK itself. This change should make the SDK API a lot more stable going forward
-
 
 - Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
 - - Remove the `BrowserDetails` field `botProbability`.
