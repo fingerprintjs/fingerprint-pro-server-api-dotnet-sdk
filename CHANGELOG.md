@@ -4,8 +4,8 @@
 
 ### Minor Changes
 
-- Add `relay` detection method to the VPN Detection Smart Signal ([e5f305d](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
-- **events**: Add a `suspect` field to the `identification` product schema ([e5f305d](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
+- Add `relay` detection method to the VPN Detection Smart Signal ([e5f305d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
+- **events**: Add a `suspect` field to the `identification` product schema ([e5f305d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/e5f305d85c89ffaa63a42833275c75ac85553683))
 
 ## 7.0.0
 
@@ -13,7 +13,7 @@
 
 The underlying Server API hasn’t changed, but we made SDK type and class generation more precise, resulting in small breaking changes for the SDK itself. This change should make the SDK API a lot more stable going forward
 
-- Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
+- Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
 - - Remove the `BrowserDetails` field `botProbability`.
   - Update the `IdentificationConfidence` field `score` type format: `float` -> `double`.
   - Make the `RawDeviceAttributeError` field `name` **optional** .
@@ -42,12 +42,12 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
   - **webhook**: Make the `WebhookTor` field `result` **optional**.
   - **webhook**: Make the `WebhookVelocity` fields **optional**: `distinctIp`, `distinctLinkedId`, `distinctCountry`, `events`, `ipEvents`, `distinctIpByLinkedId`, `distinctVisitorIdByLinkedId`.
   - **webhook**: Make the `WebhookVirtualMachine` field `result` **optional**.
-  - **webhook**: Make the `WebhookVPN` fields **optional**: `result`, `confidence`, `originTimezone`, `methods`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+  - **webhook**: Make the `WebhookVPN` fields **optional**: `result`, `confidence`, `originTimezone`, `methods`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
 - Rename errors models related to visits:
   - rename `ErrorVisitsDelete400Response` to `ErrorVisitor400Response`
   - rename `ErrorVisitsDelete404ResponseError` to `ErrorVisitor404ResponseError`
-  - rename `ErrorVisitsDelete404Response` to `ErrorVisitor404Response` ([c32807b](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/c32807b8cf88cbddf5167763f20ee2dbfd1117a2))
-- Rename `IsValidWebhookSignature` to `IsValidSignature` in `WebhookValidation` ([a8058e2](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/a8058e29f70206f387271fbcd9c3b810a867c414))
+  - rename `ErrorVisitsDelete404Response` to `ErrorVisitor404Response` ([c32807b](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/c32807b8cf88cbddf5167763f20ee2dbfd1117a2))
+- Rename `IsValidWebhookSignature` to `IsValidSignature` in `WebhookValidation` ([a8058e2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a8058e29f70206f387271fbcd9c3b810a867c414))
 - - Rename `BotdResult` -> `Botd`.
   - Rename `BotdDetectionResult` -> `BotdBot`:
     - Extract `result` type as `BotdBotResult`.
@@ -108,18 +108,18 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
     - Extract `confidence` type as `VPNConfidence`.
     - Extract `methods` type as `VPNMethods`.
   - Rename `WebhookVisit` -> `Webhook`.
-    - Introduce new inner types: `WebhookRootApps`, `WebhookEmulator`, `WebhookIPInfo`, `WebhookIPBlocklist`, `WebhookTor`, `WebhookVPN`, `WebhookProxy`, `WebhookTampering`, `WebhookClonedApp`, `WebhookFactoryReset`, `WebhookJailbroken`, `WebhookFrida`, `WebhookPrivacySettings`, `WebhookVirtualMachine`, `WebhookRawDeviceAttributes`, `WebhookHighActivity`, `WebhookLocationSpoofing`, `WebhookSuspectScore`, `WebhookRemoteControl`, `WebhookVelocity`, `WebhookDeveloperTools`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
-- Drop support for .NET6 and .NET7 because they reached EOL ([d9febcb](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d9febcb2fcac9d57f8ca7e70d3157e1358bcf900))
-- Store `ErrorCode` enum in `ErrorCode` property in `ApiException`. Http code in now available in `HttpCode` property. ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+    - Introduce new inner types: `WebhookRootApps`, `WebhookEmulator`, `WebhookIPInfo`, `WebhookIPBlocklist`, `WebhookTor`, `WebhookVPN`, `WebhookProxy`, `WebhookTampering`, `WebhookClonedApp`, `WebhookFactoryReset`, `WebhookJailbroken`, `WebhookFrida`, `WebhookPrivacySettings`, `WebhookVirtualMachine`, `WebhookRawDeviceAttributes`, `WebhookHighActivity`, `WebhookLocationSpoofing`, `WebhookSuspectScore`, `WebhookRemoteControl`, `WebhookVelocity`, `WebhookDeveloperTools`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Drop support for .NET6 and .NET7 because they reached EOL ([d9febcb](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d9febcb2fcac9d57f8ca7e70d3157e1358bcf900))
+- Store `ErrorCode` enum in `ErrorCode` property in `ApiException`. Http code in now available in `HttpCode` property. ([d197f29](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
 - Rename `Webhook` class to `WebhookValidation`.
-  Right now, `Webhook` class points to the actual data model. ([77e0c16](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/77e0c166b11935e5a29ee5a320eba097f910e355))
-- Expose actual error message in `ApiException.Message` if available ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+  Right now, `Webhook` class points to the actual data model. ([77e0c16](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/77e0c166b11935e5a29ee5a320eba097f910e355))
+- Expose actual error message in `ApiException.Message` if available ([d197f29](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
 
 ### Minor Changes
 
-- Update System.Text.Json to 8.0.5 ([606c84a](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/606c84a1b8220ffdd8256eb7407d2bc440e2cd89))
-- **related-visitors**: Add GET `/related-visitors` endpoint ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
-- Added new `ipEvents`, `distinctIpByLinkedId`, and `distinctVisitorIdByLinkedId` fields to the `velocity` Smart Signal. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Update System.Text.Json to 8.0.5 ([606c84a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/606c84a1b8220ffdd8256eb7407d2bc440e2cd89))
+- **related-visitors**: Add GET `/related-visitors` endpoint ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Added new `ipEvents`, `distinctIpByLinkedId`, and `distinctVisitorIdByLinkedId` fields to the `velocity` Smart Signal. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
 - - Make the `GeolocationCity` field `name` **required**.
   - Make the `GeolocationSubdivision` field `isoCode` **required**.
   - Make the `GeolocationSubdivision` field `name` **required**.
@@ -130,21 +130,21 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
   - **events**: Add **optional** `Identification` field `components`.
   - **events**: Make the `VPN` field `originCountry` **required**.
   - **visitors**: Add **optional** `Visit` field `components`.
-  - **webhook**: Add **optional** `Webhook` field `components`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
-- **visitors**: Add the confidence field to the VPN Detection Smart Signal ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
-- Remove `ipv4` format from `ip` field in `Botd`, `Identification`, `Visit` and `Webhook` models. ([0cceba7](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/0cceba71ae867f8740175164bff7a4a4bd07b719))
-- **events**: Add `antiDetectBrowser` detection method to the `tampering` Smart Signal. ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
-- **events**: Introduce `PUT` endpoint for `/events` API ([b2c086c](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/b2c086c6855de802ba4b06d5b23e096dba288885))
+  - **webhook**: Add **optional** `Webhook` field `components`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- **visitors**: Add the confidence field to the VPN Detection Smart Signal ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Remove `ipv4` format from `ip` field in `Botd`, `Identification`, `Visit` and `Webhook` models. ([0cceba7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0cceba71ae867f8740175164bff7a4a4bd07b719))
+- **events**: Add `antiDetectBrowser` detection method to the `tampering` Smart Signal. ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- **events**: Introduce `PUT` endpoint for `/events` API ([b2c086c](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/b2c086c6855de802ba4b06d5b23e096dba288885))
 
 ### Patch Changes
 
-- **related-visitors**: Add mention that the API is billable ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- **related-visitors**: Add mention that the API is billable ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
 
 ## 7.0.0-test.1
 
 ### Major Changes
 
-- Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
+- Replace `ProductError.CodeEnum` and `IdentificationError.CodeEnum` with `ErrorCode` ([32afba9](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/32afba9e669a6a4b891a0fbe70bae0c53e8f5788))
 - - Remove the `BrowserDetails` field `botProbability`.
   - Update the `IdentificationConfidence` field `score` type format: `float` -> `double`.
   - Make the `RawDeviceAttributeError` field `name` **optional** .
@@ -173,8 +173,8 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
   - **webhook**: Make the `WebhookTor` field `result` **optional**.
   - **webhook**: Make the `WebhookVelocity` fields **optional**: `distinctIp`, `distinctLinkedId`, `distinctCountry`, `events`, `ipEvents`, `distinctIpByLinkedId`, `distinctVisitorIdByLinkedId`.
   - **webhook**: Make the `WebhookVirtualMachine` field `result` **optional**.
-  - **webhook**: Make the `WebhookVPN` fields **optional**: `result`, `confidence`, `originTimezone`, `methods`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
-- Rename `IsValidWebhookSignature` to `IsValidSignature` in `WebhookValidation` ([a8058e2](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/a8058e29f70206f387271fbcd9c3b810a867c414))
+  - **webhook**: Make the `WebhookVPN` fields **optional**: `result`, `confidence`, `originTimezone`, `methods`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Rename `IsValidWebhookSignature` to `IsValidSignature` in `WebhookValidation` ([a8058e2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/a8058e29f70206f387271fbcd9c3b810a867c414))
 - - Rename `BotdResult` -> `Botd`.
   - Rename `BotdDetectionResult` -> `BotdBot`:
     - Extract `result` type as `BotdBotResult`.
@@ -235,18 +235,18 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
     - Extract `confidence` type as `VPNConfidence`.
     - Extract `methods` type as `VPNMethods`.
   - Rename `WebhookVisit` -> `Webhook`.
-    - Introduce new inner types: `WebhookRootApps`, `WebhookEmulator`, `WebhookIPInfo`, `WebhookIPBlocklist`, `WebhookTor`, `WebhookVPN`, `WebhookProxy`, `WebhookTampering`, `WebhookClonedApp`, `WebhookFactoryReset`, `WebhookJailbroken`, `WebhookFrida`, `WebhookPrivacySettings`, `WebhookVirtualMachine`, `WebhookRawDeviceAttributes`, `WebhookHighActivity`, `WebhookLocationSpoofing`, `WebhookSuspectScore`, `WebhookRemoteControl`, `WebhookVelocity`, `WebhookDeveloperTools`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
-- Drop support for .NET6 and .NET7 because they reached EOL ([d9febcb](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d9febcb2fcac9d57f8ca7e70d3157e1358bcf900))
-- Store `ErrorCode` enum in `ErrorCode` property in `ApiException`. Http code in now available in `HttpCode` property. ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+    - Introduce new inner types: `WebhookRootApps`, `WebhookEmulator`, `WebhookIPInfo`, `WebhookIPBlocklist`, `WebhookTor`, `WebhookVPN`, `WebhookProxy`, `WebhookTampering`, `WebhookClonedApp`, `WebhookFactoryReset`, `WebhookJailbroken`, `WebhookFrida`, `WebhookPrivacySettings`, `WebhookVirtualMachine`, `WebhookRawDeviceAttributes`, `WebhookHighActivity`, `WebhookLocationSpoofing`, `WebhookSuspectScore`, `WebhookRemoteControl`, `WebhookVelocity`, `WebhookDeveloperTools`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Drop support for .NET6 and .NET7 because they reached EOL ([d9febcb](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d9febcb2fcac9d57f8ca7e70d3157e1358bcf900))
+- Store `ErrorCode` enum in `ErrorCode` property in `ApiException`. Http code in now available in `HttpCode` property. ([d197f29](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
 - Rename `Webhook` class to `WebhookValidation`.
-  Right now, `Webhook` class points to the actual data model. ([77e0c16](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/77e0c166b11935e5a29ee5a320eba097f910e355))
-- Expose actual error message in `ApiException.Message` if available ([d197f29](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
+  Right now, `Webhook` class points to the actual data model. ([77e0c16](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/77e0c166b11935e5a29ee5a320eba097f910e355))
+- Expose actual error message in `ApiException.Message` if available ([d197f29](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/d197f291249316108f3b4306989992187ce89bb4))
 
 ### Minor Changes
 
-- Update System.Text.Json to 8.0.5 ([606c84a](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/606c84a1b8220ffdd8256eb7407d2bc440e2cd89))
-- **related-visitors**: Add GET `/related-visitors` endpoint ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
-- Added new `ipEvents`, `distinctIpByLinkedId`, and `distinctVisitorIdByLinkedId` fields to the `velocity` Smart Signal. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- Update System.Text.Json to 8.0.5 ([606c84a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/606c84a1b8220ffdd8256eb7407d2bc440e2cd89))
+- **related-visitors**: Add GET `/related-visitors` endpoint ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Added new `ipEvents`, `distinctIpByLinkedId`, and `distinctVisitorIdByLinkedId` fields to the `velocity` Smart Signal. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
 - - Make the `GeolocationCity` field `name` **required**.
   - Make the `GeolocationSubdivision` field `isoCode` **required**.
   - Make the `GeolocationSubdivision` field `name` **required**.
@@ -257,14 +257,14 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
   - **events**: Add **optional** `Identification` field `components`.
   - **events**: Make the `VPN` field `originCountry` **required**.
   - **visitors**: Add **optional** `Visit` field `components`.
-  - **webhook**: Add **optional** `Webhook` field `components`. ([9400768](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
-- **visitors**: Add the confidence field to the VPN Detection Smart Signal ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
-- Remove `ipv4` format from `ip` field in `Botd`, `Identification`, `Visit` and `Webhook` models. ([0cceba7](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/0cceba71ae867f8740175164bff7a4a4bd07b719))
-- **events**: Add `antiDetectBrowser` detection method to the `tampering` Smart Signal. ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+  - **webhook**: Add **optional** `Webhook` field `components`. ([9400768](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/940076842e436eee0e8ffb9d4fdbab6c2d047f98))
+- **visitors**: Add the confidence field to the VPN Detection Smart Signal ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- Remove `ipv4` format from `ip` field in `Botd`, `Identification`, `Visit` and `Webhook` models. ([0cceba7](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0cceba71ae867f8740175164bff7a4a4bd07b719))
+- **events**: Add `antiDetectBrowser` detection method to the `tampering` Smart Signal. ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
 
 ### Patch Changes
 
-- **related-visitors**: Add mention that the API is billable ([36ed522](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
+- **related-visitors**: Add mention that the API is billable ([36ed522](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/36ed52298896cd0f52edc4b707fa88e4a35e8b81))
 
 ## 7.0.0-test.0
 
@@ -273,11 +273,11 @@ The underlying Server API hasn’t changed, but we made SDK type and class gener
 - Rename errors models related to visits:
   - rename `ErrorVisitsDelete400Response` to `ErrorVisitor400Response`
   - rename `ErrorVisitsDelete404ResponseError` to `ErrorVisitor404ResponseError`
-  - rename `ErrorVisitsDelete404Response` to `ErrorVisitor404Response` ([c32807b](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/c32807b8cf88cbddf5167763f20ee2dbfd1117a2))
+  - rename `ErrorVisitsDelete404Response` to `ErrorVisitor404Response` ([c32807b](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/c32807b8cf88cbddf5167763f20ee2dbfd1117a2))
 
 ### Minor Changes
 
-- **events**: Introduce `PUT` endpoint for `/events` API ([b2c086c](https://github.com/fingerprintjs/fingerprintjs-pro-server-api-dotnet-sdk/commit/b2c086c6855de802ba4b06d5b23e096dba288885))
+- **events**: Introduce `PUT` endpoint for `/events` API ([b2c086c](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/b2c086c6855de802ba4b06d5b23e096dba288885))
 
 ## [6.2.2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/compare/v6.2.1...v6.2.2) (2024-09-17)
 
