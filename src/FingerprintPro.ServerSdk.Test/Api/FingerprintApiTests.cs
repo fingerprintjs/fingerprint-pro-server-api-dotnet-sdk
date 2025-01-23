@@ -703,6 +703,45 @@ namespace FingerprintPro.ServerSdk.Test.Api
         }
 
         [Test]
+        public void UpdateEventWithComplexTagTest()
+        {
+            const string requestId = "1708102555327.NLOjmg";
+
+            var tagStr = File.ReadAllText($"../../../mocks/complex_tag.json");
+            var tag = JsonUtils.Deserialize<Tag>(tagStr);
+
+            var body = new EventsUpdateRequest()
+            {
+                Tag = tag!
+            };
+            var response = _instance!.UpdateEventWithHttpInfo(body, requestId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0].Request;
+                var bodyStr = _requests[0].Body;
+
+                var expectedTag = JsonUtils.Serialize(JsonUtils.Deserialize<object>(tagStr)!);
+                Assert.That(bodyStr, Is.EqualTo($"{{\"tag\":{expectedTag}}}"));
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/{requestId}?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("PUT"));
+                Assert.That(request.ContentType, Is.EqualTo("application/json; charset=utf-8"));
+
+                Assert.That(bodyStr, Is.EqualTo(JsonUtils.Serialize(body)));
+            });
+        }
+
+        [Test]
         public async Task UpdateEvent400ErrorTest()
         {
             SetupMockResponse("errors/400_request_body_invalid.json");
