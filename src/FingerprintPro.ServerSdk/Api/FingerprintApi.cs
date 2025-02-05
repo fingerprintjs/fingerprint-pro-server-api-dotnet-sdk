@@ -114,6 +114,43 @@ namespace FingerprintPro.ServerSdk.Api
         /// <returns>ApiResponse of VisitorsGetResponse</returns>
         ApiResponse<VisitorsGetResponse> GetVisitsWithHttpInfo(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
         /// <summary>
+        /// Get events via search
+        /// </summary>
+        /// <remarks>
+        /// Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="limit">Limit the number of events returned. </param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
+        /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
+        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <returns>SearchEventsResponse</returns>
+        SearchEventsResponse SearchEvents(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
+
+        /// <summary>
+        /// Get events via search
+        /// </summary>
+        /// <remarks>
+        /// Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="limit">Limit the number of events returned. </param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
+        /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
+        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <returns>ApiResponse of SearchEventsResponse</returns>
+        ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
+        /// <summary>
         /// Update an event with a given request ID
         /// </summary>
         /// <remarks>
@@ -232,6 +269,43 @@ namespace FingerprintPro.ServerSdk.Api
         /// <param name="before">⚠️ Deprecated pagination method, please use `paginationKey` instead. Timestamp (in milliseconds since epoch) used to paginate results.  (optional)</param>
         /// <returns>Task of ApiResponse (VisitorsGetResponse)</returns>
         Task<ApiResponse<VisitorsGetResponse>> GetVisitsAsyncWithHttpInfo(string visitorId, string requestId = null!, string linkedId = null!, int? limit = null!, string paginationKey = null!, long? before = null!);
+        /// <summary>
+        /// Get events via search
+        /// </summary>
+        /// <remarks>
+        /// Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="limit">Limit the number of events returned. </param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
+        /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
+        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <returns>Task of SearchEventsResponse</returns>
+        Task<SearchEventsResponse> SearchEventsAsync(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
+
+        /// <summary>
+        /// Get events via searche
+        /// </summary>
+        /// <remarks>
+        /// Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+        /// </remarks>
+        /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="limit">Limit the number of events returned. </param>
+        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
+        /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
+        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
+        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <returns>Task of ApiResponse (SearchEventsResponse)</returns>
+        Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
         /// <summary>
         /// Update an event with a given request ID
         /// </summary>
@@ -352,6 +426,27 @@ namespace FingerprintPro.ServerSdk.Api
                 },
                 {
                     429, typeof(ErrorPlainResponse)
+                },
+            };
+    }
+    internal class SearchEventsDefinition : OperationDefinition
+    {
+        public override string Path => "/events/search";
+
+        public override string OperationName => "SearchEvents";
+
+        public override string[] PathParams => Array.Empty<string>();
+
+        public override Dictionary<int, Type> ResponseStatusCodeMap => new()
+            {
+                {
+                    200, typeof(SearchEventsResponse)
+                },
+                {
+                    400, typeof(ErrorResponse)
+                },
+                {
+                    403, typeof(ErrorResponse)
                 },
             };
     }

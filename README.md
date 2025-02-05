@@ -211,6 +211,7 @@ Class | Method | HTTP request | Description
 *FingerprintApi* | [**GetEvent**](docs/FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
 *FingerprintApi* | [**GetRelatedVisitors**](docs/FingerprintApi.md#getrelatedvisitors) | **GET** /related-visitors | Get Related Visitors
 *FingerprintApi* | [**GetVisits**](docs/FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
+*FingerprintApi* | [**SearchEvents**](docs/FingerprintApi.md#searchevents) | **GET** /events/search | Get events via search
 *FingerprintApi* | [**UpdateEvent**](docs/FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
 <a name="documentation-for-models"></a>
@@ -286,6 +287,8 @@ Class | Method | HTTP request | Description
  - [Model.RelatedVisitorsResponse](docs/RelatedVisitorsResponse.md)
  - [Model.RemoteControl](docs/RemoteControl.md)
  - [Model.RootApps](docs/RootApps.md)
+ - [Model.SearchEventsResponse](docs/SearchEventsResponse.md)
+ - [Model.SearchEventsResponseEvents](docs/SearchEventsResponseEvents.md)
  - [Model.SuspectScore](docs/SuspectScore.md)
  - [Model.Tag](docs/Tag.md)
  - [Model.Tampering](docs/Tampering.md)
