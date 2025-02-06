@@ -234,4 +234,71 @@ public class FingerprintApi : IFingerprintApi
     }
 
     #endregion
+
+    #region SearchEvents
+
+    public SearchEventsResponse SearchEvents(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    {
+        return SearchEventsWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Data;
+    }
+
+    public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    {
+        return SearchEventsAsyncWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Result;
+    }
+
+    public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    {
+        var response = await SearchEventsAsyncWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+        return response.Data;
+    }
+
+    public Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    {
+        var definition = new SearchEventsDefinition();
+        var queryParams = new Dictionary<string, string>()
+        {
+            { "limit", limit.ToString() }
+        };
+        
+        if (!string.IsNullOrEmpty(visitorId))
+        {
+            queryParams.Add("visitor_id", visitorId);
+        }
+        if (!string.IsNullOrEmpty(bot))
+        {
+            queryParams.Add("bot", bot);
+        }
+        if (!string.IsNullOrEmpty(ipAddress))
+        {
+            queryParams.Add("ip_address", ipAddress);
+        }
+        if (!string.IsNullOrEmpty(linkedId))
+        {
+            queryParams.Add("linked_id", linkedId);
+        }
+        if (start != null) {
+            queryParams.Add("start", start.ToString());
+        }
+        if (end != null) {
+            queryParams.Add("end", end.ToString());
+        }
+        if (reverse != null) {
+            queryParams.Add("reverse", reverse.ToString());
+        }
+        if (suspect != null) {
+            queryParams.Add("suspect", suspect.ToString());
+        }
+
+        var request = new ApiRequest
+        {
+            OperationDefinition = definition,
+            Method = HttpMethod.Get,
+            QueryParams = queryParams
+        };
+
+        return _apiClient.DoRequest<SearchEventsResponse>(request);
+    }
+
+    #endregion
 }
