@@ -260,7 +260,7 @@ public class FingerprintApi : IFingerprintApi
         {
             { "limit", limit.ToString() }
         };
-        
+
         if (!string.IsNullOrEmpty(visitorId))
         {
             queryParams.Add("visitor_id", visitorId);
@@ -277,16 +277,20 @@ public class FingerprintApi : IFingerprintApi
         {
             queryParams.Add("linked_id", linkedId);
         }
-        if (start != null) {
+        if (start != null)
+        {
             queryParams.Add("start", start.ToString());
         }
-        if (end != null) {
+        if (end != null)
+        {
             queryParams.Add("end", end.ToString());
         }
-        if (reverse != null) {
+        if (reverse != null)
+        {
             queryParams.Add("reverse", reverse.ToString());
         }
-        if (suspect != null) {
+        if (suspect != null)
+        {
             queryParams.Add("suspect", suspect.ToString());
         }
 

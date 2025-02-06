@@ -53,7 +53,8 @@ internal class FingerprintExample
         Console.WriteLine(events);
     }
 
-    public void SearchEventsExample() {
+    public void SearchEventsExample()
+    {
         var events = _api.SearchEvents(2, bot: "bad");
         Console.WriteLine("SearchEvents() result:");
         Console.WriteLine(events);
