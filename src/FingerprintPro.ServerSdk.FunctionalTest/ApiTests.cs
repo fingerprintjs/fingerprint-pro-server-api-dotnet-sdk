@@ -100,4 +100,15 @@ public class ApiTests
             Assert.That(response.VisitorId, Is.EqualTo(visitorId));
         });
     }
+
+    [Test]
+    public void SearchEvents()
+    {
+        var bot = "bad";
+        var limit = 2;
+
+        var response = _api.SearchEvents(limit, bot: bot);
+
+        Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
+    }
 }

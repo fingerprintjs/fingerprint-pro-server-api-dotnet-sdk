@@ -937,5 +937,180 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 .TypeOf<TooManyRequestsException>().With.Property(nameof(TooManyRequestsException.HttpCode))
                 .EqualTo(TooManyRequestsException.TooManyRequestsCode));
         }
+
+        [Test]
+        public void SearchEventsMinimumParamsTest()
+        {
+            SetupMockResponse("get_event_search_200.json");
+
+            const int limit = 1;
+
+            var response = _instance!.SearchEventsWithHttpInfo(limit);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0].Request;
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&limit={limit}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+
+                Assert.That(response.Data.Events.Count, Is.EqualTo(1));
+                var eventData = response.Data.Events[0];
+
+                Assert.That(eventData.Products.Identification.Data.RequestId, Is.EqualTo("1708102555327.NLOjmg"));
+                Assert.That(eventData.Products.IpInfo.Data.V4.Address, Is.EqualTo("94.142.239.124"));
+                Assert.That(eventData.Products.ClonedApp.Data.Result, Is.False);
+                Assert.That(eventData.Products.Emulator.Data.Result, Is.False);
+                Assert.That(eventData.Products.FactoryReset.Data.Timestamp, Is.EqualTo(0));
+                Assert.That(eventData.Products.Frida.Data.Result, Is.False);
+                Assert.That(eventData.Products.Incognito.Data.Result, Is.False);
+                Assert.That(eventData.Products.IpBlocklist.Data.Result, Is.False);
+                Assert.That(eventData.Products.IpBlocklist.Data.Details.AttackSource, Is.False);
+                Assert.That(eventData.Products.IpBlocklist.Data.Details.EmailSpam, Is.False);
+                Assert.That(eventData.Products.Jailbroken.Data.Result, Is.False);
+                Assert.That(eventData.Products.PrivacySettings.Data.Result, Is.False);
+                Assert.That(eventData.Products.Proxy.Data.Result, Is.False);
+                Assert.That(eventData.Products.RootApps.Data.Result, Is.False);
+                Assert.That(eventData.Products.Tampering.Data.Result, Is.False);
+                Assert.That(eventData.Products.Tor.Data.Result, Is.False);
+                Assert.That(eventData.Products.VirtualMachine.Data.Result, Is.False);
+                Assert.That(eventData.Products.Vpn.Data.Result, Is.False);
+                Assert.That(eventData.Products.ClonedApp.Data.Result, Is.False);
+                var factoryResedExpectedTime = DateTime.Parse("1970-01-01T00:00:00Z", CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal);
+                Assert.That(eventData.Products.FactoryReset.Data.Time, Is.EqualTo(factoryResedExpectedTime));
+                Assert.That(eventData.Products.Jailbroken.Data.Result, Is.False);
+                Assert.That(eventData.Products.Frida.Data.Result, Is.False);
+                Assert.That(eventData.Products.PrivacySettings.Data.Result, Is.False);
+                Assert.That(eventData.Products.VirtualMachine.Data.Result, Is.False);
+                var rawDeviceAttributes = eventData.Products.RawDeviceAttributes.Data;
+                Assert.That(rawDeviceAttributes.ContainsKey("colorGamut"), Is.True);
+                Assert.That(rawDeviceAttributes["colorGamut"], Is.Not.Null);
+                Assert.That(rawDeviceAttributes["colorGamut"].Value.ToString(), Is.EqualTo("p3"));
+                var colorGamut = rawDeviceAttributes["colorGamut"].Value;
+                Assert.That(colorGamut.Value.ToString(), Is.EqualTo("p3"));
+                var canvas = rawDeviceAttributes["canvas"].Value;
+                Assert.That(canvas.Value.GetProperty("Geometry").ToString(), Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
+            });
+
+        }
+
+        [Test]
+        public void SearchEventsMaximumParamsTest()
+        {
+            SetupMockResponse("get_event_search_200.json");
+
+            const int limit = 1;
+            const string visitorId = "AcxioeQKffpXF8iGQK3P";
+            const string bot = "good";
+            const string ipAddress = "10.0.0.0/24";
+            const string encodedIpAddress = "10.0.0.0%2f24";
+            const string linkedId = "some_linked_id";
+            const long start = 1582299576511;
+            const long end = 1582299576513;
+            const bool reverse = true;
+            const bool suspect = false;
+
+
+            var response = _instance!.SearchEventsWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+                Assert.That(response.Response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+                var request = _requests[0].Request;
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                var queryParams = $"limit={limit}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}";
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+
+                Assert.That(response.Data.Events.Count, Is.EqualTo(1));
+            });
+
+        }
+
+        [Test]
+        public void SearchEventsHalfParamsTest()
+        {
+            SetupMockResponse("get_event_search_200.json");
+
+            const int limit = 1;
+            const string bot = "good";
+            const string linkedId = "some_linked_id";
+            const long start = 1582299576511;
+            const bool reverse = true;
+
+
+            var response = _instance!.SearchEvents(limit, start: start, reverse: reverse, bot: bot, linkedId: linkedId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_requests, Has.Count.EqualTo(1));
+
+                var request = _requests[0].Request;
+
+                Assert.That(request.Headers.Get("User-Agent"),
+                    Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
+
+                var queryParams = $"limit={limit}&bot={bot}&linked_id={linkedId}&start={start}&reverse={reverse}";
+                Assert.That(request.Url?.ToString(),
+                    Is.EqualTo(
+                        $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));
+
+                Assert.That(request.HttpMethod, Is.EqualTo("GET"));
+
+                Assert.That(response.Events.Count, Is.EqualTo(1));
+            });
+
+        }
+
+        [Test]
+        public async Task SearchEvents400ErrorTest()
+        {
+            SetupMockResponse("errors/400_ip_address_invalid.json");
+            _mockResponseStatusCode = 400;
+
+            const int limit = 1;
+            const string ipAddress = "10123";
+
+            await Assert.ThatAsync(async () => await _instance!.SearchEventsAsync(limit, ipAddress: ipAddress),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorResponse>()
+                    .And
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(400)
+            );
+        }
+
+        [Test]
+        public async Task SearchEvents403ErrorTest()
+        {
+            SetupMockResponse("errors/403_feature_not_enabled.json");
+            _mockResponseStatusCode = 403;
+
+            const int limit = 1;
+
+            await Assert.ThatAsync(async () => await _instance!.SearchEventsAsync(limit),
+                Throws.TypeOf<ApiException>().With.Property(nameof(ApiException.ErrorContent))
+                    .InstanceOf<ErrorResponse>()
+                    .And
+                    .With.Property(nameof(ApiException.HttpCode)).EqualTo(403)
+            );
+        }
     }
 }
