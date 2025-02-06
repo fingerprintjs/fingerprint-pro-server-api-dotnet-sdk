@@ -707,7 +707,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
         {
             const string requestId = "1708102555327.NLOjmg";
 
-            var tagStr = File.ReadAllText($"../../../mocks/complex_tag.json");
+            var tagStr = File.ReadAllText($"../../../local-mocks/complex_tag.json");
             var tag = JsonUtils.Deserialize<Tag>(tagStr);
 
             var body = new EventsUpdateRequest()
