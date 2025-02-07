@@ -9,6 +9,7 @@ using FingerprintPro.ServerSdk.Model;
 var example = new FingerprintExample();
 example.GetVisitsExample();
 example.GetEventExample();
+example.SearchEventsExample();
 
 // Uncomment following line to test update event method
 // example.UpdateEventExample()
@@ -49,6 +50,13 @@ internal class FingerprintExample
     {
         var events = _api.GetEvent(_requestId);
         Console.WriteLine("GetEvent() result:");
+        Console.WriteLine(events);
+    }
+
+    public void SearchEventsExample()
+    {
+        var events = _api.SearchEvents(2, bot: "bad");
+        Console.WriteLine("SearchEvents() result:");
         Console.WriteLine(events);
     }
 

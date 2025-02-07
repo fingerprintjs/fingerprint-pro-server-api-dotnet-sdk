@@ -68,9 +68,11 @@ var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
 
 var visits = api.GetVisits(visitorId);
 var events = api.GetEvent(requestId);
+var eventsFound = api.SearchEvents(20, bot: "bad");
 
 Console.WriteLine(visits);
 Console.WriteLine(events);
+Console.WriteLine(eventsFound);
 
 var tag = new Tag
 {

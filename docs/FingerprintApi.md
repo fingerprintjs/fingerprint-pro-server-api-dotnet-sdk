@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**GetEvent**](FingerprintApi.md#getevent) | **GET** /events/{request_id} | Get event by request ID
 [**GetRelatedVisitors**](FingerprintApi.md#getrelatedvisitors) | **GET** /related-visitors | Get Related Visitors
 [**GetVisits**](FingerprintApi.md#getvisits) | **GET** /visitors/{visitor_id} | Get visits by visitor ID
+[**SearchEvents**](FingerprintApi.md#searchevents) | **GET** /events/search | Get events via search
 [**UpdateEvent**](FingerprintApi.md#updateevent) | **PUT** /events/{request_id} | Update an event with a given request ID
 
 <a name="deletevisitordata"></a>
@@ -252,6 +253,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VisitorsGetResponse**](VisitorsGetResponse.md)
+
+### Authorization
+
+[ApiKeyHeader](../README.md#ApiKeyHeader), [ApiKeyQuery](../README.md#ApiKeyQuery)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+<a name="searchevents"></a>
+# **SearchEvents**
+> SearchEventsResponse SearchEvents (int? limit, string visitorId = null, string bot = null, string ipAddress = null, string linkedId = null, long? start = null, long? end = null, bool? reverse = null, bool? suspect = null)
+
+Get events via search
+
+Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FingerprintPro.ServerSdk.Api;
+using FingerprintPro.ServerSdk.Client;
+using FingerprintPro.ServerSdk.Model;
+
+namespace Example
+{
+    public class SearchEventsExample
+    {
+        public void main()
+        {
+            var configuration = new Configuration("YOUR_API_KEY");
+            var apiInstance = new FingerprintApi(configuration);
+            var limit = 56;  // int? | Limit the number of events returned. 
+            var visitorId = visitorId_example;  // string | Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional) 
+            var bot = bot_example;  // string | Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional) 
+            var ipAddress = ipAddress_example;  // string | Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional) 
+            var linkedId = linkedId_example;  // string | Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional) 
+            var start = 789;  // long? | Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional) 
+            var end = 789;  // long? | Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional) 
+            var reverse = true;  // bool? | Sort events in reverse timestamp order.  (optional) 
+            var suspect = true;  // bool? | Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional) 
+
+            try
+            {
+                // Get events via search
+                SearchEventsResponse result = apiInstance.SearchEvents(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling FingerprintApi.SearchEvents: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int?**| Limit the number of events returned.  | 
+ **visitorId** | **string**| Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  | [optional] 
+ **bot** | **string**| Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  | [optional] 
+ **ipAddress** | **string**| Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  | [optional] 
+ **linkedId** | **string**| Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] 
+ **start** | **long?**| Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  | [optional] 
+ **end** | **long?**| Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  | [optional] 
+ **reverse** | **bool?**| Sort events in reverse timestamp order.  | [optional] 
+ **suspect** | **bool?**| Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  | [optional] 
+
+### Return type
+
+[**SearchEventsResponse**](SearchEventsResponse.md)
 
 ### Authorization
 
