@@ -104,7 +104,7 @@ public class ApiTests
     [Test]
     public void SearchEvents()
     {
-        var bot = "bad";
+        var bot = "good";
         var limit = 2;
 
         var response = _api.SearchEvents(limit, bot: bot);
