@@ -104,12 +104,11 @@ public class ApiTests
     [Test]
     public void SearchEvents()
     {
-        var bot = "good";
         var limit = 2;
         var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
         var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
-        var response = _api.SearchEvents(limit, bot: bot, start: ((DateTimeOffset)start).ToUnixTimeMilliseconds(),
+        var response = _api.SearchEvents(limit, start: ((DateTimeOffset)start).ToUnixTimeMilliseconds(),
             end: ((DateTimeOffset)end).ToUnixTimeMilliseconds());
 
         Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
