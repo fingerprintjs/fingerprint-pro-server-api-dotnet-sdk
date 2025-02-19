@@ -106,8 +106,11 @@ public class ApiTests
     {
         var bot = "good";
         var limit = 2;
+        var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
+        var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
-        var response = _api.SearchEvents(limit, bot: bot);
+        var response = _api.SearchEvents(limit, bot: bot, start: ((DateTimeOffset)start).ToUnixTimeMilliseconds(),
+            end: ((DateTimeOffset)end).ToUnixTimeMilliseconds());
 
         Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
     }
