@@ -122,13 +122,13 @@ namespace FingerprintPro.ServerSdk.Api
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit">Limit the number of events returned. </param>
         /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected.  (optional)</param>
         /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
         /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
         /// <returns>SearchEventsResponse</returns>
         SearchEventsResponse SearchEvents(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
 
@@ -141,13 +141,13 @@ namespace FingerprintPro.ServerSdk.Api
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit">Limit the number of events returned. </param>
         /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected.  (optional)</param>
         /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
         /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
         /// <returns>ApiResponse of SearchEventsResponse</returns>
         ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
         /// <summary>
@@ -278,13 +278,13 @@ namespace FingerprintPro.ServerSdk.Api
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit">Limit the number of events returned. </param>
         /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected.  (optional)</param>
         /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
         /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
         /// <returns>Task of SearchEventsResponse</returns>
         Task<SearchEventsResponse> SearchEventsAsync(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
 
@@ -297,13 +297,13 @@ namespace FingerprintPro.ServerSdk.Api
         /// <exception cref="FingerprintPro.ServerSdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit">Limit the number of events returned. </param>
         /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Pro. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the bot detection result, specifically:    - events where any kind of bot was detected.   - events where a good bot was detected.   - events where a bad bot was detected.   - events where no bot was detected.  (optional)</param>
+        /// <param name="bot">Filter events by the bot detection result, specifically:    `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected.  (optional)</param>
         /// <param name="ipAddress">Filter events by IP address range. The range can be as specific as a single IP (/32 for IPv4 or /128 for IPv6)  All ip_address filters must use CIDR notation, for example, 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
         /// <param name="linkedId">Filter events by your custom identifier.   You can use [linked IDs](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session ID, purchase ID, or transaction ID. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
         /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
         /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  (optional)</param>
+        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent).  > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
         /// <returns>Task of ApiResponse (SearchEventsResponse)</returns>
         Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!);
         /// <summary>
