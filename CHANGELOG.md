@@ -1,5 +1,15 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.2.0-test.1
+
+### Minor Changes
+
+- **events-search**: Add 'pagination_key' parameter ([2f38b0a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/2f38b0a2b2ae1ee1d89f983d0cbaab3a5f0a4003))
+
+### Patch Changes
+
+- **events-search**: Improve parameter descriptions for `bot`, `suspect` ([e70bbb1](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/e70bbb1b2e42be8023609da12e330f12a743f437))
+
 ## 7.2.0-test.0
 
 ### Minor Changes
