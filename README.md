@@ -60,7 +60,7 @@ var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
 
 var visits = api.GetVisits(visitorId);
 var events = api.GetEvent(requestId);
-var eventsFound = api.SearchEvents(20, bot: "bad");
+var eventsFound = api.SearchEvents(20, paginationKey: "1740815825085", bot: "bad");
 
 Console.WriteLine(visits);
 Console.WriteLine(events);
