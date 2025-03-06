@@ -1019,9 +1019,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const long end = 1582299576513;
             const bool reverse = true;
             const bool suspect = false;
+            const string paginationKey = "pagination";
 
 
-            var response = _instance!.SearchEventsWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+            var response = _instance!.SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
 
             Assert.Multiple(() =>
             {
@@ -1033,7 +1034,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
 
-                var queryParams = $"limit={limit}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}";
+                var queryParams = $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}";
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
                         $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));

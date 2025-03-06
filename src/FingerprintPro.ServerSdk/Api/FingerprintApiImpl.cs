@@ -237,23 +237,23 @@ public class FingerprintApi : IFingerprintApi
 
     #region SearchEvents
 
-    public SearchEventsResponse SearchEvents(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public SearchEventsResponse SearchEvents(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
     {
-        return SearchEventsWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Data;
+        return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Data;
     }
 
-    public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
     {
-        return SearchEventsAsyncWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Result;
+        return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Result;
     }
 
-    public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
     {
-        var response = await SearchEventsAsyncWithHttpInfo(limit, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+        var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
         return response.Data;
     }
 
-    public Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
     {
         var definition = new SearchEventsDefinition();
         var queryParams = new Dictionary<string, string>()
@@ -261,6 +261,10 @@ public class FingerprintApi : IFingerprintApi
             { "limit", limit.ToString() }
         };
 
+        if (!string.IsNullOrEmpty(paginationKey))
+        {
+            queryParams.Add("pagination_key", paginationKey);
+        }
         if (!string.IsNullOrEmpty(visitorId))
         {
             queryParams.Add("visitor_id", visitorId);

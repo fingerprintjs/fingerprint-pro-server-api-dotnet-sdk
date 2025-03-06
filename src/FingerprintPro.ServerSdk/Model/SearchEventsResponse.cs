@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="SearchEventsResponse" /> class.
         /// </summary>
         /// <param name="events">events.</param>
-        /// <param name="paginationKey">paginationKey.</param>
+        /// <param name="paginationKey">Use this value in the `pagination_key` parameter to request the next page of search results..</param>
         public SearchEventsResponse(List<SearchEventsResponseEvents> events = default(List<SearchEventsResponseEvents>), string paginationKey = default(string))
         {
             this.Events = events;
@@ -42,8 +42,9 @@ namespace FingerprintPro.ServerSdk.Model
         public List<SearchEventsResponseEvents> Events { get; set; }
 
         /// <summary>
-        /// Gets or Sets PaginationKey
+        /// Use this value in the `pagination_key` parameter to request the next page of search results.
         /// </summary>
+        /// <value>Use this value in the `pagination_key` parameter to request the next page of search results.</value>
         [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
         [JsonPropertyName("paginationKey")]
         public string PaginationKey { get; set; }
