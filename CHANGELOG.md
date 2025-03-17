@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.2.0
+
+### Minor Changes
+
+- **events-search**: Add a new `events/search` API endpoint. Allow users to search for identification events matching one or more search criteria, for example, visitor ID, IP address, bot detection result, etc. ([0844a4e](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0844a4e5c26abcb2a83ea2b0fbffdff96d836925))
+
 ## 7.2.0-test.1
 
 ### Minor Changes
