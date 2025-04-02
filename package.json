@@ -1,6 +1,6 @@
 {
   "name": "fingerprint-pro-server-api-dotnet-sdk",
-  "version": "7.2.0",
+  "version": "7.3.0",
   "private": true,
   "devDependencies": {
     "@changesets/cli": "^2.27.8",

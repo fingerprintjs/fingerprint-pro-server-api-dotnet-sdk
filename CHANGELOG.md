@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.3.0
+
+### Minor Changes
+
+- Add `mitmAttack` (man-in-the-middle attack) Smart Signal. ([81b6d59](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/81b6d5901d764294cee959bc3a78db66967c1642))
+
 ## 7.2.0
 
 ### Minor Changes
