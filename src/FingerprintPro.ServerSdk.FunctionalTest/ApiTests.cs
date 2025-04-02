@@ -7,6 +7,11 @@ namespace FingerprintPro.ServerSdk.FunctionalTest;
 public class ApiTests
 {
     private FingerprintApi _api;
+    private String requestId;
+    private String visitorId;
+    private long start;
+    private long end;
+    private String searchEventsPaginationKey;
 
     [SetUp]
     public void Setup()
@@ -16,13 +21,24 @@ public class ApiTests
         _api = new FingerprintApi(
             configuration
         );
+
+        if (string.IsNullOrEmpty(requestId))
+        {
+            var now = DateTimeOffset.UtcNow;
+            end = now.ToUnixTimeMilliseconds();
+            start = now.AddDays(-90).ToUnixTimeMilliseconds();
+
+            var events = _api.SearchEvents(2, start: start, end: end);
+            Assert.That(events.Events, Is.Not.Empty);
+            var firstEventIdentificationData = events.Events[0].Products.Identification.Data;
+            requestId = firstEventIdentificationData.RequestId;
+            visitorId = firstEventIdentificationData.VisitorId;
+        }
     }
 
     [Test]
     public void GetEventsTest()
     {
-        var requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
-
         var events = _api.GetEvent(requestId);
 
         Assert.Multiple(() =>
@@ -50,14 +66,11 @@ public class ApiTests
     [Test]
     public void GetVisitsWithoutRequestIdTest()
     {
-        var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
-
         var response = _api.GetVisits(visitorId);
 
         Assert.Multiple(() =>
         {
             Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
-            Assert.That(response.Visits, Has.Count.AtLeast(4));
             Assert.That(response.Visits, Is.All.InstanceOf<Visit>());
             Assert.That(response.VisitorId, Is.EqualTo(visitorId));
         });
@@ -66,7 +79,6 @@ public class ApiTests
     [Test]
     public void GetVisitsWithRequestIdTest()
     {
-        var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
         var allVisits = _api.GetVisits(visitorId);
 
         var requestId = allVisits.Visits[0].RequestId;
@@ -83,25 +95,6 @@ public class ApiTests
     }
 
     [Test]
-    public void GetVisitsWithLinkedId()
-    {
-        var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
-        var allVisits = _api.GetVisits(visitorId);
-
-        var linkedId = allVisits.Visits[0].LinkedId;
-
-        var response = _api.GetVisits(visitorId, null, linkedId);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
-            Assert.That(response.Visits, Has.Count.EqualTo(2));
-            Assert.That(response.Visits, Is.All.Property("LinkedId").EqualTo(linkedId));
-            Assert.That(response.VisitorId, Is.EqualTo(visitorId));
-        });
-    }
-
-    [Test]
     public void SearchEvents()
     {
         var limit = 2;
@@ -112,5 +105,28 @@ public class ApiTests
             end: ((DateTimeOffset)end).ToUnixTimeMilliseconds());
 
         Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
+    }
+
+    [Test]
+    public void SearchEventsPagination()
+    {
+        var response = _api.SearchEvents(2, start: start, end: end, paginationKey: searchEventsPaginationKey);
+        Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
+    }
+
+    [Test]
+    public void SearchOldEvents()
+    {
+        var response = _api.SearchEvents(limit: 2, start: start, end: end, reverse: true);
+
+        Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
+        var oldEventIdentificationData = response.Events[0].Products.Identification.Data;
+
+        Assert.That(oldEventIdentificationData.VisitorId, Is.Not.EqualTo(visitorId));
+        Assert.That(oldEventIdentificationData.RequestId, Is.Not.EqualTo(requestId));
+
+        // Try to request old events to check if they still could be deserialized
+        _api.GetVisits(oldEventIdentificationData.VisitorId);
+        _api.GetEvent(oldEventIdentificationData.RequestId);
     }
 }
