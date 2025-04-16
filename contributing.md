@@ -43,7 +43,7 @@ We recommend using our [docker-compose.yml](docker-compose.yml) file for running
 
 1. Build the image used for running the project: `docker build --tag fingerprint-pro-server-api-dotnet:latest ./`
 2. Prepare env file based on the [.env.example](.env.example).
-3. Run the example project: `docker compose run --rm example`
+3. Run the example project: `docker compose run --rm example`. The `--rm` flag ensures the service is removed once the command completes execution.
 
 ### How to publish
 
