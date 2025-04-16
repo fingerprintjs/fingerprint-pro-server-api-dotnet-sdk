@@ -16,7 +16,7 @@ public class ApiTests
     [SetUp]
     public void Setup()
     {
-        var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
+        var configuration = new Configuration(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
 
         _api = new FingerprintApi(
             configuration

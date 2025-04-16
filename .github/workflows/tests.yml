@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: dotnet test
         env:
-          API_KEY: ${{ secrets.API_KEY }}
+          SECRET_API_KEY: ${{ secrets.API_KEY }}
 
   report-status:
     needs: tests

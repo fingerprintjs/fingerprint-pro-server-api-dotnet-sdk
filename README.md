@@ -49,7 +49,7 @@ using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
 // Initialize configuration and add your api key
-var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
+var configuration = new Configuration(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
 
 var api = new FingerprintApi(
     configuration
@@ -90,7 +90,7 @@ using FingerprintPro.ServerSdk.Api;
 using FingerprintPro.ServerSdk.Client;
 
 // Initialize configuration and add your api key
-var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!);
+var configuration = new Configuration(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
 
 var api = new FingerprintApi(
     configuration
@@ -117,7 +117,7 @@ If your subscription is in region other than US, you need to change the region i
 ```csharp
 using FingerprintPro.ServerSdk.Client;
 
-var configuration = new Configuration(Environment.GetEnvironmentVariable("API_KEY")!)
+var configuration = new Configuration(Environment.GetEnvironmentVariable("SECRET_API_KEY")!)
 {
     Region = Region.Eu // or Region.Asia
 };

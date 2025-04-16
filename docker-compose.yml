@@ -1,7 +1,7 @@
 # Hint: run `docker build --tag fingerprint-pro-server-api-dotnet:latest ./` to prepare image required for these service
 services:
   # Generic service for running arbitrary dotnet commands
-  # Example usage: `docker compose run --rm dotnet dotnet list package`
+  # Example usage: `docker compose run --rm dotnet "dotnet list package"`
   dotnet:
     image: fingerprint-pro-server-api-dotnet:latest
     env_file: &env
