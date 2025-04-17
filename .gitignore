@@ -189,3 +189,5 @@ $RECYCLE.BIN/
 **/*.sln.ide
 
 **/node_modules
+.env
+!**/.env.example

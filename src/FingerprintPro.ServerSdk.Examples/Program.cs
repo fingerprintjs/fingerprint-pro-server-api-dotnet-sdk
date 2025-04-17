@@ -19,7 +19,7 @@ example.SearchEventsExample();
 
 internal class FingerprintExample
 {
-    private readonly Configuration _configuration = new(Environment.GetEnvironmentVariable("API_KEY")!);
+    private readonly Configuration _configuration = new(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
     private readonly string _visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
     private readonly string _requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
     private readonly FingerprintApi _api;
