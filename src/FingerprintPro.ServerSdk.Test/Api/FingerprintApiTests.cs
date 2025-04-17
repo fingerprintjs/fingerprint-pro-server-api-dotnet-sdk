@@ -1020,9 +1020,48 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const bool reverse = true;
             const bool suspect = false;
             const string paginationKey = "pagination";
+            const bool vpn = true;
+            const bool virtualMachine = false;
+            const bool tampering = false;
+            const bool antiDetectBrowser = false;
+            const bool incognito = false;
+            const bool privacySettings = false;
+            const bool jailbroken = false;
+            const bool frida = false;
+            const bool factoryReset = false;
+            const bool clonedApp = false;
+            const bool emulator = false;
+            const bool rootApps = false;
+            const string vpnConfidence = "high";
+            const float minSuspectScore = 0.7f;
+            const string encodedMinSuspectScore = "0.70";
 
-
-            var response = _instance!.SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+            var response = _instance!.SearchEventsWithHttpInfo(
+    limit: limit,
+    paginationKey: paginationKey,
+    visitorId: visitorId,
+    bot: bot,
+    ipAddress: ipAddress,
+    linkedId: linkedId,
+    start: start,
+    end: end,
+    reverse: reverse,
+    suspect: suspect,
+    vpn: vpn,
+    virtualMachine: virtualMachine,
+    tampering: tampering,
+    antiDetectBrowser: antiDetectBrowser,
+    incognito: incognito,
+    privacySettings: privacySettings,
+    jailbroken: jailbroken,
+    frida: frida,
+    factoryReset: factoryReset,
+    clonedApp: clonedApp,
+    emulator: emulator,
+    rootApps: rootApps,
+    vpnConfidence: vpnConfidence,
+    minSuspectScore: minSuspectScore
+);
 
             Assert.Multiple(() =>
             {
@@ -1034,7 +1073,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
 
-                var queryParams = $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}";
+                var queryParams = $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}";
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
                         $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));
