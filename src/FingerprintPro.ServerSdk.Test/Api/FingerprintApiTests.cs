@@ -25,7 +25,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
         public HttpListenerRequest Request;
 
         public string? Body;
-
     }
 
     /// <summary>
@@ -124,7 +123,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     using var reader = new StreamReader(req.InputStream, req.ContentEncoding);
 
                     body = await reader.ReadToEndAsync();
-
                 }
 
                 _requests.Add(new ApiRequest()
@@ -313,7 +311,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var colorGamut = rawDeviceAttributes["colorGamut"].Value;
                 Assert.That(colorGamut.Value.ToString(), Is.EqualTo("p3"));
                 var canvas = rawDeviceAttributes["canvas"].Value;
-                Assert.That(canvas.Value.GetProperty("Geometry").ToString(), Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
+                Assert.That(canvas.Value.GetProperty("Geometry").ToString(),
+                    Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
             });
         }
 
@@ -999,9 +998,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 var colorGamut = rawDeviceAttributes["colorGamut"].Value;
                 Assert.That(colorGamut.Value.ToString(), Is.EqualTo("p3"));
                 var canvas = rawDeviceAttributes["canvas"].Value;
-                Assert.That(canvas.Value.GetProperty("Geometry").ToString(), Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
+                Assert.That(canvas.Value.GetProperty("Geometry").ToString(),
+                    Is.EqualTo("4dce9d6017c3e0c052a77252f29f2b1c"));
             });
-
         }
 
         [Test]
@@ -1037,31 +1036,31 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string encodedMinSuspectScore = "0.70";
 
             var response = _instance!.SearchEventsWithHttpInfo(
-    limit: limit,
-    paginationKey: paginationKey,
-    visitorId: visitorId,
-    bot: bot,
-    ipAddress: ipAddress,
-    linkedId: linkedId,
-    start: start,
-    end: end,
-    reverse: reverse,
-    suspect: suspect,
-    vpn: vpn,
-    virtualMachine: virtualMachine,
-    tampering: tampering,
-    antiDetectBrowser: antiDetectBrowser,
-    incognito: incognito,
-    privacySettings: privacySettings,
-    jailbroken: jailbroken,
-    frida: frida,
-    factoryReset: factoryReset,
-    clonedApp: clonedApp,
-    emulator: emulator,
-    rootApps: rootApps,
-    vpnConfidence: vpnConfidence,
-    minSuspectScore: minSuspectScore
-);
+                limit: limit,
+                paginationKey: paginationKey,
+                visitorId: visitorId,
+                bot: bot,
+                ipAddress: ipAddress,
+                linkedId: linkedId,
+                start: start,
+                end: end,
+                reverse: reverse,
+                suspect: suspect,
+                vpn: vpn,
+                virtualMachine: virtualMachine,
+                tampering: tampering,
+                antiDetectBrowser: antiDetectBrowser,
+                incognito: incognito,
+                privacySettings: privacySettings,
+                jailbroken: jailbroken,
+                frida: frida,
+                factoryReset: factoryReset,
+                clonedApp: clonedApp,
+                emulator: emulator,
+                rootApps: rootApps,
+                vpnConfidence: vpnConfidence,
+                minSuspectScore: minSuspectScore
+            );
 
             Assert.Multiple(() =>
             {
@@ -1073,7 +1072,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(request.Headers.Get("User-Agent"),
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
 
-                var queryParams = $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}";
+                var queryParams =
+                    $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}";
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
                         $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));
@@ -1082,7 +1082,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
                 Assert.That(response.Data.Events.Count, Is.EqualTo(1));
             });
-
         }
 
         [Test]
@@ -1117,7 +1116,6 @@ namespace FingerprintPro.ServerSdk.Test.Api
 
                 Assert.That(response.Events.Count, Is.EqualTo(1));
             });
-
         }
 
         [Test]
