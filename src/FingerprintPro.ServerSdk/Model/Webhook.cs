@@ -29,6 +29,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="requestId">Unique identifier of the user's request. (required).</param>
         /// <param name="url">Page URL from which the request was sent. (required).</param>
         /// <param name="ip">IP address of the requesting browser or bot. (required).</param>
+        /// <param name="environmentId">Environment ID of the event..</param>
         /// <param name="tag">tag.</param>
         /// <param name="time">Time expressed according to ISO 8601 in UTC format, when the request from the JS agent was made. We recommend to treat requests that are older than 2 minutes as malicious. Otherwise, request replay attacks are possible. (required).</param>
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
@@ -67,7 +68,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="velocity">velocity.</param>
         /// <param name="developerTools">developerTools.</param>
         /// <param name="mitmAttack">mitmAttack.</param>
-        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack))
+        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack))
         {
             // to ensure "requestId" is required (not null)
             // swagger debug: Webhook RequestId
@@ -124,6 +125,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Timestamp = timestamp;
             }
+            this.EnvironmentId = environmentId;
             this.Tag = tag;
             this.IpLocation = ipLocation;
             this.LinkedId = linkedId;
@@ -185,6 +187,14 @@ namespace FingerprintPro.ServerSdk.Model
         [DataMember(Name = "ip", EmitDefaultValue = false)]
         [JsonPropertyName("ip")]
         public string Ip { get; set; }
+
+        /// <summary>
+        /// Environment ID of the event.
+        /// </summary>
+        /// <value>Environment ID of the event.</value>
+        [DataMember(Name = "environmentId", EmitDefaultValue = false)]
+        [JsonPropertyName("environmentId")]
+        public string EnvironmentId { get; set; }
 
         /// <summary>
         /// Gets or Sets Tag
@@ -469,6 +479,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Ip: ").Append(Ip).Append("\n");
+            sb.Append("  EnvironmentId: ").Append(EnvironmentId).Append("\n");
             sb.Append("  Tag: ").Append(Tag).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
@@ -545,6 +556,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Ip == input.Ip ||
                 (this.Ip != null &&
                 this.Ip.Equals(input.Ip))
+                ) &&
+                (
+                this.EnvironmentId == input.EnvironmentId ||
+                (this.EnvironmentId != null &&
+                this.EnvironmentId.Equals(input.EnvironmentId))
                 ) &&
                 (
                 this.Tag == input.Tag ||
@@ -753,6 +769,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
                 if (this.Ip != null)
                     hashCode = hashCode * 59 + this.Ip.GetHashCode();
+                if (this.EnvironmentId != null)
+                    hashCode = hashCode * 59 + this.EnvironmentId.GetHashCode();
                 if (this.Tag != null)
                     hashCode = hashCode * 59 + this.Tag.GetHashCode();
                 if (this.Time != null)
