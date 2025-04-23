@@ -1,3 +1,4 @@
+using System.Globalization;
 using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
 using System.Net.Http;
@@ -90,7 +91,8 @@ public class FingerprintApi : IFingerprintApi
 
     #region GetVisits
 
-    public async Task<VisitorsGetResponse> GetVisitsAsync(string visitorId, string? requestId = null, string? linkedId = null,
+    public async Task<VisitorsGetResponse> GetVisitsAsync(string visitorId, string? requestId = null,
+        string? linkedId = null,
         int? limit = null,
         string? paginationKey = null, long? before = null)
     {
@@ -150,7 +152,8 @@ public class FingerprintApi : IFingerprintApi
         return _apiClient.DoRequest<VisitorsGetResponse>(request);
     }
 
-    public VisitorsGetResponse GetVisits(string visitorId, string? requestId = null, string? linkedId = null, int? limit = null,
+    public VisitorsGetResponse GetVisits(string visitorId, string? requestId = null, string? linkedId = null,
+        int? limit = null,
         string? paginationKey = null, long? before = null)
     {
         return GetVisitsWithHttpInfo(visitorId, requestId, linkedId, limit, paginationKey, before).Data;
@@ -237,23 +240,55 @@ public class FingerprintApi : IFingerprintApi
 
     #region SearchEvents
 
-    public SearchEventsResponse SearchEvents(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public SearchEventsResponse SearchEvents(int? limit, string paginationKey = null!, string visitorId = null!,
+        string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!,
+        bool? reverse = null!, bool? suspect = null!, bool? vpn = null!, bool? virtualMachine = null!,
+        bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
+        bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
+        bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
+        float? minSuspectScore = null!)
     {
-        return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Data;
+        return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse,
+            suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida,
+            factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore).Data;
     }
 
-    public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!,
+        string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!,
+        long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!, bool? vpn = null!,
+        bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
+        bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
+        bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
+        float? minSuspectScore = null!)
     {
-        return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect).Result;
+        return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end,
+            reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken,
+            frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore).Result;
     }
 
-    public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!,
+        string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!,
+        long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!, bool? vpn = null!,
+        bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
+        bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
+        bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
+        float? minSuspectScore = null!)
     {
-        var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect);
+        var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId,
+            start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings,
+            jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore);
         return response.Data;
     }
 
-    public Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit, string paginationKey = null!, string visitorId = null!, string bot = null!, string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!, bool? reverse = null!, bool? suspect = null!)
+    public Task<ApiResponse<SearchEventsResponse>> SearchEventsAsyncWithHttpInfo(int? limit,
+        string paginationKey = null!, string visitorId = null!, string bot = null!,
+        string ipAddress = null!, string linkedId = null!, long? start = null!, long? end = null!,
+        bool? reverse = null!, bool? suspect = null!,
+        bool? vpn = null!, bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!,
+        bool? incognito = null!,
+        bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
+        bool? clonedApp = null!,
+        bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!)
     {
         var definition = new SearchEventsDefinition();
         var queryParams = new Dictionary<string, string>()
@@ -265,37 +300,115 @@ public class FingerprintApi : IFingerprintApi
         {
             queryParams.Add("pagination_key", paginationKey);
         }
+
         if (!string.IsNullOrEmpty(visitorId))
         {
             queryParams.Add("visitor_id", visitorId);
         }
+
         if (!string.IsNullOrEmpty(bot))
         {
             queryParams.Add("bot", bot);
         }
+
         if (!string.IsNullOrEmpty(ipAddress))
         {
             queryParams.Add("ip_address", ipAddress);
         }
+
         if (!string.IsNullOrEmpty(linkedId))
         {
             queryParams.Add("linked_id", linkedId);
         }
+
         if (start != null)
         {
             queryParams.Add("start", start.ToString());
         }
+
         if (end != null)
         {
             queryParams.Add("end", end.ToString());
         }
+
         if (reverse != null)
         {
             queryParams.Add("reverse", reverse.ToString());
         }
+
         if (suspect != null)
         {
-            queryParams.Add("suspect", suspect.ToString());
+            queryParams.Add("suspect", suspect.ToString()!);
+        }
+
+        if (vpn != null)
+        {
+            queryParams.Add("vpn", vpn.ToString());
+        }
+
+        if (virtualMachine != null)
+        {
+            queryParams.Add("virtual_machine", virtualMachine.ToString());
+        }
+
+        if (tampering != null)
+        {
+            queryParams.Add("tampering", tampering.ToString());
+        }
+
+        if (antiDetectBrowser != null)
+        {
+            queryParams.Add("anti_detect_browser", antiDetectBrowser.ToString());
+        }
+
+        if (incognito != null)
+        {
+            queryParams.Add("incognito", incognito.ToString());
+        }
+
+        if (privacySettings != null)
+        {
+            queryParams.Add("privacy_settings", privacySettings.ToString());
+        }
+
+        if (jailbroken != null)
+        {
+            queryParams.Add("jailbroken", jailbroken.ToString());
+        }
+
+        if (frida != null)
+        {
+            queryParams.Add("frida", frida.ToString());
+        }
+
+        if (factoryReset != null)
+        {
+            queryParams.Add("factory_reset", factoryReset.ToString());
+        }
+
+        if (clonedApp != null)
+        {
+            queryParams.Add("cloned_app", clonedApp.ToString());
+        }
+
+        if (emulator != null)
+        {
+            queryParams.Add("emulator", emulator.ToString());
+        }
+
+        if (rootApps != null)
+        {
+            queryParams.Add("root_apps", rootApps.ToString());
+        }
+
+        if (!string.IsNullOrEmpty(vpnConfidence))
+        {
+            queryParams.Add("vpn_confidence", vpnConfidence);
+        }
+
+        if (minSuspectScore != null)
+        {
+            queryParams.Add("min_suspect_score", string.Format(CultureInfo.InvariantCulture, "{0:F}", minSuspectScore));
         }
 
         var request = new ApiRequest
