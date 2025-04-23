@@ -1,5 +1,16 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.4.0-test.0
+
+### Minor Changes
+
+- **events-search**: Event search now supports a new set of filter parameters: `vpn`, `virtual_machine`, `tampering`, `anti_detect_browser`, `incognito`, `privacy_settings`, `jailbroken`, `frida`, `factory_reset`, `cloned_app`, `emulator`, `root_apps`, `vpn_confidence`, `min_suspect_score`. ([27fda6d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/27fda6d2ca5377d17efb5ccb99b691d5c1e3696b))
+
+### Patch Changes
+
+- **events**: Update Tampering descriptions to reflect Android support. ([27fda6d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/27fda6d2ca5377d17efb5ccb99b691d5c1e3696b))
+- **webhook**: Add `environmentId` property ([27fda6d](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/27fda6d2ca5377d17efb5ccb99b691d5c1e3696b))
+
 ## 7.3.0
 
 ### Minor Changes
