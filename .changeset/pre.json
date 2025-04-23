@@ -4,5 +4,9 @@
   "initialVersions": {
     "fingerprint-pro-server-api-dotnet-sdk": "7.3.0"
   },
-  "changesets": []
+  "changesets": [
+    "fuzzy-pumas-end",
+    "sharp-chicken-yawn",
+    "thick-clouds-ring"
+  ]
 }
