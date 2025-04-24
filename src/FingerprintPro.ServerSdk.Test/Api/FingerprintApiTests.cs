@@ -1034,6 +1034,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string vpnConfidence = "high";
             const float minSuspectScore = 0.7f;
             const string encodedMinSuspectScore = "0.70";
+            const bool ipBlocklist = false;
+            const bool datacenter = false;
 
             var response = _instance!.SearchEventsWithHttpInfo(
                 limit: limit,
@@ -1059,7 +1061,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 emulator: emulator,
                 rootApps: rootApps,
                 vpnConfidence: vpnConfidence,
-                minSuspectScore: minSuspectScore
+                minSuspectScore: minSuspectScore,
+                ipBlocklist: ipBlocklist,
+                datacenter: datacenter
             );
 
             Assert.Multiple(() =>
@@ -1073,7 +1077,7 @@ namespace FingerprintPro.ServerSdk.Test.Api
                     Is.EqualTo($"Swagger-Codegen/{Configuration.Version}/csharp"));
 
                 var queryParams =
-                    $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}";
+                    $"limit={limit}&pagination_key={paginationKey}&visitor_id={visitorId}&bot={bot}&ip_address={encodedIpAddress}&linked_id={linkedId}&start={start}&end={end}&reverse={reverse}&suspect={suspect}&vpn={vpn}&virtual_machine={virtualMachine}&tampering={tampering}&anti_detect_browser={antiDetectBrowser}&incognito={incognito}&privacy_settings={privacySettings}&jailbroken={jailbroken}&frida={frida}&factory_reset={factoryReset}&cloned_app={clonedApp}&emulator={emulator}&root_apps={rootApps}&vpn_confidence={vpnConfidence}&min_suspect_score={encodedMinSuspectScore}&ip_blocklist={ipBlocklist}&datacenter={datacenter}";
                 Assert.That(request.Url?.ToString(),
                     Is.EqualTo(
                         $"http://127.0.0.1:8080/events/search?ii=fingerprint-pro-server-api-dotnet-sdk%2f{Configuration.Version}&{queryParams}&api_key=123"));
