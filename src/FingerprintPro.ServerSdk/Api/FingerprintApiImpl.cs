@@ -246,11 +246,11 @@ public class FingerprintApi : IFingerprintApi
         bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
     {
         return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse,
             suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida,
-            factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore).Data;
+            factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter).Data;
     }
 
     public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!,
@@ -259,11 +259,11 @@ public class FingerprintApi : IFingerprintApi
         bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
     {
         return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end,
             reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken,
-            frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore).Result;
+            frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter).Result;
     }
 
     public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!,
@@ -272,7 +272,7 @@ public class FingerprintApi : IFingerprintApi
         bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
     {
         var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId,
             start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings,
@@ -288,7 +288,8 @@ public class FingerprintApi : IFingerprintApi
         bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!,
-        bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!)
+        bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!,
+        bool? ipBlocklist = null!, bool? datacenter = null!)
     {
         var definition = new SearchEventsDefinition();
         var queryParams = new Dictionary<string, string>()
@@ -409,6 +410,16 @@ public class FingerprintApi : IFingerprintApi
         if (minSuspectScore != null)
         {
             queryParams.Add("min_suspect_score", string.Format(CultureInfo.InvariantCulture, "{0:F}", minSuspectScore));
+        }
+
+        if (ipBlocklist != null)
+        {
+            queryParams.Add("ip_blocklist", ipBlocklist.ToString());
+        }
+
+        if (datacenter != null)
+        {
+            queryParams.Add("datacenter", datacenter.ToString());
         }
 
         var request = new ApiRequest

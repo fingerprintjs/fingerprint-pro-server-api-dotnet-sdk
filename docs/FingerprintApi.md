@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 <a name="searchevents"></a>
 # **SearchEvents**
-> SearchEventsResponse SearchEvents (int? limit, string paginationKey = null, string visitorId = null, string bot = null, string ipAddress = null, string linkedId = null, long? start = null, long? end = null, bool? reverse = null, bool? suspect = null, bool? vpn = null, bool? virtualMachine = null, bool? tampering = null, bool? antiDetectBrowser = null, bool? incognito = null, bool? privacySettings = null, bool? jailbroken = null, bool? frida = null, bool? factoryReset = null, bool? clonedApp = null, bool? emulator = null, bool? rootApps = null, string vpnConfidence = null, float? minSuspectScore = null)
+> SearchEventsResponse SearchEvents (int? limit, string paginationKey = null, string visitorId = null, string bot = null, string ipAddress = null, string linkedId = null, long? start = null, long? end = null, bool? reverse = null, bool? suspect = null, bool? vpn = null, bool? virtualMachine = null, bool? tampering = null, bool? antiDetectBrowser = null, bool? incognito = null, bool? privacySettings = null, bool? jailbroken = null, bool? frida = null, bool? factoryReset = null, bool? clonedApp = null, bool? emulator = null, bool? rootApps = null, string vpnConfidence = null, float? minSuspectScore = null, bool? ipBlocklist = null, bool? datacenter = null)
 
 Get events via search
 
@@ -312,11 +312,13 @@ namespace Example
             var rootApps = true;  // bool? | Filter events by Rooted Device Detection result.   > Note: When using this parameter, only events with the `products.rootApps.data.result` property set to `true` or `false` are returned. Events without a `products.rootApps` Smart Signal result are left out of the response.  (optional) 
             var vpnConfidence = vpnConfidence_example;  // string | Filter events by VPN Detection result confidence level.   `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `products.vpn.data.confidence` property set to a valid value are returned. Events without a `products.vpn` Smart Signal result are left out of the response.  (optional) 
             var minSuspectScore = 3.4;  // float? | Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `products.suspectScore.data.result` property set to a value exceeding your threshold are returned. Events without a `products.suspectScore` Smart Signal result are left out of the response.  (optional) 
+            var ipBlocklist = true;  // bool? | Filter events by IP Blocklist Detection result.   > Note: When using this parameter, only events with the `products.ipBlocklist.data.result` property set to `true` or `false` are returned. Events without a `products.ipBlocklist` Smart Signal result are left out of the response.  (optional) 
+            var datacenter = true;  // bool? | Filter events by Datacenter Detection result.   > Note: When using this parameter, only events with the `products.ipInfo.data.v4.datacenter.result` or `products.ipInfo.data.v6.datacenter.result` property set to `true` or `false` are returned. Events without a `products.ipInfo` Smart Signal result are left out of the response.  (optional) 
 
             try
             {
                 // Get events via search
-                SearchEventsResponse result = apiInstance.SearchEvents(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore);
+                SearchEventsResponse result = apiInstance.SearchEvents(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -356,6 +358,8 @@ Name | Type | Description  | Notes
  **rootApps** | **bool?**| Filter events by Rooted Device Detection result.   > Note: When using this parameter, only events with the `products.rootApps.data.result` property set to `true` or `false` are returned. Events without a `products.rootApps` Smart Signal result are left out of the response.  | [optional] 
  **vpnConfidence** | **string**| Filter events by VPN Detection result confidence level.   `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `products.vpn.data.confidence` property set to a valid value are returned. Events without a `products.vpn` Smart Signal result are left out of the response.  | [optional] 
  **minSuspectScore** | **float?**| Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `products.suspectScore.data.result` property set to a value exceeding your threshold are returned. Events without a `products.suspectScore` Smart Signal result are left out of the response.  | [optional] 
+ **ipBlocklist** | **bool?**| Filter events by IP Blocklist Detection result.   > Note: When using this parameter, only events with the `products.ipBlocklist.data.result` property set to `true` or `false` are returned. Events without a `products.ipBlocklist` Smart Signal result are left out of the response.  | [optional] 
+ **datacenter** | **bool?**| Filter events by Datacenter Detection result.   > Note: When using this parameter, only events with the `products.ipInfo.data.v4.datacenter.result` or `products.ipInfo.data.v6.datacenter.result` property set to `true` or `false` are returned. Events without a `products.ipInfo` Smart Signal result are left out of the response.  | [optional] 
 
 ### Return type
 
