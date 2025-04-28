@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.4.0-test.1
+
+### Minor Changes
+
+- **events-search**: Event search now supports two new filter parameters: `ip_blocklist`, `datacenter` ([7535359](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/75353590af9435c06db46c64ae50f01a453d7304))
+
 ## 7.4.0-test.0
 
 ### Minor Changes
