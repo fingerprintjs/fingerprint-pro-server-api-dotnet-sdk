@@ -1,7 +1,7 @@
 /*
- * Fingerprint Pro Server API
+ * Fingerprint Server API
  *
- * Fingerprint Pro Server API allows you to get information about visitors and about individual events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
+ * Fingerprint Server API allows you to search, update, and delete identification events in a server environment. This API can be used for data exports, decision-making, and data analysis scenarios.
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
