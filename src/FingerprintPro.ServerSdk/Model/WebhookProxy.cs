@@ -26,19 +26,28 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookProxy" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request IP address is used by a public proxy provider, `false` otherwise. .</param>
-        public WebhookProxy(bool? result = default(bool?))
+        /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy .</param>
+        /// <param name="confidence">confidence.</param>
+        public WebhookProxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence))
         {
             this.Result = result;
+            this.Confidence = confidence;
         }
 
         /// <summary>
-        /// `true` if the request IP address is used by a public proxy provider, `false` otherwise. 
+        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
         /// </summary>
-        /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
+        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         [JsonPropertyName("result")]
         public bool? Result { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Confidence
+        /// </summary>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public ProxyConfidence Confidence { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -49,6 +58,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class WebhookProxy {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -77,6 +87,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result == input.Result ||
                 (this.Result != null &&
                 this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
                 );
         }
 
@@ -91,6 +106,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
                 return hashCode;
             }
         }

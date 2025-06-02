@@ -284,6 +284,7 @@ Class | Method | HTTP request | Description
  - [Model.ProductVirtualMachine](docs/ProductVirtualMachine.md)
  - [Model.Products](docs/Products.md)
  - [Model.Proxy](docs/Proxy.md)
+ - [Model.ProxyConfidence](docs/ProxyConfidence.md)
  - [Model.RawDeviceAttribute](docs/RawDeviceAttribute.md)
  - [Model.RawDeviceAttributeError](docs/RawDeviceAttributeError.md)
  - [Model.RawDeviceAttributes](docs/RawDeviceAttributes.md)
