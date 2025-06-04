@@ -26,8 +26,9 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Proxy" /> class.
         /// </summary>
-        /// <param name="result">`true` if the request IP address is used by a public proxy provider, `false` otherwise.  (required).</param>
-        public Proxy(bool? result = default(bool?))
+        /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy  (required).</param>
+        /// <param name="confidence">confidence (required).</param>
+        public Proxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence))
         {
             // to ensure "result" is required (not null)
             // swagger debug: Proxy Result
@@ -40,15 +41,33 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Result = result;
             }
+            // to ensure "confidence" is required (not null)
+            // swagger debug: Proxy Confidence
+
+            if (confidence == null)
+            {
+                throw new InvalidDataException("confidence is a required property for Proxy and cannot be null");
+            }
+            else
+            {
+                this.Confidence = confidence;
+            }
         }
 
         /// <summary>
-        /// `true` if the request IP address is used by a public proxy provider, `false` otherwise. 
+        /// IP address was used by a public proxy provider or belonged to a known recent residential proxy 
         /// </summary>
-        /// <value>`true` if the request IP address is used by a public proxy provider, `false` otherwise. </value>
+        /// <value>IP address was used by a public proxy provider or belonged to a known recent residential proxy </value>
         [DataMember(Name = "result", EmitDefaultValue = false)]
         [JsonPropertyName("result")]
         public bool? Result { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Confidence
+        /// </summary>
+        [DataMember(Name = "confidence", EmitDefaultValue = false)]
+        [JsonPropertyName("confidence")]
+        public ProxyConfidence Confidence { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,6 +78,7 @@ namespace FingerprintPro.ServerSdk.Model
             var sb = new StringBuilder();
             sb.Append("class Proxy {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
+            sb.Append("  Confidence: ").Append(Confidence).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -87,6 +107,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Result == input.Result ||
                 (this.Result != null &&
                 this.Result.Equals(input.Result))
+                ) &&
+                (
+                this.Confidence == input.Confidence ||
+                (this.Confidence != null &&
+                this.Confidence.Equals(input.Confidence))
                 );
         }
 
@@ -101,6 +126,8 @@ namespace FingerprintPro.ServerSdk.Model
                 int hashCode = 41;
                 if (this.Result != null)
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
+                if (this.Confidence != null)
+                    hashCode = hashCode * 59 + this.Confidence.GetHashCode();
                 return hashCode;
             }
         }
