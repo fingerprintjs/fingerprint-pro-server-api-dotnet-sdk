@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.5.0
+
+### Minor Changes
+
+- Add `confidence` property to the Proxy detection Smart Signal, which now supports both residential and public web proxies. ([2c63338](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/2c6333851112f4a274e2d338ac5198ce8ada8f94))
+
 ## 7.4.0
 
 ### Minor Changes
