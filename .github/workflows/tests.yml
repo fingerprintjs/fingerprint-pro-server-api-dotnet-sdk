@@ -9,6 +9,12 @@ on:
     - cron: '0 5 * * *'
 
 jobs:
+  set_datadog_team:
+    name: 'Set Datadog team'
+    uses: fingerprintjs/dx-team-toolkit/.github/workflows/set-datadog-team.yml@v1
+    secrets:
+      DD_API_KEY: ${{ secrets.INTEGRATIONS_DATADOG_API_KEY }}
+
   tests:
     name: Unit and functional tests on ${{ matrix.os }} (dotnet ${{ matrix.dotnet-version }})
     runs-on: ${{ matrix.os }}
@@ -38,13 +44,3 @@ jobs:
         run: dotnet test
         env:
           SECRET_API_KEY: ${{ secrets.API_KEY }}
-
-  report-status:
-    needs: tests
-    if: always()
-    uses: fingerprintjs/dx-team-toolkit/.github/workflows/report-workflow-status.yml@v1
-    with:
-      notification_title: 'dotnet SDK Tests has {status_message}'
-      job_status: ${{ needs.tests.result }}
-    secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
