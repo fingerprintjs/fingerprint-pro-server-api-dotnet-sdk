@@ -43,7 +43,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
         /// <param name="components">components.</param>
-        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes))
+        /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
+        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes), bool? replayed = default(bool?))
         {
             // to ensure "visitorId" is required (not null)
             // swagger debug: Identification VisitorId
@@ -182,6 +183,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.Suspect = suspect;
             this.Confidence = confidence;
             this.Components = components;
+            this.Replayed = replayed;
         }
 
         /// <summary>
@@ -314,6 +316,14 @@ namespace FingerprintPro.ServerSdk.Model
         public RawDeviceAttributes Components { get; set; }
 
         /// <summary>
+        /// `true` if we determined that this payload was replayed, `false` otherwise. 
+        /// </summary>
+        /// <value>`true` if we determined that this payload was replayed, `false` otherwise. </value>
+        [DataMember(Name = "replayed", EmitDefaultValue = false)]
+        [JsonPropertyName("replayed")]
+        public bool? Replayed { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -338,6 +348,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  FirstSeenAt: ").Append(FirstSeenAt).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
             sb.Append("  Components: ").Append(Components).Append("\n");
+            sb.Append("  Replayed: ").Append(Replayed).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -446,6 +457,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Components == input.Components ||
                 (this.Components != null &&
                 this.Components.Equals(input.Components))
+                ) &&
+                (
+                this.Replayed == input.Replayed ||
+                (this.Replayed != null &&
+                this.Replayed.Equals(input.Replayed))
                 );
         }
 
@@ -492,6 +508,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.LastSeenAt.GetHashCode();
                 if (this.Components != null)
                     hashCode = hashCode * 59 + this.Components.GetHashCode();
+                if (this.Replayed != null)
+                    hashCode = hashCode * 59 + this.Replayed.GetHashCode();
                 return hashCode;
             }
         }
