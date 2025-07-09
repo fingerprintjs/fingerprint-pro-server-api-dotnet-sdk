@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.6.0
+
+### Minor Changes
+
+- add `replayed` field to `identification` in Events and Webhooks ([0c6c173](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/0c6c173b943f38f36b9d3a419dbe7c3fc932ebbb))
+
 ## 7.5.0
 
 ### Minor Changes
