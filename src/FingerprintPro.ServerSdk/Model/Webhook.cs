@@ -69,7 +69,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="developerTools">developerTools.</param>
         /// <param name="mitmAttack">mitmAttack.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
-        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), bool? replayed = default(bool?))
+        /// <param name="sdk">sdk (required).</param>
+        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), bool? replayed = default(bool?), SDK sdk = default(SDK))
         {
             // to ensure "requestId" is required (not null)
             // swagger debug: Webhook RequestId
@@ -125,6 +126,17 @@ namespace FingerprintPro.ServerSdk.Model
             else
             {
                 this.Timestamp = timestamp;
+            }
+            // to ensure "sdk" is required (not null)
+            // swagger debug: Webhook Sdk
+
+            if (sdk == null)
+            {
+                throw new InvalidDataException("sdk is a required property for Webhook and cannot be null");
+            }
+            else
+            {
+                this.Sdk = sdk;
             }
             this.EnvironmentId = environmentId;
             this.Tag = tag;
@@ -479,6 +491,13 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Replayed { get; set; }
 
         /// <summary>
+        /// Gets or Sets Sdk
+        /// </summary>
+        [DataMember(Name = "sdk", EmitDefaultValue = false)]
+        [JsonPropertyName("sdk")]
+        public SDK Sdk { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -529,6 +548,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  MitmAttack: ").Append(MitmAttack).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
+            sb.Append("  Sdk: ").Append(Sdk).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -767,6 +787,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Replayed == input.Replayed ||
                 (this.Replayed != null &&
                 this.Replayed.Equals(input.Replayed))
+                ) &&
+                (
+                this.Sdk == input.Sdk ||
+                (this.Sdk != null &&
+                this.Sdk.Equals(input.Sdk))
                 );
         }
 
@@ -865,6 +890,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.MitmAttack.GetHashCode();
                 if (this.Replayed != null)
                     hashCode = hashCode * 59 + this.Replayed.GetHashCode();
+                if (this.Sdk != null)
+                    hashCode = hashCode * 59 + this.Sdk.GetHashCode();
                 return hashCode;
             }
         }

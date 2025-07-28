@@ -43,8 +43,9 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="firstSeenAt">firstSeenAt (required).</param>
         /// <param name="lastSeenAt">lastSeenAt (required).</param>
         /// <param name="components">components.</param>
-        /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
-        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes), bool? replayed = default(bool?))
+        /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise.  (required).</param>
+        /// <param name="sdk">sdk.</param>
+        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes), bool? replayed = default(bool?), SDK sdk = default(SDK))
         {
             // to ensure "visitorId" is required (not null)
             // swagger debug: Identification VisitorId
@@ -178,12 +179,23 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.LastSeenAt = lastSeenAt;
             }
+            // to ensure "replayed" is required (not null)
+            // swagger debug: Identification Replayed
+
+            if (replayed == null)
+            {
+                throw new InvalidDataException("replayed is a required property for Identification and cannot be null");
+            }
+            else
+            {
+                this.Replayed = replayed;
+            }
             this.IpLocation = ipLocation;
             this.LinkedId = linkedId;
             this.Suspect = suspect;
             this.Confidence = confidence;
             this.Components = components;
-            this.Replayed = replayed;
+            this.Sdk = sdk;
         }
 
         /// <summary>
@@ -324,6 +336,13 @@ namespace FingerprintPro.ServerSdk.Model
         public bool? Replayed { get; set; }
 
         /// <summary>
+        /// Gets or Sets Sdk
+        /// </summary>
+        [DataMember(Name = "sdk", EmitDefaultValue = false)]
+        [JsonPropertyName("sdk")]
+        public SDK Sdk { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -349,6 +368,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
             sb.Append("  Components: ").Append(Components).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
+            sb.Append("  Sdk: ").Append(Sdk).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -462,6 +482,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Replayed == input.Replayed ||
                 (this.Replayed != null &&
                 this.Replayed.Equals(input.Replayed))
+                ) &&
+                (
+                this.Sdk == input.Sdk ||
+                (this.Sdk != null &&
+                this.Sdk.Equals(input.Sdk))
                 );
         }
 
@@ -510,6 +535,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Components.GetHashCode();
                 if (this.Replayed != null)
                     hashCode = hashCode * 59 + this.Replayed.GetHashCode();
+                if (this.Sdk != null)
+                    hashCode = hashCode * 59 + this.Sdk.GetHashCode();
                 return hashCode;
             }
         }

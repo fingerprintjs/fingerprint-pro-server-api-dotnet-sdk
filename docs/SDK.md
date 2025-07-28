@@ -1,12 +1,12 @@
-# FingerprintPro.ServerSdk.Model.WebhookRemoteControl
-This signal is deprecated.
-
+# FingerprintPro.ServerSdk.Model.SDK
+Contains information about the SDK used to perform the request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Result** | **bool?** | `true` if the request came from a machine being remotely controlled (e.g. TeamViewer), `false` otherwise.  | [optional] 
+**Platform** | **string** | Platform of the SDK. | 
+**Version** | **string** | SDK version string. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
