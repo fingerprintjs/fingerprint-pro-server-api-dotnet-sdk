@@ -1,6 +1,7 @@
 /// <summary>
     /// {{#description}}{{{.}}}{{/description}}{{^description}}{{classname}}{{/description}}
-    /// </summary>
+    /// </summary>{{#schema.deprecated}}
+[Obsolete]{{/schema.deprecated}}
 [DataContract]
 {{#discriminator}}
     [JsonConverter(typeof(JsonSubtypes), "{{discriminator.propertyName}}")]{{#children}}

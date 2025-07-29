@@ -16,8 +16,9 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// ProductRemoteControl
+    /// This product is deprecated. 
     /// </summary>
+    [Obsolete]
     [DataContract]
     public class ProductRemoteControl : IEquatable<ProductRemoteControl>
     {

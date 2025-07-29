@@ -16,8 +16,9 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// RemoteControl
+    /// This signal is deprecated. 
     /// </summary>
+    [Obsolete]
     [DataContract]
     public class RemoteControl : IEquatable<RemoteControl>
     {
