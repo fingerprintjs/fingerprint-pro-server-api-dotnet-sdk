@@ -18,6 +18,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// <summary>
     /// This signal is deprecated. 
     /// </summary>
+    [Obsolete]
     [DataContract]
     public class RemoteControl : IEquatable<RemoteControl>
     {

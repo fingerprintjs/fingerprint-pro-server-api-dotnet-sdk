@@ -18,6 +18,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// <summary>
     /// This field is **deprecated** and will not return a result for **applications created after January 23rd, 2024**.  Please use the [IP Geolocation Smart signal](https://dev.fingerprint.com/docs/smart-signals-overview#ip-geolocation) for geolocation information.
     /// </summary>
+    [Obsolete]
     [DataContract]
     public class DeprecatedGeolocation : IEquatable<DeprecatedGeolocation>
     {

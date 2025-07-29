@@ -18,6 +18,7 @@ namespace FingerprintPro.ServerSdk.Model
     /// <summary>
     /// This product is deprecated. 
     /// </summary>
+    [Obsolete]
     [DataContract]
     public class ProductRemoteControl : IEquatable<ProductRemoteControl>
     {
