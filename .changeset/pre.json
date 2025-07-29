@@ -4,5 +4,9 @@
   "initialVersions": {
     "fingerprint-pro-server-api-dotnet-sdk": "7.6.0"
   },
-  "changesets": []
+  "changesets": [
+    "dark-dogs-play",
+    "sharp-facts-boil",
+    "ten-plums-tickle"
+  ]
 }
