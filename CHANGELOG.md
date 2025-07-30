@@ -1,5 +1,16 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.7.0
+
+### Minor Changes
+
+- Mark `replayed` field required in the `identification` product schema. This field will always be present. ([9088e89](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/9088e8942fbaa8aae4bebe75810cec2c0c18a4d7))
+- Add `sdk` field with platform metadata to `identification` ([9088e89](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/9088e8942fbaa8aae4bebe75810cec2c0c18a4d7))
+
+### Patch Changes
+
+- Deprecate the Remote Control Detection Smart Signal. This signal is no longer available. ([9088e89](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/9088e8942fbaa8aae4bebe75810cec2c0c18a4d7))
+
 ## 7.7.0-test.0
 
 ### Minor Changes
