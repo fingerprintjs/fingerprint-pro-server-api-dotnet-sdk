@@ -28,7 +28,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="result">IP address was used by a public proxy provider or belonged to a known recent residential proxy  (required).</param>
         /// <param name="confidence">confidence (required).</param>
-        public Proxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence))
+        /// <param name="details">details.</param>
+        public Proxy(bool? result = default(bool?), ProxyConfidence confidence = default(ProxyConfidence), ProxyDetails details = default(ProxyDetails))
         {
             // to ensure "result" is required (not null)
             // swagger debug: Proxy Result
@@ -52,6 +53,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Confidence = confidence;
             }
+            this.Details = details;
         }
 
         /// <summary>
@@ -70,6 +72,13 @@ namespace FingerprintPro.ServerSdk.Model
         public ProxyConfidence Confidence { get; set; }
 
         /// <summary>
+        /// Gets or Sets Details
+        /// </summary>
+        [DataMember(Name = "details", EmitDefaultValue = false)]
+        [JsonPropertyName("details")]
+        public ProxyDetails Details { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -79,6 +88,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class Proxy {\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  Confidence: ").Append(Confidence).Append("\n");
+            sb.Append("  Details: ").Append(Details).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,6 +122,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Confidence == input.Confidence ||
                 (this.Confidence != null &&
                 this.Confidence.Equals(input.Confidence))
+                ) &&
+                (
+                this.Details == input.Details ||
+                (this.Details != null &&
+                this.Details.Equals(input.Details))
                 );
         }
 
@@ -128,6 +143,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Result.GetHashCode();
                 if (this.Confidence != null)
                     hashCode = hashCode * 59 + this.Confidence.GetHashCode();
+                if (this.Details != null)
+                    hashCode = hashCode * 59 + this.Details.GetHashCode();
                 return hashCode;
             }
         }

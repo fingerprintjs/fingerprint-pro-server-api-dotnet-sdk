@@ -290,7 +290,10 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 Assert.That(response.Products.IpBlocklist.Data.Details.EmailSpam, Is.False);
                 Assert.That(response.Products.Jailbroken.Data.Result, Is.False);
                 Assert.That(response.Products.PrivacySettings.Data.Result, Is.False);
-                Assert.That(response.Products.Proxy.Data.Result, Is.False);
+                Assert.That(response.Products.Proxy.Data.Result, Is.True);
+                Assert.That(response.Products.Proxy.Data.Details, Is.Not.Null);
+                Assert.That(response.Products.Proxy.Data.Details.ProxyType, Is.EqualTo(ProxyDetails.ProxyTypeEnum.Residential));
+                Assert.That(response.Products.Proxy.Data.Details.LastSeenAt, Is.InstanceOf<DateTime>());
                 Assert.That(response.Products.RootApps.Data.Result, Is.False);
                 Assert.That(response.Products.Tampering.Data.Result, Is.False);
                 Assert.That(response.Products.Tor.Data.Result, Is.False);
