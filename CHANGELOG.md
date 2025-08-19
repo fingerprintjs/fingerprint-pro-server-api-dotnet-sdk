@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.8.0
+
+### Minor Changes
+
+- Add `details` object to the `proxy` signal. This field includes the `type` of the detected proxy (`residential` or `data_center`) and the `lastSeenAt` timestamp of when an IP was last observed to show proxy-like behavior. ([458455a](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/458455a9163085ae2a0325308c15a95ef6e19899))
+
 ## 7.7.0
 
 ### Minor Changes
