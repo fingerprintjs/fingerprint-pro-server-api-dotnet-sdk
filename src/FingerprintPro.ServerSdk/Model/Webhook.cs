@@ -35,7 +35,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="timestamp">Timestamp of the event with millisecond precision in Unix time. (required).</param>
         /// <param name="ipLocation">ipLocation.</param>
         /// <param name="linkedId">A customer-provided id that was sent with the request..</param>
-        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser..</param>
+        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser or mobile device..</param>
         /// <param name="visitorFound">Attribute represents if a visitor had been identified before..</param>
         /// <param name="confidence">confidence.</param>
         /// <param name="firstSeenAt">firstSeenAt.</param>
@@ -70,7 +70,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="mitmAttack">mitmAttack.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise. .</param>
         /// <param name="sdk">sdk (required).</param>
-        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), bool? replayed = default(bool?), SDK sdk = default(SDK))
+        /// <param name="supplementaryIds">supplementaryIds.</param>
+        public Webhook(string requestId = default(string), string url = default(string), string ip = default(string), string environmentId = default(string), Tag tag = default(Tag), DateTime? time = default(DateTime?), long? timestamp = default(long?), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), string visitorId = default(string), bool? visitorFound = default(bool?), IdentificationConfidence confidence = default(IdentificationConfidence), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string clientReferrer = default(string), RawDeviceAttributes components = default(RawDeviceAttributes), BotdBot bot = default(BotdBot), string userAgent = default(string), WebhookRootApps rootApps = default(WebhookRootApps), WebhookEmulator emulator = default(WebhookEmulator), WebhookIPInfo ipInfo = default(WebhookIPInfo), WebhookIPBlocklist ipBlocklist = default(WebhookIPBlocklist), WebhookTor tor = default(WebhookTor), WebhookVPN vpn = default(WebhookVPN), WebhookProxy proxy = default(WebhookProxy), WebhookTampering tampering = default(WebhookTampering), WebhookClonedApp clonedApp = default(WebhookClonedApp), WebhookFactoryReset factoryReset = default(WebhookFactoryReset), WebhookJailbroken jailbroken = default(WebhookJailbroken), WebhookFrida frida = default(WebhookFrida), WebhookPrivacySettings privacySettings = default(WebhookPrivacySettings), WebhookVirtualMachine virtualMachine = default(WebhookVirtualMachine), WebhookRawDeviceAttributes rawDeviceAttributes = default(WebhookRawDeviceAttributes), WebhookHighActivity highActivity = default(WebhookHighActivity), WebhookLocationSpoofing locationSpoofing = default(WebhookLocationSpoofing), WebhookSuspectScore suspectScore = default(WebhookSuspectScore), WebhookRemoteControl remoteControl = default(WebhookRemoteControl), WebhookVelocity velocity = default(WebhookVelocity), WebhookDeveloperTools developerTools = default(WebhookDeveloperTools), WebhookMitMAttack mitmAttack = default(WebhookMitMAttack), bool? replayed = default(bool?), SDK sdk = default(SDK), WebhookSupplementaryIDs supplementaryIds = default(WebhookSupplementaryIDs))
         {
             // to ensure "requestId" is required (not null)
             // swagger debug: Webhook RequestId
@@ -176,6 +177,7 @@ namespace FingerprintPro.ServerSdk.Model
             this.DeveloperTools = developerTools;
             this.MitmAttack = mitmAttack;
             this.Replayed = replayed;
+            this.SupplementaryIds = supplementaryIds;
         }
 
         /// <summary>
@@ -249,9 +251,9 @@ namespace FingerprintPro.ServerSdk.Model
         public string LinkedId { get; set; }
 
         /// <summary>
-        /// String of 20 characters that uniquely identifies the visitor's browser.
+        /// String of 20 characters that uniquely identifies the visitor's browser or mobile device.
         /// </summary>
-        /// <value>String of 20 characters that uniquely identifies the visitor's browser.</value>
+        /// <value>String of 20 characters that uniquely identifies the visitor's browser or mobile device.</value>
         [DataMember(Name = "visitorId", EmitDefaultValue = false)]
         [JsonPropertyName("visitorId")]
         public string VisitorId { get; set; }
@@ -498,6 +500,13 @@ namespace FingerprintPro.ServerSdk.Model
         public SDK Sdk { get; set; }
 
         /// <summary>
+        /// Gets or Sets SupplementaryIds
+        /// </summary>
+        [DataMember(Name = "supplementaryIds", EmitDefaultValue = false)]
+        [JsonPropertyName("supplementaryIds")]
+        public WebhookSupplementaryIDs SupplementaryIds { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -549,6 +558,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  MitmAttack: ").Append(MitmAttack).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
             sb.Append("  Sdk: ").Append(Sdk).Append("\n");
+            sb.Append("  SupplementaryIds: ").Append(SupplementaryIds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -792,6 +802,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Sdk == input.Sdk ||
                 (this.Sdk != null &&
                 this.Sdk.Equals(input.Sdk))
+                ) &&
+                (
+                this.SupplementaryIds == input.SupplementaryIds ||
+                (this.SupplementaryIds != null &&
+                this.SupplementaryIds.Equals(input.SupplementaryIds))
                 );
         }
 
@@ -892,6 +907,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Replayed.GetHashCode();
                 if (this.Sdk != null)
                     hashCode = hashCode * 59 + this.Sdk.GetHashCode();
+                if (this.SupplementaryIds != null)
+                    hashCode = hashCode * 59 + this.SupplementaryIds.GetHashCode();
                 return hashCode;
             }
         }
