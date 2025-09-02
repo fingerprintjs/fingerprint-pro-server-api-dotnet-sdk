@@ -58,7 +58,7 @@ namespace FingerprintPro.ServerSdk.Client
         public IReadableConfiguration Configuration { get; set; }
 
         private HttpRequestMessage CreateRequestMessage(HttpMethod method, UriBuilder uri,
-            Dictionary<string, string>? queryParams, HttpContent? body = null)
+            List<KeyValuePair<string, string>>? queryParams, HttpContent? body = null)
         {
             var query = HttpUtility.ParseQueryString(uri.Query);
             query["ii"] = $"fingerprint-pro-server-api-dotnet-sdk/{ServerSdk.Client.Configuration.Version}";
@@ -66,7 +66,7 @@ namespace FingerprintPro.ServerSdk.Client
             {
                 foreach (var param in queryParams)
                 {
-                    query[param.Key] = param.Value;
+                    query.Add(param.Key, param.Value);
                 }
             }
 
