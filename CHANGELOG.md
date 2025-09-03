@@ -1,5 +1,13 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.9.0-test.0
+
+### Minor Changes
+
+- **events-search**: Event search now supports a new set of filter parameters: `developer_tools`, `location_spoofing`, `mitm_attack`, `proxy`, `sdk_version`, `sdk_platform`, `environment` ([f6036c2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/f6036c2f2da9a1c0878c55aa75eda8dc21abe5fd))
+- **webhook**: Add `supplementaryIds` property to the Webhooks schema. ([f6036c2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/f6036c2f2da9a1c0878c55aa75eda8dc21abe5fd))
+- Add `environmentId` property to `identification` ([f6036c2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/f6036c2f2da9a1c0878c55aa75eda8dc21abe5fd))
+
 ## 7.8.0
 
 ### Minor Changes
