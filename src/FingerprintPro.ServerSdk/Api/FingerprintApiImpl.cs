@@ -109,9 +109,6 @@ public class FingerprintApi : IFingerprintApi
             if (value is null) return;
             switch (value)
             {
-                case string s when !string.IsNullOrEmpty(s):
-                    queryParams.Add(new KeyValuePair<string, string>(name, s));
-                    break;
                 case bool b:
                     queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
                     break;
@@ -306,9 +303,6 @@ public class FingerprintApi : IFingerprintApi
             if (value is null) return;
             switch (value)
             {
-                case string s when !string.IsNullOrEmpty(s):
-                    queryParams.Add(new KeyValuePair<string, string>(name, s));
-                    break;
                 case bool b:
                     queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
                     break;
