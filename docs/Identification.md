@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser. | 
+**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser or mobile device. | 
 **RequestId** | **string** | Unique identifier of the user's request. | 
 **BrowserDetails** | [**BrowserDetails**](BrowserDetails.md) |  | 
 **Incognito** | **bool?** | Flag if user used incognito session. | 
@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **Components** | [**RawDeviceAttributes**](RawDeviceAttributes.md) |  | [optional] 
 **Replayed** | **bool?** | `true` if we determined that this payload was replayed, `false` otherwise.  | 
 **Sdk** | [**SDK**](SDK.md) |  | [optional] 
+**EnvironmentId** | **string** | Environment ID associated with the event | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

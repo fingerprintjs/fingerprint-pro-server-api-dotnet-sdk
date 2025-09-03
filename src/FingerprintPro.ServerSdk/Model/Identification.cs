@@ -26,7 +26,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Identification" /> class.
         /// </summary>
-        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser. (required).</param>
+        /// <param name="visitorId">String of 20 characters that uniquely identifies the visitor's browser or mobile device. (required).</param>
         /// <param name="requestId">Unique identifier of the user's request. (required).</param>
         /// <param name="browserDetails">browserDetails (required).</param>
         /// <param name="incognito">Flag if user used incognito session. (required).</param>
@@ -45,7 +45,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="components">components.</param>
         /// <param name="replayed">`true` if we determined that this payload was replayed, `false` otherwise.  (required).</param>
         /// <param name="sdk">sdk.</param>
-        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes), bool? replayed = default(bool?), SDK sdk = default(SDK))
+        /// <param name="environmentId">Environment ID associated with the event.</param>
+        public Identification(string visitorId = default(string), string requestId = default(string), BrowserDetails browserDetails = default(BrowserDetails), bool? incognito = default(bool?), string ip = default(string), DeprecatedGeolocation ipLocation = default(DeprecatedGeolocation), string linkedId = default(string), bool? suspect = default(bool?), long? timestamp = default(long?), DateTime? time = default(DateTime?), string url = default(string), Tag tag = default(Tag), IdentificationConfidence confidence = default(IdentificationConfidence), bool? visitorFound = default(bool?), IdentificationSeenAt firstSeenAt = default(IdentificationSeenAt), IdentificationSeenAt lastSeenAt = default(IdentificationSeenAt), RawDeviceAttributes components = default(RawDeviceAttributes), bool? replayed = default(bool?), SDK sdk = default(SDK), string environmentId = default(string))
         {
             // to ensure "visitorId" is required (not null)
             // swagger debug: Identification VisitorId
@@ -196,12 +197,13 @@ namespace FingerprintPro.ServerSdk.Model
             this.Confidence = confidence;
             this.Components = components;
             this.Sdk = sdk;
+            this.EnvironmentId = environmentId;
         }
 
         /// <summary>
-        /// String of 20 characters that uniquely identifies the visitor's browser.
+        /// String of 20 characters that uniquely identifies the visitor's browser or mobile device.
         /// </summary>
-        /// <value>String of 20 characters that uniquely identifies the visitor's browser.</value>
+        /// <value>String of 20 characters that uniquely identifies the visitor's browser or mobile device.</value>
         [DataMember(Name = "visitorId", EmitDefaultValue = false)]
         [JsonPropertyName("visitorId")]
         public string VisitorId { get; set; }
@@ -343,6 +345,14 @@ namespace FingerprintPro.ServerSdk.Model
         public SDK Sdk { get; set; }
 
         /// <summary>
+        /// Environment ID associated with the event
+        /// </summary>
+        /// <value>Environment ID associated with the event</value>
+        [DataMember(Name = "environmentId", EmitDefaultValue = false)]
+        [JsonPropertyName("environmentId")]
+        public string EnvironmentId { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -369,6 +379,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Components: ").Append(Components).Append("\n");
             sb.Append("  Replayed: ").Append(Replayed).Append("\n");
             sb.Append("  Sdk: ").Append(Sdk).Append("\n");
+            sb.Append("  EnvironmentId: ").Append(EnvironmentId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -487,6 +498,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Sdk == input.Sdk ||
                 (this.Sdk != null &&
                 this.Sdk.Equals(input.Sdk))
+                ) &&
+                (
+                this.EnvironmentId == input.EnvironmentId ||
+                (this.EnvironmentId != null &&
+                this.EnvironmentId.Equals(input.EnvironmentId))
                 );
         }
 
@@ -537,6 +553,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Replayed.GetHashCode();
                 if (this.Sdk != null)
                     hashCode = hashCode * 59 + this.Sdk.GetHashCode();
+                if (this.EnvironmentId != null)
+                    hashCode = hashCode * 59 + this.EnvironmentId.GetHashCode();
                 return hashCode;
             }
         }

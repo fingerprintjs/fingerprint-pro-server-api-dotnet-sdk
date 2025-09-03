@@ -9,7 +9,7 @@ public class ApiRequest
 
     public HttpMethod Method;
 
-    public Dictionary<string, string>? QueryParams;
+    public List<KeyValuePair<string, string>> QueryParams { get; set; } = new();
 
     public HttpContent? Body;
 

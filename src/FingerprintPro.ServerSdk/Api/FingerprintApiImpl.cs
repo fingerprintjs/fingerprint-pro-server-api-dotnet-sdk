@@ -3,7 +3,6 @@ using FingerprintPro.ServerSdk.Client;
 using FingerprintPro.ServerSdk.Model;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using FingerprintPro.ServerSdk.Json;
 
 namespace FingerprintPro.ServerSdk.Api;
@@ -22,6 +21,31 @@ public class FingerprintApi : IFingerprintApi
     {
         _apiClient = new ApiClient(configuration);
     }
+
+    #region Utils
+
+    private void AddQueryParam(List<KeyValuePair<string, string>> queryParams, string name, object? value)
+    {
+        if (value is null) return;
+        switch (value)
+        {
+            case bool b:
+                queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
+                break;
+            case float f:
+                queryParams.Add(new KeyValuePair<string, string>(name, f.ToString("F", CultureInfo.InvariantCulture)));
+                break;
+            case IFormattable formattable:
+                queryParams.Add(new KeyValuePair<string, string>(name, formattable.ToString(null, CultureInfo.InvariantCulture)!));
+                break;
+            default:
+                var str = value.ToString();
+                if (!string.IsNullOrEmpty(str))
+                    queryParams.Add(new KeyValuePair<string, string>(name, str));
+                break;
+        }
+    }
+    #endregion
 
     #region GetEvent
 
@@ -103,42 +127,13 @@ public class FingerprintApi : IFingerprintApi
         string? linkedId = null, int? limit = null,
         string? paginationKey = null, long? before = null)
     {
-        Dictionary<string, string> queryParams = new();
+        var queryParams = new List<KeyValuePair<string, string>>();
 
-        if (!string.IsNullOrEmpty(requestId))
-        {
-            queryParams.Add("request_id", requestId);
-        }
-
-        if (!string.IsNullOrEmpty(linkedId))
-        {
-            queryParams.Add("linked_id", linkedId);
-        }
-
-        if (limit != null)
-        {
-            var limitStr = limit.ToString();
-
-            if (!string.IsNullOrEmpty(limitStr))
-            {
-                queryParams.Add("limit", limitStr);
-            }
-        }
-
-        if (!string.IsNullOrEmpty(paginationKey))
-        {
-            queryParams.Add("paginationKey", paginationKey);
-        }
-
-        if (before != null)
-        {
-            var beforeStr = before.ToString();
-
-            if (!string.IsNullOrEmpty(beforeStr))
-            {
-                queryParams.Add("before", beforeStr);
-            }
-        }
+        AddQueryParam(queryParams, "request_id", requestId);
+        AddQueryParam(queryParams, "linked_id", linkedId);
+        AddQueryParam(queryParams, "limit", limit);
+        AddQueryParam(queryParams, "paginationKey", paginationKey);
+        AddQueryParam(queryParams, "before", before);
 
         var definition = new GetVisitsDefinition();
         var request = new ApiRequest()
@@ -227,9 +222,9 @@ public class FingerprintApi : IFingerprintApi
         {
             OperationDefinition = definition,
             Method = HttpMethod.Get,
-            QueryParams = new Dictionary<string, string>()
+            QueryParams = new List<KeyValuePair<string, string>>
             {
-                { "visitor_id", visitorId }
+                new KeyValuePair<string, string>("visitor_id", visitorId)
             }
         };
 
@@ -246,11 +241,14 @@ public class FingerprintApi : IFingerprintApi
         bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
     {
         return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse,
             suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida,
-            factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter).Data;
+            factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
+            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment).Data;
     }
 
     public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!,
@@ -259,11 +257,14 @@ public class FingerprintApi : IFingerprintApi
         bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
     {
         return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end,
             reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken,
-            frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter).Result;
+            frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
+            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment).Result;
     }
 
     public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!,
@@ -272,11 +273,14 @@ public class FingerprintApi : IFingerprintApi
         bool? virtualMachine = null!, bool? tampering = null!, bool? antiDetectBrowser = null!, bool? incognito = null!,
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
-        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!)
+        float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
+        bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
     {
         var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId,
             start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings,
-            jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore);
+            jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist,
+            datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment);
         return response.Data;
     }
 
@@ -289,137 +293,53 @@ public class FingerprintApi : IFingerprintApi
         bool? privacySettings = null!, bool? jailbroken = null!, bool? frida = null!, bool? factoryReset = null!,
         bool? clonedApp = null!,
         bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!,
-        bool? ipBlocklist = null!, bool? datacenter = null!)
+        bool? ipBlocklist = null!, bool? datacenter = null!, bool? developerTools = null!,
+        bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!, string? sdkVersion = null!,
+        string? sdkPlatform = null!, List<string>? environment = null!)
     {
         var definition = new SearchEventsDefinition();
-        var queryParams = new Dictionary<string, string>()
-        {
-            { "limit", limit.ToString() }
-        };
 
-        if (!string.IsNullOrEmpty(paginationKey))
-        {
-            queryParams.Add("pagination_key", paginationKey);
-        }
+        var queryParams = new List<KeyValuePair<string, string>>();
 
-        if (!string.IsNullOrEmpty(visitorId))
-        {
-            queryParams.Add("visitor_id", visitorId);
-        }
+        AddQueryParam(queryParams, "limit", limit);
+        AddQueryParam(queryParams, "pagination_key", paginationKey);
+        AddQueryParam(queryParams, "visitor_id", visitorId);
+        AddQueryParam(queryParams, "bot", bot);
+        AddQueryParam(queryParams, "ip_address", ipAddress);
+        AddQueryParam(queryParams, "linked_id", linkedId);
+        AddQueryParam(queryParams, "start", start);
+        AddQueryParam(queryParams, "end", end);
+        AddQueryParam(queryParams, "reverse", reverse);
+        AddQueryParam(queryParams, "suspect", suspect);
+        AddQueryParam(queryParams, "vpn", vpn);
+        AddQueryParam(queryParams, "virtual_machine", virtualMachine);
+        AddQueryParam(queryParams, "tampering", tampering);
+        AddQueryParam(queryParams, "anti_detect_browser", antiDetectBrowser);
+        AddQueryParam(queryParams, "incognito", incognito);
+        AddQueryParam(queryParams, "privacy_settings", privacySettings);
+        AddQueryParam(queryParams, "jailbroken", jailbroken);
+        AddQueryParam(queryParams, "frida", frida);
+        AddQueryParam(queryParams, "factory_reset", factoryReset);
+        AddQueryParam(queryParams, "cloned_app", clonedApp);
+        AddQueryParam(queryParams, "emulator", emulator);
+        AddQueryParam(queryParams, "root_apps", rootApps);
+        AddQueryParam(queryParams, "vpn_confidence", vpnConfidence);
+        AddQueryParam(queryParams, "min_suspect_score", minSuspectScore);
+        AddQueryParam(queryParams, "ip_blocklist", ipBlocklist);
+        AddQueryParam(queryParams, "datacenter", datacenter);
+        AddQueryParam(queryParams, "developer_tools", developerTools);
+        AddQueryParam(queryParams, "location_spoofing", locationSpoofing);
+        AddQueryParam(queryParams, "mitm_attack", mitmAttack);
+        AddQueryParam(queryParams, "proxy", proxy);
+        AddQueryParam(queryParams, "sdk_version", sdkVersion);
+        AddQueryParam(queryParams, "sdk_platform", sdkPlatform);
 
-        if (!string.IsNullOrEmpty(bot))
+        if (environment != null)
         {
-            queryParams.Add("bot", bot);
-        }
-
-        if (!string.IsNullOrEmpty(ipAddress))
-        {
-            queryParams.Add("ip_address", ipAddress);
-        }
-
-        if (!string.IsNullOrEmpty(linkedId))
-        {
-            queryParams.Add("linked_id", linkedId);
-        }
-
-        if (start != null)
-        {
-            queryParams.Add("start", start.ToString());
-        }
-
-        if (end != null)
-        {
-            queryParams.Add("end", end.ToString());
-        }
-
-        if (reverse != null)
-        {
-            queryParams.Add("reverse", reverse.ToString());
-        }
-
-        if (suspect != null)
-        {
-            queryParams.Add("suspect", suspect.ToString()!);
-        }
-
-        if (vpn != null)
-        {
-            queryParams.Add("vpn", vpn.ToString());
-        }
-
-        if (virtualMachine != null)
-        {
-            queryParams.Add("virtual_machine", virtualMachine.ToString());
-        }
-
-        if (tampering != null)
-        {
-            queryParams.Add("tampering", tampering.ToString());
-        }
-
-        if (antiDetectBrowser != null)
-        {
-            queryParams.Add("anti_detect_browser", antiDetectBrowser.ToString());
-        }
-
-        if (incognito != null)
-        {
-            queryParams.Add("incognito", incognito.ToString());
-        }
-
-        if (privacySettings != null)
-        {
-            queryParams.Add("privacy_settings", privacySettings.ToString());
-        }
-
-        if (jailbroken != null)
-        {
-            queryParams.Add("jailbroken", jailbroken.ToString());
-        }
-
-        if (frida != null)
-        {
-            queryParams.Add("frida", frida.ToString());
-        }
-
-        if (factoryReset != null)
-        {
-            queryParams.Add("factory_reset", factoryReset.ToString());
-        }
-
-        if (clonedApp != null)
-        {
-            queryParams.Add("cloned_app", clonedApp.ToString());
-        }
-
-        if (emulator != null)
-        {
-            queryParams.Add("emulator", emulator.ToString());
-        }
-
-        if (rootApps != null)
-        {
-            queryParams.Add("root_apps", rootApps.ToString());
-        }
-
-        if (!string.IsNullOrEmpty(vpnConfidence))
-        {
-            queryParams.Add("vpn_confidence", vpnConfidence);
-        }
-
-        if (minSuspectScore != null)
-        {
-            queryParams.Add("min_suspect_score", string.Format(CultureInfo.InvariantCulture, "{0:F}", minSuspectScore));
-        }
-
-        if (ipBlocklist != null)
-        {
-            queryParams.Add("ip_blocklist", ipBlocklist.ToString());
-        }
-
-        if (datacenter != null)
-        {
-            queryParams.Add("datacenter", datacenter.ToString());
+            foreach (var envValue in environment)
+            {
+                AddQueryParam(queryParams, "environment", envValue);
+            }
         }
 
         var request = new ApiRequest

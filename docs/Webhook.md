@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Timestamp** | **long?** | Timestamp of the event with millisecond precision in Unix time. | 
 **IpLocation** | [**DeprecatedGeolocation**](DeprecatedGeolocation.md) |  | [optional] 
 **LinkedId** | **string** | A customer-provided id that was sent with the request. | [optional] 
-**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser. | [optional] 
+**VisitorId** | **string** | String of 20 characters that uniquely identifies the visitor's browser or mobile device. | [optional] 
 **VisitorFound** | **bool?** | Attribute represents if a visitor had been identified before. | [optional] 
 **Confidence** | [**IdentificationConfidence**](IdentificationConfidence.md) |  | [optional] 
 **FirstSeenAt** | [**IdentificationSeenAt**](IdentificationSeenAt.md) |  | [optional] 
@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **MitmAttack** | [**WebhookMitMAttack**](WebhookMitMAttack.md) |  | [optional] 
 **Replayed** | **bool?** | `true` if we determined that this payload was replayed, `false` otherwise.  | [optional] 
 **Sdk** | [**SDK**](SDK.md) |  | 
+**SupplementaryIds** | [**WebhookSupplementaryIDs**](WebhookSupplementaryIDs.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
