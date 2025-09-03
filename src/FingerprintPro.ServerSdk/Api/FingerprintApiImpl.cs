@@ -22,6 +22,31 @@ public class FingerprintApi : IFingerprintApi
         _apiClient = new ApiClient(configuration);
     }
 
+    #region Utils
+
+    private void AddQueryParam(List<KeyValuePair<string, string>> queryParams, string name, object? value)
+    {
+        if (value is null) return;
+        switch (value)
+        {
+            case bool b:
+                queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
+                break;
+            case float f:
+                queryParams.Add(new KeyValuePair<string, string>(name, f.ToString("F", CultureInfo.InvariantCulture)));
+                break;
+            case IFormattable formattable:
+                queryParams.Add(new KeyValuePair<string, string>(name, formattable.ToString(null, CultureInfo.InvariantCulture)!));
+                break;
+            default:
+                var str = value.ToString();
+                if (!string.IsNullOrEmpty(str))
+                    queryParams.Add(new KeyValuePair<string, string>(name, str));
+                break;
+        }
+    }
+    #endregion
+
     #region GetEvent
 
     public EventsGetResponse GetEvent(string requestId)
@@ -104,33 +129,11 @@ public class FingerprintApi : IFingerprintApi
     {
         var queryParams = new List<KeyValuePair<string, string>>();
 
-        void Add(string name, object? value)
-        {
-            if (value is null) return;
-            switch (value)
-            {
-                case bool b:
-                    queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
-                    break;
-                case float f:
-                    queryParams.Add(new KeyValuePair<string, string>(name, f.ToString("F", CultureInfo.InvariantCulture)));
-                    break;
-                case IFormattable formattable:
-                    queryParams.Add(new KeyValuePair<string, string>(name, formattable.ToString(null, CultureInfo.InvariantCulture)!));
-                    break;
-                default:
-                    var str = value.ToString();
-                    if (!string.IsNullOrEmpty(str))
-                        queryParams.Add(new KeyValuePair<string, string>(name, str));
-                    break;
-            }
-        }
-
-        Add("request_id", requestId);
-        Add("linked_id", linkedId);
-        Add("limit", limit);
-        Add("paginationKey", paginationKey);
-        Add("before", before);
+        AddQueryParam(queryParams, "request_id", requestId);
+        AddQueryParam(queryParams, "linked_id", linkedId);
+        AddQueryParam(queryParams, "limit", limit);
+        AddQueryParam(queryParams, "paginationKey", paginationKey);
+        AddQueryParam(queryParams, "before", before);
 
         var definition = new GetVisitsDefinition();
         var request = new ApiRequest()
@@ -298,66 +301,44 @@ public class FingerprintApi : IFingerprintApi
 
         var queryParams = new List<KeyValuePair<string, string>>();
 
-        void Add(string name, object? value)
-        {
-            if (value is null) return;
-            switch (value)
-            {
-                case bool b:
-                    queryParams.Add(new KeyValuePair<string, string>(name, b.ToString())); // "True"/"False"
-                    break;
-                case float f:
-                    queryParams.Add(new KeyValuePair<string, string>(name, f.ToString("F", CultureInfo.InvariantCulture)));
-                    break;
-                case IFormattable formattable:
-                    queryParams.Add(new KeyValuePair<string, string>(name, formattable.ToString(null, CultureInfo.InvariantCulture)!));
-                    break;
-                default:
-                    var str = value.ToString();
-                    if (!string.IsNullOrEmpty(str))
-                        queryParams.Add(new KeyValuePair<string, string>(name, str));
-                    break;
-            }
-        }
-
-        Add("limit", limit);
-        Add("pagination_key", paginationKey);
-        Add("visitor_id", visitorId);
-        Add("bot", bot);
-        Add("ip_address", ipAddress);
-        Add("linked_id", linkedId);
-        Add("start", start);
-        Add("end", end);
-        Add("reverse", reverse);
-        Add("suspect", suspect);
-        Add("vpn", vpn);
-        Add("virtual_machine", virtualMachine);
-        Add("tampering", tampering);
-        Add("anti_detect_browser", antiDetectBrowser);
-        Add("incognito", incognito);
-        Add("privacy_settings", privacySettings);
-        Add("jailbroken", jailbroken);
-        Add("frida", frida);
-        Add("factory_reset", factoryReset);
-        Add("cloned_app", clonedApp);
-        Add("emulator", emulator);
-        Add("root_apps", rootApps);
-        Add("vpn_confidence", vpnConfidence);
-        Add("min_suspect_score", minSuspectScore);
-        Add("ip_blocklist", ipBlocklist);
-        Add("datacenter", datacenter);
-        Add("developer_tools", developerTools);
-        Add("location_spoofing", locationSpoofing);
-        Add("mitm_attack", mitmAttack);
-        Add("proxy", proxy);
-        Add("sdk_version", sdkVersion);
-        Add("sdk_platform", sdkPlatform);
+        AddQueryParam(queryParams, "limit", limit);
+        AddQueryParam(queryParams, "pagination_key", paginationKey);
+        AddQueryParam(queryParams, "visitor_id", visitorId);
+        AddQueryParam(queryParams, "bot", bot);
+        AddQueryParam(queryParams, "ip_address", ipAddress);
+        AddQueryParam(queryParams, "linked_id", linkedId);
+        AddQueryParam(queryParams, "start", start);
+        AddQueryParam(queryParams, "end", end);
+        AddQueryParam(queryParams, "reverse", reverse);
+        AddQueryParam(queryParams, "suspect", suspect);
+        AddQueryParam(queryParams, "vpn", vpn);
+        AddQueryParam(queryParams, "virtual_machine", virtualMachine);
+        AddQueryParam(queryParams, "tampering", tampering);
+        AddQueryParam(queryParams, "anti_detect_browser", antiDetectBrowser);
+        AddQueryParam(queryParams, "incognito", incognito);
+        AddQueryParam(queryParams, "privacy_settings", privacySettings);
+        AddQueryParam(queryParams, "jailbroken", jailbroken);
+        AddQueryParam(queryParams, "frida", frida);
+        AddQueryParam(queryParams, "factory_reset", factoryReset);
+        AddQueryParam(queryParams, "cloned_app", clonedApp);
+        AddQueryParam(queryParams, "emulator", emulator);
+        AddQueryParam(queryParams, "root_apps", rootApps);
+        AddQueryParam(queryParams, "vpn_confidence", vpnConfidence);
+        AddQueryParam(queryParams, "min_suspect_score", minSuspectScore);
+        AddQueryParam(queryParams, "ip_blocklist", ipBlocklist);
+        AddQueryParam(queryParams, "datacenter", datacenter);
+        AddQueryParam(queryParams, "developer_tools", developerTools);
+        AddQueryParam(queryParams, "location_spoofing", locationSpoofing);
+        AddQueryParam(queryParams, "mitm_attack", mitmAttack);
+        AddQueryParam(queryParams, "proxy", proxy);
+        AddQueryParam(queryParams, "sdk_version", sdkVersion);
+        AddQueryParam(queryParams, "sdk_platform", sdkPlatform);
 
         if (environment != null)
         {
             foreach (var envValue in environment)
             {
-                Add("environment", envValue);
+                AddQueryParam(queryParams, "environment", envValue);
             }
         }
 
