@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 <a name="searchevents"></a>
 # **SearchEvents**
-> SearchEventsResponse SearchEvents (int? limit, string paginationKey = null, string visitorId = null, string bot = null, string ipAddress = null, string linkedId = null, long? start = null, long? end = null, bool? reverse = null, bool? suspect = null, bool? vpn = null, bool? virtualMachine = null, bool? tampering = null, bool? antiDetectBrowser = null, bool? incognito = null, bool? privacySettings = null, bool? jailbroken = null, bool? frida = null, bool? factoryReset = null, bool? clonedApp = null, bool? emulator = null, bool? rootApps = null, string vpnConfidence = null, float? minSuspectScore = null, bool? ipBlocklist = null, bool? datacenter = null, bool? developerTools = null, bool? locationSpoofing = null, bool? mitmAttack = null, bool? proxy = null, string sdkVersion = null, string sdkPlatform = null, List<string> environment = null)
+> SearchEventsResponse SearchEvents (int? limit, string paginationKey = null, string visitorId = null, string bot = null, string ipAddress = null, string linkedId = null, long? start = null, long? end = null, bool? reverse = null, bool? suspect = null, bool? vpn = null, bool? virtualMachine = null, bool? tampering = null, bool? antiDetectBrowser = null, bool? incognito = null, bool? privacySettings = null, bool? jailbroken = null, bool? frida = null, bool? factoryReset = null, bool? clonedApp = null, bool? emulator = null, bool? rootApps = null, string vpnConfidence = null, float? minSuspectScore = null, bool? ipBlocklist = null, bool? datacenter = null, bool? developerTools = null, bool? locationSpoofing = null, bool? mitmAttack = null, bool? proxy = null, string sdkVersion = null, string sdkPlatform = null, List<string> environment = null, string proximityId = null, int? proximityPrecisionRadius = null)
 
 Get events via search
 
@@ -321,11 +321,13 @@ namespace Example
             var sdkVersion = sdkVersion_example;  // string | Filter events by a specific SDK version associated with the identification event. Example: `3.11.14`  (optional) 
             var sdkPlatform = sdkPlatform_example;  // string | Filter events by the SDK Platform associated with the identification event. `js` - JavaScript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional) 
             var environment = new List<string>(); // List<string> | Filter for events by providing one or more environment IDs.  (optional) 
+            var proximityId = proximityId_example;  // string | Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `products.proximity.id` property matching the provided ID are returned. Events without a `products.proximity` result are left out of the response.  (optional) 
+            var proximityPrecisionRadius = 56;  // int? | Filter events by Proximity Radius. > Note: When using this parameter, only events with the `products.proximity.precisionRadius` property set to a valid value are returned. Events without a `products.proximity` result are left out of the response.  (optional) 
 
             try
             {
                 // Get events via search
-                SearchEventsResponse result = apiInstance.SearchEvents(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment);
+                SearchEventsResponse result = apiInstance.SearchEvents(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, proximityPrecisionRadius);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -374,6 +376,8 @@ Name | Type | Description  | Notes
  **sdkVersion** | **string**| Filter events by a specific SDK version associated with the identification event. Example: `3.11.14`  | [optional] 
  **sdkPlatform** | **string**| Filter events by the SDK Platform associated with the identification event. `js` - JavaScript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  | [optional] 
  **environment** | [**List&lt;string&gt;**](string.md)| Filter for events by providing one or more environment IDs.  | [optional] 
+ **proximityId** | **string**| Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `products.proximity.id` property matching the provided ID are returned. Events without a `products.proximity` result are left out of the response.  | [optional] 
+ **proximityPrecisionRadius** | **int?**| Filter events by Proximity Radius. > Note: When using this parameter, only events with the `products.proximity.precisionRadius` property set to a valid value are returned. Events without a `products.proximity` result are left out of the response.  | [optional] 
 
 ### Return type
 
