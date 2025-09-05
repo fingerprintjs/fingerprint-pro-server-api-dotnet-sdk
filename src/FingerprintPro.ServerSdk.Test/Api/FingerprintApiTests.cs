@@ -1046,6 +1046,8 @@ namespace FingerprintPro.ServerSdk.Test.Api
             const string sdkVersion = "testSdkVersion";
             const string sdkPlatform = "testSdkPlatform";
             List<string> environment = new List<string> { "env1", "env2" };
+            const string proximityId = "testProximityId";
+            const int proximityPrecisionRadius = 10;
 
             var response = _instance!.SearchEventsWithHttpInfo(
                 limit: limit,
@@ -1080,7 +1082,9 @@ namespace FingerprintPro.ServerSdk.Test.Api
                 proxy: proxy,
                 sdkVersion: sdkVersion,
                 sdkPlatform: sdkPlatform,
-                environment: environment
+                environment: environment,
+                proximityId: proximityId,
+                proximityPrecisionRadius: proximityPrecisionRadius
             );
 
             Assert.Multiple(() =>

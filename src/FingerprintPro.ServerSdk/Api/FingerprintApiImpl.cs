@@ -243,12 +243,13 @@ public class FingerprintApi : IFingerprintApi
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
         bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
-        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
+        string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         return SearchEventsWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end, reverse,
             suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida,
             factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
-            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment).Data;
+            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, proximityPrecisionRadius).Data;
     }
 
     public ApiResponse<SearchEventsResponse> SearchEventsWithHttpInfo(int? limit, string paginationKey = null!,
@@ -259,12 +260,14 @@ public class FingerprintApi : IFingerprintApi
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
         bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
-        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
+        string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         return SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId, start, end,
             reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken,
             frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist, datacenter,
-            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment).Result;
+            developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment,
+            proximityId, proximityPrecisionRadius).Result;
     }
 
     public async Task<SearchEventsResponse> SearchEventsAsync(int? limit, string paginationKey = null!,
@@ -275,12 +278,14 @@ public class FingerprintApi : IFingerprintApi
         bool? clonedApp = null!, bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!,
         float? minSuspectScore = null!, bool? ipBlocklist = null!, bool? datacenter = null!,
         bool? developerTools = null!, bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!,
-        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!)
+        string? sdkVersion = null!, string? sdkPlatform = null!, List<string>? environment = null!,
+        string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         var response = await SearchEventsAsyncWithHttpInfo(limit, paginationKey, visitorId, bot, ipAddress, linkedId,
             start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings,
             jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, ipBlocklist,
-            datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment);
+            datacenter, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment,
+            proximityId, proximityPrecisionRadius);
         return response.Data;
     }
 
@@ -295,7 +300,8 @@ public class FingerprintApi : IFingerprintApi
         bool? emulator = null!, bool? rootApps = null!, string vpnConfidence = null!, float? minSuspectScore = null!,
         bool? ipBlocklist = null!, bool? datacenter = null!, bool? developerTools = null!,
         bool? locationSpoofing = null!, bool? mitmAttack = null!, bool? proxy = null!, string? sdkVersion = null!,
-        string? sdkPlatform = null!, List<string>? environment = null!)
+        string? sdkPlatform = null!, List<string>? environment = null!,
+        string? proximityId = null!, int? proximityPrecisionRadius = null!)
     {
         var definition = new SearchEventsDefinition();
 
@@ -333,6 +339,8 @@ public class FingerprintApi : IFingerprintApi
         AddQueryParam(queryParams, "proxy", proxy);
         AddQueryParam(queryParams, "sdk_version", sdkVersion);
         AddQueryParam(queryParams, "sdk_platform", sdkPlatform);
+        AddQueryParam(queryParams, "proximity_id", proximityId);
+        AddQueryParam(queryParams, "proximity_precision_radius", proximityPrecisionRadius);
 
         if (environment != null)
         {
