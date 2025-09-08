@@ -1,5 +1,11 @@
 # Fingerprint Server API Dotnet SDK
 
+## 7.9.0-test.1
+
+### Minor Changes
+
+- Add `proximity` signal that represents a fixed geographical zone in a discrete global grid within which the device is observed. ([56e95c8](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/56e95c8889a27b8d4b9e852af079db42d0ae5d64))
+
 ## 7.9.0-test.0
 
 ### Minor Changes
