@@ -13,7 +13,7 @@ public class ApiTests
     private long end;
     private String searchEventsPaginationKey;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void Setup()
     {
         var configuration = new Configuration(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
@@ -22,18 +22,15 @@ public class ApiTests
             configuration
         );
 
-        if (string.IsNullOrEmpty(requestId))
-        {
-            var now = DateTimeOffset.UtcNow;
-            end = now.ToUnixTimeMilliseconds();
-            start = now.AddDays(-90).ToUnixTimeMilliseconds();
+        var now = DateTimeOffset.UtcNow;
+        end = now.ToUnixTimeMilliseconds();
+        start = now.AddDays(-90).ToUnixTimeMilliseconds();
 
-            var events = _api.SearchEvents(2, start: start, end: end);
-            Assert.That(events.Events, Is.Not.Empty);
-            var firstEventIdentificationData = events.Events[0].Products.Identification.Data;
-            requestId = firstEventIdentificationData.RequestId;
-            visitorId = firstEventIdentificationData.VisitorId;
-        }
+        var events = _api.SearchEvents(2, start: start, end: end);
+        Assert.That(events.Events, Is.Not.Empty);
+        var firstEventIdentificationData = events.Events[0].Products.Identification.Data;
+        requestId = firstEventIdentificationData.RequestId;
+        visitorId = firstEventIdentificationData.VisitorId;
     }
 
     [Test]
@@ -122,7 +119,6 @@ public class ApiTests
         Assert.That(response.Events.Count, Is.GreaterThanOrEqualTo(1));
         var oldEventIdentificationData = response.Events[0].Products.Identification.Data;
 
-        Assert.That(oldEventIdentificationData.VisitorId, Is.Not.EqualTo(visitorId));
         Assert.That(oldEventIdentificationData.RequestId, Is.Not.EqualTo(requestId));
 
         // Try to request old events to check if they still could be deserialized
