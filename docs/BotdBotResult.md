@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.BotdBotResult
+# Fingerprint.ServerSdk.Model.BotdBotResult
 Bot detection result:
  * `notDetected` - the visitor is not a bot
  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on

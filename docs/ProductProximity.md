@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductProximity
+# Fingerprint.ServerSdk.Model.ProductProximity
 ## Properties
 
 Name | Type | Description | Notes

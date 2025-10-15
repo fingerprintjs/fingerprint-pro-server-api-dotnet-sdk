@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductTor
+# Fingerprint.ServerSdk.Model.ProductTor
 ## Properties
 
 Name | Type | Description | Notes

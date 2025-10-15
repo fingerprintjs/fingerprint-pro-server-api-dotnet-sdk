@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.VPN
+# Fingerprint.ServerSdk.Model.VPN
 ## Properties
 
 Name | Type | Description | Notes

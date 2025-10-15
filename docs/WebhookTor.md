@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookTor
+# Fingerprint.ServerSdk.Model.WebhookTor
 ## Properties
 
 Name | Type | Description | Notes

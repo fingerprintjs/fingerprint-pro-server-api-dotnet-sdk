@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookClonedApp
+# Fingerprint.ServerSdk.Model.WebhookClonedApp
 ## Properties
 
 Name | Type | Description | Notes

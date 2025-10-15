@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.SearchEventsResponseEvents
+# Fingerprint.ServerSdk.Model.SearchEventsResponseEvents
 Device intelligence results for the identification event.
 
 ## Properties

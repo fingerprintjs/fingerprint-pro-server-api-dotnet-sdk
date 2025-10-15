@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.RelatedVisitorsResponse
+# Fingerprint.ServerSdk.Model.RelatedVisitorsResponse
 ## Properties
 
 Name | Type | Description | Notes

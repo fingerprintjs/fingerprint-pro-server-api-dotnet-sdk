@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Emulator
+# Fingerprint.ServerSdk.Model.Emulator
 ## Properties
 
 Name | Type | Description | Notes

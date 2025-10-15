@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookRootApps
+# Fingerprint.ServerSdk.Model.WebhookRootApps
 ## Properties
 
 Name | Type | Description | Notes

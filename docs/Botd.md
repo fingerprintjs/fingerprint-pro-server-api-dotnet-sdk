@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Botd
+# Fingerprint.ServerSdk.Model.Botd
 Contains all the information from Bot Detection product
 
 ## Properties

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Frida
+# Fingerprint.ServerSdk.Model.Frida
 ## Properties
 
 Name | Type | Description | Notes

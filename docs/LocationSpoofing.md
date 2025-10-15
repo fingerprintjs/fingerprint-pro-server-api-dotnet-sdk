@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.LocationSpoofing
+# Fingerprint.ServerSdk.Model.LocationSpoofing
 ## Properties
 
 Name | Type | Description | Notes

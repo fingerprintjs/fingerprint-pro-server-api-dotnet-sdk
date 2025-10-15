@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookSupplementaryIDs
+# Fingerprint.ServerSdk.Model.WebhookSupplementaryIDs
 Other identities that have been established for a given Visitor.
 
 ## Properties

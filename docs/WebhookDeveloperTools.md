@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookDeveloperTools
+# Fingerprint.ServerSdk.Model.WebhookDeveloperTools
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.IdentificationConfidence
+# Fingerprint.ServerSdk.Model.IdentificationConfidence
 ## Properties
 
 Name | Type | Description | Notes

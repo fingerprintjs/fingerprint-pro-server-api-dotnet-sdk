@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.RawDeviceAttributeError
+# Fingerprint.ServerSdk.Model.RawDeviceAttributeError
 ## Properties
 
 Name | Type | Description | Notes

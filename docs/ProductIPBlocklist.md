@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductIPBlocklist
+# Fingerprint.ServerSdk.Model.ProductIPBlocklist
 ## Properties
 
 Name | Type | Description | Notes

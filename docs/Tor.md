@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Tor
+# Fingerprint.ServerSdk.Model.Tor
 ## Properties
 
 Name | Type | Description | Notes

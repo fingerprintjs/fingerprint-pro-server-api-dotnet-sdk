@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Tampering
+# Fingerprint.ServerSdk.Model.Tampering
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Identification
+# Fingerprint.ServerSdk.Model.Identification
 ## Properties
 
 Name | Type | Description | Notes

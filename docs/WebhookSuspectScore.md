@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookSuspectScore
+# Fingerprint.ServerSdk.Model.WebhookSuspectScore
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Sealed
+# Fingerprint.ServerSdk.Sealed
 
 ## **UnsealEventsResponse**
 

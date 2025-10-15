@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookPrivacySettings
+# Fingerprint.ServerSdk.Model.WebhookPrivacySettings
 ## Properties
 
 Name | Type | Description | Notes

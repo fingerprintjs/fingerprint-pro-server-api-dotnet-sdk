@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.SearchEventsResponse
+# Fingerprint.ServerSdk.Model.SearchEventsResponse
 Contains a list of all identification events matching the specified search criteria.
 
 ## Properties

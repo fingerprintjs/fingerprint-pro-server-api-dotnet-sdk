@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ClonedApp
+# Fingerprint.ServerSdk.Model.ClonedApp
 ## Properties
 
 Name | Type | Description | Notes

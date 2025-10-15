@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.IdentificationSeenAt
+# Fingerprint.ServerSdk.Model.IdentificationSeenAt
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookProximity
+# Fingerprint.ServerSdk.Model.WebhookProximity
 Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed.
 
 

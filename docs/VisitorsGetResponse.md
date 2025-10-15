@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.VisitorsGetResponse
+# Fingerprint.ServerSdk.Model.VisitorsGetResponse
 Pagination-related fields `lastTimestamp` and `paginationKey` are included if you use a pagination parameter like `limit` or `before` and there is more data available on the next page.
 
 ## Properties

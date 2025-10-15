@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ErrorPlainResponse
+# Fingerprint.ServerSdk.Model.ErrorPlainResponse
 ## Properties
 
 Name | Type | Description | Notes

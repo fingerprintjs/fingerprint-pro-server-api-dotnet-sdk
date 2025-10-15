@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductProxy
+# Fingerprint.ServerSdk.Model.ProductProxy
 ## Properties
 
 Name | Type | Description | Notes

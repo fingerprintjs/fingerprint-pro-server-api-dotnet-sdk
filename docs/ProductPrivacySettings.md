@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductPrivacySettings
+# Fingerprint.ServerSdk.Model.ProductPrivacySettings
 ## Properties
 
 Name | Type | Description | Notes

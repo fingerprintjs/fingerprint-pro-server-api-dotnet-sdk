@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.FactoryReset
+# Fingerprint.ServerSdk.Model.FactoryReset
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Products
+# Fingerprint.ServerSdk.Model.Products
 Contains all information about the request identified by `requestId`, depending on the pricing plan (Pro, Pro Plus, Enterprise)
 
 ## Properties

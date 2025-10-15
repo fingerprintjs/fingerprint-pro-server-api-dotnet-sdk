@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductDeveloperTools
+# Fingerprint.ServerSdk.Model.ProductDeveloperTools
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.IPInfoDataCenter
+# Fingerprint.ServerSdk.Model.IPInfoDataCenter
 ## Properties
 
 Name | Type | Description | Notes

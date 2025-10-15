@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.VelocityData
+# Fingerprint.ServerSdk.Model.VelocityData
 ## Properties
 
 Name | Type | Description | Notes

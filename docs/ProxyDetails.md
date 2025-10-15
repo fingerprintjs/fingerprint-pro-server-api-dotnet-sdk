@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProxyDetails
+# Fingerprint.ServerSdk.Model.ProxyDetails
 Proxy detection details (present if proxy is detected)
 
 ## Properties

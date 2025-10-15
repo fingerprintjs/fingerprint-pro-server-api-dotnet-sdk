@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.EventsUpdateRequest
+# Fingerprint.ServerSdk.Model.EventsUpdateRequest
 ## Properties
 
 Name | Type | Description | Notes

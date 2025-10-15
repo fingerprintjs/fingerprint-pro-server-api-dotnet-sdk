@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.SupplementaryID
+# Fingerprint.ServerSdk.Model.SupplementaryID
 ## Properties
 
 Name | Type | Description | Notes

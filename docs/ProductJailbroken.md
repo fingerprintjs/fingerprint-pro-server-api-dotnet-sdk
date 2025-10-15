@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductJailbroken
+# Fingerprint.ServerSdk.Model.ProductJailbroken
 ## Properties
 
 Name | Type | Description | Notes

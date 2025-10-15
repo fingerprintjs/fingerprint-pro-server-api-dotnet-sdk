@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookFrida
+# Fingerprint.ServerSdk.Model.WebhookFrida
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookVirtualMachine
+# Fingerprint.ServerSdk.Model.WebhookVirtualMachine
 ## Properties
 
 Name | Type | Description | Notes

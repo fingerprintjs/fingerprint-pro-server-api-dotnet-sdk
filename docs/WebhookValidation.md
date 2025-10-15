@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.WebhookValidation
+# Fingerprint.ServerSdk.WebhookValidation
 
 ## **IsValidSignature**
 

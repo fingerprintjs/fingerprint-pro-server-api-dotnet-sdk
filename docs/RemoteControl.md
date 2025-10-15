@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.RemoteControl
+# Fingerprint.ServerSdk.Model.RemoteControl
 This signal is deprecated.
 
 

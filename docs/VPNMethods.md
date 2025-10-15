@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.VPNMethods
+# Fingerprint.ServerSdk.Model.VPNMethods
 ## Properties
 
 Name | Type | Description | Notes

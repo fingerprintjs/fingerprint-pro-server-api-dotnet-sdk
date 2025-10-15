@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Geolocation
+# Fingerprint.ServerSdk.Model.Geolocation
 ## Properties
 
 Name | Type | Description | Notes

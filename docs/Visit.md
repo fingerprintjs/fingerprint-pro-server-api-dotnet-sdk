@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Visit
+# Fingerprint.ServerSdk.Model.Visit
 ## Properties
 
 Name | Type | Description | Notes
