@@ -1,6 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
-curl -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-compact.yaml
+mkdir -p ./res
+
+curl -fSL -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-compact.yaml
 
 examplesList=(
   'get_visits_200_limit_1.json'
@@ -24,6 +27,16 @@ examplesList=(
   'delete_visits_429_error.json'
 )
 
-for example in ${examplesList[*]}; do
-  curl -o ./src/Fingerprint.ServerSdk.Test/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
+baseDestination="./src/Fingerprint.ServerSdk.Test/mocks"
+
+for example in "${examplesList[@]}"; do
+  destinationPath="$baseDestination/$example"
+  destinationDir="$(dirname "$destinationPath")"
+
+  mkdir -p "$destinationDir"
+
+  echo "Downloading $example to $destinationPath"
+  curl -fSL -o "$destinationPath" "https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/$example"
 done
+
+echo "All OpenAPI documentation downloads complete."
