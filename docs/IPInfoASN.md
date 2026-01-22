@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.IPInfoASN
+# Fingerprint.ServerSdk.Model.IPInfoASN
 ## Properties
 
 Name | Type | Description | Notes

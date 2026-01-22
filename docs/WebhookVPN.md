@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookVPN
+# Fingerprint.ServerSdk.Model.WebhookVPN
 ## Properties
 
 Name | Type | Description | Notes

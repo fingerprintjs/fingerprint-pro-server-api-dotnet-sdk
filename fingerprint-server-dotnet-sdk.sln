@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk", "src\Fingerprint.ServerSdk\Fingerprint.ServerSdk.csproj", "{DEE4B355-41FC-4B06-92D3-FE21753D84EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk.Test", "src\Fingerprint.ServerSdk.Test\Fingerprint.ServerSdk.Test.csproj", "{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk.Examples", "src\Fingerprint.ServerSdk.Examples\Fingerprint.ServerSdk.Examples.csproj", "{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk.FunctionalTest", "src\Fingerprint.ServerSdk.FunctionalTest\Fingerprint.ServerSdk.FunctionalTest.csproj", "{60A3F0A3-764A-43CA-9BDD-E2A727F86347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk.SealedResultExample", "src\Fingerprint.ServerSdk.SealedResultExample\Fingerprint.ServerSdk.SealedResultExample.csproj", "{68302477-4772-4F13-B569-54881B84F6B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fingerprint.ServerSdk.WebhookExample", "src\Fingerprint.ServerSdk.WebhookExample\Fingerprint.ServerSdk.WebhookExample.csproj", "{F95774AB-BC02-45AE-8916-0EFF0689E89F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE4B355-41FC-4B06-92D3-FE21753D84EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17D53A9-4987-4E7B-BDA9-3A4BE826FF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBC349E-CE18-4668-BC36-8DF98F9F5E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A3F0A3-764A-43CA-9BDD-E2A727F86347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68302477-4772-4F13-B569-54881B84F6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68302477-4772-4F13-B569-54881B84F6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68302477-4772-4F13-B569-54881B84F6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68302477-4772-4F13-B569-54881B84F6B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F95774AB-BC02-45AE-8916-0EFF0689E89F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F95774AB-BC02-45AE-8916-0EFF0689E89F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F95774AB-BC02-45AE-8916-0EFF0689E89F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F95774AB-BC02-45AE-8916-0EFF0689E89F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+	EndGlobalSection
+EndGlobal

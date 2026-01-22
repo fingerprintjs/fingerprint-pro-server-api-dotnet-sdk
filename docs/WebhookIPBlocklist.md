@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookIPBlocklist
+# Fingerprint.ServerSdk.Model.WebhookIPBlocklist
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ErrorCode
+# Fingerprint.ServerSdk.Model.ErrorCode
 Error code:
  * `RequestCannotBeParsed` - the query parameters or JSON payload contains some errors 
           that prevented us from parsing it (wrong type/surpassed limits).

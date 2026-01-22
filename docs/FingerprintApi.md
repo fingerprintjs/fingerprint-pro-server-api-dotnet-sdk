@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Api.FingerprintApi
+# Fingerprint.ServerSdk.Api.FingerprintApi
 
 All URIs are relative to *https://api.fpjs.io*
 
@@ -23,9 +23,9 @@ Request deleting all data associated with the specified visitor ID. This API is 
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {
@@ -83,9 +83,9 @@ Get a detailed analysis of an individual identification event, including Smart S
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {
@@ -144,9 +144,9 @@ Related visitors API lets you link web visits and in-app browser visits that ori
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {
@@ -205,9 +205,9 @@ Get a history of visits (identification events) for a specific `visitorId`. Use 
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {
@@ -276,9 +276,9 @@ Search for identification events, including Smart Signals, using multiple filter
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {
@@ -405,9 +405,9 @@ Change information in existing events specified by `requestId` or *flag suspicio
 ```csharp
 using System;
 using System.Diagnostics;
-using FingerprintPro.ServerSdk.Api;
-using FingerprintPro.ServerSdk.Client;
-using FingerprintPro.ServerSdk.Model;
+using Fingerprint.ServerSdk.Api;
+using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Model;
 
 namespace Example
 {

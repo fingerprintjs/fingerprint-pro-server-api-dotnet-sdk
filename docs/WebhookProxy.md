@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookProxy
+# Fingerprint.ServerSdk.Model.WebhookProxy
 ## Properties
 
 Name | Type | Description | Notes

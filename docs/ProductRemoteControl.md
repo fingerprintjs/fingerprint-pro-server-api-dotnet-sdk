@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductRemoteControl
+# Fingerprint.ServerSdk.Model.ProductRemoteControl
 This product is deprecated.
 
 

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.SDK
+# Fingerprint.ServerSdk.Model.SDK
 Contains information about the SDK used to perform the request.
 
 ## Properties

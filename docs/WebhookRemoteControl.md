@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookRemoteControl
+# Fingerprint.ServerSdk.Model.WebhookRemoteControl
 This signal is deprecated.
 
 

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookFactoryReset
+# Fingerprint.ServerSdk.Model.WebhookFactoryReset
 ## Properties
 
 Name | Type | Description | Notes

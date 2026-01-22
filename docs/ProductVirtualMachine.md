@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.ProductVirtualMachine
+# Fingerprint.ServerSdk.Model.ProductVirtualMachine
 ## Properties
 
 Name | Type | Description | Notes

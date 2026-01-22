@@ -12,7 +12,7 @@ console.info('dirname', dirname);
 
 const paths = {
     config: path.resolve(dirname, './config.json'),
-    csproj: path.resolve(dirname, './src/FingerprintPro.ServerSdk/FingerprintPro.ServerSdk.csproj'),
+    csproj: path.resolve(dirname, './src/Fingerprint.ServerSdk/Fingerprint.ServerSdk.csproj'),
 }
 
 console.info('paths', paths);

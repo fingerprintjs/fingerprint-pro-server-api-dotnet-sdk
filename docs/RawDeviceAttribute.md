@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.RawDeviceAttribute
+# Fingerprint.ServerSdk.Model.RawDeviceAttribute
 ## Properties
 
 Name | Type | Description | Notes

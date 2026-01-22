@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Incognito
+# Fingerprint.ServerSdk.Model.Incognito
 ## Properties
 
 Name | Type | Description | Notes

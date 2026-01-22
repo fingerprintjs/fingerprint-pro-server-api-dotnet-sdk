@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.RelatedVisitor
+# Fingerprint.ServerSdk.Model.RelatedVisitor
 ## Properties
 
 Name | Type | Description | Notes

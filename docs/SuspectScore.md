@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.SuspectScore
+# Fingerprint.ServerSdk.Model.SuspectScore
 ## Properties
 
 Name | Type | Description | Notes

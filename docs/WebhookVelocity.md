@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookVelocity
+# Fingerprint.ServerSdk.Model.WebhookVelocity
 Sums key data points for a specific `visitorId`, `ipAddress` and `linkedId` at three distinct time
 intervals: 5 minutes, 1 hour, and 24 hours as follows: 
 

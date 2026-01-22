@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookMitMAttack
+# Fingerprint.ServerSdk.Model.WebhookMitMAttack
 ## Properties
 
 Name | Type | Description | Notes

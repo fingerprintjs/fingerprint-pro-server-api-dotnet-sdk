@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.Tag
+# Fingerprint.ServerSdk.Model.Tag
 A customer-provided value or an object that was sent with identification request.
 
 ## Properties

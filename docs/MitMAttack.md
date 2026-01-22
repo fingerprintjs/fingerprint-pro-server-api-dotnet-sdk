@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.MitMAttack
+# Fingerprint.ServerSdk.Model.MitMAttack
 ## Properties
 
 Name | Type | Description | Notes

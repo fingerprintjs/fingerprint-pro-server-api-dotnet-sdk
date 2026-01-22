@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.VelocityIntervals
+# Fingerprint.ServerSdk.Model.VelocityIntervals
 Is absent if the velocity data could not be generated for the visitor ID.
 
 

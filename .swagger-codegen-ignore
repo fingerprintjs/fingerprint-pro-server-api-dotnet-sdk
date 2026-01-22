@@ -26,16 +26,16 @@
 git_push.sh
 
 **/packages.config
-src/FingerprintPro.ServerSdk.Test/**
-src/FingerprintPro.ServerSdk/Model/Model.cs
-src/FingerprintPro.ServerSdk/Model/ASN.cs
-src/FingerprintPro.ServerSdk/Client/ApiClient.cs
-src/FingerprintPro.ServerSdk/Client/ApiResponse.cs
-src/FingerprintPro.ServerSdk/Client/IApiAccessor.cs
-src/FingerprintPro.ServerSdk/Client/ApiException.cs
-src/FingerprintPro.ServerSdk/Client/IReadableConfiguration.cs
-src/FingerprintPro.ServerSdk/Client/ExceptionFactory.cs
-src/FingerprintPro.ServerSdk/Client/SwaggerDateConverter.cs
+src/Fingerprint.ServerSdk.Test/**
+src/Fingerprint.ServerSdk/Model/Model.cs
+src/Fingerprint.ServerSdk/Model/ASN.cs
+src/Fingerprint.ServerSdk/Client/ApiClient.cs
+src/Fingerprint.ServerSdk/Client/ApiResponse.cs
+src/Fingerprint.ServerSdk/Client/IApiAccessor.cs
+src/Fingerprint.ServerSdk/Client/ApiException.cs
+src/Fingerprint.ServerSdk/Client/IReadableConfiguration.cs
+src/Fingerprint.ServerSdk/Client/ExceptionFactory.cs
+src/Fingerprint.ServerSdk/Client/SwaggerDateConverter.cs
 
 **/GlobalConfiguration.cs
 .gitignore

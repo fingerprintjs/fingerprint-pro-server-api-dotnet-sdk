@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.WebhookJailbroken
+# Fingerprint.ServerSdk.Model.WebhookJailbroken
 ## Properties
 
 Name | Type | Description | Notes

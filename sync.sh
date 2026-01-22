@@ -25,5 +25,5 @@ examplesList=(
 )
 
 for example in ${examplesList[*]}; do
-  curl -o ./src/FingerprintPro.ServerSdk.Test/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
+  curl -o ./src/Fingerprint.ServerSdk.Test/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
 done

@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.BrowserDetails
+# Fingerprint.ServerSdk.Model.BrowserDetails
 ## Properties
 
 Name | Type | Description | Notes

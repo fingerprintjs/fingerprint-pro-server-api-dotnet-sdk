@@ -1,4 +1,4 @@
-# FingerprintPro.ServerSdk.Model.HighActivity
+# Fingerprint.ServerSdk.Model.HighActivity
 ## Properties
 
 Name | Type | Description | Notes
