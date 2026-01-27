@@ -1,0 +1,238 @@
+{{>partial_header}}
+{{#nrt}}
+#nullable enable
+
+{{/nrt}}
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.DependencyInjection;
+using {{packageName}}.{{apiPackage}};
+{{#models}}
+{{#-first}}
+using {{packageName}}.{{modelPackage}};
+{{/-first}}
+{{/models}}
+
+namespace {{packageName}}.{{clientPackage}}
+{
+    /// <summary>
+    /// Provides hosting configuration for {{packageName}}
+    /// </summary>
+    {{>visibility}} class HostConfiguration
+    {
+        private readonly IServiceCollection _services;
+        private readonly JsonSerializerOptions _jsonOptions = new();
+
+        /// <summary>
+        /// Indicates whether at least one API token has been registered
+        /// </summary>
+        private bool TokenAdded { get; set; }
+
+        /// <summary>
+        /// Indicates whether HTTP clients for the SDK have been added to the service collection.
+        /// </summary>
+        internal bool HttpClientsAdded { get; private set; }
+
+        /// <summary>
+        /// The User-Agent header value sent with SDK HTTP requests.
+        /// Defaults to <c>fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}</c>.
+        /// </summary>
+        public string UserAgent { get; set; } = $"fingerprint-dotnet-sdk/{ClientUtils.ClientVersion}";
+
+        /// <summary>
+        /// The API region used to resolve the default base URL when <see cref="BaseUrl"/> is not provided.
+        /// Defaults to <see cref="Region.Us"/>.
+        /// </summary>
+        public Region Region { get; set; } = Region.Us;
+
+        /// <summary>
+        /// Optional absolute base URL that overrides region resolution.
+        /// When set, <see cref="Region"/> is ignored for base URL calculation.
+        /// </summary>
+        public string BaseUrl { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="HostConfiguration"/> and registers core SDK singletons. 
+        /// </summary>
+        /// <param name="services">Application service collection used for registration.</param>
+        public HostConfiguration(IServiceCollection services)
+        {
+            _services = services;
+            _jsonOptions.Converters.Add(new JsonStringEnumConverter());
+            _jsonOptions.Converters.Add(new DateTimeJsonConverter());
+            _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+            {{#supportsDateOnly}}
+            _jsonOptions.Converters.Add(new DateOnlyJsonConverter());
+            _jsonOptions.Converters.Add(new DateOnlyNullableJsonConverter());
+            {{/supportsDateOnly}}
+            {{#models}}
+            {{#model}}
+            {{#isEnum}}
+            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}JsonConverter());
+            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}NullableJsonConverter());
+            {{/isEnum}}
+            {{^isEnum}}
+            _jsonOptions.Converters.Add(new {{classname}}JsonConverter());
+            {{/isEnum}}
+            {{/model}}
+            {{/models}}
+            JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new{{^net60OrLater}} JsonSerializerOptionsProvider{{/net60OrLater}}(_jsonOptions);
+            _services.AddSingleton(jsonSerializerOptionsProvider);
+            {{#useSourceGeneration}}
+
+            {{#models}}
+            {{#-first}}
+            _jsonOptions.TypeInfoResolver = System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver.Combine(
+            {{/-first}}
+            {{/models}}
+                {{#lambda.joinLinesWithComma}}
+                {{#models}}
+                {{#model}}
+                new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}SerializationContext(){{#-last}},{{/-last}}
+                {{/model}}
+                {{/models}}
+                {{/lambda.joinLinesWithComma}}
+            {{#models}}
+            {{#-last}}
+
+                new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver()
+            );
+            {{/-last}}
+            {{/models}}
+
+            {{/useSourceGeneration}}
+            _services.AddSingleton<IApiFactory, ApiFactory>();{{#apiInfo}}{{#apis}}
+            _services.AddSingleton<{{classname}}Events>();{{/apis}}{{/apiInfo}}
+        }
+
+        /// <summary>
+        /// Registers and configures the SDK <see cref="HttpClient"/> instances used by <see cref="IFingerprintApi"/>.
+        /// Requires tokens to be added beforehand.
+        /// </summary>
+        /// <param name="client">Optional per-client configuration</param>
+        /// <param name="builder">Optional hook to customize the created <see cref="IHttpClientBuilder"/></param>
+        /// <returns>The current <see cref="HostConfiguration"/> for chaining.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when no API tokens were added prior to calling this method.</exception>
+        public HostConfiguration Add{{apiName}}HttpClients(Action<HttpClient>{{nrt?}} client = null, Action<IHttpClientBuilder>{{nrt?}} builder = null)
+        {
+            if (!TokenAdded)
+            {
+                throw new InvalidOperationException(
+                    "No API tokens provided. Call options.AddTokens(new BearerToken(\"<SECRET_API_KEY>\")) before AddApiHttpClients."
+                );
+            }
+
+            if (client == null)
+            {
+                client = c =>
+                {
+                    c.BaseAddress = ResolveBaseUri();
+                    c.DefaultRequestHeaders.UserAgent.Add(ProductInfoHeaderValue.Parse(UserAgent));
+                };
+            }
+            else
+            {
+                // Override custom client's base address if it's empty.
+                var customClient = client;
+                client = c =>
+                {
+                    customClient(c);
+                    if (c.BaseAddress is null)
+                    {
+                        c.BaseAddress = ResolveBaseUri();
+                        c.DefaultRequestHeaders.UserAgent.Add(ProductInfoHeaderValue.Parse(UserAgent));
+                    }
+                };
+            }
+
+            var builders = new List<IHttpClientBuilder>
+            {
+                {{#apiInfo}}{{#apis}}_services.AddHttpClient<{{interfacePrefix}}{{classname}}, {{classname}}>(client){{^-last}},{{/-last}}{{/apis}}{{/apiInfo}}
+            };
+
+            if (builder != null)
+                foreach (var instance in builders)
+                    builder(instance);
+
+            HttpClientsAdded = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Allows customizing the JSON serialization options used by the SDK.
+        /// </summary>
+        /// <param name="options">A delegate that mutates the <see cref="JsonSerializerOptions"/> instance.</param>
+        /// <returns>The current <see cref="HostConfiguration"/> for chaining.</returns>
+        public HostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
+        {
+            options(_jsonOptions);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a single token to the service collection (e.g. <see cref="BearerToken"/>)
+        /// </summary>
+        /// <typeparam name="TTokenBase">Token base type.</typeparam>
+        /// <param name="token">The token instance to register.</param>
+        /// <returns>The current <see cref="HostConfiguration"/> for chaining.</returns>
+        public HostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
+        {
+            TokenAdded = true;
+            return AddTokens(new[] { token });
+        }
+
+        /// <summary>
+        /// Adds multiple tokens to the service collection.
+        /// </summary>
+        /// <typeparam name="TTokenBase">Token base type.</typeparam>
+        /// <param name="tokens">A sequence of tokens to register.</param>
+        /// <returns>The current <see cref="HostConfiguration"/> for chaining.</returns>
+        public HostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
+        {
+            var container = new TokenContainer<TTokenBase>(tokens);
+            _services.AddSingleton(_ => container);
+
+            if (container.Tokens.Count > 0)
+            {
+                TokenAdded = true;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Registers a token provider in the service collection.
+        /// </summary>
+        /// <typeparam name="TTokenProvider">Provider type.</typeparam>
+        /// <typeparam name="TTokenBase">Token base type produced by the provider.</typeparam>
+        /// <returns>The current <see cref="HostConfiguration"/> for chaining.</returns>
+        public HostConfiguration UseProvider<TTokenProvider, TTokenBase>()
+            where TTokenProvider : TokenProvider<TTokenBase>
+            where TTokenBase : TokenBase
+        {
+            _services.AddSingleton<TTokenProvider>();
+            _services.AddSingleton<TokenProvider<TTokenBase>>(services => services.GetRequiredService<TTokenProvider>());
+
+            return this;
+        }
+
+        /// <summary>
+        /// Resolves the base API URI using <see cref="BaseUrl"/> if provided; otherwise by <see cref="Region"/>.
+        /// </summary>
+        /// <remarks>
+        /// If <see cref="BaseUrl"/> is non-empty, it is used directly.
+        /// Otherwise, the default URL for <see cref="Region"/> is returned.
+        /// </remarks>
+        /// <returns>The resolved <see cref="Uri"/>.</returns>
+        private Uri ResolveBaseUri()
+        {
+            return !string.IsNullOrWhiteSpace(BaseUrl) ? new Uri(BaseUrl) : Region.GetBaseUri();
+        }
+    }
+}

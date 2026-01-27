@@ -1,37 +1,29 @@
 #!/bin/bash
 
-# clean models and docs before generating
-find ./src/Fingerprint.ServerSdk/Model -type f ! -name "DictionaryModel.cs" -exec rm {} +
-find ./docs -type f ! -name "DecryptionKey.md" ! -name "Sealed.md" ! -name "WebhookValidation.md" -exec rm {} +
+# Cleanup
+rm -Rf ./docs
+rm -Rf ./src/Fingerprint.ServerSdk
 
-# jar was downloaded from here https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.34/
+# Prepare OpenAPI Generator CLI
+OPENAPI_GENERATOR_FILE="./bin/openapi-generator-cli.jar"
+OPENAPI_GENERATOR_URL="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.19.0/openapi-generator-cli-7.19.0.jar"
 
-java -jar ./bin/swagger-codegen-cli.jar generate -t ./template -l csharp -i ./res/fingerprint-server-api.yaml -o ./ -c config.json
-dotnet format
-
-platform=$(uname)
-
-# Fix for codegen generating override in ToJson for models that extend Dictionary
-declare -a files=("./src/Fingerprint.ServerSdk/Model/RawDeviceAttributes.cs" "./src/Fingerprint.ServerSdk/Model/WebhookRawDeviceAttributes.cs" "./src/Fingerprint.ServerSdk/Model/Tag.cs")
-
-for i in "${files[@]}"
-do
-  (
-    # Model file fix
-    if [ "$platform" = "Darwin" ]; then
-      sed -i '' 's/public override string ToJson()/public string ToJson()/' "$i"
-      sed -i '' 's/: Dictionary/: DictionaryModel/' "$i"
-    else
-      sed -i 's/public override string ToJson()/public string ToJson()/' "$i"
-      sed -i 's/: Dictionary/: DictionaryModel/' "$i"
-    fi
-  )
-done
-
-# Fix for empty type in RawDeviceAttribute docs
-if [ "$platform" = "Darwin" ]; then
-sed -i '' 's/\[\*\*\*\*\](\.md)/**JsonElement**/g' docs/RawDeviceAttribute.md
-else
-sed -i 's/\[\*\*\*\*\](\.md)/**JsonElement**/g' docs/RawDeviceAttribute.md
+if [[ ! -e "$OPENAPI_GENERATOR_FILE" ]]; then
+  echo "Downloading $OPENAPI_GENERATOR_URL..."
+  mkdir -p "$(dirname "$OPENAPI_GENERATOR_FILE")"
+  curl -fSL -o "$OPENAPI_GENERATOR_FILE" "$OPENAPI_GENERATOR_URL"
 fi
 
+# Generate
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+java -Duser.language=en -Duser.country=US -Duser.variant="" \
+  -jar "$OPENAPI_GENERATOR_FILE" generate \
+  -t ./template -g csharp \
+  -i ./res/fingerprint-server-api.yaml -o ./ -c config.json
+
+java -jar ./bin/openapi-generator-cli.jar generate -t ./template -g csharp -i ./res/fingerprint-server-api.yaml -o ./ -c config.json
+
+# Fix api doc
+mv ./docs/apis/FingerprintApi.md ./docs/FingerprintApi.md
+rmdir ./docs/apis

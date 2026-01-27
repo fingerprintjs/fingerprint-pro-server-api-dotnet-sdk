@@ -1,23 +1,69 @@
+using System;
+using System.IO;
+using System.Linq;
 using System.Text.Json;
-using Fingerprint.ServerSdk.Json;
+using System.Text.Json.Serialization;
+using Fingerprint.ServerSdk.Client;
 using Fingerprint.ServerSdk.Model;
 using Org.BouncyCastle.Crypto;
+using Xunit;
 
 namespace Fingerprint.ServerSdk.Test;
 
-[TestFixture]
 public class SealedTest
 {
-    [Test]
+    private readonly JsonSerializerOptions _jsonOptions = new();
+
+    public SealedTest()
+    {
+        _jsonOptions.Converters.Add(new JsonStringEnumConverter());
+        _jsonOptions.Converters.Add(new DateTimeJsonConverter());
+        _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+        _jsonOptions.Converters.Add(new BotResultJsonConverter());
+        _jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
+        _jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
+        _jsonOptions.Converters.Add(new ErrorJsonConverter());
+        _jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
+        _jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
+        _jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
+        _jsonOptions.Converters.Add(new EventJsonConverter());
+        _jsonOptions.Converters.Add(new EventSearchJsonConverter());
+        _jsonOptions.Converters.Add(new EventUpdateJsonConverter());
+        _jsonOptions.Converters.Add(new GeolocationJsonConverter());
+        _jsonOptions.Converters.Add(new GeolocationSubdivisionsInnerJsonConverter());
+        _jsonOptions.Converters.Add(new IPBlockListJsonConverter());
+        _jsonOptions.Converters.Add(new IPInfoJsonConverter());
+        _jsonOptions.Converters.Add(new IPInfoV4JsonConverter());
+        _jsonOptions.Converters.Add(new IPInfoV6JsonConverter());
+        _jsonOptions.Converters.Add(new IdentificationJsonConverter());
+        _jsonOptions.Converters.Add(new IdentificationConfidenceJsonConverter());
+        _jsonOptions.Converters.Add(new IntegrationJsonConverter());
+        _jsonOptions.Converters.Add(new IntegrationSubintegrationJsonConverter());
+        _jsonOptions.Converters.Add(new ProximityJsonConverter());
+        _jsonOptions.Converters.Add(new ProxyConfidenceJsonConverter());
+        _jsonOptions.Converters.Add(new ProxyConfidenceNullableJsonConverter());
+        _jsonOptions.Converters.Add(new ProxyDetailsJsonConverter());
+        _jsonOptions.Converters.Add(new SDKJsonConverter());
+        _jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
+        _jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
+        _jsonOptions.Converters.Add(new TriggeredByInnerJsonConverter());
+        _jsonOptions.Converters.Add(new VelocityJsonConverter());
+        _jsonOptions.Converters.Add(new VelocityDataJsonConverter());
+        _jsonOptions.Converters.Add(new VpnConfidenceJsonConverter());
+        _jsonOptions.Converters.Add(new VpnConfidenceNullableJsonConverter());
+        _jsonOptions.Converters.Add(new VpnMethodsJsonConverter());
+    }
+    
+    [Fact]
     public void UnsealEventResponseTest()
     {
         var sealedResult = Convert.FromBase64String(
-            "noXc7SZeaIKHXyFfzrvEXBCbQ3FPxHL7VpxiMX78XcFXPbEcgS2GRor0g27N3LLvHCWvvvhrdwkeDhKjrSC4bQfpR1OoImxLUgY4/lg7C7JZh1hlhsj9JWR3nWVo8t5oKvaDcwx/DXnyM659S5Bh9RJrP47koPwTHYsd2+N6KAXX5iuDQj4Fonhp4A3/rEmVn83mRVUSgAvyM2yRq3bww6unERvsUmVrSv/IcMw6LBIvjsKkcAj5vnFgyr0K41ITtNIaiYDMCjR3KOzvZkSstv2eWOXopEPPn9C9wHYpHEDSzEODVB9lRMB6YbcgS0vOsFD5KLHiiE/luKZl28Z3vlQNWx21ASpJdi1J2s8cEWsmEHwMoqLhnkpqHEn21wQZgMjLDvIGZ+QRJo0KnCCY4TP1cB3/TQxvzTslBpBoUqXcuC+VCLRZPXARiq6nx7SvJ2wRttQq+QFbpbjj5sXkE3HMNsb2P4r7yrMxS8WIUBlVKlxj8foqgKTTyp05AQvCxHOWc2suzDBdxEhwGlaM4vpHuzBoJIAd1c+al+mNlO+XSnJ6xPwQ37WRwHheBq/8/RNh42FQpZZh7VcXcXRvtpR9HHr8kUegzZaFQJqtZAlMUfTF9tGE7gWEWWeLAdkhEDg/NNGu+HoCIJkPt03P2gZKtnx22aUG1mlS/VEWjwtEy8u8j1q9rWpTPCPkVZR07Zflvq/rjr/4W/UdQdS5X2slz3e0Ak9rRFtZVljB3PLfVbQDZiome3FE3JojguqSraRhmMlTl0fj09mkhcze8vi4rtAWogy3iundYNLhxfNG/xAl5h3Cyrxcg2NbrZhkuLDdKoS86Ka0jGbSqLLsk1RpYx51Ljdlft0dw1viz4JNU8xReelISsfo3hsJTVaqe29Gw+IsdFq+ojlC5/YajG6SXCRGNw==");
+            "noXc7Xu7PIKu1tbMkMxLbQG4XU46Bv5dED98hqTkPYZnmb8PG81Q83Kpg541Vt4NQdkzfezDSVk8FP9ZzJ08L0MMb4S8bT78c10Op1LyKwZU6DGr1e3V+ZWcNzHVG1rPoL+eUHN6yR9MQp8/CmSUBQUPOOAUXdoqWohbfIGxoQIuQ5BtfpSJuYD6kTyswSi56wxzY/s24dMwgS2KnA81Y1pdi3ZVJKBdwGYGg4T5Dvcqu0GWv3sScKD9b4Tagfbe2m8nbXY/QtN770c7J1xo/TNXXdq4lyqaMyqIayHOwRBP58tNF8mACusm1pogOVIt456wIMetCGKxicPJr7m/Q02ONzhkMtzzXwgwriglGHfM7UbtTsCytCBP7J2vp0tEkHiq/X3qtuvSLJqNyRzwFJhgisKGftc5CIaT2VxVKKxkL/6Ws6FPm4sQB1UGtMCMftKpyb1lFzG9lwFkKvYN9+FGtvRM50mbrzz7ONDxbwykkxihAab36MIuk7dfhvnVLFAjrpuCkEFdWrtjVyWmM0xVeXpEUtP6Ijk5P+VuPZ1alV/JV1q4WvfrGMizEZbwbp6eQZg9mwKe4IX+FVi7sPF2S/CCLI/d90S5Yz6bBP9uiQ3pCVlYbVOkpwS0YQxnR+h5J50qodY7LuswNO5VlEgI0ztkjPQBr8koT4SM54X2z14tA2tKCxSv1psEL5HOk4IWN+9f3RVfDKBDruDiDd+BtZquhYLmOFat9K4h41NrPGAqv5tKmmJtx3llMs6LFHPKBlNlI5zgqE7T47xv2AWw5nqWM107t8lpRETIgJx+YN/Jv6byJSQm7afaeDtHXGceMPOKMziH1XgsiQiS56OsmyyRgaq5YCmMuaPw8gcgVa7RNZSafkP34aQBAuJOA3JFs5xcYcubKutD3h1mk697A8vwdtR/Gj0zTvuUnQ/9o3qHSLseAEIiY9/dS6WJnKXRKTonQi2F6DV9NTzFVQl99AH22jq6lIsjbEEKcq/ydFDUpgAq4lyp9nPBHuPXSojdG+1BWuUyjYykaqnLzzqKgRalGzeWmRHd2qeNw8Bz5OWYBw82C3gHRS2BB9VquIgEYktDvgJ5yRfDYkp8qgxHoYeR88ijccWgdvk+WH78OPdwqA7rqdAYcWqn9KNozoxuYddc0fnrHbgaWpanCmPp0gNEeb4r+i9FDGPSkgYBdyrEPHblsDN/Ad1dhLIHEDEtQyv13s6tDRgLVvhowrzqIM+5cm/abyTDhXzSYDfCw2Wf90cBOMsbQBB2N2YRqnrpA50PGp+0IwlPL7qZj1N4JGhvQD0ux8Ood6AiXpdguj7DMP+T0laHIjWee5/xGZB6g3EsCdOZJjVj7hSE/L3eV4No0WcLqJ5DPOgw+FnvQpxndCTc8DW83tNm624lm7scu0A499vEFj1dhtq5gUxsGcqzm09+Vk2V/d0sa77Xocqe3bcfS5lXc/pHrOc1qKlK8kTr2AYNwjeJJ14euuin361WBETd1I6n8eIs02HyBas09o9lT7Nq05jsnbxej6d0q6GH7IYusiBFTJaAZ6UXOV5i1NOcw9jaGyHms3M2N/b2cmXFYTIFZSjSfbqoI6YZF73sMPhEZqfZ5Jjq+ZLMC3A+yFPFJOW/0oolUGbcC8TBVmLi37Z9Wgc338w2Jf+I94SdViku");
         var key = Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq53=");
 
-        var expectedResponse = JsonUtils.Deserialize<EventsGetResponse>(
-                "{\"products\":{\"identification\":{\"data\":{\"visitorId\":\"2ZEDCZEfOfXjEmMuE3tq\",\"requestId\":\"1703067132750.Z5hutJ\",\"replayed\":false,\"browserDetails\":{\"browserName\":\"Safari\",\"browserMajorVersion\":\"17\",\"browserFullVersion\":\"17.3\",\"os\":\"Mac OS X\",\"osVersion\":\"10.15.7\",\"device\":\"Other\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15\"},\"incognito\":false,\"ip\":\"::1\",\"ipLocation\":{\"accuracyRadius\":1000,\"latitude\":59.3241,\"longitude\":18.0517,\"postalCode\":\"100 05\",\"timezone\":\"Europe/Stockholm\",\"city\":{\"name\":\"Stockholm\"},\"country\":{\"code\":\"SE\",\"name\":\"Sweden\"},\"continent\":{\"code\":\"EU\",\"name\":\"Europe\"},\"subdivisions\":[{\"isoCode\":\"AB\",\"name\":\"Stockholm County\"}]},\"timestamp\":1703067136286,\"time\":\"2023-12-20T10:12:16Z\",\"url\":\"http://localhost:8080/\",\"tag\":{\"foo\":\"bar\"},\"confidence\":{\"score\":1},\"visitorFound\":true,\"firstSeenAt\":{\"global\":\"2023-12-15T12:13:55.103Z\",\"subscription\":\"2023-12-15T12:13:55.103Z\"},\"lastSeenAt\":{\"global\":\"2023-12-19T11:39:51.52Z\",\"subscription\":\"2023-12-19T11:39:51.52Z\"}}},\"botd\":{\"data\":{\"bot\":{\"result\":\"notDetected\"},\"meta\":{\"foo\":\"bar\"},\"url\":\"http://localhost:8080/\",\"ip\":\"::1\",\"time\":\"2023-12-20T10:12:13.894Z\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15\",\"requestId\":\"1703067132750.Z5hutJ\"}}}}")
-            !;
+        const string exampleJson = "{\"linked_id\":\"somelinkedId\",\"tags\":{},\"timestamp\":1708102555327,\"event_id\":\"1708102555327.NLOjmg\",\"url\":\"https://www.example.com/login?hope{this{works[!\",\"ip_address\":\"61.127.217.15\",\"user_agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....\",\"browser_details\":{\"browser_name\":\"Chrome\",\"browser_major_version\":\"74\",\"browser_full_version\":\"74.0.3729\",\"os\":\"Windows\",\"os_version\":\"7\",\"device\":\"Other\"},\"identification\":{\"visitor_id\":\"Ibk1527CUFmcnjLwIs4A9\",\"confidence\":{\"score\":0.97,\"version\":\"1.1\"},\"visitor_found\":false,\"first_seen_at\":1708102555327,\"last_seen_at\":1708102555327},\"supplementary_id_high_recall\":{\"visitor_id\":\"3HNey93AkBW6CRbxV6xP\",\"visitor_found\":true,\"confidence\":{\"score\":0.97,\"version\":\"1.1\"},\"first_seen_at\":1708102555327,\"last_seen_at\":1708102555327},\"bot\":\"not_detected\",\"root_apps\":false,\"emulator\":false,\"ip_info\":{\"v4\":{\"address\":\"94.142.239.124\",\"geolocation\":{\"accuracy_radius\":20,\"latitude\":50.05,\"longitude\":14.4,\"postal_code\":\"150 00\",\"timezone\":\"Europe/Prague\",\"city_name\":\"Prague\",\"country_code\":\"CZ\",\"country_name\":\"Czechia\",\"continent_code\":\"EU\",\"continent_name\":\"Europe\",\"subdivisions\":[{\"iso_code\":\"10\",\"name\":\"Hlavni mesto Praha\"}]},\"asn\":\"7922\",\"asn_name\":\"COMCAST-7922\",\"asn_network\":\"73.136.0.0/13\",\"datacenter_result\":true,\"datacenter_name\":\"DediPath\"},\"v6\":{\"address\":\"2001:db8:3333:4444:5555:6666:7777:8888\",\"geolocation\":{\"accuracy_radius\":5,\"latitude\":49.982,\"longitude\":36.2566,\"postal_code\":\"10112\",\"timezone\":\"Europe/Berlin\",\"city_name\":\"Berlin\",\"country_code\":\"DE\",\"country_name\":\"Germany\",\"continent_code\":\"EU\",\"continent_name\":\"Europe\",\"subdivisions\":[{\"iso_code\":\"BE\",\"name\":\"Land Berlin\"}]},\"asn\":\"6805\",\"asn_name\":\"Telefonica Germany\",\"asn_network\":\"2a02:3100::/24\",\"datacenter_result\":false,\"datacenter_name\":\"\"}},\"ip_blocklist\":{\"email_spam\":false,\"attack_source\":false,\"tor_node\":false},\"proxy\":true,\"proxy_confidence\":\"low\",\"proxy_details\":{\"proxy_type\":\"residential\",\"last_seen_at\":1708102555327},\"vpn\":false,\"vpn_confidence\":\"high\",\"vpn_origin_timezone\":\"Europe/Berlin\",\"vpn_origin_country\":\"unknown\",\"vpn_methods\":{\"timezone_mismatch\":false,\"public_vpn\":false,\"auxiliary_mobile\":false,\"os_mismatch\":false,\"relay\":false},\"incognito\":false,\"tampering\":false,\"tampering_details\":{\"anomaly_score\":0.1955,\"anti_detect_browser\":false},\"cloned_app\":false,\"factory_reset_timestamp\":0,\"jailbroken\":false,\"frida\":false,\"privacy_settings\":false,\"virtual_machine\":false,\"location_spoofing\":false,\"velocity\":{\"distinct_ip\":{\"5_minutes\":1,\"1_hour\":1,\"24_hours\":1},\"distinct_country\":{\"5_minutes\":1,\"1_hour\":2,\"24_hours\":2},\"events\":{\"5_minutes\":1,\"1_hour\":5,\"24_hours\":5},\"ip_events\":{\"5_minutes\":1,\"1_hour\":5,\"24_hours\":5},\"distinct_ip_by_linked_id\":{\"5_minutes\":1,\"1_hour\":5,\"24_hours\":5},\"distinct_visitor_id_by_linked_id\":{\"5_minutes\":1,\"1_hour\":5,\"24_hours\":5}},\"developer_tools\":false,\"mitm_attack\":false,\"sdk\":{\"platform\":\"js\",\"version\":\"3.11.10\"},\"replayed\":false}";
+
+        var expectedResponse = JsonSerializer.Deserialize<Event>(exampleJson, _jsonOptions);
 
         var actualResponse = Sealed.UnsealEventResponse(
             sealedResult,
@@ -29,10 +75,10 @@ public class SealedTest
                 new(key, Sealed.DecryptionAlgorithm.Aes256Gcm)
             });
 
-        Assert.That(actualResponse.ToString(), Is.EqualTo(expectedResponse.ToString()));
+        Assert.Equal(expectedResponse.ToString(), actualResponse.ToString());
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithInvalidSealedResultTest()
     {
         // "{\"invalid\":true}"
@@ -40,7 +86,7 @@ public class SealedTest
             Convert.FromBase64String("noXc7VOpBstjjcavDKSKr4HTavt4mdq8h6NC32T0hUtw9S0jXT8lPjZiWL8SyHxmrF3uTGqO+g==");
         var key = Convert.FromBase64String("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq53=");
 
-        Assert.Throws<InvalidDataException>(() =>
+        Assert.Throws<ArgumentException>(() =>
             Sealed.UnsealEventResponse(
                 sealedResult,
                 new Sealed.DecryptionKey[]
@@ -50,7 +96,7 @@ public class SealedTest
                 }));
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithInvalidJsonSealedResultTest()
     {
         var sealedResult = Convert.FromBase64String(
@@ -67,7 +113,7 @@ public class SealedTest
                 }));
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithNotCompressedSealedResultTest()
     {
         var sealedResult = Convert.FromBase64String(
@@ -83,12 +129,12 @@ public class SealedTest
                     new(key, Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
 
-        var lastError = ex!.UnsealExceptions.Last();
+        var lastError = ex.UnsealExceptions.Last();
 
-        Assert.That(lastError.InnerException, Is.InstanceOf(typeof(InvalidDataException)));
+        Assert.IsType<InvalidDataException>(lastError.InnerException);
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithInvalidHeaderTest()
     {
         var sealedResult = Convert.FromBase64String(
@@ -105,7 +151,7 @@ public class SealedTest
                 }));
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithEmptyData()
     {
         var sealedResult = Array.Empty<byte>();
@@ -121,7 +167,7 @@ public class SealedTest
                 }));
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithInvalidKeys()
     {
         var sealedResult = Convert.FromBase64String(
@@ -138,7 +184,7 @@ public class SealedTest
                 }));
     }
 
-    [Test]
+    [Fact]
     public void UnsealEventResponseWithInvalidNonce()
     {
         byte[] sealedResult = { 0x9E, 0x85, 0xDC, 0xED, 0xAA, 0xBB, 0xCC };
@@ -153,7 +199,7 @@ public class SealedTest
                         Sealed.DecryptionAlgorithm.Aes256Gcm)
                 }));
 
-        var lastError = ex!.UnsealExceptions.Last();
-        Assert.That(lastError.InnerException, Is.InstanceOf(typeof(InvalidCipherTextException)));
+        var lastError = ex.UnsealExceptions.Last();
+        Assert.IsType<InvalidCipherTextException>(lastError.InnerException);
     }
 }

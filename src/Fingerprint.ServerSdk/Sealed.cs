@@ -1,6 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
-using Fingerprint.ServerSdk.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Fingerprint.ServerSdk.Client;
 using Fingerprint.ServerSdk.Model;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
@@ -110,11 +116,12 @@ namespace Fingerprint.ServerSdk
         /// <remarks>
         /// The SDK will try to decrypt the result with each key until it succeeds.
         /// </remarks>
-        public static EventsGetResponse UnsealEventResponse(byte[] sealedData, DecryptionKey[] keys)
+        public static Event UnsealEventResponse(byte[] sealedData, DecryptionKey[] keys)
         {
             var unsealed = Unseal(sealedData, keys);
 
-            var value = JsonUtils.Deserialize<EventsGetResponse>(Encoding.UTF8.GetString(unsealed));
+            var json = Encoding.UTF8.GetString(unsealed);
+            var value = JsonSerializer.Deserialize<Event>(json, GetJsonSerializerOptions());
 
             if (value == null)
             {
@@ -143,11 +150,76 @@ namespace Fingerprint.ServerSdk
 
         private static byte[] Decompress(byte[] data)
         {
-            using var compressedStream = new MemoryStream(data);
-            using var deflateStream = new DeflateStream(compressedStream, CompressionMode.Decompress);
-            using var resultStream = new MemoryStream();
-            deflateStream.CopyTo(resultStream);
-            return resultStream.ToArray();
+            using (var compressedStream = new MemoryStream(data))
+            {
+                using (var deflateStream = new DeflateStream(compressedStream, CompressionMode.Decompress))
+                {
+                    using (var resultStream = new MemoryStream())
+                    {
+                        deflateStream.CopyTo(resultStream);
+                        return resultStream.ToArray();
+                    }
+                }
+            }
+        }
+
+        private static JsonSerializerOptions GetJsonSerializerOptions()
+        {
+            var jsonOptions = new JsonSerializerOptions();
+            jsonOptions.Converters.Add(new JsonStringEnumConverter());
+            jsonOptions.Converters.Add(new DateTimeJsonConverter());
+            jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+            jsonOptions.Converters.Add(new BotResultJsonConverter());
+            jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
+            jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
+            jsonOptions.Converters.Add(new CanvasJsonConverter());
+            jsonOptions.Converters.Add(new EmojiJsonConverter());
+            jsonOptions.Converters.Add(new ErrorJsonConverter());
+            jsonOptions.Converters.Add(new ErrorCodeJsonConverter());
+            jsonOptions.Converters.Add(new ErrorCodeNullableJsonConverter());
+            jsonOptions.Converters.Add(new ErrorResponseJsonConverter());
+            jsonOptions.Converters.Add(new EventJsonConverter());
+            jsonOptions.Converters.Add(new EventRuleActionJsonConverter());
+            jsonOptions.Converters.Add(new EventRuleActionAllowJsonConverter());
+            jsonOptions.Converters.Add(new EventRuleActionBlockJsonConverter());
+            jsonOptions.Converters.Add(new EventSearchJsonConverter());
+            jsonOptions.Converters.Add(new EventUpdateJsonConverter());
+            jsonOptions.Converters.Add(new FontPreferencesJsonConverter());
+            jsonOptions.Converters.Add(new GeolocationJsonConverter());
+            jsonOptions.Converters.Add(new GeolocationSubdivisionsInnerJsonConverter());
+            jsonOptions.Converters.Add(new IPBlockListJsonConverter());
+            jsonOptions.Converters.Add(new IPInfoJsonConverter());
+            jsonOptions.Converters.Add(new IPInfoV4JsonConverter());
+            jsonOptions.Converters.Add(new IPInfoV6JsonConverter());
+            jsonOptions.Converters.Add(new IdentificationJsonConverter());
+            jsonOptions.Converters.Add(new IdentificationConfidenceJsonConverter());
+            jsonOptions.Converters.Add(new IntegrationJsonConverter());
+            jsonOptions.Converters.Add(new IntegrationSubintegrationJsonConverter());
+            jsonOptions.Converters.Add(new PluginsInnerJsonConverter());
+            jsonOptions.Converters.Add(new PluginsInnerMimeTypesInnerJsonConverter());
+            jsonOptions.Converters.Add(new ProximityJsonConverter());
+            jsonOptions.Converters.Add(new ProxyConfidenceJsonConverter());
+            jsonOptions.Converters.Add(new ProxyConfidenceNullableJsonConverter());
+            jsonOptions.Converters.Add(new ProxyDetailsJsonConverter());
+            jsonOptions.Converters.Add(new RawDeviceAttributesJsonConverter());
+            jsonOptions.Converters.Add(new RequestHeaderModificationsJsonConverter());
+            jsonOptions.Converters.Add(new RuleActionHeaderFieldJsonConverter());
+            jsonOptions.Converters.Add(new RuleActionTypeJsonConverter());
+            jsonOptions.Converters.Add(new RuleActionTypeNullableJsonConverter());
+            jsonOptions.Converters.Add(new SDKJsonConverter());
+            jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
+            jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
+            jsonOptions.Converters.Add(new TouchSupportJsonConverter());
+            jsonOptions.Converters.Add(new TriggeredByInnerJsonConverter());
+            jsonOptions.Converters.Add(new VelocityJsonConverter());
+            jsonOptions.Converters.Add(new VelocityDataJsonConverter());
+            jsonOptions.Converters.Add(new VpnConfidenceJsonConverter());
+            jsonOptions.Converters.Add(new VpnConfidenceNullableJsonConverter());
+            jsonOptions.Converters.Add(new VpnMethodsJsonConverter());
+            jsonOptions.Converters.Add(new WebGlBasicsJsonConverter());
+            jsonOptions.Converters.Add(new WebGlExtensionsJsonConverter());
+
+            return jsonOptions;
         }
     }
 }

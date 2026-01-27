@@ -1,147 +1,145 @@
+using System.Net;
 using Fingerprint.ServerSdk.Api;
 using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Extensions;
 using Fingerprint.ServerSdk.Model;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Xunit;
 
 namespace Fingerprint.ServerSdk.FunctionalTest;
 
-[TestFixture]
-public class ApiTests
+public class ApiTests : IAsyncLifetime
 {
-    private FingerprintApi _api;
-    private string _requestId;
-    private string _visitorId;
+    private IHost _host;
+    private IFingerprintApi _api;
+    private string _eventId;
     private long _start;
     private long _end;
     private string _paginationKey;
 
-    [OneTimeSetUp]
-    public void OneTimeSetup()
+    public async Task InitializeAsync()
     {
-        var apiKey = Environment.GetEnvironmentVariable("SECRET_API_KEY");
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            Assert.Fail("SECRET_API_KEY is not set. Provide it via environment.");
+        var eventsResponse = await _api.SearchEventsAsync(2, start: _start, end: _end);
+
+        Assert.True(eventsResponse.IsOk);
+
+        var events = eventsResponse.Ok();
+
+        Assert.NotEmpty(events.Events);
+
+        var first = events.Events.First();
+        _eventId = first.EventId;
+        _paginationKey = events.PaginationKey;
         }
 
-        var configuration = new Configuration(apiKey!);
-        _api = new FingerprintApi(configuration);
+    public ApiTests()
+    {
+        _host = CreateHostBuilder().Build();
+        _api = _host.Services.GetRequiredService<IFingerprintApi>();
 
         var now = DateTimeOffset.UtcNow;
         _end = now.ToUnixTimeMilliseconds();
         _start = now.AddDays(-90).ToUnixTimeMilliseconds();
-
-        var events = _api.SearchEvents(2, start: _start, end: _end);
-        Assert.That(events.Events, Is.Not.Null.And.Not.Empty, "No events returned by SearchEvents.");
-
-        var first = events.Events[0].Products.Identification.Data;
-        _requestId = first.RequestId;
-        _visitorId = first.VisitorId;
-        _paginationKey = events.PaginationKey;
     }
 
-    [Test]
-    public void GetEvent_ReturnsExpectedFields()
+    private static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
+        .ConfigureApi((_, _, options) =>
+        {
+            var token = Environment.GetEnvironmentVariable("SECRET_API_KEY");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                throw new InvalidOperationException("SECRET_API_KEY is missing");
+            }
+
+            var region = Environment.GetEnvironmentVariable("REGION");
+            if (!string.IsNullOrWhiteSpace(region))
+            {
+                options.Region = Regions.Parse(region);
+            }
+
+            var bearerToken = new BearerToken(token);
+            options.AddTokens(bearerToken);
+        });
+
+    [Fact]
+    public async Task GetEvent_ReturnsExpectedFields()
     {
-        var events = _api.GetEvent(_requestId);
+        Assert.NotNull(_eventId);
+
+        var eventResponse = await _api.GetEventAsync(_eventId);
+        Assert.True(eventResponse.IsOk);
+        var model = eventResponse.Ok();
 
         Assert.Multiple(() =>
         {
-            Assert.That(events, Is.InstanceOf<EventsGetResponse>());
-            Assert.That(events.Products, Is.InstanceOf<Products>());
-            Assert.That(events.Products.Botd, Is.InstanceOf<ProductBotd>());
-            Assert.That(events.Products.Identification, Is.InstanceOf<ProductIdentification>());
-            Assert.That(events.Products.Identification.Data.RequestId, Is.EqualTo(_requestId));
+            Assert.NotNull(model);
+            Assert.IsType<BotResult>(model.Bot);
+            Assert.Equal(_eventId, model.EventId);
         });
     }
 
-    [Test]
-    public void GetEvent_WrongRequestId_Throws404()
+    [Fact]
+    public async Task GetEvent_WrongRequestId_Throws404()
     {
-        Assert.That(async () => await _api.GetEventAsync("1662542583652.pLBzes"),
-            Throws.TypeOf<ApiException>()
-                .With.Message.Contains("request id not found")
-                .And.Property(nameof(ApiException.HttpCode)).EqualTo(404)
-                .And.Property(nameof(ApiException.ErrorCode)).EqualTo(ErrorCode.RequestNotFound)
-                .And.Property(nameof(ApiException.ErrorContent)).InstanceOf(typeof(ErrorResponse)));
-    }
-
-    [Test]
-    public void GetVisits_WithoutRequestId()
-    {
-        var response = _api.GetVisits(_visitorId);
-
+        var wrongRequest = await _api.GetEventAsync("1662542583652.pLBzes");
+        
         Assert.Multiple(() =>
         {
-            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
-            Assert.That(response.Visits, Is.All.InstanceOf<Visit>());
-            Assert.That(response.VisitorId, Is.EqualTo(_visitorId));
+            Assert.True(wrongRequest.IsNotFound);
+            var notFound = wrongRequest.NotFound();
+            Assert.Equal(HttpStatusCode.NotFound, wrongRequest.StatusCode);
+            Assert.Equal(ErrorCode.RequestNotFound, notFound.Error.Code);
         });
     }
 
-    [Test]
-    public void GetVisits_WithRequestId()
-    {
-        var allVisits = _api.GetVisits(_visitorId);
-        Assert.That(allVisits.Visits, Is.Not.Null.And.Not.Empty, "Expected at least one visit for visitor.");
-
-        var requestId = allVisits.Visits[0].RequestId;
-
-        var response = _api.GetVisits(_visitorId, requestId);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(response, Is.InstanceOf<VisitorsGetResponse>());
-            Assert.That(response.Visits, Has.Count.EqualTo(1));
-            Assert.That(response.Visits[0].RequestId, Is.EqualTo(requestId));
-            Assert.That(response.VisitorId, Is.EqualTo(_visitorId));
-        });
-    }
-
-    [Test]
-    public void SearchEvents_Returns()
+    [Fact]
+    public async Task SearchEvents_Returns()
     {
         var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
         var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
-        var response = _api.SearchEvents(
+        var response = await _api.SearchEventsAsync(
             limit: 2,
             start: new DateTimeOffset(start, TimeSpan.Zero).ToUnixTimeMilliseconds(),
             end: new DateTimeOffset(end, TimeSpan.Zero).ToUnixTimeMilliseconds()
         );
 
-        Assert.That(response.Events, Is.Not.Empty);
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
     }
 
-    [Test]
-    public void SearchEvents_Pagination()
+    [Fact]
+    public async Task SearchEvents_Pagination()
     {
-        if (string.IsNullOrEmpty(_paginationKey))
-        {
-            Assert.Inconclusive("Initial SearchEvents response did not include a pagination key.");
-        }
+        Assert.NotNull(_paginationKey);
 
-        var response = _api.SearchEvents(2, start: _start, end: _end, paginationKey: _paginationKey);
-        Assert.That(response.Events, Is.Not.Empty);
+        var response = await _api.SearchEventsAsync(2, start: _start, end: _end, paginationKey: _paginationKey);
+        Assert.True(response.IsOk);
+        Assert.NotEmpty(response.Ok().Events);
     }
 
-    [Test]
-    public void SearchEvents_ReverseWorks()
+    [Fact]
+    public async Task SearchEvents_ReverseWorks()
     {
-        var response = _api.SearchEvents(limit: 2, start: _start, end: _end, reverse: true);
-        Assert.That(response.Events, Has.Count.EqualTo(2));
+        var response = await _api.SearchEventsAsync(limit: 2, start: _start, end: _end, reverse: true);
+        Assert.True(response.IsOk);
+        var eventSearch = response.Ok();
+        Assert.Equal(2, eventSearch.Events.Count);
 
-        var oldestEventIdentificationData = response.Events[0].Products.Identification.Data;
-        var secondOldestEventIdentificationData = response.Events[1].Products.Identification.Data;
+        var oldestEvent = eventSearch.Events.First();
+        var newestEvent = eventSearch.Events.Last();
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(oldestEventIdentificationData.Timestamp, Is.Not.Null);
-            Assert.That(secondOldestEventIdentificationData.Timestamp, Is.Not.Null);
-        });
-        Assert.That(oldestEventIdentificationData.Timestamp, Is.LessThan(secondOldestEventIdentificationData.Timestamp));
+        Assert.True(oldestEvent.Timestamp < newestEvent.Timestamp);
 
         // Try to request old events to check if they still could be deserialized
-        _api.GetVisits(oldestEventIdentificationData.VisitorId);
-        _api.GetEvent(oldestEventIdentificationData.RequestId);
+        await _api.GetEventAsync(oldestEvent.EventId);
+        await _api.SearchEventsAsync(visitorId: oldestEvent.Identification.VisitorId);
+    }
+
+    public Task DisposeAsync()
+    {
+        _host.Dispose();
+        return Task.CompletedTask;
     }
 }
