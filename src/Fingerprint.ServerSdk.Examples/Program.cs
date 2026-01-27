@@ -1,85 +1,113 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System;
+﻿using System.Text.Json;
 using Fingerprint.ServerSdk.Api;
 using Fingerprint.ServerSdk.Client;
+using Fingerprint.ServerSdk.Extensions;
 using Fingerprint.ServerSdk.Model;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
+namespace Fingerprint.ServerSdk.Examples;
 
-var example = new FingerprintExample();
-example.GetVisitsExample();
-example.GetEventExample();
-example.SearchEventsExample();
-
-// Uncomment following line to test update event method
-// example.UpdateEventExample()
-
-// Uncomment following line to test delete visitor data
-// example.DeleteVisitorDataExample()
-
-internal class FingerprintExample
+public static class Program
 {
-    private readonly Configuration _configuration = new(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
-    private readonly string _visitorId = Environment.GetEnvironmentVariable("VISITOR_ID")!;
-    private readonly string _requestId = Environment.GetEnvironmentVariable("REQUEST_ID")!;
-    private readonly FingerprintApi _api;
-
-    public FingerprintExample()
+    public static async Task Main(string[] args)
     {
-        // Change region if needed
-        var region = Environment.GetEnvironmentVariable("REGION")!;
-        _configuration.Region = region switch
+        var host = CreateHostBuilder(args).Build();
+        var api = host.Services.GetRequiredService<IFingerprintApi>();
+
+        await SearchEventsExample(api);
+
+        var eventId = Environment.GetEnvironmentVariable("EVENT_ID");
+        if (!string.IsNullOrWhiteSpace(eventId))
         {
-            "eu" => Region.Eu,
-            "ap" => Region.Asia,
-            _ => _configuration.Region
+            await GetEventExample(api, eventId);
+        }
+
+        var updateEventId = Environment.GetEnvironmentVariable("UPDATE_EVENT_ID");
+        if (!string.IsNullOrWhiteSpace(updateEventId))
+        {
+            await UpdateEventExample(api, updateEventId);
+        }
+
+        var visitorId = Environment.GetEnvironmentVariable("VISITOR_ID");
+        if (!string.IsNullOrWhiteSpace(visitorId))
+        {
+            await DeleteVisitorDataExample(api, visitorId);
+        }
+    }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+        .ConfigureApi((_, _, options) =>
+        {
+            var token = Environment.GetEnvironmentVariable("SECRET_API_KEY");
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                throw new InvalidOperationException("SECRET_API_KEY is missing");
+            }
+
+            var region = Environment.GetEnvironmentVariable("REGION");
+            if (!string.IsNullOrWhiteSpace(region))
+            {
+                options.Region = Regions.Parse(region);
+            }
+
+            var bearerToken = new BearerToken(token);
+            options.AddTokens(bearerToken);
+        });
+
+    private static async Task SearchEventsExample(IFingerprintApi api)
+    {
+        var events = await api.SearchEventsAsync(limit: 2, bot: "bad");
+
+        if (! events.IsOk)
+        {
+            throw new ExampleException("SearchEventsAsync failed", events);
+        }
+
+        Console.WriteLine("SearchEventsAsync result:");
+        Console.WriteLine(JsonSerializer.Serialize(events.Ok()));
+    }
+
+    private static async Task GetEventExample(IFingerprintApi api, string eventId)
+    {
+        var model = await api.GetEventAsync(eventId: eventId);
+
+        if (!model.IsOk)
+        {
+            throw new ExampleException("GetEventAsync failed", model);
+        }
+
+        Console.WriteLine("GetEventAsync result:");
+        Console.WriteLine(JsonSerializer.Serialize(model.Ok()));
+    }
+
+    private static async Task UpdateEventExample(IFingerprintApi api, string eventId)
+    {
+        var tags = new Dictionary<string, object>
+        {
+            { "sdk", "dotnet" }
         };
 
-        _api = new FingerprintApi(_configuration);
-    }
+        var body = new EventUpdate(linkedId: "<linked_id>", tags: tags, suspect: false);
+        var updateEvent = await api.UpdateEventAsync(eventId: eventId, eventUpdate: body);
 
-
-    public void GetVisitsExample()
-    {
-        var visits = _api.GetVisits(_visitorId);
-        Console.WriteLine("GetVisits() result:");
-        Console.WriteLine(visits);
-    }
-
-    public void GetEventExample()
-    {
-        var events = _api.GetEvent(_requestId);
-        Console.WriteLine("GetEvent() result:");
-        Console.WriteLine(events);
-    }
-
-    public void SearchEventsExample()
-    {
-        var events = _api.SearchEvents(2, bot: "bad");
-        Console.WriteLine("SearchEvents() result:");
-        Console.WriteLine(events);
-    }
-
-    public void UpdateEventExample()
-    {
-        var tag = new Tag
+        if (! updateEvent.IsOk)
         {
-            ["sdk"] = "dotnet"
-        };
+            throw new ExampleException("UpdateEventAsync failed", updateEvent);
+        }
 
-        var body = new EventsUpdateRequest()
-        {
-            Suspect = false,
-            Tag = tag,
-            LinkedId = "<linked_id>"
-        };
-        _api.UpdateEvent(body, _requestId);
         Console.WriteLine("Event updated");
     }
 
-    public void DeleteVisitorDataExample()
+    private static async Task DeleteVisitorDataExample(IFingerprintApi api, string visitorId)
     {
-        _api.DeleteVisitorData(_visitorId);
+        var deleteVisitorData = await api.DeleteVisitorDataAsync(visitorId: visitorId);
+
+        if (! deleteVisitorData.IsOk)
+        {
+            throw new ExampleException("DeleteVisitorDataAsync failed", deleteVisitorData);
+        }
+
         Console.WriteLine("Scheduled visitor data removal");
     }
 }
