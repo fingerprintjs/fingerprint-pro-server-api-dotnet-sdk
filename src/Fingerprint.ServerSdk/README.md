@@ -4,4 +4,4 @@ Fingerprint (https://fingerprint.com) is a device intelligence platform offering
 
 ## Getting started
 
-Please follow the installation guide that you can find in our [repository](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/)
+Please follow the installation guide that you can find in our [repository](https://github.com/fingerprintjs/dotnet-sdk/)
