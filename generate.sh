@@ -22,8 +22,6 @@ java -Duser.language=en -Duser.country=US -Duser.variant="" \
   -t ./template -g csharp \
   -i ./res/fingerprint-server-api.yaml -o ./ -c config.json
 
-java -jar ./bin/openapi-generator-cli.jar generate -t ./template -g csharp -i ./res/fingerprint-server-api.yaml -o ./ -c config.json
-
 # Fix api doc
 mv ./docs/apis/FingerprintApi.md ./docs/FingerprintApi.md
 rmdir ./docs/apis
