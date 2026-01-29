@@ -257,12 +257,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation for sealed results
 
-- [Sealed](docs/Sealed.md)
-- [DecryptionKey](docs/DecryptionKey.md)
+- [Sealed](docs/models/Sealed.md)
+- [DecryptionKey](docs/models/DecryptionKey.md)
 
 ## Documentation for webhooks
 
-- [WebhookValidation](docs/WebhookValidation.md)
+- [WebhookValidation](docs/models/WebhookValidation.md)
 
 ## Support and feedback
 
