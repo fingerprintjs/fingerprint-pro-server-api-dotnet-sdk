@@ -191,6 +191,3 @@ $RECYCLE.BIN/
 **/node_modules
 .env
 !**/.env.example
-
-### Project
-bin/openapi-generator-cli.jar
