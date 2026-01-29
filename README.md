@@ -8,8 +8,8 @@
     </a>
 </p>
 <p align="center">
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/tests.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/actions/workflows/tests.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/dotnet-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/dotnet-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/dotnet-sdk/actions/workflows/tests.yml"><img src="https://github.com/fingerprintjs/dotnet-sdk/actions/workflows/tests.yml/badge.svg" alt="CI badge" /></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/:license-mit-blue.svg?style=flat"/></a>
     <a href="https://discord.gg/39EpE2neBg"><img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server"></a>
 </p>
@@ -266,8 +266,8 @@ Class | Method | HTTP request | Description
 
 ## Support and feedback
 
-To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/issues). If you need private support, you can email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
+To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/dotnet-sdk/issues). If you need private support, you can email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
 
 <a name="license"></a>
 ## License
-This project is licensed under the [MIT license](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/blob/main/LICENSE).
+This project is licensed under the [MIT license](https://github.com/fingerprintjs/dotnet-sdk/blob/main/LICENSE).
