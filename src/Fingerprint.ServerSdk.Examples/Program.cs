@@ -57,7 +57,9 @@ public static class Program
 
     private static async Task SearchEventsExample(IFingerprintApi api)
     {
-        var events = await api.SearchEventsAsync(limit: 2, bot: "bad");
+        var events = await api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithBot("bad"));
 
         if (! events.IsOk)
         {

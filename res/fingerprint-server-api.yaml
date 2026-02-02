@@ -179,6 +179,7 @@ paths:
       tags:
         - Fingerprint
       operationId: searchEvents
+      x-use-request-object: true
       summary: Search events
       description: >
         ## Search

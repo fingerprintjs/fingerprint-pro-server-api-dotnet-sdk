@@ -55,9 +55,14 @@ namespace {{packageName}}.{{apiPackage}}
         /// {{{notes}}}
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        {{#vendorExtensions.x-use-request-object}}
+        /// <param name="request">The request parameters.</param>
+        {{/vendorExtensions.x-use-request-object}}
+        {{^vendorExtensions.x-use-request-object}}
         {{#allParams}}
         /// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}{{#isDeprecated}} (deprecated){{/isDeprecated}}</param>
         {{/allParams}}
+        {{/vendorExtensions.x-use-request-object}}
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="{{interfacePrefix}}{{operationId}}ApiResponse"/>&gt;</returns>
         {{#isDeprecated}}
@@ -71,9 +76,14 @@ namespace {{packageName}}.{{apiPackage}}
         /// <remarks>
         /// {{notes}}
         /// </remarks>
+        {{#vendorExtensions.x-use-request-object}}
+        /// <param name="request">The request parameters.</param>
+        {{/vendorExtensions.x-use-request-object}}
+        {{^vendorExtensions.x-use-request-object}}
         {{#allParams}}
         /// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}{{#isDeprecated}} (deprecated){{/isDeprecated}}</param>
         {{/allParams}}
+        {{/vendorExtensions.x-use-request-object}}
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="{{interfacePrefix}}{{operationId}}ApiResponse"/>{{nrt?}}&gt;</returns>
         {{#isDeprecated}}
@@ -86,6 +96,35 @@ namespace {{packageName}}.{{apiPackage}}
         {{/operation}}
     }
     {{#operation}}
+    {{#vendorExtensions.x-use-request-object}}
+
+    /// <summary>
+    /// Request parameters for the {{operationId}} operation.
+    /// </summary>
+    {{>visibility}} class {{#lambda.pascalcase}}{{operationId}}{{/lambda.pascalcase}}Request
+    {
+        {{#allParams}}
+        /// <summary>
+        /// {{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}
+        /// </summary>
+        public {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} { get; set; }{{^required}} = default;{{/required}}
+
+        {{/allParams}}
+        {{#allParams}}
+        /// <summary>
+        /// Sets the {{paramName}} parameter.
+        /// </summary>
+        /// <param name="value">{{{description}}}</param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public {{#lambda.pascalcase}}{{operationId}}{{/lambda.pascalcase}}Request With{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{{dataType}}}{{>NullConditionalParameter}} value)
+        {
+            {{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} = {{^required}}new Option<{{{dataType}}}{{>NullConditionalParameter}}>(value){{/required}}{{#required}}value{{/required}};
+            return this;
+        }
+
+        {{/allParams}}
+    }
+    {{/vendorExtensions.x-use-request-object}}
     {{^vendorExtensions.x-duplicates}}
     {{#responses}}
     {{#-first}}
@@ -335,16 +374,26 @@ namespace {{packageName}}.{{apiPackage}}
         /// <summary>
         /// {{summary}} {{notes}}
         /// </summary>
+        {{#vendorExtensions.x-use-request-object}}
+        /// <param name="request">The request parameters.</param>
+        {{/vendorExtensions.x-use-request-object}}
+        {{^vendorExtensions.x-use-request-object}}
         {{#allParams}}
         /// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
         {{/allParams}}
+        {{/vendorExtensions.x-use-request-object}}
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="{{interfacePrefix}}{{operationId}}ApiResponse"/>&gt;</returns>
         public async Task<{{interfacePrefix}}{{operationId}}ApiResponse{{nrt?}}> {{operationId}}OrDefaultAsync({{>OperationSignature}})
         {
             try
             {
+                {{#vendorExtensions.x-use-request-object}}
+                return await {{operationId}}Async(request, cancellationToken).ConfigureAwait(false);
+                {{/vendorExtensions.x-use-request-object}}
+                {{^vendorExtensions.x-use-request-object}}
                 return await {{operationId}}Async({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#allParams.0}}, {{/allParams.0}}cancellationToken).ConfigureAwait(false);
+                {{/vendorExtensions.x-use-request-object}}
             }
             catch (Exception)
             {
@@ -359,15 +408,27 @@ namespace {{packageName}}.{{apiPackage}}
         /// {{{notes}}}
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        {{#vendorExtensions.x-use-request-object}}
+        /// <param name="request">The request parameters.</param>
+        {{/vendorExtensions.x-use-request-object}}
+        {{^vendorExtensions.x-use-request-object}}
         {{#allParams}}
         /// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
         {{/allParams}}
+        {{/vendorExtensions.x-use-request-object}}
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="{{interfacePrefix}}{{operationId}}ApiResponse"/>&gt;</returns>
         public async Task<{{interfacePrefix}}{{operationId}}ApiResponse> {{operationId}}Async({{>OperationSignature}})
         {
             {{#lambda.trimLineBreaks}}
             UriBuilder uriBuilderLocalVar = new UriBuilder();
+            {{#vendorExtensions.x-use-request-object}}
+
+            // Extract parameters from request object
+            {{#allParams}}
+            {{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{paramName}} = request.{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}};
+            {{/allParams}}
+            {{/vendorExtensions.x-use-request-object}}
 
             try
             {

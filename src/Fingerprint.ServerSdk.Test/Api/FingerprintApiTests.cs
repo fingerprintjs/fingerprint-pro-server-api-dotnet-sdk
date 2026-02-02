@@ -186,7 +186,7 @@ namespace Fingerprint.ServerSdk.Test.Api
 
             const int limit = 1;
 
-            var response = await _instance.SearchEventsAsync(limit);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest().WithLimit(limit));
 
             Assert.Multiple(() =>
             {
@@ -327,7 +327,44 @@ namespace Fingerprint.ServerSdk.Test.Api
             parseQueryString["tor_node"] = ClientUtils.ParameterToString(torNode);
             uriBuilder.Query = parseQueryString.ToString();
 
-            var response = await _instance.SearchEventsAsync(limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithPaginationKey(paginationKey)
+                .WithVisitorId(visitorId)
+                .WithBot(bot)
+                .WithIpAddress(ipAddress)
+                .WithAsn(asn)
+                .WithLinkedId(linkedId)
+                .WithUrl(url)
+                .WithOrigin(origin)
+                .WithStart(start)
+                .WithEnd(end)
+                .WithReverse(reverse)
+                .WithSuspect(suspect)
+                .WithVpn(vpn)
+                .WithVirtualMachine(virtualMachine)
+                .WithTampering(tampering)
+                .WithAntiDetectBrowser(antiDetectBrowser)
+                .WithIncognito(incognito)
+                .WithPrivacySettings(privacySettings)
+                .WithJailbroken(jailbroken)
+                .WithFrida(frida)
+                .WithFactoryReset(factoryReset)
+                .WithClonedApp(clonedApp)
+                .WithEmulator(emulator)
+                .WithRootApps(rootApps)
+                .WithVpnConfidence(vpnConfidence)
+                .WithMinSuspectScore(minSuspectScore)
+                .WithDeveloperTools(developerTools)
+                .WithLocationSpoofing(locationSpoofing)
+                .WithMitmAttack(mitmAttack)
+                .WithProxy(proxy)
+                .WithSdkVersion(sdkVersion)
+                .WithSdkPlatform(sdkPlatform)
+                .WithEnvironment(environment)
+                .WithProximityId(proximityId)
+                .WithTotalHits(totalHits)
+                .WithTorNode(torNode));
 
             Assert.Multiple(() =>
             {
@@ -382,7 +419,9 @@ namespace Fingerprint.ServerSdk.Test.Api
             const int limit = 1;
             const string ipAddress = "01234";
 
-            var response = await _instance.SearchEventsAsync(limit, ipAddress: ipAddress);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithIpAddress(ipAddress));
             Assert.Multiple(() =>
             {
                 Assert.True(response.IsBadRequest);
@@ -400,7 +439,7 @@ namespace Fingerprint.ServerSdk.Test.Api
 
             const int limit = 1;
 
-            var response = await _instance.SearchEventsAsync(limit);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest().WithLimit(limit));
             Assert.Multiple(() =>
             {
                 Assert.True(response.IsForbidden);
