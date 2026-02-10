@@ -35,6 +35,9 @@ jobs:
 
       - run: dotnet --version && dotnet restore && dotnet list package
 
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v4
+
       - run: bash ./generate.sh
 
       - name: Build
