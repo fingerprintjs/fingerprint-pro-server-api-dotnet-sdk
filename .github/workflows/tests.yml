@@ -35,8 +35,6 @@ jobs:
 
       - run: dotnet --version && dotnet restore && dotnet list package
 
-      - run: bash ./generate.sh
-
       - name: Build
         run: dotnet build
 

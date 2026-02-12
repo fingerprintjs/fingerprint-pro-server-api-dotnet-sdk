@@ -92,7 +92,7 @@ public class ApiTests : IAsyncLifetime
             Assert.True(wrongRequest.IsNotFound);
             var notFound = wrongRequest.NotFound();
             Assert.Equal(HttpStatusCode.NotFound, wrongRequest.StatusCode);
-            Assert.Equal(ErrorCode.RequestNotFound, notFound.Error.Code);
+            Assert.Equal(ErrorCode.EventNotFound, notFound.Error.Code);
         });
     }
 
