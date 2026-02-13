@@ -33,7 +33,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         private const string CustomUserAgent = $"{CustomUserAgentProduct}/{CustomUserAgentVersion}";
 
         private readonly IHost _hostUsingConfigureWithoutAClient =
-            Host.CreateDefaultBuilder([]).ConfigureApi((_, _, options) =>
+            Host.CreateDefaultBuilder([]).ConfigureFingerprint((_, _, options) =>
             {
                 var bearerToken1 = new BearerToken(Token);
                 options.AddTokens(bearerToken1);
@@ -41,7 +41,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             .Build();
 
         private readonly IHost _hostUsingConfigureWithAClient =
-            Host.CreateDefaultBuilder([]).ConfigureApi((_, _, options) =>
+            Host.CreateDefaultBuilder([]).ConfigureFingerprint((_, _, options) =>
             {
                 var bearerToken1 = new BearerToken(Token);
                 options.AddTokens(bearerToken1);
@@ -52,7 +52,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         private readonly IHost _hostUsingAddWithoutAClient =
             Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
             {
-                services.AddApi(options =>
+                services.AddFingerprint(options =>
                 {
                     var bearerToken1 = new BearerToken(Token);
                     options.AddTokens(bearerToken1);
@@ -63,7 +63,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         private readonly IHost _hostUsingAddWithAClient =
             Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
             {
-                services.AddApi(options =>
+                services.AddFingerprint(options =>
                 {
                     var bearerToken1 = new BearerToken(Token);
                     options.AddTokens(bearerToken1);
@@ -76,7 +76,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         private readonly IHost _hostUsingDifferentUserAgent =
             Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
                 {
-                    services.AddApi(options =>
+                    services.AddFingerprint(options =>
                     {
                         options.UserAgent = CustomUserAgent;
 

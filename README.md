@@ -68,7 +68,7 @@ namespace YourProject
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-          .ConfigureApi((context, services, options) =>
+          .ConfigureFingerprint((context, services, options) =>
           {
               BearerToken token = new(Environment.GetEnvironmentVariable("SECRET_API_KEY")!);
               options.AddTokens(token);
@@ -106,7 +106,7 @@ If your subscription is in a region other than the US, you need to change the re
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-    .ConfigureApi((context, services, options) =>
+    .ConfigureFingerprint((context, services, options) =>
     {
         // ...
         options.SetRegion(Region.EU);

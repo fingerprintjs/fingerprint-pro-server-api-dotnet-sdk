@@ -37,7 +37,7 @@ public static class Program
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-        .ConfigureApi((_, _, options) =>
+        .ConfigureFingerprint((_, _, options) =>
         {
             var token = Environment.GetEnvironmentVariable("SECRET_API_KEY");
             if (string.IsNullOrWhiteSpace(token))

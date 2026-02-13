@@ -44,7 +44,7 @@ public class ApiTests : IAsyncLifetime
     }
 
     private static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
-        .ConfigureApi((_, _, options) =>
+        .ConfigureFingerprint((_, _, options) =>
         {
             var token = Environment.GetEnvironmentVariable("SECRET_API_KEY");
             if (string.IsNullOrWhiteSpace(token))

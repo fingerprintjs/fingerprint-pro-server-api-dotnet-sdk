@@ -52,7 +52,7 @@ namespace Fingerprint.ServerSdk.Test.Api
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) => Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
-            .ConfigureApi((context, _, options) =>
+            .ConfigureFingerprint((context, _, options) =>
             {
                 options.BaseUrl = ServerUrl;
 
