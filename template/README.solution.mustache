@@ -66,11 +66,16 @@ namespace YourProject
             {{#apis}}
             {{#-first}}
             var api = host.Services.GetRequiredService<{{interfacePrefix}}{{classname}}>();
-            ApiResponse apiResponse = await api.SearchEventsAsync(limit: 2);
-            EventSearch model = apiResponse.Ok();
+            var response = await api.SearchEventsAsync(limit: 2);
+
+            if (response.TryOk(out EventSearch events))
+            {
+                // Process events...
+            }
+
             // You can also access the raw content and headers:
-            // string rawContent = apiResponse.RawContent;
-            // HttpResponseHeaders headers = apiResponse.Headers;
+            // string rawContent = response.RawContent;
+            // HttpResponseHeaders headers = response.Headers;
             {{/-first}}
             {{/apis}}
             {{/apiInfo}}
@@ -112,6 +117,56 @@ namespace YourProject
 ```
 
 You can view more examples in [src/Fingerprint.ServerSdk.Examples/Program.cs](src/Fingerprint.ServerSdk.Examples/Program.cs).
+
+### Handling Responses
+
+The SDK provides type-safe response handling with `IsXxx` properties and extraction methods:
+
+```csharp
+var response = await api.GetEventAsync("event_id");
+
+// Check response status
+if (response.IsOk)
+{
+    // Extract successful response
+    Event ev = response.Ok();
+    Console.WriteLine($"Visitor ID: {event.Identification.VisitorId}");
+}
+else if (response.IsNotFound)
+{
+    // Extract error response
+    ErrorResponse error = response.NotFound();
+    Console.WriteLine($"Error: {error.Error.Message}");
+}
+else if (response.IsBadRequest)
+{
+    ErrorResponse error = response.BadRequest();
+    Console.WriteLine($"Bad request: {error.Error.Message}");
+}
+else if (response.IsForbidden)
+{
+    ErrorResponse error = response.Forbidden();
+    Console.WriteLine($"Forbidden: {error.Error.Message}");
+}
+else if (response.IsTooManyRequests)
+{
+    ErrorResponse error = response.TooManyRequests();
+    Console.WriteLine($"Rate limited. Retry after: {response.Headers.RetryAfter}");
+}
+```
+
+You can also use the `TryXxx` methods for safe extraction:
+
+```csharp
+if (response.TryOk(out Event ev))
+{
+    Console.WriteLine($"Visitor ID: {ev.Identification.VisitorId}");
+}
+else if (response.TryNotFound(out ErrorResponse error))
+{
+    Console.WriteLine($"Not found: {error.Error.Message}");
+}
+```
 
 ### Region
 
