@@ -18,9 +18,10 @@ public static class Program
         await SearchEventsExample(api);
 
         var eventId = Environment.GetEnvironmentVariable("EVENT_ID");
+        var rulesetId = Environment.GetEnvironmentVariable("RULESET_ID");
         if (!string.IsNullOrWhiteSpace(eventId))
         {
-            await GetEventExample(api, eventId);
+            await GetEventExample(api, eventId, rulesetId);
         }
 
         var updateEventId = Environment.GetEnvironmentVariable("UPDATE_EVENT_ID");
@@ -68,9 +69,9 @@ public static class Program
         Console.WriteLine(JsonSerializer.Serialize(events.Ok()));
     }
 
-    private static async Task GetEventExample(IFingerprintApi api, string eventId)
+    private static async Task GetEventExample(IFingerprintApi api, string eventId, string? rulesetId = null)
     {
-        var model = await api.GetEventAsync(eventId: eventId);
+        var model = await api.GetEventAsync(eventId: eventId, rulesetId: rulesetId);
 
         if (!model.IsOk)
         {
@@ -78,7 +79,27 @@ public static class Program
         }
 
         Console.WriteLine("GetEventAsync result:");
-        Console.WriteLine(JsonSerializer.Serialize(model.Ok()));
+        var result = model.Ok();
+        Console.WriteLine(JsonSerializer.Serialize(result));
+
+        if (rulesetId != null)
+        {
+            Console.WriteLine("GetEventAsync ruleset evaluation:");
+            var allow = result.RuleAction.EventRuleActionAllow;
+            var block = result.RuleAction.EventRuleActionBlock;
+            if (allow != null)
+            {
+                Console.WriteLine("Action type: 'allow'");
+                Console.WriteLine($"Request header modifications: `{JsonSerializer.Serialize(allow.RequestHeaderModifications)}`");
+            }
+            else if (block != null)
+            {
+                Console.WriteLine("Action type: `block`");
+                Console.WriteLine($"Response body: `{block.Body}`");
+                Console.WriteLine($"Response status code: `{block.StatusCode}`");
+                Console.WriteLine($"Headers: `{JsonSerializer.Serialize(block.Headers)}`");
+            }
+        }
     }
 
     private static async Task UpdateEventExample(IFingerprintApi api, string eventId)
