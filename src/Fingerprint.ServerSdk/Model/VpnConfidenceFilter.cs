@@ -30,7 +30,7 @@ namespace Fingerprint.ServerSdk.Model
     public enum VpnConfidenceFilter
     {
         /// <summary>
-        /// Enum High for value: high,
+        /// Enum High for value: high
         /// </summary>
         High = 1,
 
@@ -57,7 +57,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <returns></returns>
         public static VpnConfidenceFilter FromString(string value)
         {
-            if (value.Equals("high,"))
+            if (value.Equals("high"))
                 return VpnConfidenceFilter.High;
 
             if (value.Equals("medium"))
@@ -76,7 +76,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <returns></returns>
         public static VpnConfidenceFilter? FromStringOrDefault(string value)
         {
-            if (value.Equals("high,"))
+            if (value.Equals("high"))
                 return VpnConfidenceFilter.High;
 
             if (value.Equals("medium"))
@@ -97,7 +97,7 @@ namespace Fingerprint.ServerSdk.Model
         public static string ToJsonValue(VpnConfidenceFilter value)
         {
             if (value == VpnConfidenceFilter.High)
-                return "high,";
+                return "high";
 
             if (value == VpnConfidenceFilter.Medium)
                 return "medium";

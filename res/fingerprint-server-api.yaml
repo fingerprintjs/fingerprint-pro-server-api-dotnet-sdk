@@ -2350,6 +2350,6 @@ components:
         `low` - events with low VPN Detection confidence.
         > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.
       enum:
-        - high,
+        - high
         - medium
         - low
