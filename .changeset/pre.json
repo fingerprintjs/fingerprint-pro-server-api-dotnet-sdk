@@ -4,5 +4,8 @@
   "initialVersions": {
     "fingerprint-server-dotnet-sdk": "7.9.0"
   },
-  "changesets": []
+  "changesets": [
+    "four-balloons-confess",
+    "quiet-singers-sniff"
+  ]
 }
