@@ -230,7 +230,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  (optional)
         /// </summary>
-        public Option<string> Bot { get; set; } = default;
+        public Option<BotFilter> Bot { get; set; } = default;
 
         /// <summary>
         /// Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)
@@ -340,7 +340,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)
         /// </summary>
-        public Option<string> VpnConfidence { get; set; } = default;
+        public Option<VpnConfidenceFilter> VpnConfidence { get; set; } = default;
 
         /// <summary>
         /// Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  (optional)
@@ -375,7 +375,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <summary>
         /// Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional)
         /// </summary>
-        public Option<string> SdkPlatform { get; set; } = default;
+        public Option<SdkPlatformFilter> SdkPlatform { get; set; } = default;
 
         /// <summary>
         /// Filter for events by providing one or more environment IDs (`environment_id` property).  (optional)
@@ -435,9 +435,9 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <param name="value">Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
-        public SearchEventsRequest WithBot(string value)
+        public SearchEventsRequest WithBot(BotFilter value)
         {
-            Bot = new Option<string>(value);
+            Bot = new Option<BotFilter>(value);
             return this;
         }
 
@@ -677,9 +677,9 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <param name="value">Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. </param>
         /// <returns>This request instance for fluent chaining.</returns>
-        public SearchEventsRequest WithVpnConfidence(string value)
+        public SearchEventsRequest WithVpnConfidence(VpnConfidenceFilter value)
         {
-            VpnConfidence = new Option<string>(value);
+            VpnConfidence = new Option<VpnConfidenceFilter>(value);
             return this;
         }
 
@@ -754,9 +754,9 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <param name="value">Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. </param>
         /// <returns>This request instance for fluent chaining.</returns>
-        public SearchEventsRequest WithSdkPlatform(string value)
+        public SearchEventsRequest WithSdkPlatform(SdkPlatformFilter value)
         {
-            SdkPlatform = new Option<string>(value);
+            SdkPlatform = new Option<SdkPlatformFilter>(value);
             return this;
         }
 
@@ -1860,35 +1860,29 @@ namespace Fingerprint.ServerSdk.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<string> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<string> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode);
+        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<BotFilter> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<VpnConfidenceFilter> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="paginationKey"></param>
         /// <param name="visitorId"></param>
-        /// <param name="bot"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
         /// <param name="url"></param>
         /// <param name="origin"></param>
-        /// <param name="vpnConfidence"></param>
         /// <param name="sdkVersion"></param>
-        /// <param name="sdkPlatform"></param>
         /// <param name="environment"></param>
         /// <param name="proximityId"></param>
         /// <returns></returns>
-        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<string> vpnConfidence, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId)
+        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
         {
             if (paginationKey.IsSet && paginationKey.Value == null)
                 throw new ArgumentNullException(nameof(paginationKey));
 
             if (visitorId.IsSet && visitorId.Value == null)
                 throw new ArgumentNullException(nameof(visitorId));
-
-            if (bot.IsSet && bot.Value == null)
-                throw new ArgumentNullException(nameof(bot));
 
             if (ipAddress.IsSet && ipAddress.Value == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -1905,14 +1899,8 @@ namespace Fingerprint.ServerSdk.Api
             if (origin.IsSet && origin.Value == null)
                 throw new ArgumentNullException(nameof(origin));
 
-            if (vpnConfidence.IsSet && vpnConfidence.Value == null)
-                throw new ArgumentNullException(nameof(vpnConfidence));
-
             if (sdkVersion.IsSet && sdkVersion.Value == null)
                 throw new ArgumentNullException(nameof(sdkVersion));
-
-            if (sdkPlatform.IsSet && sdkPlatform.Value == null)
-                throw new ArgumentNullException(nameof(sdkPlatform));
 
             if (environment.IsSet && environment.Value == null)
                 throw new ArgumentNullException(nameof(environment));
@@ -1962,7 +1950,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
+        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
         {
             bool suppressDefaultLog = false;
             AfterSearchEvents(ref suppressDefaultLog, apiResponseLocalVar, limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
@@ -2012,7 +2000,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
+        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2057,7 +2045,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
+        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSearchEvents(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
@@ -2109,7 +2097,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
+        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
 
         /// <summary>
         /// Search events ## Search  The &#x60;/v4/events&#x60; endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single &#x60;visitor_id&#x60; within a time range to get historical behavior of a visitor. - Searching for events associated with a single &#x60;linked_id&#x60; within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (&#x60;good&#x60; and &#x60;bad&#x60; bots)  If you don&#39;t provide &#x60;start&#x60; or &#x60;end&#x60; parameters, the default search range is the **last 7 days**.  ### Filtering events with the &#x60;suspect&#x60; flag  The &#x60;/v4/events&#x60; endpoint unlocks a powerful method for fraud protection analytics. The &#x60;suspect&#x60; flag is exposed in all events where it was previously set by the update API.  You can also apply the &#x60;suspect&#x60; query parameter as a filter to find all potentially fraudulent activity that you previously marked as &#x60;suspect&#x60;. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
@@ -2147,7 +2135,7 @@ namespace Fingerprint.ServerSdk.Api
             Option<int> limit = request.Limit;
             Option<string> paginationKey = request.PaginationKey;
             Option<string> visitorId = request.VisitorId;
-            Option<string> bot = request.Bot;
+            Option<BotFilter> bot = request.Bot;
             Option<string> ipAddress = request.IpAddress;
             Option<string> asn = request.Asn;
             Option<string> linkedId = request.LinkedId;
@@ -2169,14 +2157,14 @@ namespace Fingerprint.ServerSdk.Api
             Option<bool> clonedApp = request.ClonedApp;
             Option<bool> emulator = request.Emulator;
             Option<bool> rootApps = request.RootApps;
-            Option<string> vpnConfidence = request.VpnConfidence;
+            Option<VpnConfidenceFilter> vpnConfidence = request.VpnConfidence;
             Option<float> minSuspectScore = request.MinSuspectScore;
             Option<bool> developerTools = request.DeveloperTools;
             Option<bool> locationSpoofing = request.LocationSpoofing;
             Option<bool> mitmAttack = request.MitmAttack;
             Option<bool> proxy = request.Proxy;
             Option<string> sdkVersion = request.SdkVersion;
-            Option<string> sdkPlatform = request.SdkPlatform;
+            Option<SdkPlatformFilter> sdkPlatform = request.SdkPlatform;
             Option<List<string>> environment = request.Environment;
             Option<string> proximityId = request.ProximityId;
             Option<long> totalHits = request.TotalHits;
@@ -2184,7 +2172,7 @@ namespace Fingerprint.ServerSdk.Api
 
             try
             {
-                ValidateSearchEvents(paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, vpnConfidence, sdkVersion, sdkPlatform, environment, proximityId);
+                ValidateSearchEvents(paginationKey, visitorId, ipAddress, asn, linkedId, url, origin, sdkVersion, environment, proximityId);
 
                 FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref bot, ref ipAddress, ref asn, ref linkedId, ref url, ref origin, ref start, ref end, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode);
 

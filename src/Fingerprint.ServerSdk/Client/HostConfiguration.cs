@@ -65,6 +65,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new BotFilterJsonConverter());
+            _jsonOptions.Converters.Add(new BotFilterNullableJsonConverter());
             _jsonOptions.Converters.Add(new BotResultJsonConverter());
             _jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             _jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
@@ -103,6 +105,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new RuleActionTypeJsonConverter());
             _jsonOptions.Converters.Add(new RuleActionTypeNullableJsonConverter());
             _jsonOptions.Converters.Add(new SDKJsonConverter());
+            _jsonOptions.Converters.Add(new SdkPlatformFilterJsonConverter());
+            _jsonOptions.Converters.Add(new SdkPlatformFilterNullableJsonConverter());
             _jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
             _jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
             _jsonOptions.Converters.Add(new TouchSupportJsonConverter());
@@ -111,6 +115,8 @@ namespace Fingerprint.ServerSdk.Client
             _jsonOptions.Converters.Add(new VelocityDataJsonConverter());
             _jsonOptions.Converters.Add(new VpnConfidenceJsonConverter());
             _jsonOptions.Converters.Add(new VpnConfidenceNullableJsonConverter());
+            _jsonOptions.Converters.Add(new VpnConfidenceFilterJsonConverter());
+            _jsonOptions.Converters.Add(new VpnConfidenceFilterNullableJsonConverter());
             _jsonOptions.Converters.Add(new VpnMethodsJsonConverter());
             _jsonOptions.Converters.Add(new WebGlBasicsJsonConverter());
             _jsonOptions.Converters.Add(new WebGlExtensionsJsonConverter());

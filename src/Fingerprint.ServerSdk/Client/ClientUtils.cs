@@ -112,6 +112,8 @@ namespace Fingerprint.ServerSdk.Client
                 return boolean
                     ? "true"
                     : "false";
+            if (obj is BotFilter botFilter)
+                return BotFilterValueConverter.ToJsonValue(botFilter);
             if (obj is BotResult botResult)
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
@@ -126,8 +128,12 @@ namespace Fingerprint.ServerSdk.Client
                 return RuleActionTypeValueConverter.ToJsonValue(ruleActionType);
             if (obj is SDK.PlatformEnum sDKPlatformEnum)
                 return SDK.PlatformEnumToJsonValue(sDKPlatformEnum);
+            if (obj is SdkPlatformFilter sdkPlatformFilter)
+                return SdkPlatformFilterValueConverter.ToJsonValue(sdkPlatformFilter);
             if (obj is VpnConfidence vpnConfidence)
                 return VpnConfidenceValueConverter.ToJsonValue(vpnConfidence);
+            if (obj is VpnConfidenceFilter vpnConfidenceFilter)
+                return VpnConfidenceFilterValueConverter.ToJsonValue(vpnConfidenceFilter);
             if (obj is ICollection collection)
             {
                 List<string> entries = new List<string>();

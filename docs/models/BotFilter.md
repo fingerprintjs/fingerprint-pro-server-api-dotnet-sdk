@@ -1,0 +1,8 @@
+# Fingerprint.ServerSdk.Model.BotFilter
+Filter events by the Bot Detection result, specifically:
+  `all` - events where any kind of bot was detected.
+  `good` - events where a good bot was detected.
+  `bad` - events where a bad bot was detected.
+  `none` - events where no bot was detected.
+> Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.
+
