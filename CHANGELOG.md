@@ -1,4 +1,4 @@
-# Fingerprint Server API Dotnet SDK
+# Fingerprint Server Dotnet SDK
 
 ## 7.9.0
 

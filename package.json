@@ -1,5 +1,5 @@
 {
-  "name": "fingerprint-pro-server-api-dotnet-sdk",
+  "name": "fingerprint-server-dotnet-sdk",
   "version": "7.9.0",
   "private": true,
   "devDependencies": {

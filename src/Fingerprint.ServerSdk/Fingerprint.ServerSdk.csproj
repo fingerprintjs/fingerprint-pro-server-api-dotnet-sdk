@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>Fingerprint.ServerSdk</PackageId>
+        <PackageTags>browser,detection,fingerprint,identification,fingerprinting,browser-fingerprinting,fraud-detection,fraud,audio-fingerprinting,fingerprintjs,fingerprintjs-pro,visitor-identification</PackageTags>
+        <Version>8.0.0</Version>
+        <Authors>Fingerprint</Authors>
+        <Company>Fingerprint</Company>
+        <RepositoryUrl>https://github.com/fingerprintjs/dotnet-sdk</RepositoryUrl>
+        <PackageProjectUrl>https://fingerprint.com/</PackageProjectUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageIcon>logo.png</PackageIcon>
+        <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net48</TargetFrameworks>
+        <LangVersion>10.0</LangVersion>
+        <AssemblyName>Fingerprint.ServerSdk</AssemblyName>
+        <OutputType>Library</OutputType>
+        <AssemblyTitle>OpenAPI Library</AssemblyTitle>
+        <Description>Fingerprint (https://fingerprint.com) is a device intelligence platform offering industry-leading accuracy. Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it&#39;s not intended to be used from the client side, whether it&#39;s a browser or a mobile device.</Description>
+        <Copyright>No Copyright</Copyright>
+        <RootNamespace>Fingerprint.ServerSdk</RootNamespace>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Fingerprint.ServerSdk.xml</DocumentationFile>
+        <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
+        <PackageReference Include="System.Threading.Channels" Version="8.0.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="./README.md" Pack="true" PackagePath="/" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+        <None Include="../../res/logo.png" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="System.Web" />
+    </ItemGroup>
+
+</Project>

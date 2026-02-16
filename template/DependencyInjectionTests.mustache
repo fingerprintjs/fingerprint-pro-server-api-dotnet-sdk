@@ -1,0 +1,246 @@
+{{>partial_header}}
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Net.Http.Headers;
+using {{packageName}}.{{clientPackage}};
+using {{packageName}}.{{apiPackage}};
+using {{packageName}}.Extensions;
+using Xunit;
+
+namespace {{packageName}}.Test.{{apiPackage}}
+{
+    /// <summary>
+    ///  Tests the dependency injection.
+    /// </summary>
+    public class DependencyInjectionTest
+    {
+
+        private const string Token = "<token>";
+
+        private const string CustomUserAgentProduct = "custom-user-agent";
+
+        private const string CustomUserAgentVersion = "1.0.0";
+
+        private const string CustomUserAgent = $"{CustomUserAgentProduct}/{CustomUserAgentVersion}";
+
+        private readonly IHost _hostUsingConfigureWithoutAClient =
+            Host.CreateDefaultBuilder([]).ConfigureFingerprint((_, _, options) =>
+            {
+                {{#lambda.trimTrailingWithNewLine}}
+                {{#apiKeyMethods}}
+                ApiKeyToken apiKeyToken{{-index}} = new{{^net70OrLater}} ApiKeyToken{{/net70OrLater}}(Token, ClientUtils.ApiKeyHeader.{{#lambda.titlecase}}{{#lambda.alphabet_or_underscore}}{{keyParamName}}{{/lambda.alphabet_or_underscore}}{{/lambda.titlecase}}, timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(apiKeyToken{{-index}});
+
+                {{/apiKeyMethods}}
+                {{#httpBearerMethods}}
+                var bearerToken{{-index}} = new{{^net70OrLater}} BearerToken{{/net70OrLater}}(Token);
+                options.AddTokens(bearerToken{{-index}});
+
+                {{/httpBearerMethods}}
+                {{#httpBasicMethods}}
+                BasicToken basicToken{{-index}} = new{{^net70OrLater}} BasicToken{{/net70OrLater}}("<username>", "<password>", timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(basicToken{{-index}});
+
+                {{/httpBasicMethods}}
+                {{#httpSignatureMethods}}
+                HttpSigningConfiguration config{{-index}} = new{{^net70OrLater}} HttpSigningConfiguration{{/net70OrLater}}("<keyId>", "<keyFilePath>", null, {{#net80OrLater}}[]{{/net80OrLater}}{{^net80OrLater}}new List<string>(){{/net80OrLater}}, HashAlgorithmName.SHA256, "<signingAlgorithm>", 0);
+                HttpSignatureToken httpSignatureToken{{-index}} = new{{^net70OrLater}} HttpSignatureToken{{/net70OrLater}}(config{{-index}}, timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(httpSignatureToken{{-index}});
+
+                {{/httpSignatureMethods}}
+                {{#oauthMethods}}
+                OAuthToken oauthToken{{-index}} = new{{^net70OrLater}} OAuthToken{{/net70OrLater}}("token", timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(oauthToken{{-index}});
+
+                {{/oauthMethods}}
+                {{/lambda.trimTrailingWithNewLine}}
+            })
+            .Build();
+
+        private readonly IHost _hostUsingConfigureWithAClient =
+            Host.CreateDefaultBuilder([]).ConfigureFingerprint((_, _, options) =>
+            {
+                {{#lambda.trimTrailingWithNewLine}}
+                {{#apiKeyMethods}}
+                ApiKeyToken apiKeyToken{{-index}} = new{{^net70OrLater}} ApiKeyToken{{/net70OrLater}}(Token, ClientUtils.ApiKeyHeader.{{#lambda.titlecase}}{{#lambda.alphabet_or_underscore}}{{keyParamName}}{{/lambda.alphabet_or_underscore}}{{/lambda.titlecase}}, timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(apiKeyToken{{-index}});
+
+                {{/apiKeyMethods}}
+                {{#httpBearerMethods}}
+                var bearerToken{{-index}} = new{{^net70OrLater}} BearerToken{{/net70OrLater}}(Token);
+                options.AddTokens(bearerToken{{-index}});
+
+                {{/httpBearerMethods}}
+                {{#httpBasicMethods}}
+                BasicToken basicToken{{-index}} = new{{^net70OrLater}} BasicToken{{/net70OrLater}}("<username>", "<password>", timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(basicToken{{-index}});
+
+                {{/httpBasicMethods}}
+                {{#httpSignatureMethods}}
+                HttpSigningConfiguration config{{-index}} = new{{^net70OrLater}} HttpSigningConfiguration{{/net70OrLater}}("<keyId>", "<keyFilePath>", null, {{#net80OrLater}}[]{{/net80OrLater}}{{^net80OrLater}}new List<string>(){{/net80OrLater}}, HashAlgorithmName.SHA256, "<signingAlgorithm>", 0);
+                HttpSignatureToken httpSignatureToken{{-index}} = new{{^net70OrLater}} HttpSignatureToken{{/net70OrLater}}(config{{-index}}, timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(httpSignatureToken{{-index}});
+
+                {{/httpSignatureMethods}}
+                {{#oauthMethods}}
+                OAuthToken oauthToken = new{{^net70OrLater}} OAuthToken{{/net70OrLater}}("token", timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(oauthToken);
+
+                {{/oauthMethods}}
+                {{/lambda.trimTrailingWithNewLine}}
+                options.Add{{apiName}}HttpClients(client => client.BaseAddress = ClientUtils.GetBaseUri(Region.Us));
+            })
+            .Build();
+
+        private readonly IHost _hostUsingAddWithoutAClient =
+            Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
+            {
+                services.AddFingerprint(options =>
+                {
+                    {{#lambda.trimTrailingWithNewLine}}
+                    {{#apiKeyMethods}}
+                    ApiKeyToken apiKeyToken{{-index}} = new{{^net70OrLater}} ApiKeyToken{{/net70OrLater}}(Token, ClientUtils.ApiKeyHeader.{{#lambda.titlecase}}{{#lambda.alphabet_or_underscore}}{{keyParamName}}{{/lambda.alphabet_or_underscore}}{{/lambda.titlecase}}, timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(apiKeyToken{{-index}});
+
+                    {{/apiKeyMethods}}
+                    {{#httpBearerMethods}}
+                    var bearerToken{{-index}} = new{{^net70OrLater}} BearerToken{{/net70OrLater}}(Token);
+                    options.AddTokens(bearerToken{{-index}});
+
+                    {{/httpBearerMethods}}
+                    {{#httpBasicMethods}}
+                    BasicToken basicToken{{-index}} = new{{^net70OrLater}} BasicToken{{/net70OrLater}}("<username>", "<password>", timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(basicToken{{-index}});
+
+                    {{/httpBasicMethods}}
+                    {{#httpSignatureMethods}}
+                    HttpSigningConfiguration config{{-index}} = new{{^net70OrLater}} HttpSigningConfiguration{{/net70OrLater}}("<keyId>", "<keyFilePath>", null, {{#net80OrLater}}[]{{/net80OrLater}}{{^net80OrLater}}new List<string>(){{/net80OrLater}}, HashAlgorithmName.SHA256, "<signingAlgorithm>", 0);
+                    HttpSignatureToken httpSignatureToken{{-index}} = new{{^net70OrLater}} HttpSignatureToken{{/net70OrLater}}(config{{-index}}, timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(httpSignatureToken{{-index}});
+
+                    {{/httpSignatureMethods}}
+                    {{#oauthMethods}}
+                    OAuthToken oauthToken{{-index}} = new{{^net70OrLater}} OAuthToken{{/net70OrLater}}("token", timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(oauthToken{{-index}});
+
+                    {{/oauthMethods}}
+                    {{/lambda.trimTrailingWithNewLine}}
+                });
+            })
+            .Build();
+
+        private readonly IHost _hostUsingAddWithAClient =
+            Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
+            {
+                services.AddFingerprint(options =>
+                {
+                    {{#lambda.trimTrailingWithNewLine}}
+                    {{#apiKeyMethods}}
+                    ApiKeyToken apiKeyToken{{-index}} = new{{^net70OrLater}} ApiKeyToken{{/net70OrLater}}(Token, ClientUtils.ApiKeyHeader.{{#lambda.titlecase}}{{#lambda.alphabet_or_underscore}}{{keyParamName}}{{/lambda.alphabet_or_underscore}}{{/lambda.titlecase}}, timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(apiKeyToken{{-index}});
+
+                    {{/apiKeyMethods}}
+                    {{#httpBearerMethods}}
+                    var bearerToken{{-index}} = new{{^net70OrLater}} BearerToken{{/net70OrLater}}(Token);
+                    options.AddTokens(bearerToken{{-index}});
+
+                    {{/httpBearerMethods}}
+                    {{#httpBasicMethods}}
+                    BasicToken basicToken{{-index}} = new{{^net70OrLater}} BasicToken{{/net70OrLater}}("<username>", "<password>", timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(basicToken{{-index}});
+
+                    {{/httpBasicMethods}}
+                    {{#httpSignatureMethods}}
+                    HttpSigningConfiguration config{{-index}} = new{{^net70OrLater}} HttpSigningConfiguration{{/net70OrLater}}("<keyId>", "<keyFilePath>", null, {{#net80OrLater}}[]{{/net80OrLater}}{{^net80OrLater}}new List<string>(){{/net80OrLater}}, HashAlgorithmName.SHA256, "<signingAlgorithm>", 0);
+                    HttpSignatureToken httpSignatureToken{{-index}} = new{{^net70OrLater}} HttpSignatureToken{{/net70OrLater}}(config{{-index}}, timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(httpSignatureToken{{-index}});
+
+                    {{/httpSignatureMethods}}
+                    {{#oauthMethods}}
+                    OAuthToken oauthToken{{-index}} = new{{^net70OrLater}} OAuthToken{{/net70OrLater}}("token", timeout: TimeSpan.FromSeconds(1));
+                    options.AddTokens(oauthToken{{-index}});
+
+                    {{/oauthMethods}}
+                    {{/lambda.trimTrailingWithNewLine}}
+                    options.Add{{apiName}}HttpClients(client => client.BaseAddress = ClientUtils.GetBaseUri(Region.Us));
+                });
+            })
+            .Build();
+
+
+        private readonly IHost _hostUsingDifferentUserAgent =
+            Host.CreateDefaultBuilder([]).ConfigureServices((_, services) =>
+                {
+                    services.AddFingerprint(options =>
+                    {
+                        options.UserAgent = CustomUserAgent;
+
+                        var bearerToken1 = new BearerToken(Token);
+                        options.AddTokens(bearerToken1);
+                    });
+                })
+                .Build();
+
+        /// <summary>
+        /// Test dependency injection when using the configure method
+        /// </summary>
+        [Fact]
+        public void ConfigureApiWithAClientTest()
+        {
+            {{#apiInfo}}{{#apis}}var {{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}} = _hostUsingConfigureWithAClient.Services.GetRequiredService<{{interfacePrefix}}{{classname}}>();
+            Assert.True({{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}}.HttpClient.BaseAddress != null);{{^-last}}
+
+            {{/-last}}{{/apis}}{{/apiInfo}}
+        }
+
+        /// <summary>
+        /// Test dependency injection when using the configure method
+        /// </summary>
+        [Fact]
+        public void ConfigureApiWithoutAClientTest()
+        {
+            {{#apiInfo}}{{#apis}}var {{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}} = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<{{interfacePrefix}}{{classname}}>();
+            Assert.True({{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}}.HttpClient.BaseAddress != null);{{^-last}}
+
+            {{/-last}}{{/apis}}{{/apiInfo}}
+        }
+
+        /// <summary>
+        /// Test custom user agent
+        /// </summary>
+        [Fact]
+        public void ConfigureApiWithCustomUserAgentTest()
+        {
+            var fingerprintApi = _hostUsingDifferentUserAgent.Services.GetRequiredService<IFingerprintApi>();
+            var userAgentCollection = fingerprintApi.HttpClient.DefaultRequestHeaders.UserAgent;
+            Assert.Single(userAgentCollection);
+            var userAgent = userAgentCollection.First();
+            Assert.Equal(new ProductInfoHeaderValue(CustomUserAgentProduct, CustomUserAgentVersion), userAgent);
+        }
+
+        /// <summary>
+        /// Test dependency injection when using the add method
+        /// </summary>
+        [Fact]
+        public void AddApiWithAClientTest()
+        {
+            {{#apiInfo}}{{#apis}}var {{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}} = _hostUsingAddWithAClient.Services.GetRequiredService<{{interfacePrefix}}{{classname}}>();
+            Assert.True({{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}}.HttpClient.BaseAddress != null);{{^-last}}
+            
+            {{/-last}}{{/apis}}{{/apiInfo}}
+        }
+
+        /// <summary>
+        /// Test dependency injection when using the add method
+        /// </summary>
+        [Fact]
+        public void AddApiWithoutAClientTest()
+        {
+            {{#apiInfo}}{{#apis}}var {{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}} = _hostUsingAddWithoutAClient.Services.GetRequiredService<{{interfacePrefix}}{{classname}}>();
+            Assert.True({{#lambda.camel_case}}{{classname}}{{/lambda.camel_case}}.HttpClient.BaseAddress != null);{{^-last}}
+
+            {{/-last}}{{/apis}}{{/apiInfo}}
+        }
+    }
+}

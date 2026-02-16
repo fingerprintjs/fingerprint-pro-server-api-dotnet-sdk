@@ -1,0 +1,12 @@
+git_push.sh
+appveyor.yml
+
+src/Fingerprint.ServerSdk/Client/DateOnlyJsonConverter.cs
+src/Fingerprint.ServerSdk/Client/DateOnlyNullableJsonConverter.cs
+src/Fingerprint.ServerSdk.Test/README.md
+src/Fingerprint.ServerSdk.Test/Model/*
+
+.gitignore
+
+api/openapi.yaml
+docs/scripts/*

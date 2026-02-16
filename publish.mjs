@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-const sdkPath = path.resolve(dirname, './src/FingerprintPro.ServerSdk');
+const sdkPath = path.resolve(dirname, './src/Fingerprint.ServerSdk');
 
 const paths = {
     sdk: sdkPath,
@@ -48,7 +48,7 @@ cp.execSync('dotnet pack --configuration Release --no-restore', {
     cwd: paths.sdk
 })
 
-const fileName = `FingerprintPro.ServerSdk.${version}.nupkg`;
+const fileName = `Fingerprint.ServerSdk.${version}.nupkg`;
 
 console.info(`Publishing ${fileName}...`);
 

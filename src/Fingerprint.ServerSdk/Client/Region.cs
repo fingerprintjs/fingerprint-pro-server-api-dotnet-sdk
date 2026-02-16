@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+
+namespace Fingerprint.ServerSdk.Client
+{
+    /// <summary>
+    /// TODO: Region summary
+    /// </summary>
+    public enum Region
+    {
+        /// <summary>
+        /// TODO: US summary
+        /// </summary>
+        Us = 1,
+        /// <summary>
+        /// TODO: EU summary
+        /// </summary>
+        Eu = 2,
+        /// <summary>
+        /// TODO: Asia summary
+        /// </summary>
+        Asia = 3,
+    }
+
+    /// <summary>
+    /// TODO: RegionConfig summary
+    /// </summary>
+    public sealed class RegionConfig
+    {
+        /// <summary>
+        /// TODO: Scheme summary
+        /// </summary>
+        public string Scheme { get; }
+
+        /// <summary>
+        /// TODO: Host summary
+        /// </summary>
+        public string Host { get; }
+
+        /// <summary>
+        /// TODO: ContextPath summary
+        /// </summary>
+        public string ContextPath { get; }
+
+        /// <summary>
+        /// TODO: RegionConfig docs
+        /// </summary>
+        /// <param name="scheme"></param>
+        /// <param name="host"></param>
+        /// <param name="contextPath"></param>
+        public RegionConfig(string scheme, string host, string contextPath)
+        {
+            Scheme = scheme;
+            Host = host;
+            ContextPath = contextPath;
+        }
+
+        /// <summary>
+        /// TODO: BaseUri summary
+        /// </summary>
+        public Uri BaseUri => new Uri(Scheme + "://" + Host + ContextPath);
+
+        /// <summary>
+        /// TODO: BaseAddress summary
+        /// </summary>
+        public string BaseAddress => Scheme + "://" + Host + ContextPath;
+    }
+
+    /// <summary>
+    /// TODO: Regions summary
+    /// </summary>
+    public static class Regions
+    {
+        private const string DefaultContextPath = "/v4";
+
+        private static readonly IReadOnlyDictionary<Region, RegionConfig> Map =
+            new Dictionary<Region, RegionConfig>
+            {
+                [Region.Us] = new RegionConfig("https", "api.fpjs.io", DefaultContextPath),
+                [Region.Eu] = new RegionConfig("https", "eu.api.fpjs.io", DefaultContextPath),
+                [Region.Asia] = new RegionConfig("https", "ap.api.fpjs.io", DefaultContextPath),
+            };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static RegionConfig GetConfig(this Region r) => Map[r];
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static Uri GetBaseUri(this Region r) => Map[r].BaseUri;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static string GetHost(this Region r) => Map[r].Host;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static string GetScheme(this Region r) => Map[r].Scheme;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static string GetContextPath(this Region r) => Map[r].ContextPath;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static Region Parse(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return Region.Us;
+            }
+
+            switch (value.Trim().ToLowerInvariant())
+            {
+                case "us":
+                case "global":
+                    return Region.Us;
+                case "eu":
+                    return Region.Eu;
+                case "asia":
+                case "ap":
+                    return Region.Asia;
+                default:
+                    throw new ArgumentException($"Unknown region: '{value}'. Allowed: us/global, eu, ap/asia.");
+            }
+        }
+    }
+}

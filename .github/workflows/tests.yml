@@ -23,7 +23,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        dotnet-version: [ 8.x, 9.x ]
+        dotnet-version: [ 8.x, 9.x, 10.x ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
@@ -34,8 +34,6 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       - run: dotnet --version && dotnet restore && dotnet list package
-
-      - run: bash ./generate.sh
 
       - name: Build
         run: dotnet build

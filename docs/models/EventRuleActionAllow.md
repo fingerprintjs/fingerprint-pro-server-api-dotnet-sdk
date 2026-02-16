@@ -1,0 +1,12 @@
+# Fingerprint.ServerSdk.Model.EventRuleActionAllow
+Informs the client that the request should be forwarded to the origin with optional request header modifications.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Type** | **RuleActionType** |  | 
+**RequestHeaderModifications** | [**RequestHeaderModifications**](RequestHeaderModifications.md) |  | [optional] 
+
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
