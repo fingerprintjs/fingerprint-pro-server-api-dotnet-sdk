@@ -179,6 +179,7 @@ paths:
       tags:
         - Fingerprint
       operationId: searchEvents
+      x-dotnet-use-request-object: true
       summary: Search events
       description: >
         ## Search
@@ -273,12 +274,7 @@ paths:
         - name: bot
           in: query
           schema:
-            type: string
-            enum:
-              - all
-              - good
-              - bad
-              - none
+            $ref: '#/components/schemas/BotFilter'
           description: >
             Filter events by the Bot Detection result, specifically:
               `all` - events where any kind of bot was detected.
@@ -494,11 +490,7 @@ paths:
         - name: vpn_confidence
           in: query
           schema:
-            type: string
-            enum:
-              - high,
-              - medium
-              - low
+            $ref: '#/components/schemas/VpnConfidenceFilter'
           description: >
             Filter events by VPN Detection result confidence level.
 
@@ -577,11 +569,7 @@ paths:
         - name: sdk_platform
           in: query
           schema:
-            type: string
-            enum:
-              - js
-              - android
-              - ios
+            $ref: '#/components/schemas/SdkPlatformFilter'
           description: >
             Filter events by the SDK Platform associated with the identification
             event (`sdk.platform` property) .
@@ -2328,3 +2316,40 @@ components:
             This value represents the total number of events matching the search
             query, up to the limit provided in the `total_hits` query parameter.
             Only present if the `total_hits` query parameter was provided.
+    BotFilter:
+      type: string
+      description: |
+        Filter events by the Bot Detection result, specifically:
+          `all` - events where any kind of bot was detected.
+          `good` - events where a good bot was detected.
+          `bad` - events where a bad bot was detected.
+          `none` - events where no bot was detected.
+        > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.
+      enum:
+        - all
+        - good
+        - bad
+        - none
+    SdkPlatformFilter:
+      type: string
+      description: |
+        Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) .
+        `js` - Javascript agent (Web).
+        `ios` - Apple iOS based devices.
+        `android` - Android based devices.
+      enum:
+        - js
+        - android
+        - ios
+    VpnConfidenceFilter:
+      type: string
+      description: |
+        Filter events by VPN Detection result confidence level.
+        `high` - events with high VPN Detection confidence.
+        `medium` - events with medium VPN Detection confidence.
+        `low` - events with low VPN Detection confidence.
+        > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.
+      enum:
+        - high
+        - medium
+        - low

@@ -264,6 +264,7 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [Model.BotFilter](docs/models/BotFilter.md)
  - [Model.BotResult](docs/models/BotResult.md)
  - [Model.BrowserDetails](docs/models/BrowserDetails.md)
  - [Model.Canvas](docs/models/Canvas.md)
@@ -298,6 +299,7 @@ Class | Method | HTTP request | Description
  - [Model.RuleActionHeaderField](docs/models/RuleActionHeaderField.md)
  - [Model.RuleActionType](docs/models/RuleActionType.md)
  - [Model.SDK](docs/models/SDK.md)
+ - [Model.SdkPlatformFilter](docs/models/SdkPlatformFilter.md)
  - [Model.SupplementaryIDHighRecall](docs/models/SupplementaryIDHighRecall.md)
  - [Model.TamperingDetails](docs/models/TamperingDetails.md)
  - [Model.TouchSupport](docs/models/TouchSupport.md)
@@ -305,6 +307,7 @@ Class | Method | HTTP request | Description
  - [Model.Velocity](docs/models/Velocity.md)
  - [Model.VelocityData](docs/models/VelocityData.md)
  - [Model.VpnConfidence](docs/models/VpnConfidence.md)
+ - [Model.VpnConfidenceFilter](docs/models/VpnConfidenceFilter.md)
  - [Model.VpnMethods](docs/models/VpnMethods.md)
  - [Model.WebGlBasics](docs/models/WebGlBasics.md)
  - [Model.WebGlExtensions](docs/models/WebGlExtensions.md)

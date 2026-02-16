@@ -20,7 +20,10 @@ public class ApiTests : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        var eventsResponse = await _api.SearchEventsAsync(2, start: _start, end: _end);
+        var eventsResponse = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStart(_start)
+            .WithEnd(_end));
 
         Assert.True(eventsResponse.IsOk);
 
@@ -99,11 +102,10 @@ public class ApiTests : IAsyncLifetime
         var start = DateTime.UtcNow.Subtract(TimeSpan.FromDays(365));
         var end = DateTime.UtcNow.Add(TimeSpan.FromDays(365));
 
-        var response = await _api.SearchEventsAsync(
-            limit: 2,
-            start: new DateTimeOffset(start, TimeSpan.Zero).ToUnixTimeMilliseconds(),
-            end: new DateTimeOffset(end, TimeSpan.Zero).ToUnixTimeMilliseconds()
-        );
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStart(new DateTimeOffset(start, TimeSpan.Zero).ToUnixTimeMilliseconds())
+            .WithEnd(new DateTimeOffset(end, TimeSpan.Zero).ToUnixTimeMilliseconds()));
 
         Assert.True(response.IsOk);
         Assert.NotEmpty(response.Ok().Events);
@@ -114,7 +116,11 @@ public class ApiTests : IAsyncLifetime
     {
         Assert.NotNull(_paginationKey);
 
-        var response = await _api.SearchEventsAsync(2, start: _start, end: _end, paginationKey: _paginationKey);
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStart(_start)
+            .WithEnd(_end)
+            .WithPaginationKey(_paginationKey));
         Assert.True(response.IsOk);
         Assert.NotEmpty(response.Ok().Events);
     }
@@ -122,7 +128,11 @@ public class ApiTests : IAsyncLifetime
     [Fact]
     public async Task SearchEvents_ReverseWorks()
     {
-        var response = await _api.SearchEventsAsync(limit: 2, start: _start, end: _end, reverse: true);
+        var response = await _api.SearchEventsAsync(new SearchEventsRequest()
+            .WithLimit(2)
+            .WithStart(_start)
+            .WithEnd(_end)
+            .WithReverse(true));
         Assert.True(response.IsOk);
         var eventSearch = response.Ok();
         Assert.Equal(2, eventSearch.Events.Count);
@@ -134,7 +144,7 @@ public class ApiTests : IAsyncLifetime
 
         // Try to request old events to check if they still could be deserialized
         await _api.GetEventAsync(oldestEvent.EventId);
-        await _api.SearchEventsAsync(visitorId: oldestEvent.Identification.VisitorId);
+        await _api.SearchEventsAsync(new SearchEventsRequest().WithVisitorId(oldestEvent.Identification.VisitorId));
     }
 
     public Task DisposeAsync()

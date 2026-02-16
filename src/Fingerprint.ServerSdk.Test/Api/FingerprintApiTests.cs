@@ -186,7 +186,7 @@ namespace Fingerprint.ServerSdk.Test.Api
 
             const int limit = 1;
 
-            var response = await _instance.SearchEventsAsync(limit);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest().WithLimit(limit));
 
             Assert.Multiple(() =>
             {
@@ -242,7 +242,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             const int limit = 1;
             const string paginationKey = "pagination";
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
-            const string bot = "good";
+            const BotFilter bot = BotFilter.Good;
             const string ipAddress = "10.0.0.0/24";
             const string asn = "asn";
             const string linkedId = "some_linked_id";
@@ -264,14 +264,14 @@ namespace Fingerprint.ServerSdk.Test.Api
             const bool clonedApp = false;
             const bool emulator = false;
             const bool rootApps = false;
-            const string vpnConfidence = "high";
+            const VpnConfidenceFilter vpnConfidence = VpnConfidenceFilter.High;
             const float minSuspectScore = .7f;
             const bool developerTools = true;
             const bool locationSpoofing = true;
             const bool mitmAttack = true;
             const bool proxy = true;
             const string sdkVersion = "testSdkVersion";
-            const string sdkPlatform = "testSdkPlatform";
+            const SdkPlatformFilter sdkPlatform = SdkPlatformFilter.Js;
             var environment = new List<string> { "env1", "env2" };
             const string proximityId = "testProximityId";
             const long totalHits = 1;
@@ -327,7 +327,44 @@ namespace Fingerprint.ServerSdk.Test.Api
             parseQueryString["tor_node"] = ClientUtils.ParameterToString(torNode);
             uriBuilder.Query = parseQueryString.ToString();
 
-            var response = await _instance.SearchEventsAsync(limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithPaginationKey(paginationKey)
+                .WithVisitorId(visitorId)
+                .WithBot(bot)
+                .WithIpAddress(ipAddress)
+                .WithAsn(asn)
+                .WithLinkedId(linkedId)
+                .WithUrl(url)
+                .WithOrigin(origin)
+                .WithStart(start)
+                .WithEnd(end)
+                .WithReverse(reverse)
+                .WithSuspect(suspect)
+                .WithVpn(vpn)
+                .WithVirtualMachine(virtualMachine)
+                .WithTampering(tampering)
+                .WithAntiDetectBrowser(antiDetectBrowser)
+                .WithIncognito(incognito)
+                .WithPrivacySettings(privacySettings)
+                .WithJailbroken(jailbroken)
+                .WithFrida(frida)
+                .WithFactoryReset(factoryReset)
+                .WithClonedApp(clonedApp)
+                .WithEmulator(emulator)
+                .WithRootApps(rootApps)
+                .WithVpnConfidence(vpnConfidence)
+                .WithMinSuspectScore(minSuspectScore)
+                .WithDeveloperTools(developerTools)
+                .WithLocationSpoofing(locationSpoofing)
+                .WithMitmAttack(mitmAttack)
+                .WithProxy(proxy)
+                .WithSdkVersion(sdkVersion)
+                .WithSdkPlatform(sdkPlatform)
+                .WithEnvironment(environment)
+                .WithProximityId(proximityId)
+                .WithTotalHits(totalHits)
+                .WithTorNode(torNode));
 
             Assert.Multiple(() =>
             {
@@ -382,7 +419,9 @@ namespace Fingerprint.ServerSdk.Test.Api
             const int limit = 1;
             const string ipAddress = "01234";
 
-            var response = await _instance.SearchEventsAsync(limit, ipAddress: ipAddress);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest()
+                .WithLimit(limit)
+                .WithIpAddress(ipAddress));
             Assert.Multiple(() =>
             {
                 Assert.True(response.IsBadRequest);
@@ -400,7 +439,7 @@ namespace Fingerprint.ServerSdk.Test.Api
 
             const int limit = 1;
 
-            var response = await _instance.SearchEventsAsync(limit);
+            var response = await _instance.SearchEventsAsync(new SearchEventsRequest().WithLimit(limit));
             Assert.Multiple(() =>
             {
                 Assert.True(response.IsForbidden);

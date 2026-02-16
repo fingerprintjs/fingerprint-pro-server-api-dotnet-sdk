@@ -87,46 +87,10 @@ namespace Fingerprint.ServerSdk.Api
         /// ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="limit">Limit the number of events returned.  (optional, default to 10)</param>
-        /// <param name="paginationKey">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)</param>
-        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="ipAddress">Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
-        /// <param name="asn"> (optional)</param>
-        /// <param name="linkedId">Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
-        /// <param name="url">Filter events by the URL (`url` property) associated with the event.  (optional)</param>
-        /// <param name="origin">Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  (optional)</param>
-        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
-        /// <param name="vpn">Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="virtualMachine">Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="tampering">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="antiDetectBrowser">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="incognito">Filter events by Browser Incognito Detection result. > Note: When using this parameter, only events with the `incognito` property set to `true` or `false` are returned. Events without an `incognito` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="privacySettings">Filter events by Privacy Settings Detection result. > Note: When using this parameter, only events with the `privacy_settings` property set to `true` or `false` are returned. Events without a `privacy_settings` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="jailbroken">Filter events by Jailbroken Device Detection result. > Note: When using this parameter, only events with the `jailbroken` property set to `true` or `false` are returned. Events without a `jailbroken` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="frida">Filter events by Frida Detection result. > Note: When using this parameter, only events with the `frida` property set to `true` or `false` are returned. Events without a `frida` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="factoryReset">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="clonedApp">Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="emulator">Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="rootApps">Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="vpnConfidence">Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="minSuspectScore">Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="developerTools">Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="locationSpoofing">Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="mitmAttack">Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="proxy">Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="sdkVersion">Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  (optional)</param>
-        /// <param name="sdkPlatform">Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional)</param>
-        /// <param name="environment">Filter for events by providing one or more environment IDs (`environment_id` property).  (optional)</param>
-        /// <param name="proximityId">Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  (optional)</param>
-        /// <param name="totalHits">When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  (optional)</param>
-        /// <param name="torNode">Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  (optional)</param>
+        /// <param name="request">The request parameters.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchEventsApiResponse"/>&gt;</returns>
-        Task<ISearchEventsApiResponse> SearchEventsAsync(Option<int> limit = default, Option<string> paginationKey = default, Option<string> visitorId = default, Option<string> bot = default, Option<string> ipAddress = default, Option<string> asn = default, Option<string> linkedId = default, Option<string> url = default, Option<string> origin = default, Option<long> start = default, Option<long> end = default, Option<bool> reverse = default, Option<bool> suspect = default, Option<bool> vpn = default, Option<bool> virtualMachine = default, Option<bool> tampering = default, Option<bool> antiDetectBrowser = default, Option<bool> incognito = default, Option<bool> privacySettings = default, Option<bool> jailbroken = default, Option<bool> frida = default, Option<bool> factoryReset = default, Option<bool> clonedApp = default, Option<bool> emulator = default, Option<bool> rootApps = default, Option<string> vpnConfidence = default, Option<float> minSuspectScore = default, Option<bool> developerTools = default, Option<bool> locationSpoofing = default, Option<bool> mitmAttack = default, Option<bool> proxy = default, Option<string> sdkVersion = default, Option<string> sdkPlatform = default, Option<List<string>> environment = default, Option<string> proximityId = default, Option<long> totalHits = default, Option<bool> torNode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchEventsApiResponse> SearchEventsAsync(SearchEventsRequest request, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search events
@@ -134,46 +98,10 @@ namespace Fingerprint.ServerSdk.Api
         /// <remarks>
         /// ## Search  The &#x60;/v4/events&#x60; endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single &#x60;visitor_id&#x60; within a time range to get historical behavior of a visitor. - Searching for events associated with a single &#x60;linked_id&#x60; within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (&#x60;good&#x60; and &#x60;bad&#x60; bots)  If you don&#39;t provide &#x60;start&#x60; or &#x60;end&#x60; parameters, the default search range is the **last 7 days**.  ### Filtering events with the &#x60;suspect&#x60; flag  The &#x60;/v4/events&#x60; endpoint unlocks a powerful method for fraud protection analytics. The &#x60;suspect&#x60; flag is exposed in all events where it was previously set by the update API.  You can also apply the &#x60;suspect&#x60; query parameter as a filter to find all potentially fraudulent activity that you previously marked as &#x60;suspect&#x60;. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
         /// </remarks>
-        /// <param name="limit">Limit the number of events returned.  (optional, default to 10)</param>
-        /// <param name="paginationKey">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)</param>
-        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="ipAddress">Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
-        /// <param name="asn"> (optional)</param>
-        /// <param name="linkedId">Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
-        /// <param name="url">Filter events by the URL (`url` property) associated with the event.  (optional)</param>
-        /// <param name="origin">Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  (optional)</param>
-        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
-        /// <param name="vpn">Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="virtualMachine">Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="tampering">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="antiDetectBrowser">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="incognito">Filter events by Browser Incognito Detection result. > Note: When using this parameter, only events with the `incognito` property set to `true` or `false` are returned. Events without an `incognito` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="privacySettings">Filter events by Privacy Settings Detection result. > Note: When using this parameter, only events with the `privacy_settings` property set to `true` or `false` are returned. Events without a `privacy_settings` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="jailbroken">Filter events by Jailbroken Device Detection result. > Note: When using this parameter, only events with the `jailbroken` property set to `true` or `false` are returned. Events without a `jailbroken` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="frida">Filter events by Frida Detection result. > Note: When using this parameter, only events with the `frida` property set to `true` or `false` are returned. Events without a `frida` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="factoryReset">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="clonedApp">Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="emulator">Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="rootApps">Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="vpnConfidence">Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="minSuspectScore">Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="developerTools">Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="locationSpoofing">Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="mitmAttack">Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="proxy">Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="sdkVersion">Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  (optional)</param>
-        /// <param name="sdkPlatform">Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional)</param>
-        /// <param name="environment">Filter for events by providing one or more environment IDs (`environment_id` property).  (optional)</param>
-        /// <param name="proximityId">Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  (optional)</param>
-        /// <param name="totalHits">When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  (optional)</param>
-        /// <param name="torNode">Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  (optional)</param>
+        /// <param name="request">The request parameters.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchEventsApiResponse"/>&gt;</returns>
-        Task<ISearchEventsApiResponse> SearchEventsOrDefaultAsync(Option<int> limit = default, Option<string> paginationKey = default, Option<string> visitorId = default, Option<string> bot = default, Option<string> ipAddress = default, Option<string> asn = default, Option<string> linkedId = default, Option<string> url = default, Option<string> origin = default, Option<long> start = default, Option<long> end = default, Option<bool> reverse = default, Option<bool> suspect = default, Option<bool> vpn = default, Option<bool> virtualMachine = default, Option<bool> tampering = default, Option<bool> antiDetectBrowser = default, Option<bool> incognito = default, Option<bool> privacySettings = default, Option<bool> jailbroken = default, Option<bool> frida = default, Option<bool> factoryReset = default, Option<bool> clonedApp = default, Option<bool> emulator = default, Option<bool> rootApps = default, Option<string> vpnConfidence = default, Option<float> minSuspectScore = default, Option<bool> developerTools = default, Option<bool> locationSpoofing = default, Option<bool> mitmAttack = default, Option<bool> proxy = default, Option<string> sdkVersion = default, Option<string> sdkPlatform = default, Option<List<string>> environment = default, Option<string> proximityId = default, Option<long> totalHits = default, Option<bool> torNode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchEventsApiResponse> SearchEventsOrDefaultAsync(SearchEventsRequest request, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update an event
@@ -277,6 +205,605 @@ namespace Fingerprint.ServerSdk.Api
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+    }
+
+    /// <summary>
+    /// Request parameters for the SearchEvents operation.
+    /// </summary>
+    public class SearchEventsRequest
+    {
+        /// <summary>
+        /// Limit the number of events returned.  (optional, default to 10)
+        /// </summary>
+        public Option<int> Limit { get; set; } = default;
+
+        /// <summary>
+        /// Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)
+        /// </summary>
+        public Option<string> PaginationKey { get; set; } = default;
+
+        /// <summary>
+        /// Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  (optional)
+        /// </summary>
+        public Option<string> VisitorId { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<BotFilter> Bot { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)
+        /// </summary>
+        public Option<string> IpAddress { get; set; } = default;
+
+        /// <summary>
+        ///  (optional)
+        /// </summary>
+        public Option<string> Asn { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)
+        /// </summary>
+        public Option<string> LinkedId { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by the URL (`url` property) associated with the event.  (optional)
+        /// </summary>
+        public Option<string> Url { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  (optional)
+        /// </summary>
+        public Option<string> Origin { get; set; } = default;
+
+        /// <summary>
+        /// Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)
+        /// </summary>
+        public Option<long> Start { get; set; } = default;
+
+        /// <summary>
+        /// Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)
+        /// </summary>
+        public Option<long> End { get; set; } = default;
+
+        /// <summary>
+        /// Sort events in reverse timestamp order.  (optional)
+        /// </summary>
+        public Option<bool> Reverse { get; set; } = default;
+
+        /// <summary>
+        /// Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Suspect { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Vpn { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> VirtualMachine { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Tampering { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> AntiDetectBrowser { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Browser Incognito Detection result. > Note: When using this parameter, only events with the `incognito` property set to `true` or `false` are returned. Events without an `incognito` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Incognito { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Privacy Settings Detection result. > Note: When using this parameter, only events with the `privacy_settings` property set to `true` or `false` are returned. Events without a `privacy_settings` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> PrivacySettings { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Jailbroken Device Detection result. > Note: When using this parameter, only events with the `jailbroken` property set to `true` or `false` are returned. Events without a `jailbroken` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Jailbroken { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Frida Detection result. > Note: When using this parameter, only events with the `frida` property set to `true` or `false` are returned. Events without a `frida` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Frida { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> FactoryReset { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> ClonedApp { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Emulator { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> RootApps { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<VpnConfidenceFilter> VpnConfidence { get; set; } = default;
+
+        /// <summary>
+        /// Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<float> MinSuspectScore { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> DeveloperTools { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> LocationSpoofing { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> MitmAttack { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> Proxy { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  (optional)
+        /// </summary>
+        public Option<string> SdkVersion { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional)
+        /// </summary>
+        public Option<SdkPlatformFilter> SdkPlatform { get; set; } = default;
+
+        /// <summary>
+        /// Filter for events by providing one or more environment IDs (`environment_id` property).  (optional)
+        /// </summary>
+        public Option<List<string>> Environment { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  (optional)
+        /// </summary>
+        public Option<string> ProximityId { get; set; } = default;
+
+        /// <summary>
+        /// When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  (optional)
+        /// </summary>
+        public Option<long> TotalHits { get; set; } = default;
+
+        /// <summary>
+        /// Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  (optional)
+        /// </summary>
+        public Option<bool> TorNode { get; set; } = default;
+
+        /// <summary>
+        /// Sets the limit parameter.
+        /// </summary>
+        /// <param name="value">Limit the number of events returned. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithLimit(int value)
+        {
+            Limit = new Option<int>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the paginationKey parameter.
+        /// </summary>
+        /// <param name="value">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithPaginationKey(string value)
+        {
+            PaginationKey = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the visitorId parameter.
+        /// </summary>
+        /// <param name="value">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithVisitorId(string value)
+        {
+            VisitorId = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the bot parameter.
+        /// </summary>
+        /// <param name="value">Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithBot(BotFilter value)
+        {
+            Bot = new Option<BotFilter>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the ipAddress parameter.
+        /// </summary>
+        /// <param name="value">Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32 </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithIpAddress(string value)
+        {
+            IpAddress = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the asn parameter.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithAsn(string value)
+        {
+            Asn = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the linkedId parameter.
+        /// </summary>
+        /// <param name="value">Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithLinkedId(string value)
+        {
+            LinkedId = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the url parameter.
+        /// </summary>
+        /// <param name="value">Filter events by the URL (`url` property) associated with the event. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithUrl(string value)
+        {
+            Url = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the origin parameter.
+        /// </summary>
+        /// <param name="value">Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar) </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithOrigin(string value)
+        {
+            Origin = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the start parameter.
+        /// </summary>
+        /// <param name="value">Filter events with a timestamp greater than the start time, in Unix time (milliseconds). </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithStart(long value)
+        {
+            Start = new Option<long>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the end parameter.
+        /// </summary>
+        /// <param name="value">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds). </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithEnd(long value)
+        {
+            End = new Option<long>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the reverse parameter.
+        /// </summary>
+        /// <param name="value">Sort events in reverse timestamp order. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithReverse(bool value)
+        {
+            Reverse = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the suspect parameter.
+        /// </summary>
+        /// <param name="value">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithSuspect(bool value)
+        {
+            Suspect = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the vpn parameter.
+        /// </summary>
+        /// <param name="value">Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithVpn(bool value)
+        {
+            Vpn = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the virtualMachine parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithVirtualMachine(bool value)
+        {
+            VirtualMachine = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the tampering parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithTampering(bool value)
+        {
+            Tampering = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the antiDetectBrowser parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithAntiDetectBrowser(bool value)
+        {
+            AntiDetectBrowser = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the incognito parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Browser Incognito Detection result. > Note: When using this parameter, only events with the `incognito` property set to `true` or `false` are returned. Events without an `incognito` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithIncognito(bool value)
+        {
+            Incognito = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the privacySettings parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Privacy Settings Detection result. > Note: When using this parameter, only events with the `privacy_settings` property set to `true` or `false` are returned. Events without a `privacy_settings` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithPrivacySettings(bool value)
+        {
+            PrivacySettings = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the jailbroken parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Jailbroken Device Detection result. > Note: When using this parameter, only events with the `jailbroken` property set to `true` or `false` are returned. Events without a `jailbroken` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithJailbroken(bool value)
+        {
+            Jailbroken = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the frida parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Frida Detection result. > Note: When using this parameter, only events with the `frida` property set to `true` or `false` are returned. Events without a `frida` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithFrida(bool value)
+        {
+            Frida = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the factoryReset parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithFactoryReset(bool value)
+        {
+            FactoryReset = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the clonedApp parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithClonedApp(bool value)
+        {
+            ClonedApp = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the emulator parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithEmulator(bool value)
+        {
+            Emulator = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the rootApps parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithRootApps(bool value)
+        {
+            RootApps = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the vpnConfidence parameter.
+        /// </summary>
+        /// <param name="value">Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithVpnConfidence(VpnConfidenceFilter value)
+        {
+            VpnConfidence = new Option<VpnConfidenceFilter>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the minSuspectScore parameter.
+        /// </summary>
+        /// <param name="value">Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithMinSuspectScore(float value)
+        {
+            MinSuspectScore = new Option<float>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the developerTools parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithDeveloperTools(bool value)
+        {
+            DeveloperTools = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the locationSpoofing parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithLocationSpoofing(bool value)
+        {
+            LocationSpoofing = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the mitmAttack parameter.
+        /// </summary>
+        /// <param name="value">Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithMitmAttack(bool value)
+        {
+            MitmAttack = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the proxy parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithProxy(bool value)
+        {
+            Proxy = new Option<bool>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the sdkVersion parameter.
+        /// </summary>
+        /// <param name="value">Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14` </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithSdkVersion(string value)
+        {
+            SdkVersion = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the sdkPlatform parameter.
+        /// </summary>
+        /// <param name="value">Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithSdkPlatform(SdkPlatformFilter value)
+        {
+            SdkPlatform = new Option<SdkPlatformFilter>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the environment parameter.
+        /// </summary>
+        /// <param name="value">Filter for events by providing one or more environment IDs (`environment_id` property). </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithEnvironment(List<string> value)
+        {
+            Environment = new Option<List<string>>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the proximityId parameter.
+        /// </summary>
+        /// <param name="value">Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithProximityId(string value)
+        {
+            ProximityId = new Option<string>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the totalHits parameter.
+        /// </summary>
+        /// <param name="value">When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithTotalHits(long value)
+        {
+            TotalHits = new Option<long>(value);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the torNode parameter.
+        /// </summary>
+        /// <param name="value">Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response. </param>
+        /// <returns>This request instance for fluent chaining.</returns>
+        public SearchEventsRequest WithTorNode(bool value)
+        {
+            TorNode = new Option<bool>(value);
+            return this;
+        }
+
     }
 
     /// <summary>
@@ -1333,35 +1860,29 @@ namespace Fingerprint.ServerSdk.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<string> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<string> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<string> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode);
+        partial void FormatSearchEvents(ref Option<int> limit, ref Option<string> paginationKey, ref Option<string> visitorId, ref Option<BotFilter> bot, ref Option<string> ipAddress, ref Option<string> asn, ref Option<string> linkedId, ref Option<string> url, ref Option<string> origin, ref Option<long> start, ref Option<long> end, ref Option<bool> reverse, ref Option<bool> suspect, ref Option<bool> vpn, ref Option<bool> virtualMachine, ref Option<bool> tampering, ref Option<bool> antiDetectBrowser, ref Option<bool> incognito, ref Option<bool> privacySettings, ref Option<bool> jailbroken, ref Option<bool> frida, ref Option<bool> factoryReset, ref Option<bool> clonedApp, ref Option<bool> emulator, ref Option<bool> rootApps, ref Option<VpnConfidenceFilter> vpnConfidence, ref Option<float> minSuspectScore, ref Option<bool> developerTools, ref Option<bool> locationSpoofing, ref Option<bool> mitmAttack, ref Option<bool> proxy, ref Option<string> sdkVersion, ref Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, ref Option<string> proximityId, ref Option<long> totalHits, ref Option<bool> torNode);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="paginationKey"></param>
         /// <param name="visitorId"></param>
-        /// <param name="bot"></param>
         /// <param name="ipAddress"></param>
         /// <param name="asn"></param>
         /// <param name="linkedId"></param>
         /// <param name="url"></param>
         /// <param name="origin"></param>
-        /// <param name="vpnConfidence"></param>
         /// <param name="sdkVersion"></param>
-        /// <param name="sdkPlatform"></param>
         /// <param name="environment"></param>
         /// <param name="proximityId"></param>
         /// <returns></returns>
-        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<string> vpnConfidence, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId)
+        private void ValidateSearchEvents(Option<string> paginationKey, Option<string> visitorId, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<string> sdkVersion, Option<List<string>> environment, Option<string> proximityId)
         {
             if (paginationKey.IsSet && paginationKey.Value == null)
                 throw new ArgumentNullException(nameof(paginationKey));
 
             if (visitorId.IsSet && visitorId.Value == null)
                 throw new ArgumentNullException(nameof(visitorId));
-
-            if (bot.IsSet && bot.Value == null)
-                throw new ArgumentNullException(nameof(bot));
 
             if (ipAddress.IsSet && ipAddress.Value == null)
                 throw new ArgumentNullException(nameof(ipAddress));
@@ -1378,14 +1899,8 @@ namespace Fingerprint.ServerSdk.Api
             if (origin.IsSet && origin.Value == null)
                 throw new ArgumentNullException(nameof(origin));
 
-            if (vpnConfidence.IsSet && vpnConfidence.Value == null)
-                throw new ArgumentNullException(nameof(vpnConfidence));
-
             if (sdkVersion.IsSet && sdkVersion.Value == null)
                 throw new ArgumentNullException(nameof(sdkVersion));
-
-            if (sdkPlatform.IsSet && sdkPlatform.Value == null)
-                throw new ArgumentNullException(nameof(sdkPlatform));
 
             if (environment.IsSet && environment.Value == null)
                 throw new ArgumentNullException(nameof(environment));
@@ -1435,7 +1950,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
+        private void AfterSearchEventsDefaultImplementation(ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
         {
             bool suppressDefaultLog = false;
             AfterSearchEvents(ref suppressDefaultLog, apiResponseLocalVar, limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
@@ -1485,7 +2000,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
+        partial void AfterSearchEvents(ref bool suppressDefaultLog, ISearchEventsApiResponse apiResponseLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1530,7 +2045,7 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
+        private void OnErrorSearchEventsDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSearchEvents(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode);
@@ -1582,55 +2097,19 @@ namespace Fingerprint.ServerSdk.Api
         /// <param name="proximityId"></param>
         /// <param name="totalHits"></param>
         /// <param name="torNode"></param>
-        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<string> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<string> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<string> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
+        partial void OnErrorSearchEvents(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> limit, Option<string> paginationKey, Option<string> visitorId, Option<BotFilter> bot, Option<string> ipAddress, Option<string> asn, Option<string> linkedId, Option<string> url, Option<string> origin, Option<long> start, Option<long> end, Option<bool> reverse, Option<bool> suspect, Option<bool> vpn, Option<bool> virtualMachine, Option<bool> tampering, Option<bool> antiDetectBrowser, Option<bool> incognito, Option<bool> privacySettings, Option<bool> jailbroken, Option<bool> frida, Option<bool> factoryReset, Option<bool> clonedApp, Option<bool> emulator, Option<bool> rootApps, Option<VpnConfidenceFilter> vpnConfidence, Option<float> minSuspectScore, Option<bool> developerTools, Option<bool> locationSpoofing, Option<bool> mitmAttack, Option<bool> proxy, Option<string> sdkVersion, Option<SdkPlatformFilter> sdkPlatform, Option<List<string>> environment, Option<string> proximityId, Option<long> totalHits, Option<bool> torNode);
 
         /// <summary>
         /// Search events ## Search  The &#x60;/v4/events&#x60; endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single &#x60;visitor_id&#x60; within a time range to get historical behavior of a visitor. - Searching for events associated with a single &#x60;linked_id&#x60; within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (&#x60;good&#x60; and &#x60;bad&#x60; bots)  If you don&#39;t provide &#x60;start&#x60; or &#x60;end&#x60; parameters, the default search range is the **last 7 days**.  ### Filtering events with the &#x60;suspect&#x60; flag  The &#x60;/v4/events&#x60; endpoint unlocks a powerful method for fraud protection analytics. The &#x60;suspect&#x60; flag is exposed in all events where it was previously set by the update API.  You can also apply the &#x60;suspect&#x60; query parameter as a filter to find all potentially fraudulent activity that you previously marked as &#x60;suspect&#x60;. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
         /// </summary>
-        /// <param name="limit">Limit the number of events returned.  (optional, default to 10)</param>
-        /// <param name="paginationKey">Use &#x60;pagination_key&#x60; to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using &#x60;limit&#x60;, but there are more than 100 events total matching your request), the &#x60;pagination_key&#x60; field is added to the response. The key corresponds to the &#x60;timestamp&#x60; of the last returned event. In the following request, use that value in the &#x60;pagination_key&#x60; parameter to get the next page of results:  1. First request, returning most recent 200 events: &#x60;GET api-base-url/events?limit&#x3D;100&#x60; 2. Use &#x60;response.pagination_key&#x60; to get the next page of results: &#x60;GET api-base-url/events?limit&#x3D;100&amp;pagination_key&#x3D;1740815825085&#x60;  (optional)</param>
-        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this &#x60;visitor_id&#x60;.  (optional)</param>
-        /// <param name="bot">Filter events by the Bot Detection result, specifically:   &#x60;all&#x60; - events where any kind of bot was detected.   &#x60;good&#x60; - events where a good bot was detected.   &#x60;bad&#x60; - events where a bad bot was detected.   &#x60;none&#x60; - events where no bot was detected. &gt; Note: When using this parameter, only events with the &#x60;botd.bot&#x60; property set to a valid value are returned. Events without a &#x60;botd&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="ipAddress">Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
-        /// <param name="asn"> (optional)</param>
-        /// <param name="linkedId">Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this &#x60;linked_id&#x60; parameter to retrieve all events associated with your custom identifier.  (optional)</param>
-        /// <param name="url">Filter events by the URL (&#x60;url&#x60; property) associated with the event.  (optional)</param>
-        /// <param name="origin">Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  (optional)</param>
-        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). &gt; Note: When using this parameter, only events with the &#x60;suspect&#x60; property explicitly set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events with undefined &#x60;suspect&#x60; property are left out of the response.  (optional)</param>
-        /// <param name="vpn">Filter events by VPN Detection result. &gt; Note: When using this parameter, only events with the &#x60;vpn&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;vpn&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="virtualMachine">Filter events by Virtual Machine Detection result. &gt; Note: When using this parameter, only events with the &#x60;virtual_machine&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;virtual_machine&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="tampering">Filter events by Browser Tampering Detection result. &gt; Note: When using this parameter, only events with the &#x60;tampering.result&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;tampering&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="antiDetectBrowser">Filter events by Anti-detect Browser Detection result. &gt; Note: When using this parameter, only events with the &#x60;tampering.anti_detect_browser&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;tampering&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="incognito">Filter events by Browser Incognito Detection result. &gt; Note: When using this parameter, only events with the &#x60;incognito&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without an &#x60;incognito&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="privacySettings">Filter events by Privacy Settings Detection result. &gt; Note: When using this parameter, only events with the &#x60;privacy_settings&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;privacy_settings&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="jailbroken">Filter events by Jailbroken Device Detection result. &gt; Note: When using this parameter, only events with the &#x60;jailbroken&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;jailbroken&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="frida">Filter events by Frida Detection result. &gt; Note: When using this parameter, only events with the &#x60;frida&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;frida&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="factoryReset">Filter events by Factory Reset Detection result. &gt; Note: When using this parameter, only events with a &#x60;factory_reset&#x60; time. Events without a &#x60;factory_reset&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="clonedApp">Filter events by Cloned App Detection result. &gt; Note: When using this parameter, only events with the &#x60;cloned_app&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;cloned_app&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="emulator">Filter events by Android Emulator Detection result. &gt; Note: When using this parameter, only events with the &#x60;emulator&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without an &#x60;emulator&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="rootApps">Filter events by Rooted Device Detection result. &gt; Note: When using this parameter, only events with the &#x60;root_apps&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;root_apps&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="vpnConfidence">Filter events by VPN Detection result confidence level. &#x60;high&#x60; - events with high VPN Detection confidence. &#x60;medium&#x60; - events with medium VPN Detection confidence. &#x60;low&#x60; - events with low VPN Detection confidence. &gt; Note: When using this parameter, only events with the &#x60;vpn.confidence&#x60; property set to a valid value are returned. Events without a &#x60;vpn&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="minSuspectScore">Filter events with Suspect Score result above a provided minimum threshold. &gt; Note: When using this parameter, only events where the &#x60;suspect_score&#x60; property set to a value exceeding your threshold are returned. Events without a &#x60;suspect_score&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="developerTools">Filter events by Developer Tools detection result. &gt; Note: When using this parameter, only events with the &#x60;developer_tools&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;developer_tools&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="locationSpoofing">Filter events by Location Spoofing detection result. &gt; Note: When using this parameter, only events with the &#x60;location_spoofing&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;location_spoofing&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="mitmAttack">Filter events by MITM (Man-in-the-Middle) Attack detection result. &gt; Note: When using this parameter, only events with the &#x60;mitm_attack&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;mitm_attack&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="proxy">Filter events by Proxy detection result. &gt; Note: When using this parameter, only events with the &#x60;proxy&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;proxy&#x60; Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="sdkVersion">Filter events by a specific SDK version associated with the identification event (&#x60;sdk.version&#x60; property). Example: &#x60;3.11.14&#x60;  (optional)</param>
-        /// <param name="sdkPlatform">Filter events by the SDK Platform associated with the identification event (&#x60;sdk.platform&#x60; property) . &#x60;js&#x60; - Javascript agent (Web). &#x60;ios&#x60; - Apple iOS based devices. &#x60;android&#x60; - Android based devices.  (optional)</param>
-        /// <param name="environment">Filter for events by providing one or more environment IDs (&#x60;environment_id&#x60; property).  (optional)</param>
-        /// <param name="proximityId">Filter events by the most precise Proximity ID provided by default. &gt; Note: When using this parameter, only events with the &#x60;proximity.id&#x60; property matching the provided ID are returned. Events without a &#x60;proximity&#x60; result are left out of the response.  (optional)</param>
-        /// <param name="totalHits">When set, the response will include a &#x60;total_hits&#x60; property with a count of total query matches across all pages, up to the specified limit.  (optional)</param>
-        /// <param name="torNode">Filter events by Tor Node detection result. &gt; Note: When using this parameter, only events with the &#x60;tor_node&#x60; property set to &#x60;true&#x60; or &#x60;false&#x60; are returned. Events without a &#x60;tor_node&#x60; detection result are left out of the response.  (optional)</param>
+        /// <param name="request">The request parameters.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchEventsApiResponse"/>&gt;</returns>
-        public async Task<ISearchEventsApiResponse> SearchEventsOrDefaultAsync(Option<int> limit = default, Option<string> paginationKey = default, Option<string> visitorId = default, Option<string> bot = default, Option<string> ipAddress = default, Option<string> asn = default, Option<string> linkedId = default, Option<string> url = default, Option<string> origin = default, Option<long> start = default, Option<long> end = default, Option<bool> reverse = default, Option<bool> suspect = default, Option<bool> vpn = default, Option<bool> virtualMachine = default, Option<bool> tampering = default, Option<bool> antiDetectBrowser = default, Option<bool> incognito = default, Option<bool> privacySettings = default, Option<bool> jailbroken = default, Option<bool> frida = default, Option<bool> factoryReset = default, Option<bool> clonedApp = default, Option<bool> emulator = default, Option<bool> rootApps = default, Option<string> vpnConfidence = default, Option<float> minSuspectScore = default, Option<bool> developerTools = default, Option<bool> locationSpoofing = default, Option<bool> mitmAttack = default, Option<bool> proxy = default, Option<string> sdkVersion = default, Option<string> sdkPlatform = default, Option<List<string>> environment = default, Option<string> proximityId = default, Option<long> totalHits = default, Option<bool> torNode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchEventsApiResponse> SearchEventsOrDefaultAsync(SearchEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchEventsAsync(limit, paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, start, end, reverse, suspect, vpn, virtualMachine, tampering, antiDetectBrowser, incognito, privacySettings, jailbroken, frida, factoryReset, clonedApp, emulator, rootApps, vpnConfidence, minSuspectScore, developerTools, locationSpoofing, mitmAttack, proxy, sdkVersion, sdkPlatform, environment, proximityId, totalHits, torNode, cancellationToken).ConfigureAwait(false);
+                return await SearchEventsAsync(request, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1645,52 +2124,55 @@ namespace Fingerprint.ServerSdk.Api
         /// ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="limit">Limit the number of events returned.  (optional, default to 10)</param>
-        /// <param name="paginationKey">Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  (optional)</param>
-        /// <param name="visitorId">Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  (optional)</param>
-        /// <param name="bot">Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="ipAddress">Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  (optional)</param>
-        /// <param name="asn"> (optional)</param>
-        /// <param name="linkedId">Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  (optional)</param>
-        /// <param name="url">Filter events by the URL (`url` property) associated with the event.  (optional)</param>
-        /// <param name="origin">Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  (optional)</param>
-        /// <param name="start">Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="end">Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  (optional)</param>
-        /// <param name="reverse">Sort events in reverse timestamp order.  (optional)</param>
-        /// <param name="suspect">Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  (optional)</param>
-        /// <param name="vpn">Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="virtualMachine">Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="tampering">Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="antiDetectBrowser">Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="incognito">Filter events by Browser Incognito Detection result. > Note: When using this parameter, only events with the `incognito` property set to `true` or `false` are returned. Events without an `incognito` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="privacySettings">Filter events by Privacy Settings Detection result. > Note: When using this parameter, only events with the `privacy_settings` property set to `true` or `false` are returned. Events without a `privacy_settings` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="jailbroken">Filter events by Jailbroken Device Detection result. > Note: When using this parameter, only events with the `jailbroken` property set to `true` or `false` are returned. Events without a `jailbroken` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="frida">Filter events by Frida Detection result. > Note: When using this parameter, only events with the `frida` property set to `true` or `false` are returned. Events without a `frida` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="factoryReset">Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="clonedApp">Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="emulator">Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="rootApps">Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="vpnConfidence">Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="minSuspectScore">Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="developerTools">Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="locationSpoofing">Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="mitmAttack">Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="proxy">Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  (optional)</param>
-        /// <param name="sdkVersion">Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  (optional)</param>
-        /// <param name="sdkPlatform">Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  (optional)</param>
-        /// <param name="environment">Filter for events by providing one or more environment IDs (`environment_id` property).  (optional)</param>
-        /// <param name="proximityId">Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  (optional)</param>
-        /// <param name="totalHits">When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  (optional)</param>
-        /// <param name="torNode">Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  (optional)</param>
+        /// <param name="request">The request parameters.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchEventsApiResponse"/>&gt;</returns>
-        public async Task<ISearchEventsApiResponse> SearchEventsAsync(Option<int> limit = default, Option<string> paginationKey = default, Option<string> visitorId = default, Option<string> bot = default, Option<string> ipAddress = default, Option<string> asn = default, Option<string> linkedId = default, Option<string> url = default, Option<string> origin = default, Option<long> start = default, Option<long> end = default, Option<bool> reverse = default, Option<bool> suspect = default, Option<bool> vpn = default, Option<bool> virtualMachine = default, Option<bool> tampering = default, Option<bool> antiDetectBrowser = default, Option<bool> incognito = default, Option<bool> privacySettings = default, Option<bool> jailbroken = default, Option<bool> frida = default, Option<bool> factoryReset = default, Option<bool> clonedApp = default, Option<bool> emulator = default, Option<bool> rootApps = default, Option<string> vpnConfidence = default, Option<float> minSuspectScore = default, Option<bool> developerTools = default, Option<bool> locationSpoofing = default, Option<bool> mitmAttack = default, Option<bool> proxy = default, Option<string> sdkVersion = default, Option<string> sdkPlatform = default, Option<List<string>> environment = default, Option<string> proximityId = default, Option<long> totalHits = default, Option<bool> torNode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchEventsApiResponse> SearchEventsAsync(SearchEventsRequest request, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
+            // Extract parameters from request object
+            Option<int> limit = request.Limit;
+            Option<string> paginationKey = request.PaginationKey;
+            Option<string> visitorId = request.VisitorId;
+            Option<BotFilter> bot = request.Bot;
+            Option<string> ipAddress = request.IpAddress;
+            Option<string> asn = request.Asn;
+            Option<string> linkedId = request.LinkedId;
+            Option<string> url = request.Url;
+            Option<string> origin = request.Origin;
+            Option<long> start = request.Start;
+            Option<long> end = request.End;
+            Option<bool> reverse = request.Reverse;
+            Option<bool> suspect = request.Suspect;
+            Option<bool> vpn = request.Vpn;
+            Option<bool> virtualMachine = request.VirtualMachine;
+            Option<bool> tampering = request.Tampering;
+            Option<bool> antiDetectBrowser = request.AntiDetectBrowser;
+            Option<bool> incognito = request.Incognito;
+            Option<bool> privacySettings = request.PrivacySettings;
+            Option<bool> jailbroken = request.Jailbroken;
+            Option<bool> frida = request.Frida;
+            Option<bool> factoryReset = request.FactoryReset;
+            Option<bool> clonedApp = request.ClonedApp;
+            Option<bool> emulator = request.Emulator;
+            Option<bool> rootApps = request.RootApps;
+            Option<VpnConfidenceFilter> vpnConfidence = request.VpnConfidence;
+            Option<float> minSuspectScore = request.MinSuspectScore;
+            Option<bool> developerTools = request.DeveloperTools;
+            Option<bool> locationSpoofing = request.LocationSpoofing;
+            Option<bool> mitmAttack = request.MitmAttack;
+            Option<bool> proxy = request.Proxy;
+            Option<string> sdkVersion = request.SdkVersion;
+            Option<SdkPlatformFilter> sdkPlatform = request.SdkPlatform;
+            Option<List<string>> environment = request.Environment;
+            Option<string> proximityId = request.ProximityId;
+            Option<long> totalHits = request.TotalHits;
+            Option<bool> torNode = request.TorNode;
+
             try
             {
-                ValidateSearchEvents(paginationKey, visitorId, bot, ipAddress, asn, linkedId, url, origin, vpnConfidence, sdkVersion, sdkPlatform, environment, proximityId);
+                ValidateSearchEvents(paginationKey, visitorId, ipAddress, asn, linkedId, url, origin, sdkVersion, environment, proximityId);
 
                 FormatSearchEvents(ref limit, ref paginationKey, ref visitorId, ref bot, ref ipAddress, ref asn, ref linkedId, ref url, ref origin, ref start, ref end, ref reverse, ref suspect, ref vpn, ref virtualMachine, ref tampering, ref antiDetectBrowser, ref incognito, ref privacySettings, ref jailbroken, ref frida, ref factoryReset, ref clonedApp, ref emulator, ref rootApps, ref vpnConfidence, ref minSuspectScore, ref developerTools, ref locationSpoofing, ref mitmAttack, ref proxy, ref sdkVersion, ref sdkPlatform, environment, ref proximityId, ref totalHits, ref torNode);
 

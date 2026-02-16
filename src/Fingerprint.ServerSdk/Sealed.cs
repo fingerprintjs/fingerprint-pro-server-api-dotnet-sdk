@@ -169,6 +169,8 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new JsonStringEnumConverter());
             jsonOptions.Converters.Add(new DateTimeJsonConverter());
             jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+            jsonOptions.Converters.Add(new BotFilterJsonConverter());
+            jsonOptions.Converters.Add(new BotFilterNullableJsonConverter());
             jsonOptions.Converters.Add(new BotResultJsonConverter());
             jsonOptions.Converters.Add(new BotResultNullableJsonConverter());
             jsonOptions.Converters.Add(new BrowserDetailsJsonConverter());
@@ -207,6 +209,8 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new RuleActionTypeJsonConverter());
             jsonOptions.Converters.Add(new RuleActionTypeNullableJsonConverter());
             jsonOptions.Converters.Add(new SDKJsonConverter());
+            jsonOptions.Converters.Add(new SdkPlatformFilterJsonConverter());
+            jsonOptions.Converters.Add(new SdkPlatformFilterNullableJsonConverter());
             jsonOptions.Converters.Add(new SupplementaryIDHighRecallJsonConverter());
             jsonOptions.Converters.Add(new TamperingDetailsJsonConverter());
             jsonOptions.Converters.Add(new TouchSupportJsonConverter());
@@ -215,6 +219,8 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new VelocityDataJsonConverter());
             jsonOptions.Converters.Add(new VpnConfidenceJsonConverter());
             jsonOptions.Converters.Add(new VpnConfidenceNullableJsonConverter());
+            jsonOptions.Converters.Add(new VpnConfidenceFilterJsonConverter());
+            jsonOptions.Converters.Add(new VpnConfidenceFilterNullableJsonConverter());
             jsonOptions.Converters.Add(new VpnMethodsJsonConverter());
             jsonOptions.Converters.Add(new WebGlBasicsJsonConverter());
             jsonOptions.Converters.Add(new WebGlExtensionsJsonConverter());
