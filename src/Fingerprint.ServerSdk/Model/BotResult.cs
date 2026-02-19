@@ -24,9 +24,9 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// Bot detection result:  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;not_detected&#x60; - the visitor is not a bot 
+    /// Bot detection result:  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `not_detected` - the visitor is not a bot 
     /// </summary>
-    /// <value>Bot detection result:  * &#x60;bad&#x60; - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  * &#x60;good&#x60; - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * &#x60;not_detected&#x60; - the visitor is not a bot </value>
+    /// <value>Bot detection result:  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `not_detected` - the visitor is not a bot </value>
     public enum BotResult
     {
         /// <summary>

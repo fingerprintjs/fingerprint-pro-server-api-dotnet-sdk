@@ -1,9 +1,9 @@
         {{^isContainer}}
         /// <summary>
-        /// {{description}}{{^description}}Defines {{{name}}}{{/description}}
+        /// {{{description}}}{{^description}}Defines {{{name}}}{{/description}}
         /// </summary>
         {{#description}}
-        /// <value>{{.}}</value>
+        /// <value>{{{.}}}</value>
         {{/description}}
         {{#isString}}
         {{^useGenericHost}}
