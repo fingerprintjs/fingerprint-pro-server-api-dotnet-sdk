@@ -1,5 +1,38 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.0
+
+### Major Changes
+
+- Rename .NET SDK project and namespaces from `FingerprintPro.ServerSdk.*` to `Fingerprint.ServerSdk.*`.
+
+  **Breaking changes**
+
+  - Update all `using` directives and fully-qualified type names:
+    - `FingerprintPro.ServerSdk.*` → `Fingerprint.ServerSdk.*`
+  - If you reference solution/project file names or CI paths, update them to the new `Fingerprint.ServerSdk.*` locations. ([9c07283](https://github.com/fingerprintjs/dotnet-sdk/commit/9c07283b7bee90c50acc7b791df13dc17964ee4f))
+
+- Migrate to `generichost` and Server API v4.
+
+  **BREAKING CHANGE:** This release contains multiple breaking changes:
+
+  - SDK version bumped to `8.0.0`.
+  - Server API version upgraded from v3 to v4.
+  - Base URL changed from `https://api.fpjs.io` to `https://api.fpjs.io/v4`.
+  - Parameter `request_id` renamed to `event_id` for all endpoints.
+  - Removed `GetVisits` and `GetRelatedVisitors` operations and endpoints.
+  - All API methods are async.
+  - New dependency injection pattern for API client configuration.
+
+  **Migration notes:**
+
+  - Replace `Configuration` class usage with generichost
+    (`IHostBuilder.ConfigureApi()`).
+  - Update all API method calls to use async variants.
+  - Replace `request_id` parameters with `event_id`
+  - Update any code using removed endpoints/operations (`GetVisits`,
+    `GetRelatedVisitors`). You can use search operation. ([649357a](https://github.com/fingerprintjs/dotnet-sdk/commit/649357a2fa2da0a2ed1c7c3577f6840cd0b35f33))
+
 ## 8.0.0-test.3
 
 ### Patch Changes
