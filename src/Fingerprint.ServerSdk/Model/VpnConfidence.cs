@@ -24,9 +24,9 @@ using Fingerprint.ServerSdk.Client;
 namespace Fingerprint.ServerSdk.Model
 {
     /// <summary>
-    /// A confidence rating for the VPN detection result — \&quot;low\&quot;, \&quot;medium\&quot;, or \&quot;high\&quot;. Depends on the combination of results returned from all VPN detection methods.
+    /// A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.
     /// </summary>
-    /// <value>A confidence rating for the VPN detection result — \&quot;low\&quot;, \&quot;medium\&quot;, or \&quot;high\&quot;. Depends on the combination of results returned from all VPN detection methods.</value>
+    /// <value>A confidence rating for the VPN detection result — \"low\", \"medium\", or \"high\". Depends on the combination of results returned from all VPN detection methods.</value>
     public enum VpnConfidence
     {
         /// <summary>

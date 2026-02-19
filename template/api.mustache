@@ -71,10 +71,10 @@ namespace {{packageName}}.{{apiPackage}}
         Task<{{interfacePrefix}}{{operationId}}ApiResponse> {{operationId}}Async({{>OperationSignature}});
 
         /// <summary>
-        /// {{summary}}
+        /// {{{summary}}}
         /// </summary>
         /// <remarks>
-        /// {{notes}}
+        /// {{{notes}}}
         /// </remarks>
         {{#vendorExtensions.x-dotnet-use-request-object}}
         /// <param name="request">The request parameters.</param>
@@ -372,14 +372,14 @@ namespace {{packageName}}.{{apiPackage}}
         partial void OnError{{operationId}}({{#lambda.joinWithComma}}ref bool suppressDefaultLogLocalVar  Exception exceptionLocalVar  string pathFormatLocalVar  string pathLocalVar  {{#allParams}}{{^required}}Option<{{/required}}{{{dataType}}}{{>NullConditionalParameter}}{{^required}}>{{/required}} {{paramName}}  {{/allParams}}{{/lambda.joinWithComma}});
 
         /// <summary>
-        /// {{summary}} {{notes}}
+        /// {{{summary}}} {{{notes}}}
         /// </summary>
         {{#vendorExtensions.x-dotnet-use-request-object}}
         /// <param name="request">The request parameters.</param>
         {{/vendorExtensions.x-dotnet-use-request-object}}
         {{^vendorExtensions.x-dotnet-use-request-object}}
         {{#allParams}}
-        /// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+        /// <param name="{{paramName}}">{{{description}}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
         {{/allParams}}
         {{/vendorExtensions.x-dotnet-use-request-object}}
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
