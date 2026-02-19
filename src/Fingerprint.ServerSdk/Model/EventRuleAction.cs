@@ -53,75 +53,6 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Describes the action to take with the request.
-        /// </summary>
-        /// <value>Describes the action to take with the request.</value>
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum Allow for value: allow
-            /// </summary>
-
-            Allow = 1,
-
-            /// <summary>
-            /// Enum Block for value: block
-            /// </summary>
-
-            Block = 2
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static TypeEnum TypeEnumFromString(string value)
-        {
-            if (value.Equals("allow"))
-                return TypeEnum.Allow;
-
-            if (value.Equals("block"))
-                return TypeEnum.Block;
-
-            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static TypeEnum? TypeEnumFromStringOrDefault(string value)
-        {
-            if (value.Equals("allow"))
-                return TypeEnum.Allow;
-
-            if (value.Equals("block"))
-                return TypeEnum.Block;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Converts the <see cref="TypeEnum"/> to the json value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string TypeEnumToJsonValue(TypeEnum value)
-        {
-            if (value == TypeEnum.Allow)
-                return "allow";
-
-            if (value == TypeEnum.Block)
-                return "block";
-
-            throw new NotImplementedException($"Value could not be handled: '{value}'");
-        }
-
-        /// <summary>
         /// Gets or Sets EventRuleActionAllow
         /// </summary>
         public EventRuleActionAllow EventRuleActionAllow { get; set; }
@@ -186,7 +117,7 @@ namespace Fingerprint.ServerSdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<EventRuleAction.TypeEnum?> type = default;
+            Option<RuleActionType?> type = default;
 
             EventRuleActionAllow eventRuleActionAllow = null;
             EventRuleActionBlock eventRuleActionBlock = null;
@@ -239,7 +170,7 @@ namespace Fingerprint.ServerSdk.Model
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
-                                type = new Option<EventRuleAction.TypeEnum?>(EventRuleAction.TypeEnumFromStringOrDefault(typeRawValue));
+                                type = new Option<RuleActionType?>(RuleActionTypeValueConverter.FromStringOrDefault(typeRawValue));
                             break;
                         default:
                             break;
