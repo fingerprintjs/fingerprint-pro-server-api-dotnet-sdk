@@ -55,8 +55,6 @@ public class SealedTest
         _jsonOptions.Converters.Add(new RawDeviceAttributesJsonConverter());
         _jsonOptions.Converters.Add(new RequestHeaderModificationsJsonConverter());
         _jsonOptions.Converters.Add(new RuleActionHeaderFieldJsonConverter());
-        _jsonOptions.Converters.Add(new RuleActionTypeJsonConverter());
-        _jsonOptions.Converters.Add(new RuleActionTypeNullableJsonConverter());
         _jsonOptions.Converters.Add(new SDKJsonConverter());
         _jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
         _jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());

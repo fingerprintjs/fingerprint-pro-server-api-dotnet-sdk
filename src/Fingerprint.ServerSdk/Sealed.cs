@@ -205,8 +205,6 @@ namespace Fingerprint.ServerSdk
             jsonOptions.Converters.Add(new RawDeviceAttributesJsonConverter());
             jsonOptions.Converters.Add(new RequestHeaderModificationsJsonConverter());
             jsonOptions.Converters.Add(new RuleActionHeaderFieldJsonConverter());
-            jsonOptions.Converters.Add(new RuleActionTypeJsonConverter());
-            jsonOptions.Converters.Add(new RuleActionTypeNullableJsonConverter());
             jsonOptions.Converters.Add(new SDKJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotJsonConverter());
             jsonOptions.Converters.Add(new SearchEventsBotNullableJsonConverter());

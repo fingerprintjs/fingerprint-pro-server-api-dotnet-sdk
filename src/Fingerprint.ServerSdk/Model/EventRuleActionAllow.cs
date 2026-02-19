@@ -34,12 +34,12 @@ namespace Fingerprint.ServerSdk.Model
         /// Initializes a new instance of the <see cref="EventRuleActionAllow" /> class.
         /// </summary>
         /// <param name="rulesetId">The ID of the evaluated ruleset. (required).</param>
-        /// <param name="type">type (required).</param>
+        /// <param name="type">Describes the action to take with the request. (required).</param>
         /// <param name="ruleId">The ID of the rule that matched the identification event..</param>
         /// <param name="ruleExpression">The expression of the rule that matched the identification event..</param>
         /// <param name="requestHeaderModifications">requestHeaderModifications.</param>
         [JsonConstructor]
-        public EventRuleActionAllow(string rulesetId, RuleActionType type, Option<string> ruleId = default, Option<string> ruleExpression = default, Option<RequestHeaderModifications> requestHeaderModifications = default)
+        public EventRuleActionAllow(string rulesetId, TypeEnum type, Option<string> ruleId = default, Option<string> ruleExpression = default, Option<RequestHeaderModifications> requestHeaderModifications = default)
         {
             RulesetId = rulesetId;
             Type = type;
@@ -52,10 +52,65 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Describes the action to take with the request.
         /// </summary>
+        /// <value>Describes the action to take with the request.</value>
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum Allow for value: allow
+            /// </summary>
+
+            Allow = 1
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TypeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static TypeEnum TypeEnumFromString(string value)
+        {
+            if (value.Equals("allow"))
+                return TypeEnum.Allow;
+
+            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TypeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static TypeEnum? TypeEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("allow"))
+                return TypeEnum.Allow;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="TypeEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string TypeEnumToJsonValue(TypeEnum value)
+        {
+            if (value == TypeEnum.Allow)
+                return "allow";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Describes the action to take with the request.
+        /// </summary>
+        /// <value>Describes the action to take with the request.</value>
         [JsonPropertyName("type")]
-        public RuleActionType Type { get; set; }
+        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// The ID of the evaluated ruleset.
@@ -156,7 +211,7 @@ namespace Fingerprint.ServerSdk.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string> rulesetId = default;
-            Option<RuleActionType?> type = default;
+            Option<EventRuleActionAllow.TypeEnum?> type = default;
             Option<string> ruleId = default;
             Option<string> ruleExpression = default;
             Option<RequestHeaderModifications> requestHeaderModifications = default;
@@ -182,7 +237,7 @@ namespace Fingerprint.ServerSdk.Model
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
-                                type = new Option<RuleActionType?>(RuleActionTypeValueConverter.FromStringOrDefault(typeRawValue));
+                                type = new Option<EventRuleActionAllow.TypeEnum?>(EventRuleActionAllow.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "rule_id":
                             ruleId = new Option<string>(utf8JsonReader.GetString());
@@ -261,9 +316,8 @@ namespace Fingerprint.ServerSdk.Model
 
             writer.WriteString("ruleset_id", eventRuleActionAllow.RulesetId);
 
-            var typeRawValue = RuleActionTypeValueConverter.ToJsonValue(eventRuleActionAllow.Type);
+            var typeRawValue = EventRuleActionAllow.TypeEnumToJsonValue(eventRuleActionAllow.Type);
             writer.WriteString("type", typeRawValue);
-
             if (eventRuleActionAllow.RuleIdOption.IsSet)
                 writer.WriteString("rule_id", eventRuleActionAllow.RuleId);
 

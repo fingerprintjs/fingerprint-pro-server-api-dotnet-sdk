@@ -6,7 +6,7 @@ Informs the client the request should be blocked using the response described by
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RulesetId** | **string** | The ID of the evaluated ruleset. | 
-**Type** | **RuleActionType** |  | 
+**Type** | **string** | Describes the action to take with the request. | 
 **RuleId** | **string** | The ID of the rule that matched the identification event. | [optional] 
 **RuleExpression** | **string** | The expression of the rule that matched the identification event. | [optional] 
 **StatusCode** | **int** | A valid HTTP status code. | [optional] 

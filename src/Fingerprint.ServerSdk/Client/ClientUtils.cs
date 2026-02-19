@@ -120,14 +120,18 @@ namespace Fingerprint.ServerSdk.Client
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
                 return ErrorCodeValueConverter.ToJsonValue(errorCode);
+            if (obj is EventRuleAction.TypeEnum eventRuleActionTypeEnum)
+                return EventRuleAction.TypeEnumToJsonValue(eventRuleActionTypeEnum);
+            if (obj is EventRuleActionAllow.TypeEnum eventRuleActionAllowTypeEnum)
+                return EventRuleActionAllow.TypeEnumToJsonValue(eventRuleActionAllowTypeEnum);
+            if (obj is EventRuleActionBlock.TypeEnum eventRuleActionBlockTypeEnum)
+                return EventRuleActionBlock.TypeEnumToJsonValue(eventRuleActionBlockTypeEnum);
             if (obj is Proximity.PrecisionRadiusEnum proximityPrecisionRadiusEnum)
                 return Proximity.PrecisionRadiusEnumToJsonValue(proximityPrecisionRadiusEnum).ToString();
             if (obj is ProxyConfidence proxyConfidence)
                 return ProxyConfidenceValueConverter.ToJsonValue(proxyConfidence);
             if (obj is ProxyDetails.ProxyTypeEnum proxyDetailsProxyTypeEnum)
                 return ProxyDetails.ProxyTypeEnumToJsonValue(proxyDetailsProxyTypeEnum);
-            if (obj is RuleActionType ruleActionType)
-                return RuleActionTypeValueConverter.ToJsonValue(ruleActionType);
             if (obj is SDK.PlatformEnum sDKPlatformEnum)
                 return SDK.PlatformEnumToJsonValue(sDKPlatformEnum);
             if (obj is SearchEventsBot searchEventsBot)

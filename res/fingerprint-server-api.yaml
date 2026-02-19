@@ -1334,12 +1334,6 @@ components:
     RuleExpression:
       type: string
       description: The expression of the rule that matched the identification event.
-    RuleActionType:
-      type: string
-      description: Describes the action to take with the request.
-      enum:
-        - allow
-        - block
     RuleActionHeaderField:
       type: object
       required:
@@ -1388,9 +1382,9 @@ components:
         rule_expression:
           $ref: '#/components/schemas/RuleExpression'
         type:
-          allOf:
-            - $ref: '#/components/schemas/RuleActionType'
-            - const: allow
+          type: string
+          description: Describes the action to take with the request.
+          const: allow
         request_header_modifications:
           $ref: '#/components/schemas/RequestHeaderModifications'
       required:
@@ -1415,9 +1409,9 @@ components:
         rule_expression:
           $ref: '#/components/schemas/RuleExpression'
         type:
-          allOf:
-            - $ref: '#/components/schemas/RuleActionType'
-            - const: block
+          type: string
+          description: Describes the action to take with the request.
+          const: block
         status_code:
           $ref: '#/components/schemas/StatusCode'
         headers:
