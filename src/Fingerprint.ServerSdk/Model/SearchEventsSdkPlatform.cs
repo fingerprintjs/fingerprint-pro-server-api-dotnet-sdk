@@ -27,7 +27,7 @@ namespace Fingerprint.ServerSdk.Model
     /// Filter events by the SDK Platform associated with the identification event (&#x60;sdk.platform&#x60; property) . &#x60;js&#x60; - Javascript agent (Web). &#x60;ios&#x60; - Apple iOS based devices. &#x60;android&#x60; - Android based devices. 
     /// </summary>
     /// <value>Filter events by the SDK Platform associated with the identification event (&#x60;sdk.platform&#x60; property) . &#x60;js&#x60; - Javascript agent (Web). &#x60;ios&#x60; - Apple iOS based devices. &#x60;android&#x60; - Android based devices. </value>
-    public enum SdkPlatformFilter
+    public enum SearchEventsSdkPlatform
     {
         /// <summary>
         /// Enum Js for value: js
@@ -46,63 +46,63 @@ namespace Fingerprint.ServerSdk.Model
     }
 
     /// <summary>
-    /// Converts <see cref="SdkPlatformFilter"/> to and from the JSON value
+    /// Converts <see cref="SearchEventsSdkPlatform"/> to and from the JSON value
     /// </summary>
-    public static class SdkPlatformFilterValueConverter
+    public static class SearchEventsSdkPlatformValueConverter
     {
         /// <summary>
-        /// Parses a given value to <see cref="SdkPlatformFilter"/>
+        /// Parses a given value to <see cref="SearchEventsSdkPlatform"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static SdkPlatformFilter FromString(string value)
+        public static SearchEventsSdkPlatform FromString(string value)
         {
             if (value.Equals("js"))
-                return SdkPlatformFilter.Js;
+                return SearchEventsSdkPlatform.Js;
 
             if (value.Equals("android"))
-                return SdkPlatformFilter.Android;
+                return SearchEventsSdkPlatform.Android;
 
             if (value.Equals("ios"))
-                return SdkPlatformFilter.Ios;
+                return SearchEventsSdkPlatform.Ios;
 
-            throw new NotImplementedException($"Could not convert value to type SdkPlatformFilter: '{value}'");
+            throw new NotImplementedException($"Could not convert value to type SearchEventsSdkPlatform: '{value}'");
         }
 
         /// <summary>
-        /// Parses a given value to <see cref="SdkPlatformFilter"/>
+        /// Parses a given value to <see cref="SearchEventsSdkPlatform"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static SdkPlatformFilter? FromStringOrDefault(string value)
+        public static SearchEventsSdkPlatform? FromStringOrDefault(string value)
         {
             if (value.Equals("js"))
-                return SdkPlatformFilter.Js;
+                return SearchEventsSdkPlatform.Js;
 
             if (value.Equals("android"))
-                return SdkPlatformFilter.Android;
+                return SearchEventsSdkPlatform.Android;
 
             if (value.Equals("ios"))
-                return SdkPlatformFilter.Ios;
+                return SearchEventsSdkPlatform.Ios;
 
             return null;
         }
 
         /// <summary>
-        /// Converts the <see cref="SdkPlatformFilter"/> to the json value
+        /// Converts the <see cref="SearchEventsSdkPlatform"/> to the json value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string ToJsonValue(SdkPlatformFilter value)
+        public static string ToJsonValue(SearchEventsSdkPlatform value)
         {
-            if (value == SdkPlatformFilter.Js)
+            if (value == SearchEventsSdkPlatform.Js)
                 return "js";
 
-            if (value == SdkPlatformFilter.Android)
+            if (value == SearchEventsSdkPlatform.Android)
                 return "android";
 
-            if (value == SdkPlatformFilter.Ios)
+            if (value == SearchEventsSdkPlatform.Ios)
                 return "ios";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
@@ -110,10 +110,10 @@ namespace Fingerprint.ServerSdk.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="SdkPlatformFilter"/>
+    /// A Json converter for type <see cref="SearchEventsSdkPlatform"/>
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public class SdkPlatformFilterJsonConverter : JsonConverter<SdkPlatformFilter>
+    public class SearchEventsSdkPlatformJsonConverter : JsonConverter<SearchEventsSdkPlatform>
     {
         /// <summary>
         /// Returns a  from the Json object
@@ -122,13 +122,13 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override SdkPlatformFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override SearchEventsSdkPlatform Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string rawValue = reader.GetString();
 
-            SdkPlatformFilter? result = rawValue == null
+            SearchEventsSdkPlatform? result = rawValue == null
                 ? null
-                : SdkPlatformFilterValueConverter.FromStringOrDefault(rawValue);
+                : SearchEventsSdkPlatformValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -137,36 +137,36 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// Writes the SdkPlatformFilter to the json writer
+        /// Writes the SearchEventsSdkPlatform to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="sdkPlatformFilter"></param>
+        /// <param name="searchEventsSdkPlatform"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, SdkPlatformFilter sdkPlatformFilter, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, SearchEventsSdkPlatform searchEventsSdkPlatform, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(SdkPlatformFilterValueConverter.ToJsonValue(sdkPlatformFilter).ToString());
+            writer.WriteStringValue(SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform).ToString());
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="SdkPlatformFilter"/>
+    /// A Json converter for type <see cref="SearchEventsSdkPlatform"/>
     /// </summary>
-    public class SdkPlatformFilterNullableJsonConverter : JsonConverter<SdkPlatformFilter?>
+    public class SearchEventsSdkPlatformNullableJsonConverter : JsonConverter<SearchEventsSdkPlatform?>
     {
         /// <summary>
-        /// Returns a SdkPlatformFilter from the Json object
+        /// Returns a SearchEventsSdkPlatform from the Json object
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override SdkPlatformFilter? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override SearchEventsSdkPlatform? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string rawValue = reader.GetString();
 
-            SdkPlatformFilter? result = rawValue == null
+            SearchEventsSdkPlatform? result = rawValue == null
                 ? null
-                : SdkPlatformFilterValueConverter.FromStringOrDefault(rawValue);
+                : SearchEventsSdkPlatformValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -175,14 +175,14 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// Writes the SdkPlatformFilter to the json writer
+        /// Writes the SearchEventsSdkPlatform to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="sdkPlatformFilter"></param>
+        /// <param name="searchEventsSdkPlatform"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, SdkPlatformFilter? sdkPlatformFilter, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, SearchEventsSdkPlatform? searchEventsSdkPlatform, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(sdkPlatformFilter.HasValue ? SdkPlatformFilterValueConverter.ToJsonValue(sdkPlatformFilter.Value).ToString() : "null");
+            writer.WriteStringValue(searchEventsSdkPlatform.HasValue ? SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform.Value).ToString() : "null");
         }
     }
 }

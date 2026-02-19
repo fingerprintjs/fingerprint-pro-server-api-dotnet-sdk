@@ -208,12 +208,6 @@ namespace Fingerprint.ServerSdk.Model
         public List<GeolocationSubdivisionsInner> Subdivisions { get { return this.SubdivisionsOption; } set { this.SubdivisionsOption = new Option<List<GeolocationSubdivisionsInner>>(value); } }
 
         /// <summary>
-        /// Gets or Sets additional properties
-        /// </summary>
-        [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalProperties { get; } = new Dictionary<string, JsonElement>();
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -232,7 +226,6 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  ContinentCode: ").Append(ContinentCode).Append("\n");
             sb.Append("  ContinentName: ").Append(ContinentName).Append("\n");
             sb.Append("  Subdivisions: ").Append(Subdivisions).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

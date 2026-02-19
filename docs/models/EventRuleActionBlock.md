@@ -5,7 +5,10 @@ Informs the client the request should be blocked using the response described by
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **RuleActionType** |  | 
+**RulesetId** | **string** | The ID of the evaluated ruleset. | 
+**Type** | **string** | Describes the action to take with the request. | 
+**RuleId** | **string** | The ID of the rule that matched the identification event. | [optional] 
+**RuleExpression** | **string** | The expression of the rule that matched the identification event. | [optional] 
 **StatusCode** | **int** | A valid HTTP status code. | [optional] 
 **Headers** | [**List&lt;RuleActionHeaderField&gt;**](RuleActionHeaderField.md) | A list of headers to send. | [optional] 
 **Body** | **string** | The response body to send to the client. | [optional] 

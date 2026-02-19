@@ -53,6 +53,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="proximity">proximity.</param>
         /// <param name="bot">bot.</param>
         /// <param name="botType">Additional classification of the bot type if detected. .</param>
+        /// <param name="botInfo">botInfo.</param>
         /// <param name="clonedApp">Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. .</param>
         /// <param name="developerTools">`true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. .</param>
         /// <param name="emulator">Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. .</param>
@@ -83,7 +84,7 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="highActivityDevice">Flag indicating if the request came from a high-activity visitor..</param>
         /// <param name="rawDeviceAttributes">rawDeviceAttributes.</param>
         [JsonConstructor]
-        public Event(string eventId, long timestamp, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
+        public Event(string eventId, long timestamp, Option<string> linkedId = default, Option<string> environmentId = default, Option<bool?> suspect = default, Option<SDK> sdk = default, Option<bool?> replayed = default, Option<Identification> identification = default, Option<SupplementaryIDHighRecall> supplementaryIdHighRecall = default, Option<Dictionary<string, Object>> tags = default, Option<string> url = default, Option<string> bundleId = default, Option<string> packageName = default, Option<string> ipAddress = default, Option<string> userAgent = default, Option<string> clientReferrer = default, Option<BrowserDetails> browserDetails = default, Option<Proximity> proximity = default, Option<BotResult?> bot = default, Option<string> botType = default, Option<BotInfo> botInfo = default, Option<bool?> clonedApp = default, Option<bool?> developerTools = default, Option<bool?> emulator = default, Option<long?> factoryResetTimestamp = default, Option<bool?> frida = default, Option<IPBlockList> ipBlocklist = default, Option<IPInfo> ipInfo = default, Option<bool?> proxy = default, Option<ProxyConfidence?> proxyConfidence = default, Option<ProxyDetails> proxyDetails = default, Option<bool?> incognito = default, Option<bool?> jailbroken = default, Option<bool?> locationSpoofing = default, Option<bool?> mitmAttack = default, Option<bool?> privacySettings = default, Option<bool?> rootApps = default, Option<EventRuleAction> ruleAction = default, Option<int?> suspectScore = default, Option<bool?> tampering = default, Option<TamperingDetails> tamperingDetails = default, Option<Velocity> velocity = default, Option<bool?> virtualMachine = default, Option<bool?> vpn = default, Option<VpnConfidence?> vpnConfidence = default, Option<string> vpnOriginTimezone = default, Option<string> vpnOriginCountry = default, Option<VpnMethods> vpnMethods = default, Option<bool?> highActivityDevice = default, Option<RawDeviceAttributes> rawDeviceAttributes = default)
         {
             EventId = eventId;
             Timestamp = timestamp;
@@ -105,6 +106,7 @@ namespace Fingerprint.ServerSdk.Model
             ProximityOption = proximity;
             BotOption = bot;
             BotTypeOption = botType;
+            BotInfoOption = botInfo;
             ClonedAppOption = clonedApp;
             DeveloperToolsOption = developerTools;
             EmulatorOption = emulator;
@@ -424,6 +426,19 @@ namespace Fingerprint.ServerSdk.Model
         /// <value>Additional classification of the bot type if detected. </value>
         [JsonPropertyName("bot_type")]
         public string BotType { get { return this.BotTypeOption; } set { this.BotTypeOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of BotInfo
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<BotInfo> BotInfoOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BotInfo
+        /// </summary>
+        [JsonPropertyName("bot_info")]
+        public BotInfo BotInfo { get { return this.BotInfoOption; } set { this.BotInfoOption = new Option<BotInfo>(value); } }
 
         /// <summary>
         /// Used to track the state of ClonedApp
@@ -823,6 +838,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  Proximity: ").Append(Proximity).Append("\n");
             sb.Append("  Bot: ").Append(Bot).Append("\n");
             sb.Append("  BotType: ").Append(BotType).Append("\n");
+            sb.Append("  BotInfo: ").Append(BotInfo).Append("\n");
             sb.Append("  ClonedApp: ").Append(ClonedApp).Append("\n");
             sb.Append("  DeveloperTools: ").Append(DeveloperTools).Append("\n");
             sb.Append("  Emulator: ").Append(Emulator).Append("\n");
@@ -909,6 +925,7 @@ namespace Fingerprint.ServerSdk.Model
             Option<Proximity> proximity = default;
             Option<BotResult?> bot = default;
             Option<string> botType = default;
+            Option<BotInfo> botInfo = default;
             Option<bool?> clonedApp = default;
             Option<bool?> developerTools = default;
             Option<bool?> emulator = default;
@@ -1015,6 +1032,9 @@ namespace Fingerprint.ServerSdk.Model
                             break;
                         case "bot_type":
                             botType = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "bot_info":
+                            botInfo = new Option<BotInfo>(JsonSerializer.Deserialize<BotInfo>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "cloned_app":
                             clonedApp = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -1179,6 +1199,9 @@ namespace Fingerprint.ServerSdk.Model
             if (botType.IsSet && botType.Value == null)
                 throw new ArgumentNullException(nameof(botType), "Property is not nullable for class Event.");
 
+            if (botInfo.IsSet && botInfo.Value == null)
+                throw new ArgumentNullException(nameof(botInfo), "Property is not nullable for class Event.");
+
             if (clonedApp.IsSet && clonedApp.Value == null)
                 throw new ArgumentNullException(nameof(clonedApp), "Property is not nullable for class Event.");
 
@@ -1266,7 +1289,7 @@ namespace Fingerprint.ServerSdk.Model
             if (rawDeviceAttributes.IsSet && rawDeviceAttributes.Value == null)
                 throw new ArgumentNullException(nameof(rawDeviceAttributes), "Property is not nullable for class Event.");
 
-            return new Event(eventId.Value, timestamp.Value.Value, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
+            return new Event(eventId.Value, timestamp.Value.Value, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
         }
 
         /// <summary>
@@ -1340,6 +1363,9 @@ namespace Fingerprint.ServerSdk.Model
 
             if (varEvent.BotTypeOption.IsSet && varEvent.BotType == null)
                 throw new ArgumentNullException(nameof(varEvent.BotType), "Property is required for class Event.");
+
+            if (varEvent.BotInfoOption.IsSet && varEvent.BotInfo == null)
+                throw new ArgumentNullException(nameof(varEvent.BotInfo), "Property is required for class Event.");
 
             if (varEvent.IpBlocklistOption.IsSet && varEvent.IpBlocklist == null)
                 throw new ArgumentNullException(nameof(varEvent.IpBlocklist), "Property is required for class Event.");
@@ -1443,6 +1469,11 @@ namespace Fingerprint.ServerSdk.Model
             if (varEvent.BotTypeOption.IsSet)
                 writer.WriteString("bot_type", varEvent.BotType);
 
+            if (varEvent.BotInfoOption.IsSet)
+            {
+                writer.WritePropertyName("bot_info");
+                JsonSerializer.Serialize(writer, varEvent.BotInfo, jsonSerializerOptions);
+            }
             if (varEvent.ClonedAppOption.IsSet)
                 writer.WriteBoolean("cloned_app", varEvent.ClonedAppOption.Value.Value);
 

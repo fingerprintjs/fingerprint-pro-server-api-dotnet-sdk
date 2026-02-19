@@ -60,7 +60,7 @@ public static class Program
     {
         var events = await api.SearchEventsAsync(new SearchEventsRequest()
             .WithLimit(2)
-            .WithBot(BotFilter.Bad));
+            .WithBot(SearchEventsBot.Bad));
 
         if (! events.IsOk)
         {

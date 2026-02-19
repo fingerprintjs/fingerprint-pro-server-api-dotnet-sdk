@@ -33,12 +33,18 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EventRuleActionAllow" /> class.
         /// </summary>
-        /// <param name="type">type (required).</param>
+        /// <param name="rulesetId">The ID of the evaluated ruleset. (required).</param>
+        /// <param name="type">Describes the action to take with the request. (required).</param>
+        /// <param name="ruleId">The ID of the rule that matched the identification event..</param>
+        /// <param name="ruleExpression">The expression of the rule that matched the identification event..</param>
         /// <param name="requestHeaderModifications">requestHeaderModifications.</param>
         [JsonConstructor]
-        public EventRuleActionAllow(RuleActionType type, Option<RequestHeaderModifications> requestHeaderModifications = default)
+        public EventRuleActionAllow(string rulesetId, TypeEnum type, Option<string> ruleId = default, Option<string> ruleExpression = default, Option<RequestHeaderModifications> requestHeaderModifications = default)
         {
+            RulesetId = rulesetId;
             Type = type;
+            RuleIdOption = ruleId;
+            RuleExpressionOption = ruleExpression;
             RequestHeaderModificationsOption = requestHeaderModifications;
             OnCreated();
         }
@@ -46,10 +52,100 @@ namespace Fingerprint.ServerSdk.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Describes the action to take with the request.
         /// </summary>
+        /// <value>Describes the action to take with the request.</value>
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum Allow for value: allow
+            /// </summary>
+
+            Allow = 1
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TypeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static TypeEnum TypeEnumFromString(string value)
+        {
+            if (value.Equals("allow"))
+                return TypeEnum.Allow;
+
+            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TypeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static TypeEnum? TypeEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("allow"))
+                return TypeEnum.Allow;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="TypeEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string TypeEnumToJsonValue(TypeEnum value)
+        {
+            if (value == TypeEnum.Allow)
+                return "allow";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Describes the action to take with the request.
+        /// </summary>
+        /// <value>Describes the action to take with the request.</value>
         [JsonPropertyName("type")]
-        public RuleActionType Type { get; set; }
+        public TypeEnum Type { get; set; }
+
+        /// <summary>
+        /// The ID of the evaluated ruleset.
+        /// </summary>
+        /// <value>The ID of the evaluated ruleset.</value>
+        [JsonPropertyName("ruleset_id")]
+        public string RulesetId { get; set; }
+
+        /// <summary>
+        /// Used to track the state of RuleId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> RuleIdOption { get; private set; }
+
+        /// <summary>
+        /// The ID of the rule that matched the identification event.
+        /// </summary>
+        /// <value>The ID of the rule that matched the identification event.</value>
+        [JsonPropertyName("rule_id")]
+        public string RuleId { get { return this.RuleIdOption; } set { this.RuleIdOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of RuleExpression
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> RuleExpressionOption { get; private set; }
+
+        /// <summary>
+        /// The expression of the rule that matched the identification event.
+        /// </summary>
+        /// <value>The expression of the rule that matched the identification event.</value>
+        [JsonPropertyName("rule_expression")]
+        public string RuleExpression { get { return this.RuleExpressionOption; } set { this.RuleExpressionOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of RequestHeaderModifications
@@ -72,7 +168,10 @@ namespace Fingerprint.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class EventRuleActionAllow {\n");
+            sb.Append("  RulesetId: ").Append(RulesetId).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  RuleId: ").Append(RuleId).Append("\n");
+            sb.Append("  RuleExpression: ").Append(RuleExpression).Append("\n");
             sb.Append("  RequestHeaderModifications: ").Append(RequestHeaderModifications).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -111,7 +210,10 @@ namespace Fingerprint.ServerSdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<RuleActionType?> type = default;
+            Option<string> rulesetId = default;
+            Option<EventRuleActionAllow.TypeEnum?> type = default;
+            Option<string> ruleId = default;
+            Option<string> ruleExpression = default;
             Option<RequestHeaderModifications> requestHeaderModifications = default;
 
             while (utf8JsonReader.Read())
@@ -129,10 +231,19 @@ namespace Fingerprint.ServerSdk.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "ruleset_id":
+                            rulesetId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
-                                type = new Option<RuleActionType?>(RuleActionTypeValueConverter.FromStringOrDefault(typeRawValue));
+                                type = new Option<EventRuleActionAllow.TypeEnum?>(EventRuleActionAllow.TypeEnumFromStringOrDefault(typeRawValue));
+                            break;
+                        case "rule_id":
+                            ruleId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "rule_expression":
+                            ruleExpression = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "request_header_modifications":
                             requestHeaderModifications = new Option<RequestHeaderModifications>(JsonSerializer.Deserialize<RequestHeaderModifications>(ref utf8JsonReader, jsonSerializerOptions));
@@ -143,16 +254,28 @@ namespace Fingerprint.ServerSdk.Model
                 }
             }
 
+            if (!rulesetId.IsSet)
+                throw new ArgumentException("Property is required for class EventRuleActionAllow.", nameof(rulesetId));
+
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class EventRuleActionAllow.", nameof(type));
+
+            if (rulesetId.IsSet && rulesetId.Value == null)
+                throw new ArgumentNullException(nameof(rulesetId), "Property is not nullable for class EventRuleActionAllow.");
 
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class EventRuleActionAllow.");
 
+            if (ruleId.IsSet && ruleId.Value == null)
+                throw new ArgumentNullException(nameof(ruleId), "Property is not nullable for class EventRuleActionAllow.");
+
+            if (ruleExpression.IsSet && ruleExpression.Value == null)
+                throw new ArgumentNullException(nameof(ruleExpression), "Property is not nullable for class EventRuleActionAllow.");
+
             if (requestHeaderModifications.IsSet && requestHeaderModifications.Value == null)
                 throw new ArgumentNullException(nameof(requestHeaderModifications), "Property is not nullable for class EventRuleActionAllow.");
 
-            return new EventRuleActionAllow(type.Value.Value, requestHeaderModifications);
+            return new EventRuleActionAllow(rulesetId.Value, type.Value.Value, ruleId, ruleExpression, requestHeaderModifications);
         }
 
         /// <summary>
@@ -179,11 +302,27 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, EventRuleActionAllow eventRuleActionAllow, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (eventRuleActionAllow.RulesetId == null)
+                throw new ArgumentNullException(nameof(eventRuleActionAllow.RulesetId), "Property is required for class EventRuleActionAllow.");
+
+            if (eventRuleActionAllow.RuleIdOption.IsSet && eventRuleActionAllow.RuleId == null)
+                throw new ArgumentNullException(nameof(eventRuleActionAllow.RuleId), "Property is required for class EventRuleActionAllow.");
+
+            if (eventRuleActionAllow.RuleExpressionOption.IsSet && eventRuleActionAllow.RuleExpression == null)
+                throw new ArgumentNullException(nameof(eventRuleActionAllow.RuleExpression), "Property is required for class EventRuleActionAllow.");
+
             if (eventRuleActionAllow.RequestHeaderModificationsOption.IsSet && eventRuleActionAllow.RequestHeaderModifications == null)
                 throw new ArgumentNullException(nameof(eventRuleActionAllow.RequestHeaderModifications), "Property is required for class EventRuleActionAllow.");
 
-            var typeRawValue = RuleActionTypeValueConverter.ToJsonValue(eventRuleActionAllow.Type);
+            writer.WriteString("ruleset_id", eventRuleActionAllow.RulesetId);
+
+            var typeRawValue = EventRuleActionAllow.TypeEnumToJsonValue(eventRuleActionAllow.Type);
             writer.WriteString("type", typeRawValue);
+            if (eventRuleActionAllow.RuleIdOption.IsSet)
+                writer.WriteString("rule_id", eventRuleActionAllow.RuleId);
+
+            if (eventRuleActionAllow.RuleExpressionOption.IsSet)
+                writer.WriteString("rule_expression", eventRuleActionAllow.RuleExpression);
 
             if (eventRuleActionAllow.RequestHeaderModificationsOption.IsSet)
             {

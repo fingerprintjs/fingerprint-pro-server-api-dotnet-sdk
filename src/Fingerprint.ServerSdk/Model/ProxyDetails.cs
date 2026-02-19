@@ -35,11 +35,13 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         /// <param name="proxyType">Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers  (required).</param>
         /// <param name="lastSeenAt">Unix millisecond timestamp with hourly resolution of when this IP was last seen as a proxy .</param>
+        /// <param name="provider">String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. .</param>
         [JsonConstructor]
-        public ProxyDetails(ProxyTypeEnum proxyType, Option<long?> lastSeenAt = default)
+        public ProxyDetails(ProxyTypeEnum proxyType, Option<long?> lastSeenAt = default, Option<string> provider = default)
         {
             ProxyType = proxyType;
             LastSeenAtOption = lastSeenAt;
+            ProviderOption = provider;
             OnCreated();
         }
 
@@ -136,6 +138,20 @@ namespace Fingerprint.ServerSdk.Model
         public long? LastSeenAt { get { return this.LastSeenAtOption; } set { this.LastSeenAtOption = new Option<long?>(value); } }
 
         /// <summary>
+        /// Used to track the state of Provider
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ProviderOption { get; private set; }
+
+        /// <summary>
+        /// String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. 
+        /// </summary>
+        /// <value>String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. </value>
+        [JsonPropertyName("provider")]
+        public string Provider { get { return this.ProviderOption; } set { this.ProviderOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -145,6 +161,7 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("class ProxyDetails {\n");
             sb.Append("  ProxyType: ").Append(ProxyType).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
+            sb.Append("  Provider: ").Append(Provider).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -184,6 +201,7 @@ namespace Fingerprint.ServerSdk.Model
 
             Option<ProxyDetails.ProxyTypeEnum?> proxyType = default;
             Option<long?> lastSeenAt = default;
+            Option<string> provider = default;
 
             while (utf8JsonReader.Read())
             {
@@ -208,6 +226,9 @@ namespace Fingerprint.ServerSdk.Model
                         case "last_seen_at":
                             lastSeenAt = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
+                        case "provider":
+                            provider = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -223,7 +244,10 @@ namespace Fingerprint.ServerSdk.Model
             if (lastSeenAt.IsSet && lastSeenAt.Value == null)
                 throw new ArgumentNullException(nameof(lastSeenAt), "Property is not nullable for class ProxyDetails.");
 
-            return new ProxyDetails(proxyType.Value.Value, lastSeenAt);
+            if (provider.IsSet && provider.Value == null)
+                throw new ArgumentNullException(nameof(provider), "Property is not nullable for class ProxyDetails.");
+
+            return new ProxyDetails(proxyType.Value.Value, lastSeenAt, provider);
         }
 
         /// <summary>
@@ -250,10 +274,16 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ProxyDetails proxyDetails, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (proxyDetails.ProviderOption.IsSet && proxyDetails.Provider == null)
+                throw new ArgumentNullException(nameof(proxyDetails.Provider), "Property is required for class ProxyDetails.");
+
             var proxyTypeRawValue = ProxyDetails.ProxyTypeEnumToJsonValue(proxyDetails.ProxyType);
             writer.WriteString("proxy_type", proxyTypeRawValue);
             if (proxyDetails.LastSeenAtOption.IsSet)
                 writer.WriteNumber("last_seen_at", proxyDetails.LastSeenAtOption.Value.Value);
+
+            if (proxyDetails.ProviderOption.IsSet)
+                writer.WriteString("provider", proxyDetails.Provider);
         }
     }
 }

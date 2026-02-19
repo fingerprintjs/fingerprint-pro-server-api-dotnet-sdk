@@ -242,7 +242,7 @@ namespace Fingerprint.ServerSdk.Test.Api
             const int limit = 1;
             const string paginationKey = "pagination";
             const string visitorId = "AcxioeQKffpXF8iGQK3P";
-            const BotFilter bot = BotFilter.Good;
+            const SearchEventsBot bot = SearchEventsBot.Good;
             const string ipAddress = "10.0.0.0/24";
             const string asn = "asn";
             const string linkedId = "some_linked_id";
@@ -264,14 +264,14 @@ namespace Fingerprint.ServerSdk.Test.Api
             const bool clonedApp = false;
             const bool emulator = false;
             const bool rootApps = false;
-            const VpnConfidenceFilter vpnConfidence = VpnConfidenceFilter.High;
+            const SearchEventsVpnConfidence vpnConfidence = SearchEventsVpnConfidence.High;
             const float minSuspectScore = .7f;
             const bool developerTools = true;
             const bool locationSpoofing = true;
             const bool mitmAttack = true;
             const bool proxy = true;
             const string sdkVersion = "testSdkVersion";
-            const SdkPlatformFilter sdkPlatform = SdkPlatformFilter.Js;
+            const SearchEventsSdkPlatform sdkPlatform = SearchEventsSdkPlatform.Js;
             var environment = new List<string> { "env1", "env2" };
             const string proximityId = "testProximityId";
             const long totalHits = 1;

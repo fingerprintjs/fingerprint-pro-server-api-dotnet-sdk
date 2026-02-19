@@ -112,28 +112,36 @@ namespace Fingerprint.ServerSdk.Client
                 return boolean
                     ? "true"
                     : "false";
-            if (obj is BotFilter botFilter)
-                return BotFilterValueConverter.ToJsonValue(botFilter);
+            if (obj is BotInfo.IdentityEnum botInfoIdentityEnum)
+                return BotInfo.IdentityEnumToJsonValue(botInfoIdentityEnum);
+            if (obj is BotInfo.ConfidenceEnum botInfoConfidenceEnum)
+                return BotInfo.ConfidenceEnumToJsonValue(botInfoConfidenceEnum);
             if (obj is BotResult botResult)
                 return BotResultValueConverter.ToJsonValue(botResult);
             if (obj is ErrorCode errorCode)
                 return ErrorCodeValueConverter.ToJsonValue(errorCode);
+            if (obj is EventRuleAction.TypeEnum eventRuleActionTypeEnum)
+                return EventRuleAction.TypeEnumToJsonValue(eventRuleActionTypeEnum);
+            if (obj is EventRuleActionAllow.TypeEnum eventRuleActionAllowTypeEnum)
+                return EventRuleActionAllow.TypeEnumToJsonValue(eventRuleActionAllowTypeEnum);
+            if (obj is EventRuleActionBlock.TypeEnum eventRuleActionBlockTypeEnum)
+                return EventRuleActionBlock.TypeEnumToJsonValue(eventRuleActionBlockTypeEnum);
             if (obj is Proximity.PrecisionRadiusEnum proximityPrecisionRadiusEnum)
                 return Proximity.PrecisionRadiusEnumToJsonValue(proximityPrecisionRadiusEnum).ToString();
             if (obj is ProxyConfidence proxyConfidence)
                 return ProxyConfidenceValueConverter.ToJsonValue(proxyConfidence);
             if (obj is ProxyDetails.ProxyTypeEnum proxyDetailsProxyTypeEnum)
                 return ProxyDetails.ProxyTypeEnumToJsonValue(proxyDetailsProxyTypeEnum);
-            if (obj is RuleActionType ruleActionType)
-                return RuleActionTypeValueConverter.ToJsonValue(ruleActionType);
             if (obj is SDK.PlatformEnum sDKPlatformEnum)
                 return SDK.PlatformEnumToJsonValue(sDKPlatformEnum);
-            if (obj is SdkPlatformFilter sdkPlatformFilter)
-                return SdkPlatformFilterValueConverter.ToJsonValue(sdkPlatformFilter);
+            if (obj is SearchEventsBot searchEventsBot)
+                return SearchEventsBotValueConverter.ToJsonValue(searchEventsBot);
+            if (obj is SearchEventsSdkPlatform searchEventsSdkPlatform)
+                return SearchEventsSdkPlatformValueConverter.ToJsonValue(searchEventsSdkPlatform);
+            if (obj is SearchEventsVpnConfidence searchEventsVpnConfidence)
+                return SearchEventsVpnConfidenceValueConverter.ToJsonValue(searchEventsVpnConfidence);
             if (obj is VpnConfidence vpnConfidence)
                 return VpnConfidenceValueConverter.ToJsonValue(vpnConfidence);
-            if (obj is VpnConfidenceFilter vpnConfidenceFilter)
-                return VpnConfidenceFilterValueConverter.ToJsonValue(vpnConfidenceFilter);
             if (obj is ICollection collection)
             {
                 List<string> entries = new List<string>();
