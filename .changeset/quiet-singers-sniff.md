@@ -11,7 +11,7 @@ Migrate to `generichost` and Server API v4.
 - Base URL changed from `https://api.fpjs.io` to `https://api.fpjs.io/v4`.
 - Parameter `request_id` renamed to `event_id` for all endpoints.
 - Removed `GetVisits` and `GetRelatedVisitors` operations and endpoints.
-- All API methods are not async.
+- All API methods are async.
 - New dependency injection pattern for API client configuration.
 
 **Migration notes:**

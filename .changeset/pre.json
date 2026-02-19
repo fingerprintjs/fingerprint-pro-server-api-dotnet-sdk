@@ -1,14 +1,11 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "test",
   "initialVersions": {
     "fingerprint-server-dotnet-sdk": "7.9.0"
   },
   "changesets": [
-    "forty-yaks-glow",
     "four-balloons-confess",
-    "heavy-singers-judge",
-    "pretty-coats-hug",
     "quiet-singers-sniff"
   ]
 }

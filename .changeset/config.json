@@ -3,7 +3,7 @@
   "changelog": [
     "@fingerprintjs/changesets-changelog-format",
     {
-      "repo": "fingerprintjs/fingerprint-pro-server-api-dotnet-sdk"
+      "repo": "fingerprintjs/dotnet-sdk"
     }
   ],
   "commit": false,
