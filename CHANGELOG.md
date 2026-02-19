@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.0-test.2
+
+### Patch Changes
+
+- Use correct user for Trusted Publishing ([ef13e92](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/ef13e9250dcc069d12e2c29dd87edfc52f7a6dfd))
+
 ## 8.0.0-test.1
 
 ### Minor Changes
