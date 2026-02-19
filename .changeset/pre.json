@@ -5,6 +5,7 @@
     "fingerprint-server-dotnet-sdk": "7.9.0"
   },
   "changesets": [
+    "forty-yaks-glow",
     "four-balloons-confess",
     "quiet-singers-sniff"
   ]

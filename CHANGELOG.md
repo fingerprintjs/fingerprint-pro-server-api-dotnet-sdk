@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.0-test.1
+
+### Minor Changes
+
+- Enable Trusted Publishing in NuGet ([b945ea2](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/b945ea20affdfa419edb58053b4d94d3492fbe44))
+
 ## 8.0.0-test.0
 
 ### Major Changes
