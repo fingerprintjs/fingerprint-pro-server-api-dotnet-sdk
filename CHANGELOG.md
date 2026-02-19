@@ -1,5 +1,11 @@
 # Fingerprint Server Dotnet SDK
 
+## 8.0.0-test.3
+
+### Patch Changes
+
+- fix model documentations ([eddf6ac](https://github.com/fingerprintjs/fingerprint-pro-server-api-dotnet-sdk/commit/eddf6ac3550bf17a03e4bc9b907410d4c4d118a4))
+
 ## 8.0.0-test.2
 
 ### Patch Changes
