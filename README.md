@@ -164,7 +164,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaul
     .ConfigureFingerprint((context, services, options) =>
     {
         // ...
-        options.SetRegion(Region.EU);
+        options.Region = Region.EU;
     });
 ```
 
