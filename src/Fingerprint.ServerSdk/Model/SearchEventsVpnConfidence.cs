@@ -27,7 +27,7 @@ namespace Fingerprint.ServerSdk.Model
     /// Filter events by VPN Detection result confidence level. &#x60;high&#x60; - events with high VPN Detection confidence. &#x60;medium&#x60; - events with medium VPN Detection confidence. &#x60;low&#x60; - events with low VPN Detection confidence. &gt; Note: When using this parameter, only events with the &#x60;vpn.confidence&#x60; property set to a valid value are returned. Events without a &#x60;vpn&#x60; Smart Signal result are left out of the response. 
     /// </summary>
     /// <value>Filter events by VPN Detection result confidence level. &#x60;high&#x60; - events with high VPN Detection confidence. &#x60;medium&#x60; - events with medium VPN Detection confidence. &#x60;low&#x60; - events with low VPN Detection confidence. &gt; Note: When using this parameter, only events with the &#x60;vpn.confidence&#x60; property set to a valid value are returned. Events without a &#x60;vpn&#x60; Smart Signal result are left out of the response. </value>
-    public enum VpnConfidenceFilter
+    public enum SearchEventsVpnConfidence
     {
         /// <summary>
         /// Enum High for value: high
@@ -46,63 +46,63 @@ namespace Fingerprint.ServerSdk.Model
     }
 
     /// <summary>
-    /// Converts <see cref="VpnConfidenceFilter"/> to and from the JSON value
+    /// Converts <see cref="SearchEventsVpnConfidence"/> to and from the JSON value
     /// </summary>
-    public static class VpnConfidenceFilterValueConverter
+    public static class SearchEventsVpnConfidenceValueConverter
     {
         /// <summary>
-        /// Parses a given value to <see cref="VpnConfidenceFilter"/>
+        /// Parses a given value to <see cref="SearchEventsVpnConfidence"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static VpnConfidenceFilter FromString(string value)
+        public static SearchEventsVpnConfidence FromString(string value)
         {
             if (value.Equals("high"))
-                return VpnConfidenceFilter.High;
+                return SearchEventsVpnConfidence.High;
 
             if (value.Equals("medium"))
-                return VpnConfidenceFilter.Medium;
+                return SearchEventsVpnConfidence.Medium;
 
             if (value.Equals("low"))
-                return VpnConfidenceFilter.Low;
+                return SearchEventsVpnConfidence.Low;
 
-            throw new NotImplementedException($"Could not convert value to type VpnConfidenceFilter: '{value}'");
+            throw new NotImplementedException($"Could not convert value to type SearchEventsVpnConfidence: '{value}'");
         }
 
         /// <summary>
-        /// Parses a given value to <see cref="VpnConfidenceFilter"/>
+        /// Parses a given value to <see cref="SearchEventsVpnConfidence"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static VpnConfidenceFilter? FromStringOrDefault(string value)
+        public static SearchEventsVpnConfidence? FromStringOrDefault(string value)
         {
             if (value.Equals("high"))
-                return VpnConfidenceFilter.High;
+                return SearchEventsVpnConfidence.High;
 
             if (value.Equals("medium"))
-                return VpnConfidenceFilter.Medium;
+                return SearchEventsVpnConfidence.Medium;
 
             if (value.Equals("low"))
-                return VpnConfidenceFilter.Low;
+                return SearchEventsVpnConfidence.Low;
 
             return null;
         }
 
         /// <summary>
-        /// Converts the <see cref="VpnConfidenceFilter"/> to the json value
+        /// Converts the <see cref="SearchEventsVpnConfidence"/> to the json value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string ToJsonValue(VpnConfidenceFilter value)
+        public static string ToJsonValue(SearchEventsVpnConfidence value)
         {
-            if (value == VpnConfidenceFilter.High)
+            if (value == SearchEventsVpnConfidence.High)
                 return "high";
 
-            if (value == VpnConfidenceFilter.Medium)
+            if (value == SearchEventsVpnConfidence.Medium)
                 return "medium";
 
-            if (value == VpnConfidenceFilter.Low)
+            if (value == SearchEventsVpnConfidence.Low)
                 return "low";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
@@ -110,10 +110,10 @@ namespace Fingerprint.ServerSdk.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="VpnConfidenceFilter"/>
+    /// A Json converter for type <see cref="SearchEventsVpnConfidence"/>
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public class VpnConfidenceFilterJsonConverter : JsonConverter<VpnConfidenceFilter>
+    public class SearchEventsVpnConfidenceJsonConverter : JsonConverter<SearchEventsVpnConfidence>
     {
         /// <summary>
         /// Returns a  from the Json object
@@ -122,13 +122,13 @@ namespace Fingerprint.ServerSdk.Model
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override VpnConfidenceFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override SearchEventsVpnConfidence Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string rawValue = reader.GetString();
 
-            VpnConfidenceFilter? result = rawValue == null
+            SearchEventsVpnConfidence? result = rawValue == null
                 ? null
-                : VpnConfidenceFilterValueConverter.FromStringOrDefault(rawValue);
+                : SearchEventsVpnConfidenceValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -137,36 +137,36 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// Writes the VpnConfidenceFilter to the json writer
+        /// Writes the SearchEventsVpnConfidence to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="vpnConfidenceFilter"></param>
+        /// <param name="searchEventsVpnConfidence"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, VpnConfidenceFilter vpnConfidenceFilter, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, SearchEventsVpnConfidence searchEventsVpnConfidence, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(VpnConfidenceFilterValueConverter.ToJsonValue(vpnConfidenceFilter).ToString());
+            writer.WriteStringValue(SearchEventsVpnConfidenceValueConverter.ToJsonValue(searchEventsVpnConfidence).ToString());
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="VpnConfidenceFilter"/>
+    /// A Json converter for type <see cref="SearchEventsVpnConfidence"/>
     /// </summary>
-    public class VpnConfidenceFilterNullableJsonConverter : JsonConverter<VpnConfidenceFilter?>
+    public class SearchEventsVpnConfidenceNullableJsonConverter : JsonConverter<SearchEventsVpnConfidence?>
     {
         /// <summary>
-        /// Returns a VpnConfidenceFilter from the Json object
+        /// Returns a SearchEventsVpnConfidence from the Json object
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override VpnConfidenceFilter? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override SearchEventsVpnConfidence? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string rawValue = reader.GetString();
 
-            VpnConfidenceFilter? result = rawValue == null
+            SearchEventsVpnConfidence? result = rawValue == null
                 ? null
-                : VpnConfidenceFilterValueConverter.FromStringOrDefault(rawValue);
+                : SearchEventsVpnConfidenceValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -175,14 +175,14 @@ namespace Fingerprint.ServerSdk.Model
         }
 
         /// <summary>
-        /// Writes the VpnConfidenceFilter to the json writer
+        /// Writes the SearchEventsVpnConfidence to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="vpnConfidenceFilter"></param>
+        /// <param name="searchEventsVpnConfidence"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, VpnConfidenceFilter? vpnConfidenceFilter, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, SearchEventsVpnConfidence? searchEventsVpnConfidence, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(vpnConfidenceFilter.HasValue ? VpnConfidenceFilterValueConverter.ToJsonValue(vpnConfidenceFilter.Value).ToString() : "null");
+            writer.WriteStringValue(searchEventsVpnConfidence.HasValue ? SearchEventsVpnConfidenceValueConverter.ToJsonValue(searchEventsVpnConfidence.Value).ToString() : "null");
         }
     }
 }

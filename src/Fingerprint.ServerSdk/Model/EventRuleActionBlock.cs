@@ -33,14 +33,20 @@ namespace Fingerprint.ServerSdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EventRuleActionBlock" /> class.
         /// </summary>
+        /// <param name="rulesetId">The ID of the evaluated ruleset. (required).</param>
         /// <param name="type">type (required).</param>
+        /// <param name="ruleId">The ID of the rule that matched the identification event..</param>
+        /// <param name="ruleExpression">The expression of the rule that matched the identification event..</param>
         /// <param name="statusCode">A valid HTTP status code..</param>
         /// <param name="headers">A list of headers to send..</param>
         /// <param name="body">The response body to send to the client..</param>
         [JsonConstructor]
-        public EventRuleActionBlock(RuleActionType type, Option<int?> statusCode = default, Option<List<RuleActionHeaderField>> headers = default, Option<string> body = default)
+        public EventRuleActionBlock(string rulesetId, RuleActionType type, Option<string> ruleId = default, Option<string> ruleExpression = default, Option<int?> statusCode = default, Option<List<RuleActionHeaderField>> headers = default, Option<string> body = default)
         {
+            RulesetId = rulesetId;
             Type = type;
+            RuleIdOption = ruleId;
+            RuleExpressionOption = ruleExpression;
             StatusCodeOption = statusCode;
             HeadersOption = headers;
             BodyOption = body;
@@ -54,6 +60,41 @@ namespace Fingerprint.ServerSdk.Model
         /// </summary>
         [JsonPropertyName("type")]
         public RuleActionType Type { get; set; }
+
+        /// <summary>
+        /// The ID of the evaluated ruleset.
+        /// </summary>
+        /// <value>The ID of the evaluated ruleset.</value>
+        [JsonPropertyName("ruleset_id")]
+        public string RulesetId { get; set; }
+
+        /// <summary>
+        /// Used to track the state of RuleId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> RuleIdOption { get; private set; }
+
+        /// <summary>
+        /// The ID of the rule that matched the identification event.
+        /// </summary>
+        /// <value>The ID of the rule that matched the identification event.</value>
+        [JsonPropertyName("rule_id")]
+        public string RuleId { get { return this.RuleIdOption; } set { this.RuleIdOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of RuleExpression
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> RuleExpressionOption { get; private set; }
+
+        /// <summary>
+        /// The expression of the rule that matched the identification event.
+        /// </summary>
+        /// <value>The expression of the rule that matched the identification event.</value>
+        [JsonPropertyName("rule_expression")]
+        public string RuleExpression { get { return this.RuleExpressionOption; } set { this.RuleExpressionOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of StatusCode
@@ -105,7 +146,10 @@ namespace Fingerprint.ServerSdk.Model
         {
             var sb = new StringBuilder();
             sb.Append("class EventRuleActionBlock {\n");
+            sb.Append("  RulesetId: ").Append(RulesetId).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  RuleId: ").Append(RuleId).Append("\n");
+            sb.Append("  RuleExpression: ").Append(RuleExpression).Append("\n");
             sb.Append("  StatusCode: ").Append(StatusCode).Append("\n");
             sb.Append("  Headers: ").Append(Headers).Append("\n");
             sb.Append("  Body: ").Append(Body).Append("\n");
@@ -146,7 +190,10 @@ namespace Fingerprint.ServerSdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string> rulesetId = default;
             Option<RuleActionType?> type = default;
+            Option<string> ruleId = default;
+            Option<string> ruleExpression = default;
             Option<int?> statusCode = default;
             Option<List<RuleActionHeaderField>> headers = default;
             Option<string> body = default;
@@ -166,10 +213,19 @@ namespace Fingerprint.ServerSdk.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "ruleset_id":
+                            rulesetId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
                                 type = new Option<RuleActionType?>(RuleActionTypeValueConverter.FromStringOrDefault(typeRawValue));
+                            break;
+                        case "rule_id":
+                            ruleId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "rule_expression":
+                            ruleExpression = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "status_code":
                             statusCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -186,11 +242,23 @@ namespace Fingerprint.ServerSdk.Model
                 }
             }
 
+            if (!rulesetId.IsSet)
+                throw new ArgumentException("Property is required for class EventRuleActionBlock.", nameof(rulesetId));
+
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class EventRuleActionBlock.", nameof(type));
 
+            if (rulesetId.IsSet && rulesetId.Value == null)
+                throw new ArgumentNullException(nameof(rulesetId), "Property is not nullable for class EventRuleActionBlock.");
+
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class EventRuleActionBlock.");
+
+            if (ruleId.IsSet && ruleId.Value == null)
+                throw new ArgumentNullException(nameof(ruleId), "Property is not nullable for class EventRuleActionBlock.");
+
+            if (ruleExpression.IsSet && ruleExpression.Value == null)
+                throw new ArgumentNullException(nameof(ruleExpression), "Property is not nullable for class EventRuleActionBlock.");
 
             if (statusCode.IsSet && statusCode.Value == null)
                 throw new ArgumentNullException(nameof(statusCode), "Property is not nullable for class EventRuleActionBlock.");
@@ -201,7 +269,7 @@ namespace Fingerprint.ServerSdk.Model
             if (body.IsSet && body.Value == null)
                 throw new ArgumentNullException(nameof(body), "Property is not nullable for class EventRuleActionBlock.");
 
-            return new EventRuleActionBlock(type.Value.Value, statusCode, headers, body);
+            return new EventRuleActionBlock(rulesetId.Value, type.Value.Value, ruleId, ruleExpression, statusCode, headers, body);
         }
 
         /// <summary>
@@ -228,14 +296,31 @@ namespace Fingerprint.ServerSdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, EventRuleActionBlock eventRuleActionBlock, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (eventRuleActionBlock.RulesetId == null)
+                throw new ArgumentNullException(nameof(eventRuleActionBlock.RulesetId), "Property is required for class EventRuleActionBlock.");
+
+            if (eventRuleActionBlock.RuleIdOption.IsSet && eventRuleActionBlock.RuleId == null)
+                throw new ArgumentNullException(nameof(eventRuleActionBlock.RuleId), "Property is required for class EventRuleActionBlock.");
+
+            if (eventRuleActionBlock.RuleExpressionOption.IsSet && eventRuleActionBlock.RuleExpression == null)
+                throw new ArgumentNullException(nameof(eventRuleActionBlock.RuleExpression), "Property is required for class EventRuleActionBlock.");
+
             if (eventRuleActionBlock.HeadersOption.IsSet && eventRuleActionBlock.Headers == null)
                 throw new ArgumentNullException(nameof(eventRuleActionBlock.Headers), "Property is required for class EventRuleActionBlock.");
 
             if (eventRuleActionBlock.BodyOption.IsSet && eventRuleActionBlock.Body == null)
                 throw new ArgumentNullException(nameof(eventRuleActionBlock.Body), "Property is required for class EventRuleActionBlock.");
 
+            writer.WriteString("ruleset_id", eventRuleActionBlock.RulesetId);
+
             var typeRawValue = RuleActionTypeValueConverter.ToJsonValue(eventRuleActionBlock.Type);
             writer.WriteString("type", typeRawValue);
+
+            if (eventRuleActionBlock.RuleIdOption.IsSet)
+                writer.WriteString("rule_id", eventRuleActionBlock.RuleId);
+
+            if (eventRuleActionBlock.RuleExpressionOption.IsSet)
+                writer.WriteString("rule_expression", eventRuleActionBlock.RuleExpression);
 
             if (eventRuleActionBlock.StatusCodeOption.IsSet)
                 writer.WriteNumber("status_code", eventRuleActionBlock.StatusCodeOption.Value.Value);

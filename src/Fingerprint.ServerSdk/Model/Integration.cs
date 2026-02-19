@@ -89,12 +89,6 @@ namespace Fingerprint.ServerSdk.Model
         public IntegrationSubintegration Subintegration { get { return this.SubintegrationOption; } set { this.SubintegrationOption = new Option<IntegrationSubintegration>(value); } }
 
         /// <summary>
-        /// Gets or Sets additional properties
-        /// </summary>
-        [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalProperties { get; } = new Dictionary<string, JsonElement>();
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -105,7 +99,6 @@ namespace Fingerprint.ServerSdk.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
             sb.Append("  Subintegration: ").Append(Subintegration).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

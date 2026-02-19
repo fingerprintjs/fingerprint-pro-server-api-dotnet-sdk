@@ -1,4 +1,4 @@
-# Fingerprint.ServerSdk.Model.VpnConfidenceFilter
+# Fingerprint.ServerSdk.Model.SearchEventsVpnConfidence
 Filter events by VPN Detection result confidence level.
 `high` - events with high VPN Detection confidence.
 `medium` - events with medium VPN Detection confidence.

@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **Proximity** | [**Proximity**](Proximity.md) |  | [optional] 
 **Bot** | **BotResult** |  | [optional] 
 **BotType** | **string** | Additional classification of the bot type if detected.  | [optional] 
+**BotInfo** | [**BotInfo**](BotInfo.md) |  | [optional] 
 **ClonedApp** | **bool** | Android specific cloned application detection. There are 2 values:  * &#x60;true&#x60; - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * &#x60;false&#x60; - No signs of cloned application detected or the client is not Android.  | [optional] 
 **DeveloperTools** | **bool** | &#x60;true&#x60; if the browser is Chrome with DevTools open or Firefox with Developer Tools open, &#x60;false&#x60; otherwise.  | [optional] 
 **Emulator** | **bool** | Android specific emulator detection. There are 2 values:  * &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD).  * &#x60;false&#x60; - No signs of emulated environment detected or the client is not Android.  | [optional] 
