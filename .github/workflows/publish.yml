@@ -25,7 +25,7 @@ jobs:
         uses: NuGet/login@v1
         id: login
         with:
-          user: Fingerprint
+          user: ${{ secrets.NUGET_USER }}
 
       - name: 'Build'
         run: |
