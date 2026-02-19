@@ -297,6 +297,7 @@ Class | Method | HTTP request | Description
  - [Model.RawDeviceAttributes](docs/models/RawDeviceAttributes.md)
  - [Model.RequestHeaderModifications](docs/models/RequestHeaderModifications.md)
  - [Model.RuleActionHeaderField](docs/models/RuleActionHeaderField.md)
+ - [Model.RuleActionType](docs/models/RuleActionType.md)
  - [Model.SDK](docs/models/SDK.md)
  - [Model.SearchEventsBot](docs/models/SearchEventsBot.md)
  - [Model.SearchEventsSdkPlatform](docs/models/SearchEventsSdkPlatform.md)

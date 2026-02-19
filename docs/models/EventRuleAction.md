@@ -5,7 +5,7 @@ Describes the action the client should take, according to the rule in the rulese
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Describes the action to take with the request. | 
+**Type** | **RuleActionType** |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

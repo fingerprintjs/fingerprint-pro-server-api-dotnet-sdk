@@ -6,7 +6,7 @@ Informs the client that the request should be forwarded to the origin with optio
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RulesetId** | **string** | The ID of the evaluated ruleset. | 
-**Type** | **string** | Describes the action to take with the request. | 
+**Type** | **RuleActionType** |  | 
 **RuleId** | **string** | The ID of the rule that matched the identification event. | [optional] 
 **RuleExpression** | **string** | The expression of the rule that matched the identification event. | [optional] 
 **RequestHeaderModifications** | [**RequestHeaderModifications**](RequestHeaderModifications.md) |  | [optional] 
