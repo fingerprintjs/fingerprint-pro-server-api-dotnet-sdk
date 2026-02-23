@@ -4,5 +4,7 @@
   "initialVersions": {
     "fingerprint-pro-server-api-dotnet-sdk": "7.9.0"
   },
-  "changesets": []
+  "changesets": [
+    "deprecate-v3"
+  ]
 }
