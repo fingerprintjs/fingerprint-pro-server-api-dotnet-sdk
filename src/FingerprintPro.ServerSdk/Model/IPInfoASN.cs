@@ -1,7 +1,7 @@
 /* 
- * Fingerprint Server API
+ * Server API v3 (deprecated)
  *
- * Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -29,7 +29,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// <param name="asn">asn (required).</param>
         /// <param name="name">name (required).</param>
         /// <param name="network">network (required).</param>
-        public IPInfoASN(string asn = default(string), string name = default(string), string network = default(string))
+        /// <param name="type">type.</param>
+        public IPInfoASN(string asn = default(string), string name = default(string), string network = default(string), string type = default(string))
         {
             // to ensure "asn" is required (not null)
             // swagger debug: IPInfoASN Asn
@@ -64,6 +65,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Network = network;
             }
+            this.Type = type;
         }
 
         /// <summary>
@@ -88,6 +90,13 @@ namespace FingerprintPro.ServerSdk.Model
         public string Network { get; set; }
 
         /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -98,6 +107,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("  Asn: ").Append(Asn).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Network: ").Append(Network).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -136,6 +146,11 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Network == input.Network ||
                 (this.Network != null &&
                 this.Network.Equals(input.Network))
+                ) &&
+                (
+                this.Type == input.Type ||
+                (this.Type != null &&
+                this.Type.Equals(input.Type))
                 );
         }
 
@@ -154,6 +169,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Network != null)
                     hashCode = hashCode * 59 + this.Network.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

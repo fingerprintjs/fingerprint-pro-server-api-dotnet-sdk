@@ -16,6 +16,11 @@
 
 # Fingerprint Server API Dotnet SDK
 
+> [!IMPORTANT]
+> **This SDK package is deprecated.** This package (`FingerprintPro.ServerSdk`) uses Server API v3.
+>
+> Please migrate to the new [`Fingerprint.ServerSdk`](https://github.com/fingerprintjs/dotnet-sdk) package, which uses Server API v4. Follow the [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) for details.
+
 [Fingerprint](https://fingerprint.com) is a device intelligence platform offering industry-leading accuracy.
 Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
 
@@ -253,6 +258,8 @@ Class | Method | HTTP request | Description
  - [Model.IdentificationConfidence](docs/IdentificationConfidence.md)
  - [Model.IdentificationSeenAt](docs/IdentificationSeenAt.md)
  - [Model.Incognito](docs/Incognito.md)
+ - [Model.Integration](docs/Integration.md)
+ - [Model.IntegrationSubintegration](docs/IntegrationSubintegration.md)
  - [Model.Jailbroken](docs/Jailbroken.md)
  - [Model.LocationSpoofing](docs/LocationSpoofing.md)
  - [Model.MitMAttack](docs/MitMAttack.md)

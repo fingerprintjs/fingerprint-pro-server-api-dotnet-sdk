@@ -1,7 +1,7 @@
 /* 
- * Fingerprint Server API
+ * Server API v3 (deprecated)
  *
- * Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -28,7 +28,8 @@ namespace FingerprintPro.ServerSdk.Model
         /// </summary>
         /// <param name="platform">Platform of the SDK. (required).</param>
         /// <param name="version">SDK version string. (required).</param>
-        public SDK(string platform = default(string), string version = default(string))
+        /// <param name="integrations">integrations.</param>
+        public SDK(string platform = default(string), string version = default(string), List<Integration> integrations = default(List<Integration>))
         {
             // to ensure "platform" is required (not null)
             // swagger debug: SDK Platform
@@ -52,6 +53,7 @@ namespace FingerprintPro.ServerSdk.Model
             {
                 this.Version = version;
             }
+            this.Integrations = integrations;
         }
 
         /// <summary>
@@ -71,6 +73,13 @@ namespace FingerprintPro.ServerSdk.Model
         public string Version { get; set; }
 
         /// <summary>
+        /// Gets or Sets Integrations
+        /// </summary>
+        [DataMember(Name = "integrations", EmitDefaultValue = false)]
+        [JsonPropertyName("integrations")]
+        public List<Integration> Integrations { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -80,6 +89,7 @@ namespace FingerprintPro.ServerSdk.Model
             sb.Append("class SDK {\n");
             sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
+            sb.Append("  Integrations: ").Append(Integrations).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -113,6 +123,12 @@ namespace FingerprintPro.ServerSdk.Model
                 this.Version == input.Version ||
                 (this.Version != null &&
                 this.Version.Equals(input.Version))
+                ) &&
+                (
+                this.Integrations == input.Integrations ||
+                this.Integrations != null &&
+                input.Integrations != null &&
+                this.Integrations.SequenceEqual(input.Integrations)
                 );
         }
 
@@ -129,6 +145,8 @@ namespace FingerprintPro.ServerSdk.Model
                     hashCode = hashCode * 59 + this.Platform.GetHashCode();
                 if (this.Version != null)
                     hashCode = hashCode * 59 + this.Version.GetHashCode();
+                if (this.Integrations != null)
+                    hashCode = hashCode * 59 + this.Integrations.GetHashCode();
                 return hashCode;
             }
         }

@@ -16,38 +16,39 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// Contains a list of all identification events matching the specified search criteria.
+    /// IntegrationSubintegration
     /// </summary>
     [DataContract]
-    public class SearchEventsResponse : IEquatable<SearchEventsResponse>
+    public class IntegrationSubintegration : IEquatable<IntegrationSubintegration>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SearchEventsResponse" /> class.
+        /// Initializes a new instance of the <see cref="IntegrationSubintegration" /> class.
         /// </summary>
-        /// <param name="events">events.</param>
-        /// <param name="paginationKey">Use this value in the `pagination_key` parameter to request the next page of search results..</param>
-        public SearchEventsResponse(List<SearchEventsResponseEvents> events = default(List<SearchEventsResponseEvents>), string paginationKey = default(string))
+        /// <param name="name">The name of the specific subintegration, e.g. \"preact\"..</param>
+        /// <param name="version">The version of the specific subintegration, e.g. \"10.21.0\"..</param>
+        public IntegrationSubintegration(string name = default(string), string version = default(string))
         {
-            this.Events = events;
-            this.PaginationKey = paginationKey;
+            this.Name = name;
+            this.Version = version;
         }
 
         /// <summary>
-        /// Gets or Sets Events
+        /// The name of the specific subintegration, e.g. \"preact\".
         /// </summary>
-        [DataMember(Name = "events", EmitDefaultValue = false)]
-        [JsonPropertyName("events")]
-        public List<SearchEventsResponseEvents> Events { get; set; }
+        /// <value>The name of the specific subintegration, e.g. \"preact\".</value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Use this value in the `pagination_key` parameter to request the next page of search results.
+        /// The version of the specific subintegration, e.g. \"10.21.0\".
         /// </summary>
-        /// <value>Use this value in the `pagination_key` parameter to request the next page of search results.</value>
-        [DataMember(Name = "paginationKey", EmitDefaultValue = false)]
-        [JsonPropertyName("paginationKey")]
-        public string PaginationKey { get; set; }
+        /// <value>The version of the specific subintegration, e.g. \"10.21.0\".</value>
+        [DataMember(Name = "version", EmitDefaultValue = false)]
+        [JsonPropertyName("version")]
+        public string Version { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -56,9 +57,9 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SearchEventsResponse {\n");
-            sb.Append("  Events: ").Append(Events).Append("\n");
-            sb.Append("  PaginationKey: ").Append(PaginationKey).Append("\n");
+            sb.Append("class IntegrationSubintegration {\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,26 +74,25 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if SearchEventsResponse instances are equal
+        /// Returns true if IntegrationSubintegration instances are equal
         /// </summary>
-        /// <param name="input">Instance of SearchEventsResponse to be compared</param>
+        /// <param name="input">Instance of IntegrationSubintegration to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SearchEventsResponse? input)
+        public bool Equals(IntegrationSubintegration? input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Events == input.Events ||
-                this.Events != null &&
-                input.Events != null &&
-                this.Events.SequenceEqual(input.Events)
+                this.Name == input.Name ||
+                (this.Name != null &&
+                this.Name.Equals(input.Name))
                 ) &&
                 (
-                this.PaginationKey == input.PaginationKey ||
-                (this.PaginationKey != null &&
-                this.PaginationKey.Equals(input.PaginationKey))
+                this.Version == input.Version ||
+                (this.Version != null &&
+                this.Version.Equals(input.Version))
                 );
         }
 
@@ -105,10 +105,10 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Events != null)
-                    hashCode = hashCode * 59 + this.Events.GetHashCode();
-                if (this.PaginationKey != null)
-                    hashCode = hashCode * 59 + this.PaginationKey.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Version != null)
+                    hashCode = hashCode * 59 + this.Version.GetHashCode();
                 return hashCode;
             }
         }

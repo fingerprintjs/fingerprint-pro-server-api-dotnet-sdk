@@ -16,57 +16,48 @@ using FingerprintPro.ServerSdk.Json;
 namespace FingerprintPro.ServerSdk.Model
 {
     /// <summary>
-    /// GeolocationContinent
+    /// Integration
     /// </summary>
     [DataContract]
-    public class GeolocationContinent : IEquatable<GeolocationContinent>
+    public class Integration : IEquatable<Integration>
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GeolocationContinent" /> class.
+        /// Initializes a new instance of the <see cref="Integration" /> class.
         /// </summary>
-        /// <param name="code">code (required).</param>
-        /// <param name="name">name (required).</param>
-        public GeolocationContinent(string code = default(string), string name = default(string))
+        /// <param name="name">The name of the specific integration, e.g. \"fingerprint-pro-react\"..</param>
+        /// <param name="version">The version of the specific integration, e.g. \"3.11.10\"..</param>
+        /// <param name="subintegration">subintegration.</param>
+        public Integration(string name = default(string), string version = default(string), IntegrationSubintegration subintegration = default(IntegrationSubintegration))
         {
-            // to ensure "code" is required (not null)
-            // swagger debug: GeolocationContinent Code
-
-            if (code == null)
-            {
-                throw new InvalidDataException("code is a required property for GeolocationContinent and cannot be null");
-            }
-            else
-            {
-                this.Code = code;
-            }
-            // to ensure "name" is required (not null)
-            // swagger debug: GeolocationContinent Name
-
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for GeolocationContinent and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
+            this.Version = version;
+            this.Subintegration = subintegration;
         }
 
         /// <summary>
-        /// Gets or Sets Code
+        /// The name of the specific integration, e.g. \"fingerprint-pro-react\".
         /// </summary>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
-        [JsonPropertyName("code")]
-        public string Code { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
+        /// <value>The name of the specific integration, e.g. \"fingerprint-pro-react\".</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The version of the specific integration, e.g. \"3.11.10\".
+        /// </summary>
+        /// <value>The version of the specific integration, e.g. \"3.11.10\".</value>
+        [DataMember(Name = "version", EmitDefaultValue = false)]
+        [JsonPropertyName("version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Subintegration
+        /// </summary>
+        [DataMember(Name = "subintegration", EmitDefaultValue = false)]
+        [JsonPropertyName("subintegration")]
+        public IntegrationSubintegration Subintegration { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -75,9 +66,10 @@ namespace FingerprintPro.ServerSdk.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class GeolocationContinent {\n");
-            sb.Append("  Code: ").Append(Code).Append("\n");
+            sb.Append("class Integration {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Version: ").Append(Version).Append("\n");
+            sb.Append("  Subintegration: ").Append(Subintegration).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,25 +84,30 @@ namespace FingerprintPro.ServerSdk.Model
         }
 
         /// <summary>
-        /// Returns true if GeolocationContinent instances are equal
+        /// Returns true if Integration instances are equal
         /// </summary>
-        /// <param name="input">Instance of GeolocationContinent to be compared</param>
+        /// <param name="input">Instance of Integration to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(GeolocationContinent? input)
+        public bool Equals(Integration? input)
         {
             if (input == null)
                 return false;
 
             return
                 (
-                this.Code == input.Code ||
-                (this.Code != null &&
-                this.Code.Equals(input.Code))
-                ) &&
-                (
                 this.Name == input.Name ||
                 (this.Name != null &&
                 this.Name.Equals(input.Name))
+                ) &&
+                (
+                this.Version == input.Version ||
+                (this.Version != null &&
+                this.Version.Equals(input.Version))
+                ) &&
+                (
+                this.Subintegration == input.Subintegration ||
+                (this.Subintegration != null &&
+                this.Subintegration.Equals(input.Subintegration))
                 );
         }
 
@@ -123,10 +120,12 @@ namespace FingerprintPro.ServerSdk.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Code != null)
-                    hashCode = hashCode * 59 + this.Code.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Version != null)
+                    hashCode = hashCode * 59 + this.Version.GetHashCode();
+                if (this.Subintegration != null)
+                    hashCode = hashCode * 59 + this.Subintegration.GetHashCode();
                 return hashCode;
             }
         }
