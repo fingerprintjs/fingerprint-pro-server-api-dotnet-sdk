@@ -1,7 +1,7 @@
 /* 
- * Fingerprint Server API
+ * Server API v3 (deprecated)
  *
- * Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * > 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully defunct on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Fingerprint Server API allows you to search, update, and delete identification events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * OpenAPI spec version: 3
  * Contact: support@fingerprint.com
@@ -27,7 +27,7 @@ namespace FingerprintPro.ServerSdk.Model
         /// Initializes a new instance of the <see cref="WebhookFactoryReset" /> class.
         /// </summary>
         /// <param name="time">Indicates the time (in UTC) of the most recent factory reset that happened on the **mobile device**.  When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC). See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal. .</param>
-        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.        .</param>
+        /// <param name="timestamp">This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. .</param>
         public WebhookFactoryReset(DateTime? time = default(DateTime?), long? timestamp = default(long?))
         {
             this.Time = time;
@@ -43,9 +43,9 @@ namespace FingerprintPro.ServerSdk.Model
         public DateTime? Time { get; set; }
 
         /// <summary>
-        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.        
+        /// This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. 
         /// </summary>
-        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time.        </value>
+        /// <value>This field is just another representation of the value in the `time` field. The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. </value>
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
         [JsonPropertyName("timestamp")]
         public long? Timestamp { get; set; }

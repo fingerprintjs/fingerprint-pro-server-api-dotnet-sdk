@@ -1,12 +1,10 @@
-# FingerprintPro.ServerSdk.Model.IPInfoASN
+# FingerprintPro.ServerSdk.Model.IntegrationSubintegration
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Asn** | **string** |  | 
-**Name** | **string** |  | 
-**Network** | **string** |  | 
-**Type** | **string** |  | [optional] 
+**Name** | **string** | The name of the specific subintegration, e.g. \"preact\". | [optional] 
+**Version** | **string** | The version of the specific subintegration, e.g. \"10.21.0\". | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
