@@ -15,7 +15,30 @@ All URIs are relative to *https://api.fpjs.io/v4*
 
 Delete data by visitor ID
 
-Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://dev.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://dev.fingerprint.com/reference/getevent) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.
+
+### Which data is deleted?
+- Browser (or device) properties
+- Identification requests made from this browser (or device)
+
+#### Browser (or device) properties
+- Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it.
+- Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://dev.fingerprint.com/docs/glossary#fingerprint-workspace).
+
+#### Identification requests made from this browser (or device)
+- Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention).
+- Upon request to delete, the identification requests that were made by this browser
+  - Within the past 10 days are deleted within 24 hrs.
+  - Outside of 10 days are allowed to purge as per your data retention period.
+
+### Corollary
+After requesting to delete a visitor ID,
+- If the same browser (or device) requests to identify, it will receive a different visitor ID.
+- If you request [`/v4/events` API](https://dev.fingerprint.com/reference/getevent) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.
+
+### Interested?
+Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403.
+
 
 ### Example
 ```csharp
@@ -86,7 +109,10 @@ void (empty response body)
 
 Get an event by event ID
 
-Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
+Get a detailed analysis of an individual identification event, including Smart Signals.
+
+Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
+
 
 ### Example
 ```csharp
@@ -161,7 +187,28 @@ namespace GetEventExample
 
 Search events
 
-## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
+## Search
+
+The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:
+
+- Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor.
+- Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier.
+- Excluding all bot traffic from the query (`good` and `bad` bots)
+
+If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.
+
+### Filtering events with the `suspect` flag
+
+The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.
+
+You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.
+
+### Environment scoping
+
+If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.
+
+Smart Signals not activated for your workspace or are not included in the response.
+
 
 ### Example
 ```csharp
@@ -308,7 +355,16 @@ namespace SearchEventsExample
 
 Update an event
 
-Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request. 
+Change information in existing events specified by `event_id` or *flag suspicious events*.
+
+When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters. 
+This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.
+
+**Warning** It's not possible to update events older than one month. 
+
+**Warning** Trying to update an event immediately after creation may temporarily result in an 
+error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request.
+
 
 ### Example
 ```csharp

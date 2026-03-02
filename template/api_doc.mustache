@@ -17,9 +17,9 @@ All URIs are relative to *{{{basePath}}}*
 # **{{{operationId}}}**
 > {{returnType}}{{^returnType}}void{{/returnType}} {{operationId}} ({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}})
 
-{{{summary}}}{{#notes}}
+{{{summary}}}{{#unescapedNotes}}
 
-{{{.}}}{{/notes}}
+{{{unescapedNotes}}}{{/unescapedNotes}}
 
 {{#useGenericHost}}
 ### Example
