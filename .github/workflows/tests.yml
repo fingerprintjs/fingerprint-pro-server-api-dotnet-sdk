@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - '*'
+    paths:
+      - 'src/**'
+      - 'Fingerprint.ServerSdk.sln'
+      - '.github/workflows/tests.yml'
   workflow_dispatch:
   schedule:
     - cron: '0 5 * * *'
