@@ -1,3 +1,6 @@
+> [!WARNING]
+> This version is deprecated. Please upgrade to the [latest .NET SDK version](https://github.com/fingerprintjs/dotnet-sdk).
+
 <p align="center">
     <a href="https://fingerprint.com">
         <picture>
