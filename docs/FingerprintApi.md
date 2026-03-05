@@ -17,7 +17,34 @@ Method | HTTP request | Description
 
 Delete data by visitor ID
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.  Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations. ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://dev.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/events` API](https://dev.fingerprint.com/reference/getevent) with a `request_id` that was made outside of the 10 days, you will still receive a valid response. - If you request [`/visitors` API](https://dev.fingerprint.com/reference/getvisits) for the deleted visitor ID, the response will include identification requests that were made outside of those 10 days.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403. 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4) to migrate from this deprecated version to the new one.
+
+Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.
+### Which data is deleted?
+- Browser (or device) properties
+- Identification requests made from this browser (or device)
+
+#### Browser (or device) properties
+- Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it.
+- Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://dev.fingerprint.com/docs/glossary#fingerprint-workspace).
+
+#### Identification requests made from this browser (or device)
+- Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention).
+- Upon request to delete, the identification requests that were made by this browser
+  - Within the past 10 days are deleted within 24 hrs.
+  - Outside of 10 days are allowed to purge as per your data retention period.
+
+### Corollary
+After requesting to delete a visitor ID,
+- If the same browser (or device) requests to identify, it will receive a different visitor ID.
+- If you request [`/events` API](https://dev.fingerprint.com/reference/getevent) with a `request_id` that was made outside of the 10 days, you will still receive a valid response.
+- If you request [`/visitors` API](https://dev.fingerprint.com/reference/getvisits) for the deleted visitor ID, the response will include identification requests that were made outside of those 10 days.
+
+### Interested?
+Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403.
+
 
 ### Example
 ```csharp
@@ -77,7 +104,16 @@ void (empty response body)
 
 Get event by request ID
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-events) to migrate from this deprecated version to the new one.  Get a detailed analysis of an individual identification event, including Smart Signals.  Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. It is highly recommended that you **ignore** the mobile signals for such requests.   Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`. 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-events) to migrate from this deprecated version to the new one.
+
+Get a detailed analysis of an individual identification event, including Smart Signals. 
+Please note that the response includes mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform.
+It is highly recommended that you **ignore** the mobile signals for such requests. 
+
+Use `requestId` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `requestId`.
+
 
 ### Example
 ```csharp
@@ -138,7 +174,18 @@ Name | Type | Description  | Notes
 
 Get Related Visitors
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy).  Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device. It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.  ⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️  If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support). To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api). 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy).
+
+Related visitors API lets you link web visits and in-app browser visits that originated from the same mobile device.
+It searches the past 6 months of identification events to find the visitor IDs that belong to the same mobile device as the given visitor ID.
+
+⚠️ Please note that this API is not enabled by default and is billable separately. ⚠️
+
+If you would like to use Related visitors API, please contact our [support team](https://fingerprint.com/support).
+To learn more, see [Related visitors API reference](https://dev.fingerprint.com/reference/related-visitors-api).
+
 
 ### Example
 ```csharp
@@ -199,7 +246,17 @@ Name | Type | Description  | Notes
 
 Get visits by visitor ID
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-visitors) to migrate from this deprecated version to the new one.  Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter. Only information from the _Identification_ product is returned.  #### Headers  * `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received. 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-visitors) to migrate from this deprecated version to the new one.
+
+Get a history of visits (identification events) for a specific `visitorId`. Use the `visitorId` as a URL path parameter.
+Only information from the _Identification_ product is returned.
+
+#### Headers
+
+* `Retry-After` — Present in case of `429 Too many requests`. Indicates how long you should wait before making a follow-up request. The value is non-negative decimal integer indicating the seconds to delay after the response is received.
+
 
 ### Example
 ```csharp
@@ -270,7 +327,14 @@ Name | Type | Description  | Notes
 
 Get events via search
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-eventssearch) to migrate from this deprecated version to the new one.  Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.  Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests. 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-get-eventssearch) to migrate from this deprecated version to the new one.
+
+Search for identification events, including Smart Signals, using multiple filtering criteria. If you don't provide `start` or `end` parameters, the default search range is the last 7 days.
+
+Please note that events include mobile signals (e.g. `rootApps`) even if the request originated from a non-mobile platform. We recommend you **ignore** mobile signals for such requests.
+
 
 ### Example
 ```csharp
@@ -399,7 +463,16 @@ Name | Type | Description  | Notes
 
 Update an event with a given request ID
 
-> 🚧 Deprecation Notice > > This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-update-events) to migrate from this deprecated version to the new one.  Change information in existing events specified by `requestId` or *flag suspicious events*.  When an event is created, it is assigned `linkedId` and `tag` submitted through the JS agent parameters. This information might not be available on the client so the Server API allows for updating the attributes after the fact.  **Warning** It's not possible to update events older than 10 days. 
+> 🚧 Deprecation Notice
+>
+> This version of Server API is marked as deprecated starting on **Jan 7th 2026** and will be fully removed on **Jan 7th 2027** according to our [API Deprecation Policy](https://dev.fingerprint.com/reference/api-deprecation-policy). If you still use this version, please follow our [migration guide](https://dev.fingerprint.com/reference/migrating-from-server-api-v3-to-v4#migrating-update-events) to migrate from this deprecated version to the new one.
+
+Change information in existing events specified by `requestId` or *flag suspicious events*.
+
+When an event is created, it is assigned `linkedId` and `tag` submitted through the JS agent parameters. This information might not be available on the client so the Server API allows for updating the attributes after the fact.
+
+**Warning** It's not possible to update events older than 10 days.
+
 
 ### Example
 ```csharp

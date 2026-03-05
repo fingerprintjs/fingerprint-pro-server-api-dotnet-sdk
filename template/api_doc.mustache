@@ -16,9 +16,9 @@ Method | HTTP request | Description
 # **{{{operationId}}}**
 > {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}} ({{#parameters}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = null{{/optionalMethodArgument}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/parameters}})
 
-{{{summary}}}{{#notes}}
+{{{summary}}}{{#unescapedNotes}}
 
-{{{notes}}}{{/notes}}
+{{{unescapedNotes}}}{{/unescapedNotes}}
 
 ### Example
 ```csharp
